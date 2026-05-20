@@ -36,4 +36,5 @@ onReady(() => {
         if (e.key === '3') document.documentElement.setAttribute('font', '3');
         if (e.key === '4') document.documentElement.setAttribute('font', '4');
     });
+    document.querySelector('footer a').href = 'https://maps.app.goo.gl/TPDs2TqNehEzxuMY8';
 });
