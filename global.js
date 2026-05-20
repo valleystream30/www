@@ -1,4 +1,11 @@
-document.addEventListener('DOMContentLoaded', () => {
+function onReady(callback) {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', callback);
+    } else {
+        callback();
+    };
+};
+onReady(() => {
     if (document.querySelector('.alert-badge i')) document.querySelector('.alert-badge i').className = "fa-solid fa-bell";
     document.querySelector('.alert-badge')?.addEventListener('click', () => {
         var changeIconInterval = setInterval(() => {
@@ -22,4 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pageTitle.includes('partnership')) {
         document.querySelector('.ss-editor-content p:last-child').classList.add('partnerships');
     };
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '0') document.documentElement.removeAttribute('font');
+        if (e.key === '1') document.documentElement.setAttribute('font', '1');
+        if (e.key === '2') document.documentElement.setAttribute('font', '2');
+        if (e.key === '3') document.documentElement.setAttribute('font', '3');
+        if (e.key === '4') document.documentElement.setAttribute('font', '4');
+    });
 });

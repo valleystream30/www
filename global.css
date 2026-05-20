@@ -1,9 +1,74 @@
-* {
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Elms Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sniglet:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sour Gummy:wght@400;500;600;700&display=swap");
+
+html[font="1"] * {
 	--smart-sites-colors-link-blue: var(--site-design-link-color) !important;
 	--site-design-link-color: #740404 !important;
 	--site-design-link-color-hover: #042450 !important;
 	--ss-modal-content-alert-icon-background-color: #042450 !important;
 	--ss-modal-content-alert-icon-background-border-color: #042450 !important;
+	--ss-nav-font-family: Montserrat, sans-serif !important;
+	--ss-menu-font-family: Montserrat, sans-serif !important;
+	--ss-site-name-font-family: Montserrat, sans-serif !important;
+	--ss-utility-font-family: Montserrat, sans-serif !important;
+	--ss-default-font-family: Montserrat, sans-serif !important;
+}
+
+html[font="2"] * {
+	--smart-sites-colors-link-blue: var(--site-design-link-color) !important;
+	--site-design-link-color: #740404 !important;
+	--site-design-link-color-hover: #042450 !important;
+	--ss-modal-content-alert-icon-background-color: #042450 !important;
+	--ss-modal-content-alert-icon-background-border-color: #042450 !important;
+	--ss-nav-font-family: Elms Sans, sans-serif !important;
+	--ss-menu-font-family: Elms Sans, sans-serif !important;
+	--ss-site-name-font-family: Elms Sans, sans-serif !important;
+	--ss-utility-font-family: Elms Sans, sans-serif !important;
+	--ss-default-font-family: Elms Sans, sans-serif !important;
+}
+
+html[font="3"] * {
+	--smart-sites-colors-link-blue: var(--site-design-link-color) !important;
+	--site-design-link-color: #740404 !important;
+	--site-design-link-color-hover: #042450 !important;
+	--ss-modal-content-alert-icon-background-color: #042450 !important;
+	--ss-modal-content-alert-icon-background-border-color: #042450 !important;
+	--ss-nav-font-family: Sniglet, sans-serif !important;
+	--ss-menu-font-family: Sniglet, sans-serif !important;
+	--ss-site-name-font-family: Sniglet, sans-serif !important;
+	--ss-utility-font-family: Sniglet, sans-serif !important;
+	--ss-default-font-family: Sniglet, sans-serif !important;
+}
+
+html[font="4"] * {
+	--smart-sites-colors-link-blue: var(--site-design-link-color) !important;
+	--site-design-link-color: #740404 !important;
+	--site-design-link-color-hover: #042450 !important;
+	--ss-modal-content-alert-icon-background-color: #042450 !important;
+	--ss-modal-content-alert-icon-background-border-color: #042450 !important;
+	--ss-nav-font-family: Sour Gummy, sans-serif !important;
+	--ss-menu-font-family: Sour Gummy, sans-serif !important;
+	--ss-site-name-font-family: Sour Gummy, sans-serif !important;
+	--ss-utility-font-family: Sour Gummy, sans-serif !important;
+	--ss-default-font-family: Sour Gummy, sans-serif !important;
+}
+
+html[font] {
+	body,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	a,
+	span,
+	div {
+		font-family: var(--ss-default-font-family) !important;
+	}
 }
 
 .alert-badge.ss-button {
@@ -40,5 +105,5 @@
 }
 
 body:has(.alert-badge:not(.active)) .ss-alert-modal-svg-container svg {
-    display: none !important;
+	display: none !important;
 }
