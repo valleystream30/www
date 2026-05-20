@@ -11,10 +11,10 @@
 }
 
 .ss-alert-modal-svg-container {
-	height: 100%;
+	height: 100% !important;
 	width: 100%;
 	display: flex;
-	align-items: center;
+	align-items: start;
 	justify-content: center;
 }
 
@@ -36,5 +36,9 @@
 	height: fit-content !important;
 	max-height: 75px !important;
 	width: auto !important;
-	border-radius: 10px !important;
+	border-radius: 5px !important;
+}
+
+body:has(.alert-badge:not(.active)) .ss-alert-modal-svg-container svg {
+    display: none !important;
 }
