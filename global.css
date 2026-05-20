@@ -1,0 +1,40 @@
+* {
+	--smart-sites-colors-link-blue: var(--site-design-link-color) !important;
+	--site-design-link-color: #740404 !important;
+	--site-design-link-color-hover: #042450 !important;
+	--ss-modal-content-alert-icon-background-color: #042450 !important;
+	--ss-modal-content-alert-icon-background-border-color: #042450 !important;
+}
+
+.alert-badge.ss-button {
+	background-color: var(--smart-sites-colors-dark-buttons);
+}
+
+.ss-alert-modal-svg-container {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.ss-alert-modal-svg-container svg {
+	width: 75%;
+	fill: #fff;
+}
+
+.partnerships {
+	display: flex !important;
+	flex-direction: row !important;
+	justify-content: center !important;
+	align-items: center !important;
+	flex-wrap: wrap !important;
+	gap: 20px 0 !important;
+}
+
+.partnerships img {
+	height: fit-content !important;
+	max-height: 75px !important;
+	width: auto !important;
+	border-radius: 10px !important;
+}
