@@ -56,17 +56,17 @@ html[font="4"] * {
 }
 
 html[font] {
-	body,
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6,
-	p,
-	a,
-	span,
-	div {
+	body:not(.customFont),
+	h1:not(.customFont),
+	h2:not(.customFont),
+	h3:not(.customFont),
+	h4:not(.customFont),
+	h5:not(.customFont),
+	h6:not(.customFont),
+	p:not(.customFont),
+	a:not(.customFont),
+	span:not(.customFont),
+	div:not(.customFont) {
 		font-family: var(--ss-default-font-family) !important;
 	}
 }
@@ -110,6 +110,11 @@ body:has(.alert-badge:not(.active)) .ss-alert-modal-svg-container svg {
 
 section.ss-has-bg .ss-component-header-title:only-child {
 	padding: 0;
+}
+
+.ss-component-content .ss-one-column h3 {
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 table p {
