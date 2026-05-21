@@ -111,3 +111,7 @@ body:has(.alert-badge:not(.active)) .ss-alert-modal-svg-container svg {
 section.ss-has-bg .ss-component-header-title:only-child {
 	padding: 0;
 }
+
+table p {
+	margin: 10px;
+}
