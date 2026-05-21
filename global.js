@@ -29,13 +29,13 @@ onReady(() => {
     if (pageTitle.includes('partnership')) {
         document.querySelector('.ss-editor-content p:last-child').classList.add('partnerships');
     };
-    document.addEventListener('keydown', (e) => {
-        if (e.key === '0') document.documentElement.removeAttribute('font');
-        if (e.key === '1') document.documentElement.setAttribute('font', '1');
-        if (e.key === '2') document.documentElement.setAttribute('font', '2');
-        if (e.key === '3') document.documentElement.setAttribute('font', '3');
-        if (e.key === '4') document.documentElement.setAttribute('font', '4');
-    });
+    // document.addEventListener('keydown', (e) => {
+    //     if (e.key === '0') document.documentElement.removeAttribute('font');
+    //     if (e.key === '1') document.documentElement.setAttribute('font', '1');
+    //     if (e.key === '2') document.documentElement.setAttribute('font', '2');
+    //     if (e.key === '3') document.documentElement.setAttribute('font', '3');
+    //     if (e.key === '4') document.documentElement.setAttribute('font', '4');
+    // });
     document.querySelector('footer a').href = 'https://maps.app.goo.gl/TPDs2TqNehEzxuMY8';
     document.querySelectorAll('a.btn').forEach(btn => {
         if (btn.querySelector('.ss-button-icon')) return;
