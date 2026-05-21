@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Elms Sans:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sniglet:wght@400;500;600;700&display=swap");
 
-html {
+html * {
 	--smart-sites-colors-link-blue: var(--site-design-link-color) !important;
 	--site-design-link-color: #740404 !important;
 	--site-design-link-color-hover: #042450 !important;
@@ -13,7 +13,9 @@ html {
 	--ss-site-name-font-family: Elms Sans, sans-serif !important;
 	--ss-utility-font-family: Elms Sans, sans-serif !important;
 	--ss-default-font-family: Elms Sans, sans-serif !important;
+}
 
+html {
 	body:not(.customFont),
 	h1:not(.customFont),
 	h2:not(.customFont),
