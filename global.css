@@ -107,3 +107,7 @@ html[font] {
 body:has(.alert-badge:not(.active)) .ss-alert-modal-svg-container svg {
 	display: none !important;
 }
+
+section.ss-has-bg .ss-component-header-title:only-child {
+	padding: 0;
+}
