@@ -81,7 +81,11 @@ section.ss-has-bg .ss-component-header-title:only-child {
 	padding: 0;
 }
 
-.ss-component-content .ss-one-column h3 {
+.ss-component-content .ss-one-column .ss-component-column:has(h3) {
+	overflow: visible !important;
+}
+
+.ss-component-content .ss-one-column .ss-component-column h3 {
 	margin-top: 0;
 	margin-bottom: 0;
 }
@@ -151,4 +155,8 @@ table p {
 	padding: 0px 2.5px;
 	background: #ffffff;
 	border-radius: 0 0 10px 10px;
+}
+
+.schools {
+	display: none !important;
 }
