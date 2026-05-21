@@ -115,3 +115,28 @@ section.ss-has-bg .ss-component-header-title:only-child {
 table p {
 	margin: 5px;
 }
+
+.anchor-plates a {
+	background-color: var(--site-design-link-color) !important;
+	color: #ffffff !important;
+	border-radius: 8px;
+	padding-right: 1.2rem;
+}
+
+.anchor-plates a:hover {
+	background-color: var(--site-design-link-color-hover) !important;
+}
+
+.active .anchor-plates {
+	user-select: none;
+	pointer-events: none;
+}
+
+.anchor-plates a span {
+	color: #ffffff;
+	width: max-content;
+}
+
+:has(> .anchor-plates) {
+	min-width: fit-content;
+}
