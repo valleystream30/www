@@ -2,12 +2,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Elms Sans:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sniglet:wght@400;500;600;700&display=swap");
 
+:root {
+	--blue: #042450 !important;
+	--red: #740404 !important;
+	--yellow: #F1C233 !important;
+}
+
 html * {
 	--smart-sites-colors-link-blue: var(--site-design-link-color) !important;
-	--site-design-link-color: #740404 !important;
-	--site-design-link-color-hover: #042450 !important;
-	--ss-modal-content-alert-icon-background-color: #042450 !important;
-	--ss-modal-content-alert-icon-background-border-color: #042450 !important;
+	--site-design-link-color: var(--red) !important;
+	--site-design-link-color-hover: var(--blue) !important;
+	--ss-modal-content-alert-icon-background-color: var(--blue) !important;
+	--ss-modal-content-alert-icon-background-border-color: var(--blue) !important;
 	--ss-nav-font-family: Elms Sans, sans-serif !important;
 	--ss-menu-font-family: Elms Sans, sans-serif !important;
 	--ss-site-name-font-family: Elms Sans, sans-serif !important;
@@ -32,7 +38,7 @@ html {
 }
 
 .alert-badge.ss-button {
-	background-color: var(--smart-sites-colors-dark-buttons);
+	background-color: var(--yellow);
 }
 
 .ss-alert-modal-svg-container {
@@ -45,7 +51,7 @@ html {
 
 .ss-alert-modal-svg-container svg {
 	width: 75%;
-	fill: #fff;
+	fill: #ffffff;
 }
 
 .partnerships {
