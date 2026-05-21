@@ -160,3 +160,12 @@ table p {
 .schools {
 	display: none !important;
 }
+
+body:has(header:not(:hover)):has(.adminBar:not(:hover)) .adminBar {
+	display: none;
+}
+
+.admin-btn1:hover {
+	margin-top: 3px;
+	margin-bottom: -3px;
+}
