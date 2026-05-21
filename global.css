@@ -36,6 +36,7 @@ html {
 	span:not(.customFont),
 	div:not(.customFont) {
 		font-family: var(--ss-default-font-family) !important;
+		word-spacing: -2px !important;
 	}
 }
 
