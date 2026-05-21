@@ -37,4 +37,11 @@ onReady(() => {
         if (e.key === '4') document.documentElement.setAttribute('font', '4');
     });
     document.querySelector('footer a').href = 'https://maps.app.goo.gl/TPDs2TqNehEzxuMY8';
+    document.querySelectorAll('a.btn').forEach(btn => {
+        if (btn.querySelector('.ss-button-icon')) return;
+        const icon = document.createElement('span');
+        icon.setAttribute('aria-hidden', 'true');
+        icon.className = 'ss-button-icon';
+        btn.appendChild(icon);
+    });
 });
