@@ -145,3 +145,14 @@ table p {
 :has(> .anchor-plates) {
 	min-width: fit-content;
 }
+
+.breadcrumb > li {
+  margin-right: 14px;
+}
+
+.breadcrumb > li span {
+  top: calc(50% - 12px);
+  transform: none;
+  right: -12px;
+  width: 8px;
+}
