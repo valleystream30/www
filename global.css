@@ -5,7 +5,7 @@
 :root {
 	--blue: #042450 !important;
 	--red: #740404 !important;
-	--yellow: #F1C233 !important;
+	--yellow: #f1c233 !important;
 }
 
 html * {
@@ -13,7 +13,9 @@ html * {
 	--site-design-link-color: var(--red) !important;
 	--site-design-link-color-hover: var(--blue) !important;
 	--ss-modal-content-alert-icon-background-color: var(--blue) !important;
-	--ss-modal-content-alert-icon-background-border-color: var(--blue) !important;
+	--ss-modal-content-alert-icon-background-border-color: var(
+		--blue
+	) !important;
 	--ss-nav-font-family: Elms Sans, sans-serif !important;
 	--ss-menu-font-family: Elms Sans, sans-serif !important;
 	--ss-site-name-font-family: Elms Sans, sans-serif !important;
@@ -121,4 +123,31 @@ table p {
 	transform: none;
 	right: -12px;
 	width: 8px;
+}
+
+.adminBar {
+	height: fit-content;
+	min-height: unset !important;
+	display: flex;
+	background: transparent !important;
+	border: none;
+	justify-content: center;
+	position: fixed;
+}
+
+.adminBar > :first-child,
+.adminBar span {
+	display: none;
+}
+
+.psq_logged_in_bar a {
+	padding: 5px;
+	width: fit-content;
+}
+
+.adminBar > :last-child {
+	width: fit-content;
+	padding: 0px 2.5px;
+	background: #ffffff;
+	border-radius: 0 0 10px 10px;
 }
