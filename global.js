@@ -28,6 +28,18 @@ onReady(() => {
     const pageTitle = document.querySelector('title').textContent.toLowerCase();
     if (pageTitle.includes('partnership')) {
         document.querySelector('.ss-editor-content p:last-child').classList.add('partnerships');
+    } else if (pageTitle.includes('schools')) {
+        var interval = setInterval(() => {
+            if (document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a[style]').length === 3) {
+                var minHeight = Array.from(document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child img')).map(img => img.clientHeight).sort()[0];
+                document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a').forEach(img => {
+                    img.style.height = `${minHeight}px`;
+                    img.style.width = 'unset';
+                    img.style.borderRadius = '10px';
+                });
+                clearInterval(interval);
+            };
+        }, 100);
     };
     // document.addEventListener('keydown', (e) => {
     //     if (e.key === '0') document.documentElement.removeAttribute('font');
