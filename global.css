@@ -94,11 +94,27 @@ table p {
 	margin: 5px;
 }
 
+li:has(> .anchor-plates) {
+	width: fit-content !important;
+}
+
+.anchor-plates {
+	width: fit-content !important;
+}
+
 .anchor-plates a {
-	background-color: var(--site-design-link-color) !important;
 	color: #ffffff !important;
 	border-radius: 8px;
 	padding-right: 1.2rem;
+	width: fit-content !important;
+}
+
+.active .anchor-plates a {
+	background-color: var(--site-design-link-color-hover) !important;
+}
+
+.active .anchor-plates a:hover {
+	background-color: var(--site-design-link-color) !important;
 }
 
 .anchor-plates a:hover {
