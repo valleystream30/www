@@ -300,3 +300,37 @@ font {
 	background-color: transparent !important;
 	box-shadow: none !important;
 }
+
+.spotlight-text-container {
+	border-radius: 10px;
+	gap: 5px;
+	padding: 30px 20px !important;
+	background-color: #042450f0 !important;
+	zoom: 0.9;
+}
+
+.spotlight-text-container p {
+	margin: 0;
+}
+
+.ss-has-bg:has(hr.hr) {
+	padding: 10px;
+}
+
+hr.hr {
+	display: none;
+}
+
+.calendar-events-view-container h3 {
+	margin-bottom: 10px !important;
+}
+
+#item2003201 {
+	overflow: hidden;
+}
+
+#item2003201 .rellax {
+	position: absolute;
+	top: -50%;
+	z-index: -1;
+}

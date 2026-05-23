@@ -43,7 +43,7 @@ onReady(() => {
             document.querySelector('.ss-editor-content p:last-child').classList.add('partnerships');
         } else if (pageTitle.includes('schools')) {
             var schoolsPageInterval = setInterval(() => {
-                if (document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a[style]').length === 3) {
+                if ((document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a[style]').length === 3) || (document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a img[height]').length === 3)) {
                     var minHeight = Array.from(document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child img')).map(img => img.clientHeight).sort()[0];
                     document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a').forEach(img => {
                         img.style.height = `${minHeight}px`;
@@ -53,6 +53,43 @@ onReady(() => {
                     clearInterval(schoolsPageInterval);
                 };
             }, 100);
+        } else if (pageTitle.includes('home')) {
+            var firstSection = document.querySelector('.stack_sort_area').children[0];
+            if (firstSection.querySelector('.spotlight-container')) {
+                firstSection.querySelectorAll('.spotlight-slide').forEach(slide => {
+                    slide.style.minHeight = `calc(100vh - ${document.querySelector('header').clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
+                });
+            };
+            var schoolsPageInterval = setInterval(() => {
+                if ((document.querySelectorAll('.ss-image-link[style]').length === 3) || (document.querySelectorAll('.ss-image-link img[height]').length === 3)) {
+                    document.querySelectorAll('.ss-image-link').forEach(img => {
+                        img.style.width = 'unset';
+                        img.removeAttribute('height');
+                    });
+                    var minHeight = Array.from(document.querySelectorAll('.ss-image-link img')).map(img => img.clientHeight).sort()[0];
+                    document.querySelectorAll('.ss-image-link').forEach(img => {
+                        img.style.height = `${minHeight}px`;
+                        img.style.borderRadius = '10px';
+                    });
+                    clearInterval(schoolsPageInterval);
+                };
+            }, 100);
+            var statsSection = document.querySelectorAll('section:has(.ss-im-icons-list)')[1];
+            if (statsSection) {
+                var parallaxSection = statsSection.nextElementSibling;
+                if (parallaxSection) {
+                    var parallaxImage = parallaxSection.querySelector('img.rellax');
+                    if (parallaxImage) {
+                        statsSection.appendChild(parallaxImage);
+                        parallaxSection.remove();
+                        parallaxImage.src = getComputedStyle(statsSection)['background-image'].split('"')[1].split('"')[0];
+                        parallaxImage.style.position = 'absolute';
+                        parallaxImage.style.top = '-50%';
+                        parallaxImage.style.zIndex = '-1';
+                        statsSection.style.background = 'none';
+                    };
+                };
+            };
         };
         // document.addEventListener('keydown', (e) => {
         //     if (e.key === '0') document.documentElement.removeAttribute('font');
