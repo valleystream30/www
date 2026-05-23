@@ -195,7 +195,7 @@ body:has(header:not(:hover)):has(.adminBar:not(:hover)) .adminBar {
 	top: 30px;
 	right: 0;
 	width: calc(100vw - 40px);
-	max-width: 400px;
+	max-width: 500px;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
@@ -236,6 +236,10 @@ body:has(header:not(:hover)):has(.adminBar:not(:hover)) .adminBar {
 .languageOptions span:hover,
 .languageOptions span.active {
 	background: var(--blue);
+}
+
+.languageOptions span:first-child {
+	width: 100%;
 }
 
 .languageOptions span:first-child::after {
@@ -280,6 +284,15 @@ body {
 	.languageSelector {
 		top: 50px;
 		right: 20px;
+	}
+
+	.languageOptions {
+		flex-direction: column;
+	}
+
+	.languageOptions span {
+		min-width: unset;
+		width: 100%;
 	}
 }
 

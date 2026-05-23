@@ -89,7 +89,21 @@ onReady(() => {
                 languages.push({
                     'language': 'English',
                     'code': '',
-                })
+                });
+                // languages = languages.filter(lang => (lang.code !== 'zh-TW') && (lang.code !== 'crh') && (lang.code !== 'iu') && (lang.code !== 'ber') && (lang.code !== 'sat'));
+                // if (languages.find(lang => lang.code === 'zh-CN')) languages.find(lang => lang.code === 'zh-CN').language = 'Chinese (Simple)';
+                // if (languages.find(lang => lang.code === 'crh-Latn')) languages.find(lang => lang.code === 'crh-Latn').language = 'Crimean Tatar';
+                // if (languages.find(lang => lang.code === 'iu-Latn')) languages.find(lang => lang.code === 'iu-Latn').language = 'Inuktut';
+                if (languages.find(lang => lang.code === 'nhe')) languages.find(lang => lang.code === 'nhe').language = 'Nahuatl';
+                languages.forEach(lang => {
+                    if (lang.language.includes('(') && lang.language.includes(')')) {
+                        const mainLanguage = lang.language.split('(')[0].trim();
+                        const subLanguage = lang.language.split('(')[1].split(')')[0].trim();
+                        lang.language = `${mainLanguage}, ${subLanguage}`;
+                    } else if (lang.language.includes('(') || lang.language.includes(')')) {
+                        lang.language = lang.language.replace('(', '').replace(')', '').trim();
+                    };
+                });
                 languages.sort((a, b) => {
                     if (a.code === '') return -1;
                     if (b.code === '') return 1;
