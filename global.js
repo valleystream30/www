@@ -138,10 +138,6 @@ onReady(() => {
                     'language': 'English',
                     'code': '',
                 });
-                // languages = languages.filter(lang => (lang.code !== 'zh-TW') && (lang.code !== 'crh') && (lang.code !== 'iu') && (lang.code !== 'ber') && (lang.code !== 'sat'));
-                // if (languages.find(lang => lang.code === 'zh-CN')) languages.find(lang => lang.code === 'zh-CN').language = 'Chinese (Simple)';
-                // if (languages.find(lang => lang.code === 'crh-Latn')) languages.find(lang => lang.code === 'crh-Latn').language = 'Crimean Tatar';
-                // if (languages.find(lang => lang.code === 'iu-Latn')) languages.find(lang => lang.code === 'iu-Latn').language = 'Inuktut';
                 if (languages.find(lang => lang.code === 'nhe')) languages.find(lang => lang.code === 'nhe').language = 'Nahuatl';
                 languages.forEach(lang => {
                     if (lang.language.includes('(') && lang.language.includes(')')) {

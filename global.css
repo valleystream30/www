@@ -1,4 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Elms Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sniglet:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sour Gummy:wght@400;500;600;700&display=swap");
 
 @media screen and (max-width: 1000px) {
 	.adminBar {
@@ -106,6 +109,17 @@ html * {
 	--ss-header-mobile-menu-text-color: var(--blue) !important;
 	--ss-modal-font-hover-color: var(--red) !important;
 	--ss-header-mobile-menu-highlight-background: transparent !important;
+}
+
+html[font="1"] * {
+	--ss-nav-font-family: Montserrat, sans-serif !important;
+	--ss-menu-font-family: Montserrat, sans-serif !important;
+	--ss-site-name-font-family: Montserrat, sans-serif !important;
+	--ss-utility-font-family: Montserrat, sans-serif !important;
+	--ss-default-font-family: Montserrat, sans-serif !important;
+}
+
+html[font="2"] * {
 	--ss-nav-font-family: Elms Sans, sans-serif !important;
 	--ss-menu-font-family: Elms Sans, sans-serif !important;
 	--ss-site-name-font-family: Elms Sans, sans-serif !important;
@@ -113,7 +127,23 @@ html * {
 	--ss-default-font-family: Elms Sans, sans-serif !important;
 }
 
-html {
+html[font="3"] * {
+	--ss-nav-font-family: Sniglet, sans-serif !important;
+	--ss-menu-font-family: Sniglet, sans-serif !important;
+	--ss-site-name-font-family: Sniglet, sans-serif !important;
+	--ss-utility-font-family: Sniglet, sans-serif !important;
+	--ss-default-font-family: Sniglet, sans-serif !important;
+}
+
+html[font="4"] * {
+	--ss-nav-font-family: Sour Gummy, sans-serif !important;
+	--ss-menu-font-family: Sour Gummy, sans-serif !important;
+	--ss-site-name-font-family: Sour Gummy, sans-serif !important;
+	--ss-utility-font-family: Sour Gummy, sans-serif !important;
+	--ss-default-font-family: Sour Gummy, sans-serif !important;
+}
+
+html[font] {
 	body:not(.customFont),
 	h1:not(.customFont),
 	h2:not(.customFont),
@@ -424,7 +454,7 @@ header .ss-site-header-title-container * {
 	color: #ffffff !important;
 }
 
-header .ss-site-header-school-name:not(.forceStyle) {
+html[font="2"] header .ss-site-header-school-name:not(.forceStyle) {
 	word-spacing: -6px !important;
 }
 
