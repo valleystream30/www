@@ -24,6 +24,18 @@ onReady(() => {
         var nav = Array.from(document.querySelectorAll('header nav')).find(nav => nav.clientHeight);
         document.querySelector('header').prepend(nav);
         document.querySelector('header').style.marginTop = `${nav.clientHeight}px`;
+        document.querySelectorAll('.ss-site-header-main-links-container').forEach(nav2 => {
+            Array.from(document.querySelectorAll('#ss-schools-modal a')).reverse().forEach(schoolLink => {
+                var newLink = schoolLink.cloneNode(true);
+                newLink.innerText = newLink.innerText.replace(' School', '');
+                nav2.prepend(newLink);
+            });
+        });
+        var newLink = document.createElement('a');
+        newLink.className = 'ss-site-header-title-container';
+        newLink.href = '/';
+        newLink.append(...document.querySelectorAll('header .ss-site-header-title-container *'));
+        document.querySelector('header .ss-site-header-title-container').replaceWith(newLink);
         if (document.querySelector('.alert-badge i')) document.querySelector('.alert-badge i').className = "fa-solid fa-bell";
         document.querySelector('.alert-badge')?.addEventListener('click', () => {
             var changeIconInterval = setInterval(() => {
