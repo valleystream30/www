@@ -1,3 +1,4 @@
+document.querySelector('header img').src = 'https://faisaln.com/share/1779572955.png'; // remove after approval
 function resetTranslate() {
     var iframe = document.getElementsByClassName('goog-te-banner-frame')[0] || document.getElementById(':1.container');
     if (!iframe) return;
@@ -19,6 +20,10 @@ function onReady(callback) {
 };
 onReady(() => {
     try {
+        document.querySelector('header .ss-site-header-school-tagline').classList.add('customFont');
+        var nav = Array.from(document.querySelectorAll('header nav')).find(nav => nav.clientHeight);
+        document.querySelector('header').prepend(nav);
+        document.querySelector('header').style.marginTop = `${nav.clientHeight}px`;
         if (document.querySelector('.alert-badge i')) document.querySelector('.alert-badge i').className = "fa-solid fa-bell";
         document.querySelector('.alert-badge')?.addEventListener('click', () => {
             var changeIconInterval = setInterval(() => {
@@ -54,13 +59,19 @@ onReady(() => {
                 };
             }, 100);
         } else if (pageTitle.includes('home')) {
-            var firstSection = document.querySelector('.stack_sort_area').children[0];
-            if (firstSection.querySelector('.spotlight-container')) {
-                firstSection.querySelectorAll('.spotlight-slide').forEach(slide => {
-                    slide.style.minHeight = `calc(100vh - ${document.querySelector('header').clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
-                });
-            };
-            var schoolsPageInterval = setInterval(() => {
+            Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
+                var firstSection = document.querySelector('.stack_sort_area').children[0];
+                if (firstSection.querySelector('.spotlight-container')) {
+                    firstSection.querySelectorAll('.spotlight-slide').forEach(slide => {
+                        if (window.innerWidth <= 1000) {
+                            slide.style.height = `calc(100vh - ${document.querySelector('header').style.marginTop} - ${document.querySelector('header').clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
+                        } else {
+                            slide.style.minHeight = `calc(100vh - ${document.querySelector('header').style.marginTop} - ${document.querySelector('header').clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
+                        };
+                    });
+                };
+            });
+            var homepageAboutImagesInterval = setInterval(() => {
                 if ((document.querySelectorAll('.ss-image-link[style]').length === 3) || (document.querySelectorAll('.ss-image-link img[height]').length === 3)) {
                     document.querySelectorAll('.ss-image-link').forEach(img => {
                         img.style.width = 'unset';
@@ -70,12 +81,14 @@ onReady(() => {
                     document.querySelectorAll('.ss-image-link').forEach(img => {
                         img.style.height = `${minHeight}px`;
                         img.style.borderRadius = '10px';
+                        if (window.innerWidth <= 1000) img.style.width = '100%';
                     });
-                    clearInterval(schoolsPageInterval);
+                    clearInterval(homepageAboutImagesInterval);
                 };
             }, 100);
             var statsSection = document.querySelectorAll('section:has(.ss-im-icons-list)')[1];
             if (statsSection) {
+                statsSection.style.overflow = 'hidden';
                 var parallaxSection = statsSection.nextElementSibling;
                 if (parallaxSection) {
                     var parallaxImage = parallaxSection.querySelector('img.rellax');
@@ -83,21 +96,19 @@ onReady(() => {
                         statsSection.appendChild(parallaxImage);
                         parallaxSection.remove();
                         parallaxImage.src = getComputedStyle(statsSection)['background-image'].split('"')[1].split('"')[0];
-                        parallaxImage.style.position = 'absolute';
-                        parallaxImage.style.top = '-50%';
-                        parallaxImage.style.zIndex = '-1';
+                        parallaxImage.classList.add('parallax-image');
                         statsSection.style.background = 'none';
                     };
                 };
             };
         };
-        // document.addEventListener('keydown', (e) => {
-        //     if (e.key === '0') document.documentElement.removeAttribute('font');
-        //     if (e.key === '1') document.documentElement.setAttribute('font', '1');
-        //     if (e.key === '2') document.documentElement.setAttribute('font', '2');
-        //     if (e.key === '3') document.documentElement.setAttribute('font', '3');
-        //     if (e.key === '4') document.documentElement.setAttribute('font', '4');
-        // });
+        document.addEventListener('keydown', (e) => { // remove after approval
+            if (e.key === '0') document.documentElement.removeAttribute('font');
+            if (e.key === '1') document.documentElement.setAttribute('font', '1');
+            if (e.key === '2') document.documentElement.setAttribute('font', '2');
+            if (e.key === '3') document.documentElement.setAttribute('font', '3');
+            if (e.key === '4') document.documentElement.setAttribute('font', '4');
+        });
         document.querySelector('footer a').href = 'https://maps.app.goo.gl/TPDs2TqNehEzxuMY8';
         document.querySelectorAll('a.btn').forEach(btn => {
             if (btn.querySelector('.ss-button-icon')) return;
@@ -181,6 +192,11 @@ onReady(() => {
                 });
                 document.addEventListener('click', (event) => {
                     if (!event.target.closest('.languageSelector') && !event.target.closest('.translate')) document.querySelectorAll('.languageSelector').forEach(languageSelector => {
+                        languageSelector.classList.remove('active');
+                    });
+                });
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape') document.querySelectorAll('.languageSelector').forEach(languageSelector => {
                         languageSelector.classList.remove('active');
                     });
                 });

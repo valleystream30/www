@@ -1,5 +1,93 @@
 @import url("https://fonts.googleapis.com/css2?family=Elms Sans:wght@400;500;600;700&display=swap");
 
+@media screen and (max-width: 1000px) {
+	.adminBar {
+		display: none !important;
+	}
+
+	.languageSelector {
+		top: 80px !important;
+		left: 10px !important;
+	}
+
+	.languageOptions {
+		flex-direction: column;
+	}
+
+	.languageOptions span {
+		min-width: unset;
+		width: 100%;
+	}
+
+	header .ss-site-header-hero-container {
+		flex-direction: column !important;
+	}
+
+	header .ss-site-header-hero-container {
+		gap: 5px !important;
+	}
+
+	header .ss-site-header-title-container {
+		text-align: center !important;
+	}
+
+	header .ss-site-header-mobile-menu {
+		position: relative;
+	}
+
+	header .ss-site-header-hero-container {
+		padding: 0 !important;
+	}
+
+	header .ss-site-header-mobile-menu button {
+		padding: 15px 20px;
+	}
+
+	.ss-mobile-menu-schools {
+		display: none !important;
+	}
+
+	.ss-site-header-main-links-container {
+		order: unset !important;
+	}
+
+	.spotlight-slide-component:has(.spotlight-image-container) {
+		aspect-ratio: auto !important;
+		height: 100% !important;
+	}
+
+	.spotlight-image-container {
+		aspect-ratio: auto !important;
+	}
+
+	.spotlight-text-container:not(.forceStyle) {
+		border-radius: 0 !important;
+		padding: 30px 20px 20px 20px !important;
+	}
+
+	.spotlight-nav-container {
+		position: relative;
+		background: #042450f0;
+		height: fit-content;
+		padding: 0 !important;
+		aspect-ratio: auto !important;
+		top: unset;
+	}
+
+	.spotlight-nav-options {
+		position: relative;
+		padding: 10px;
+	}
+
+	.spotlight-slide {
+		justify-content: end;
+	}
+
+	.ss-im-icons-list {
+		gap: 10px;
+	}
+}
+
 :root {
 	--blue: #042450 !important;
 	--red: #740404 !important;
@@ -14,6 +102,10 @@ html * {
 	--ss-modal-content-alert-icon-background-border-color: var(
 		--blue
 	) !important;
+	--ss-header-mobile-menu-search-icon-color: var(--blue);
+	--ss-header-mobile-menu-text-color: var(--blue) !important;
+	--ss-modal-font-hover-color: var(--red) !important;
+	--ss-header-mobile-menu-highlight-background: transparent !important;
 	--ss-nav-font-family: Elms Sans, sans-serif !important;
 	--ss-menu-font-family: Elms Sans, sans-serif !important;
 	--ss-site-name-font-family: Elms Sans, sans-serif !important;
@@ -268,32 +360,12 @@ body {
 }
 
 .ss-site-header-main-nav-mobile * {
-	color: var(--blue) !important;
-	fill: var(--blue) !important;
+	color: #ffffff !important;
+	fill: #ffffff !important;
 }
 
 .ss-site-header-mobile-menu * {
-	stroke: var(--blue) !important;
-}
-
-@media screen and (max-width: 1000px) {
-	.adminBar {
-		display: none !important;
-	}
-
-	.languageSelector {
-		top: 50px;
-		right: 20px;
-	}
-
-	.languageOptions {
-		flex-direction: column;
-	}
-
-	.languageOptions span {
-		min-width: unset;
-		width: 100%;
-	}
+	stroke: #ffffff !important;
 }
 
 font {
@@ -307,6 +379,10 @@ font {
 	padding: 30px 20px !important;
 	background-color: #042450f0 !important;
 	zoom: 0.9;
+}
+
+.spotlight-text-container * {
+	color: #ffffff !important;
 }
 
 .spotlight-text-container p {
@@ -325,12 +401,90 @@ hr.hr {
 	margin-bottom: 10px !important;
 }
 
-#item2003201 {
-	overflow: hidden;
+header {
+	max-width: unset !important;
+	background: var(--blue);
 }
 
-#item2003201 .rellax {
+header::before,
+header::after,
+.ss-site-header-page-links::before {
+	content: unset !important;
+}
+
+header .ss-site-header-hero-container {
+	gap: 25px !important;
+}
+
+header .ss-site-header-title-container {
+	display: flex !important;
+}
+
+header .ss-site-header-title-container * {
+	color: #ffffff !important;
+}
+
+header .ss-site-header-school-name:not(.forceStyle) {
+	word-spacing: -6px !important;
+}
+
+header .ss-site-header-school-tagline {
+	font-family: Charm !important;
+	font-size: 20px !important;
+}
+
+header .ss-site-header-main-nav > .ss-site-header-page-links {
+	margin: unset !important;
+	top: unset !important;
+}
+
+header nav {
+	background: var(--red) !important;
+	position: fixed !important;
+	top: 0;
+	left: 0;
+	z-index: 10000;
+	width: 100%;
+}
+
+header .top-nav {
+	height: unset !important;
+}
+
+header .top-nav:hover {
+	background: var(--blue);
+}
+
+header .top-nav .top-nav-link {
+	margin: 0 !important;
+	padding: 20px !important;
+}
+
+header .ss-site-header-main-links-container {
+	position: relative !important;
+	top: unset !important;
+	right: unset !important;
+}
+
+.spotlight-layout-medium
+	.spotlight-slide-component:has(.spotlight-image-container) {
+	background: var(--blue);
+}
+
+.stack-nav-edit-bar-cta .ss-admin-edit:link,
+.stack-nav-edit-bar-cta .ss-admin-edit:visited {
+	background: var(--blue) !important;
+	border-color: var(--blue) !important;
+}
+
+.parallax-image {
 	position: absolute;
 	top: -50%;
 	z-index: -1;
+	min-height: 100vh;
+}
+
+#ss-header-mobile-menu .ss-mobile-menu-level-1 ul .ss-mobile-menu-level-2 ul {
+	padding: 0 20px;
+	margin-top: 5px !important;
 }
