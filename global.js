@@ -126,6 +126,7 @@ onReady(() => {
             siteMapSearch.placeholder = 'Search site map...';
             siteMapSearch.className = 'sitemap-search';
             document.querySelector('.pageBody').prepend(siteMapSearch);
+            siteMapSearch.focus();
             siteMapSearch.addEventListener('input', (event) => {
                 const searchTerm = event.target.value.toLowerCase();
                 document.querySelectorAll('.sitemap-block').forEach(block => {
@@ -282,7 +283,11 @@ onReady(() => {
                     translateButton.parentElement.appendChild(languageSelector);
                     translateButton.addEventListener('click', (event) => {
                         event.preventDefault();
-                        translateButton.parentElement.querySelector('.languageSelector').classList.toggle('active');
+                        var languageSelector = translateButton.parentElement.querySelector('.languageSelector');
+                        languageSelector.classList.toggle('active');
+                        if (languageSelector.classList.contains('active')) setTimeout(() => {
+                            languageSelector.querySelector('#languageSearch').focus();
+                        }, 100);
                     });
                     translateButton.parentElement.querySelector('.languageSelector #languageSearch').addEventListener('input', (event) => {
                         const searchTerm = event.target.value.toLowerCase();
