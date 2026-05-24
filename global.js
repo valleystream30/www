@@ -128,10 +128,18 @@ onReady(() => {
             };
         };
         document.addEventListener('keydown', (e) => { // remove after approval
-            if (e.key === '0') document.documentElement.removeAttribute('font');
-            if (e.key === '1') document.documentElement.setAttribute('font', '1');
+            if (e.key === '1') document.documentElement.removeAttribute('font');
             if (e.key === '2') document.documentElement.setAttribute('font', '2');
             if (e.key === '3') document.documentElement.setAttribute('font', '3');
+            if (e.key === '4') document.documentElement.setAttribute('font', '4');
+        });
+        document.addEventListener('keydown', (e) => { // remove after approval
+            if (e.key === '5') document.documentElement.removeAttribute('header');
+            if (e.key === '6') document.documentElement.setAttribute('header', '6');
+            if (e.key === '7') document.documentElement.setAttribute('header', '7');
+            if (e.key === '8') document.documentElement.setAttribute('header', '8');
+            if (e.key === '9') document.documentElement.setAttribute('header', '9');
+            if (e.key === '0') document.documentElement.setAttribute('header', '0');
         });
         document.querySelector('footer a').href = 'https://maps.app.goo.gl/TPDs2TqNehEzxuMY8';
         document.querySelectorAll('a.btn').forEach(btn => {
