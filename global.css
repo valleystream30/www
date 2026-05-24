@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Elms Sans:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sniglet:wght@400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Sour Gummy:wght@400;500;600;700&display=swap");
 
 @media screen and (max-width: 1000px) {
 	.adminBar {
@@ -133,14 +132,6 @@ html[font="3"] * {
 	--ss-site-name-font-family: Sniglet, sans-serif !important;
 	--ss-utility-font-family: Sniglet, sans-serif !important;
 	--ss-default-font-family: Sniglet, sans-serif !important;
-}
-
-html[font="4"] * {
-	--ss-nav-font-family: Sour Gummy, sans-serif !important;
-	--ss-menu-font-family: Sour Gummy, sans-serif !important;
-	--ss-site-name-font-family: Sour Gummy, sans-serif !important;
-	--ss-utility-font-family: Sour Gummy, sans-serif !important;
-	--ss-default-font-family: Sour Gummy, sans-serif !important;
 }
 
 html[font] {
