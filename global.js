@@ -24,13 +24,26 @@ onReady(() => {
         var nav = Array.from(document.querySelectorAll('header nav')).find(nav => nav.clientHeight);
         document.querySelector('header').prepend(nav);
         document.querySelector('header').style.marginTop = `${nav.clientHeight}px`;
-        document.querySelectorAll('.ss-site-header-main-links-container').forEach(nav2 => {
-            Array.from(document.querySelectorAll('#ss-schools-modal a')).reverse().forEach(schoolLink => {
+        if (window.innerWidth <= 1000) {
+            var nav2 = document.createElement('nav');
+            nav2.className = 'ss-site-header-main-links-container';
+            nav2.style.display = 'flex';
+            nav2.style.justifyContent = 'center';
+            Array.from(document.querySelectorAll('#ss-schools-modal a')).forEach(schoolLink => {
                 var newLink = schoolLink.cloneNode(true);
-                newLink.innerText = newLink.innerText.replace(' School', '');
-                nav2.prepend(newLink);
+                newLink.innerText = newLink.innerText.replace(' School', '').replace(' Avenue', ' Ave');
+                nav2.append(newLink);
             });
-        });
+            document.querySelector('header .ss-site-header-main-container').appendChild(nav2);
+        } else {
+            document.querySelectorAll('.ss-site-header-main-links-container').forEach(nav2 => {
+                Array.from(document.querySelectorAll('#ss-schools-modal a')).reverse().forEach(schoolLink => {
+                    var newLink = schoolLink.cloneNode(true);
+                    newLink.innerText = newLink.innerText.replace(' School', '');
+                    nav2.prepend(newLink);
+                });
+            });
+        };
         var newLink = document.createElement('a');
         newLink.className = 'ss-site-header-title-container';
         newLink.href = '/';
