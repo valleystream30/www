@@ -23,7 +23,7 @@ onReady(() => {
         document.querySelector('header .ss-site-header-school-tagline').classList.add('customFont');
         var nav = Array.from(document.querySelectorAll('header nav')).find(nav => nav.clientHeight);
         document.querySelector('header').prepend(nav);
-        document.querySelector('header').style.marginTop = `${nav.clientHeight}px`;
+        document.querySelector('header').style.paddingTop = `${nav.clientHeight}px`;
         if (window.innerWidth <= 1000) {
             var nav2 = document.createElement('nav');
             nav2.className = 'ss-site-header-main-links-container';
@@ -62,12 +62,6 @@ onReady(() => {
                 if (!document.querySelector('.ss-alert-modal-svg-container')) clearInterval(changeIconInterval);
             }, 500);
         });
-        /* Array.from($0.querySelectorAll('img')).map(img => {
-            img.style.height = 'fit-content';
-            img.style.maxHeight = '75px';
-            img.style.width = 'auto';
-            return img.outerHTML;
-        }).join('&nbsp;&nbsp;&nbsp;&nbsp;'); */
         const pageTitle = document.querySelector('title').textContent.toLowerCase();
         if (pageTitle.includes('partnership')) {
             document.querySelector('.ss-editor-content p:last-child').classList.add('partnerships');
@@ -89,9 +83,9 @@ onReady(() => {
                 if (firstSection.querySelector('.spotlight-container')) {
                     firstSection.querySelectorAll('.spotlight-slide').forEach(slide => {
                         if (window.innerWidth <= 1000) {
-                            slide.style.height = `calc(100vh - ${document.querySelector('header').style.marginTop} - ${document.querySelector('header').clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
+                            slide.style.height = `calc(100vh - ${document.querySelector('header').style.paddingTop} - ${document.querySelector('header').clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
                         } else {
-                            slide.style.minHeight = `calc(100vh - ${document.querySelector('header').style.marginTop} - ${document.querySelector('header').clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
+                            slide.style.minHeight = `calc(100vh - ${document.querySelector('header').style.paddingTop} - ${document.querySelector('header').clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
                         };
                     });
                 };
@@ -126,6 +120,98 @@ onReady(() => {
                     };
                 };
             };
+        } else if (pageTitle.includes('site map')) {
+            var siteMapSearch = document.createElement('input');
+            siteMapSearch.type = 'text';
+            siteMapSearch.placeholder = 'Search site map...';
+            siteMapSearch.className = 'sitemap-search';
+            document.querySelector('.pageBody').prepend(siteMapSearch);
+            siteMapSearch.addEventListener('input', (event) => {
+                const searchTerm = event.target.value.toLowerCase();
+                document.querySelectorAll('.sitemap-block').forEach(block => {
+                    block.style.display = block.innerText.toLowerCase().includes(searchTerm) ? 'flex' : 'none';
+                });
+            });
+            var masonry = document.createElement('div');
+            masonry.className = 'sitemap-masonry desktop';
+            var mobileMasonry = document.createElement('div');
+            mobileMasonry.className = 'sitemap-masonry mobile';
+            var tabletMasonry = document.createElement('div');
+            tabletMasonry.className = 'sitemap-masonry tablet';
+            var column1 = document.createElement('div');
+            var column2 = document.createElement('div');
+            var column3 = document.createElement('div');
+            var tabletColumn1 = document.createElement('div');
+            var tabletColumn2 = document.createElement('div');
+            column1.className = 'sitemap-column';
+            column2.className = 'sitemap-column';
+            column3.className = 'sitemap-column';
+            tabletColumn1.className = 'sitemap-column';
+            tabletColumn2.className = 'sitemap-column';
+            var blocks = [];
+            function createSitemapBlock(block) {
+                var link = block.querySelector('a');
+                var newLink = document.createElement('div');
+                newLink.className = 'sitemap-block';
+                newLink.innerHTML = `<a href="${link.href}">${link.innerText}</a>`;
+                if (block.querySelector('ul')) {
+                    var leaves = Array.from(block.querySelector('ul').children).filter(li => !li.querySelector('ul'));
+                    var branches = Array.from(block.querySelector('ul').children).filter(li => li.querySelector('ul'));
+                    console.log(link.innerText, leaves.length, branches.length);
+                    if (leaves.length) {
+                        newLink.innerHTML += `<hr>`;
+                        leaves.forEach(leaf => {
+                            var subLink = leaf.querySelector('a');
+                            var newSubLink = document.createElement('a');
+                            newSubLink.className = 'sitemap-sublink';
+                            newSubLink.href = subLink.href;
+                            newSubLink.innerText = subLink.innerText;
+                            newLink.appendChild(newSubLink);
+                        });
+                    };
+                    branches.forEach(branch => {
+                        createSitemapBlock(branch);
+                    });
+                };
+                blocks.push({
+                    'name': link.innerText,
+                    'element': newLink,
+                });
+            };
+            document.querySelectorAll('.pageBody > ul > li').forEach(block => {
+                createSitemapBlock(block);
+            });
+            blocks.sort((a, b) => {
+                if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+                if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+                return 0;
+            });
+            var currentBlock = 0;
+            blocks.forEach(block => {
+                if ((currentBlock % 3) === 0) {
+                    column1.appendChild(block.element);
+                } else if ((currentBlock % 3) === 1) {
+                    column2.appendChild(block.element);
+                } else {
+                    column3.appendChild(block.element);
+                };
+                if ((currentBlock % 2) === 0) {
+                    tabletColumn1.appendChild(block.element.cloneNode(true));
+                } else if ((currentBlock % 2) === 1) {
+                    tabletColumn2.appendChild(block.element.cloneNode(true));
+                };
+                mobileMasonry.appendChild(block.element.cloneNode(true));
+                currentBlock++;
+            });
+            masonry.appendChild(column1);
+            masonry.appendChild(column2);
+            masonry.appendChild(column3);
+            tabletMasonry.appendChild(tabletColumn1);
+            tabletMasonry.appendChild(tabletColumn2);
+            document.querySelector('.pageBody').appendChild(masonry);
+            document.querySelector('.pageBody').appendChild(mobileMasonry);
+            document.querySelector('.pageBody').appendChild(tabletMasonry);
+            document.querySelector('.pageBody > ul').remove();
         };
         document.addEventListener('keydown', (e) => { // remove after approval
             if (e.key === '1') document.documentElement.removeAttribute('font');
