@@ -83,9 +83,9 @@ onReady(() => {
                 if (firstSection.querySelector('.spotlight-container')) {
                     firstSection.querySelectorAll('.spotlight-slide').forEach(slide => {
                         if (window.innerWidth <= 1000) {
-                            slide.style.height = `calc(100vh - ${document.querySelector('header').style.paddingTop} - ${document.querySelector('header').clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
+                            slide.style.height = `calc(100vh - ${document.querySelector('header').clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
                         } else {
-                            slide.style.minHeight = `calc(100vh - ${document.querySelector('header').style.paddingTop} - ${document.querySelector('header').clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
+                            slide.style.minHeight = `calc(100vh - ${document.querySelector('header').clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
                         };
                     });
                 };

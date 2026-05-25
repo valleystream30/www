@@ -42,6 +42,10 @@
 		width: 100%;
 	}
 
+	header .ss-site-header-main-container {
+		flex-direction: column;
+	}
+
 	header .ss-site-header-hero-container {
 		flex-direction: column !important;
 	}
@@ -151,6 +155,8 @@ html * {
 	--ss-utility-font-color: var(--header-color) !important;
 	--ss-utility-icon-color: var(--header-color) !important;
 	--ss-nav-font-color: var(--header-nav-color) !important;
+	--ss-menu-background-color: var(--red) !important;
+	--ss-menu-font-color: #ffffff !important;
 }
 
 html[header="6"] * {
