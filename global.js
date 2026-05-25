@@ -92,7 +92,8 @@ onReady(() => {
             });
             var homepageAboutImagesInterval = setInterval(() => {
                 if ((document.querySelectorAll('.ss-image-link[style]').length === 3) || (document.querySelectorAll('.ss-image-link img[height]').length === 3)) {
-                    document.querySelectorAll('.ss-image-link').forEach(img => {
+                    document.querySelector('section:has(.ss-image-link[style]), section:has(.ss-image-link img[height])').style.padding = 'min(70px, 7vh) min(20px, 2vw)';
+                    document.querySelectorAll('.ss-image-link, .ss-image-link img').forEach(img => {
                         img.style.width = 'unset';
                         img.removeAttribute('height');
                     });

@@ -130,6 +130,17 @@
 	}
 }
 
+@media screen and (min-width: 576px) {
+	.school-footer-seven-address-info .school-footer-seven-address-street-info {
+		padding-right: 20px;
+	}
+
+	.school-footer-seven-address-info
+		.school-footer-seven-address-street-info::after {
+		right: 8.5px;
+	}
+}
+
 :root {
 	--blue: #042450 !important;
 	--red: #740404 !important;
@@ -481,11 +492,18 @@ font {
 	box-shadow: none !important;
 }
 
+.spotlight-container:has(.item:only-of-type) .spotlight-text-container {
+	background: linear-gradient(#0000, #042450f0) !important;
+}
+
+.spotlight-container:not(:has(.item:only-of-type)) .spotlight-text-container {
+	background-color: #042450f0 !important;
+}
+
 .spotlight-text-container {
 	border-radius: 10px;
 	gap: 5px;
 	padding: 30px 20px !important;
-	background-color: #042450f0 !important;
 	zoom: 0.9;
 }
 
@@ -700,4 +718,30 @@ main > .row:has(.breadcrumb) {
 	font-size: 30px !important;
 	margin-top: 40px;
 	margin-left: 0;
+}
+
+li:has(.smart-sites-link) {
+	display: none;
+}
+
+.animated-button:not(:hover) .animated-button-text {
+	margin-right: -8px;
+}
+
+.animated-button:hover .animated-button-text {
+	margin-left: -4px;
+}
+
+.animated-button:hover .animated-button-svg {
+	margin-right: -4px;
+}
+
+.ss-image-link {
+	rotate: 0deg;
+	transition: 0.25s rotate;
+}
+
+.ss-image-link:hover {
+	rotate: 1.1deg;
+	transition: 0.25s rotate;
 }
