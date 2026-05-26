@@ -749,8 +749,12 @@ main > .row:has(.breadcrumb) {
 	margin-left: 0;
 }
 
-li:has(.smart-sites-link) {
+.school-footer-parentsquare-links {
 	display: none;
+}
+
+footer .school-footer-col:last-of-type nav:last-of-type ul:last-of-type li:last-of-type {
+	display: none !important;
 }
 
 .animated-button:not(:hover) .animated-button-text {
