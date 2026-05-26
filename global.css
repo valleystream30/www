@@ -753,7 +753,11 @@ main > .row:has(.breadcrumb) {
 	display: none;
 }
 
-footer .school-footer-col:last-of-type nav:last-of-type ul:last-of-type li:last-of-type {
+footer
+	.school-footer-col:last-of-type
+	nav:last-of-type
+	ul:last-of-type
+	li:last-of-type {
 	display: none !important;
 }
 
@@ -811,4 +815,8 @@ footer .school-footer-col:last-of-type nav:last-of-type ul:last-of-type li:last-
 	rotate: 14deg;
 	top: 250px !important;
 	right: -140px !important;
+}
+
+.ss-section-directory i.fa-chevron-down {
+	display: none;
 }
