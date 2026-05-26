@@ -252,6 +252,7 @@ html[font="3"] * {
 	--ss-site-name-font-family: Elms Sans, sans-serif !important;
 	--ss-utility-font-family: Elms Sans, sans-serif !important;
 	--ss-default-font-family: Elms Sans, sans-serif !important;
+	word-spacing: -2px !important;
 }
 
 html[font="4"] * {
@@ -275,7 +276,6 @@ html[font] {
 	span:not(.customFont),
 	div:not(.customFont) {
 		font-family: var(--ss-default-font-family) !important;
-		word-spacing: -2px !important;
 	}
 }
 
