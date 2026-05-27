@@ -1,6 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Elms Sans:wght@400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Sniglet:wght@400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playpen+Sans:wght@100..800&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 @media screen and (max-width: 1300px) {
 	.sitemap-masonry.desktop,
@@ -199,19 +197,19 @@ html * {
 	--ss-menu-font-color: #ffffff !important;
 }
 
-html[header="6"] * {
+html[header="1"] * {
 	--blue: #26428b;
 	--red: #8e0000;
 }
 
-html[header="7"] * {
+html[header="2"] * {
 	--blue: #26428b;
 	--red: #8e0000;
 	--header-nav-background-color: var(--yellow);
 	--header-nav-color: var(--red);
 }
 
-html[header="8"] * {
+html[header="3"] * {
 	--header-background-color: #ffffff;
 	--header-nav-background-color: #aac7ff;
 	--header-color: var(--blue);
@@ -220,7 +218,7 @@ html[header="8"] * {
 	--header-nav-color: var(--blue);
 }
 
-html[header="9"] * {
+html[header="4"] * {
 	--header-background-color: #ffffff;
 	--header-nav-background-color: #bfd7ff;
 	--header-color: var(--blue);
@@ -229,7 +227,7 @@ html[header="9"] * {
 	--header-nav-color: var(--blue);
 }
 
-html[header="0"] * {
+html[header="5"] * {
 	--header-background-color: #ffffff;
 	--header-nav-background-color: var(--yellow);
 	--header-color: var(--blue);
@@ -238,7 +236,7 @@ html[header="0"] * {
 	--header-nav-color: var(--red);
 }
 
-html[font="2"] * {
+html[font="1"] * {
 	--ss-nav-font-family: Montserrat, sans-serif !important;
 	--ss-menu-font-family: Montserrat, sans-serif !important;
 	--ss-site-name-font-family: Montserrat, sans-serif !important;
@@ -246,7 +244,7 @@ html[font="2"] * {
 	--ss-default-font-family: Montserrat, sans-serif !important;
 }
 
-html[font="3"] * {
+html[font="2"] * {
 	--ss-nav-font-family: Elms Sans, sans-serif !important;
 	--ss-menu-font-family: Elms Sans, sans-serif !important;
 	--ss-site-name-font-family: Elms Sans, sans-serif !important;
@@ -255,12 +253,23 @@ html[font="3"] * {
 	word-spacing: -2px !important;
 }
 
-html[font="4"] * {
-	--ss-nav-font-family: Sniglet, sans-serif !important;
+html[font="3"] * {
+	/* --ss-nav-font-family: Sniglet, sans-serif !important;
 	--ss-menu-font-family: Sniglet, sans-serif !important;
 	--ss-site-name-font-family: Sniglet, sans-serif !important;
 	--ss-utility-font-family: Sniglet, sans-serif !important;
-	--ss-default-font-family: Sniglet, sans-serif !important;
+	--ss-default-font-family: Sniglet, sans-serif !important; */
+	--ss-menu-font-family: Playpen Sans, sans-serif !important;
+	--ss-site-name-font-family: Playpen Sans, sans-serif !important;
+	--ss-utility-font-family: Playpen Sans, sans-serif !important;
+	--ss-default-font-family: Playpen Sans, sans-serif !important;
+}
+
+html[font="4"] * {
+	--ss-menu-font-family: Shantell Sans, sans-serif !important;
+	--ss-site-name-font-family: Shantell Sans, sans-serif !important;
+	--ss-utility-font-family: Shantell Sans, sans-serif !important;
+	--ss-default-font-family: Shantell Sans, sans-serif !important;
 }
 
 html[font] {
@@ -580,7 +589,7 @@ header .ss-site-header-title-container * {
 	color: var(--header-color) !important;
 }
 
-html[font="3"] header .ss-site-header-school-name:not(.forceStyle) {
+html[font="2"] header .ss-site-header-school-name:not(.forceStyle) {
 	word-spacing: -6px !important;
 }
 

@@ -221,20 +221,37 @@ onReady(() => {
             document.querySelector('.pageBody').appendChild(tabletMasonry);
             document.querySelector('.pageBody > ul').remove();
         };
-        document.addEventListener('keydown', (e) => { // remove after approval
-            if (e.key === '1') document.documentElement.removeAttribute('font');
-            if (e.key === '2') document.documentElement.setAttribute('font', '2');
-            if (e.key === '3') document.documentElement.setAttribute('font', '3');
-            if (e.key === '4') document.documentElement.setAttribute('font', '4');
+        var font = 0;
+        var header = 0;
+        const fontValues = ['', '1', '2', '3', '4'];
+        const headerValues = ['', '1', '2', '3', '4', '5'];
+        document.addEventListener('keydown', e => {
+            switch (e.key) {
+                case 'ArrowUp':
+                    font = (font + 1) % fontValues.length;
+                    updateAttribute('font', fontValues[font]);
+                    break;
+                case 'ArrowDown':
+                    font = (font - 1 + fontValues.length) % fontValues.length;
+                    updateAttribute('font', fontValues[font]);
+                    break;
+                case 'ArrowRight':
+                    header = (header + 1) % headerValues.length;
+                    updateAttribute('header', headerValues[header]);
+                    break;
+                case 'ArrowLeft':
+                    header = (header - 1 + headerValues.length) % headerValues.length;
+                    updateAttribute('header', headerValues[header]);
+                    break;
+            }
         });
-        document.addEventListener('keydown', (e) => { // remove after approval
-            if (e.key === '5') document.documentElement.removeAttribute('header');
-            if (e.key === '6') document.documentElement.setAttribute('header', '6');
-            if (e.key === '7') document.documentElement.setAttribute('header', '7');
-            if (e.key === '8') document.documentElement.setAttribute('header', '8');
-            if (e.key === '9') document.documentElement.setAttribute('header', '9');
-            if (e.key === '0') document.documentElement.setAttribute('header', '0');
-        });
+        function updateAttribute(name, value) {
+            if (value === '') {
+                document.documentElement.removeAttribute(name);
+            } else {
+                document.documentElement.setAttribute(name, value);
+            };
+        };
         document.querySelector('footer a').href = 'https://maps.app.goo.gl/TPDs2TqNehEzxuMY8';
         document.querySelectorAll('a.btn').forEach(btn => {
             if (btn.querySelector('.ss-button-icon')) return;
