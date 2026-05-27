@@ -653,12 +653,6 @@ header .ss-site-header-main-links-container > a {
 	margin-top: 5px !important;
 }
 
-main > .row:has(.breadcrumb) {
-	width: 100vw;
-	position: absolute;
-	left: 0;
-}
-
 .sitemap-masonry {
 	display: flex;
 	align-items: stretch;
