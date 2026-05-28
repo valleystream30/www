@@ -136,7 +136,7 @@
 	}
 
 	header .ss-site-header-main-links-container:not(:has(.translate)) {
-		gap: 5px 20px;
+		gap: 5px 15px;
 	}
 
 	table tr {
@@ -153,6 +153,19 @@
 
 	.sitemap-masonry.mobile {
 		display: flex !important;
+	}
+
+	.customElement.about {
+		padding: 40px 0;
+	}
+
+	.customElement.about .ss-component-column-wrapper {
+		flex-direction: column;
+		row-gap: 40px;
+	}
+
+	.customElement.about .ss-component-column {
+		width: 100%;
 	}
 }
 
@@ -200,6 +213,7 @@ html * {
 	--ss-nav-font-color: var(--header-nav-color) !important;
 	--ss-menu-background-color: var(--red) !important;
 	--ss-menu-font-color: #ffffff !important;
+	font-variant-ligatures: none;
 }
 
 html[header="1"] * {
@@ -849,7 +863,7 @@ footer
 	display: none;
 }
 
-.customElement .ss-component-header {
+html:not(.ready) .ss-component-header {
 	display: none !important;
 }
 
@@ -873,7 +887,7 @@ footer
 }
 
 .customElement.staff .ss-im-icon-wrapper-inner:hover .ss-icon {
-	margin-bottom: 10.5px;
+	margin-bottom: 10.75px;
 	zoom: 1.1;
 	rotate: -7deg;
 	transition:
@@ -898,6 +912,10 @@ footer
 	margin-top: -4px;
 }
 
+.customElement.staff .ss-im-icon-wrapper {
+	min-width: 400px;
+}
+
 html.translated-rtl .nav {
 	justify-content: end;
 	text-align: right;
@@ -918,4 +936,63 @@ html.translated-rtl .customElement.staff .phone {
 html.translated-rtl .customElement.staff:has(.phone) .email {
 	left: 50px;
 	right: unset;
+}
+
+.customElement.project .ss-component-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.customElement.project .ss-component-column:last-of-type img {
+	border-radius: 10px !important;
+	border: 2px solid var(--blue);
+	width: 100% !important;
+	transition: 0.25s rotate;
+}
+
+.customElement.project .ss-component-column:last-of-type img:hover {
+	rotate: 1deg;
+	transition: 0.25s rotate;
+}
+
+.customElement.about .ss-component-column-wrapper {
+	column-gap: 75px;
+}
+
+.customElement.about .ss-column-one {
+	flex-basis: 23.333%;
+	min-width: fit-content;
+}
+
+.customElement.about .ss-column-one :has(> ul) p {
+	padding-right: 30px !important;
+}
+
+.customElement.about .ss-column-one ul {
+	margin: 0;
+}
+
+.customElement.about + section:has(.stack-links-container) {
+	padding-top: 20px !important;
+}
+
+.customElement.links li {
+	cursor: pointer;
+	transition: 0.25s;
+}
+
+.customElement.links li:hover {
+	margin-top: -10px;
+	margin-bottom: 10px;
+	transition: 0.25s;
+}
+
+.customElement.sideBySide .ss-component-header-title {
+	text-align: left !important;
+	justify-content: start !important;
+}
+
+.customElement.sideBySide .spotlight-component-body-content {
+	padding: 50px 80px !important;
 }

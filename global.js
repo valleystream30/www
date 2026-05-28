@@ -391,6 +391,7 @@ onReady(() => {
             if (header.innerText.includes('customElement.')) {
                 var customElement = header.innerText.split('customElement.')[1].trim();
                 section.classList.add('customElement', customElement);
+                section.querySelector('.ss-component-header').remove();
                 switch (customElement) {
                     case 'staff':
                         section.querySelectorAll('.ss-im-icon-wrapper-inner').forEach(wrapper => {
@@ -425,6 +426,13 @@ onReady(() => {
             newLink.innerHTML = link.innerHTML;
             link.replaceWith(newLink);
         });
+        document.querySelectorAll('.customElement.links li').forEach(li => {
+            var link = li.querySelector('a');
+            if (link) li.addEventListener('click', () => {
+                window.location.href = link.href;
+            });
+        });
+        document.documentElement.classList.add('ready');
     } catch (e) {
         console.error(e);
     };
