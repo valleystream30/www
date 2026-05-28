@@ -138,6 +138,11 @@
 	header .ss-site-header-main-links-container:not(:has(.translate)) {
 		gap: 5px 20px;
 	}
+
+	table tr {
+		display: flex;
+		flex-direction: column;
+	}
 }
 
 @media screen and (max-width: 800px) {
