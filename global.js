@@ -353,24 +353,26 @@ onReady(() => {
                             el.style.display = '';
                         });
                         if ((langCode !== 'auto') && (langCode !== 'en') && (langCode !== '')) {
-                            var totalFound = [];
-                            document.querySelectorAll('[lang]:not(html)').forEach(el => {
-                                if (el.getAttribute('lang') === langCode) {
-                                    el.style.display = 'none';
-                                } else {
-                                    totalFound.push(el);
-                                };
-                            });
-                            document.querySelectorAll('a:not([tabindex])').forEach(el => {
-                                if (!languages.map(lang => lang.language).some(lang => el.innerText.includes(lang))) return;
-                                if (!el.innerText.includes(langName)) {
-                                    el.style.display = 'none';
-                                } else {
-                                    totalFound.push(el);
-                                };
-                            });
-                            if (totalFound.length === 0) document.querySelectorAll('[lang]:not(html), a:not([tabindex])').forEach(el => {
-                                el.style.display = '';
+                            document.querySelectorAll('section').forEach(section => {
+                                var totalFound = [];
+                                section.querySelectorAll('[lang]:not(html)').forEach(el => {
+                                    if (el.getAttribute('lang') === langCode) {
+                                        el.style.display = 'none';
+                                    } else {
+                                        totalFound.push(el);
+                                    };
+                                });
+                                section.querySelectorAll('a:not([tabindex])').forEach(el => {
+                                    if (!languages.map(lang => lang.language).some(lang => el.innerText.includes(lang))) return;
+                                    if (!el.innerText.includes(langName)) {
+                                        el.style.display = 'none';
+                                    } else {
+                                        totalFound.push(el);
+                                    };
+                                });
+                                if (totalFound.length === 0) section.querySelectorAll('[lang]:not(html), a:not([tabindex])').forEach(el => {
+                                    el.style.display = '';
+                                });
                             });
                         };
                         document.querySelectorAll('header .translate > a').forEach(translateButton => {
