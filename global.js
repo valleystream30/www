@@ -419,6 +419,12 @@ onReady(() => {
                 };
             };
         });
+        document.querySelectorAll('a[href=""]').forEach(link => {
+            var newLink = document.createElement('div');
+            newLink.className = link.className;
+            newLink.innerHTML = link.innerHTML;
+            link.replaceWith(newLink);
+        });
     } catch (e) {
         console.error(e);
     };
