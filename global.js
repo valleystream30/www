@@ -384,6 +384,39 @@ onReady(() => {
                 htmlObserver.observe(document.documentElement, { attributes: true });
             };
         }, 500);
+        document.querySelectorAll('section:has(.ss-component-header-title)').forEach(section => {
+            var header = section.querySelector('.ss-component-header-title');
+            if (header.innerText.includes('customElement.')) {
+                var customElement = header.innerText.split('customElement.')[1].trim();
+                section.classList.add('customElement', customElement);
+                switch (customElement) {
+                    case 'staff':
+                        section.querySelectorAll('.ss-im-icon-wrapper-inner').forEach(wrapper => {
+                            const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
+                            const emailMatch = wrapper.innerText.match(emailPattern);
+                            const email = emailMatch ? emailMatch[0].replaceAll('ext', '#').replaceAll('.', '').replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '') : null;
+                            const phonePattern = /(?:\+?\d{1,3}\s*)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}(?:\s*(?:ext\.?|x)\s*\d+)?/i;
+                            const phoneMatch = wrapper.innerText.match(phonePattern);
+                            const phone = phoneMatch ? phoneMatch[0] : null;
+                            if (email) {
+                                const emailLink = document.createElement('a');
+                                emailLink.href = `mailto:${email}`;
+                                emailLink.innerHTML = '<i class="fa-solid fa-envelope"></i>';
+                                emailLink.classList.add('email');
+                                wrapper.appendChild(emailLink);
+                            };
+                            if (phone) {
+                                const phoneLink = document.createElement('a');
+                                phoneLink.href = `tel:${phone.replaceAll(' ', '').replaceAll('-', '').replaceAll('.', '')}`;
+                                phoneLink.innerHTML = '<i class="fa-solid fa-phone"></i>';
+                                phoneLink.classList.add('phone');
+                                wrapper.appendChild(phoneLink);
+                            };
+                        });
+                        break;
+                };
+            };
+        });
     } catch (e) {
         console.error(e);
     };
