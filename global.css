@@ -897,3 +897,25 @@ footer
 	font-size: 24.4px;
 	margin-top: -4px;
 }
+
+html.translated-rtl .nav {
+	justify-content: end;
+	text-align: right;
+}
+
+html.translated-rtl main,
+html.translated-rtl #ss-header-mobile-menu {
+	direction: rtl;
+	text-align: right;
+}
+
+html.translated-rtl .customElement.staff .email,
+html.translated-rtl .customElement.staff .phone {
+	left: 20px;
+	right: unset;
+}
+
+html.translated-rtl .customElement.staff:has(.phone) .email {
+	left: 50px;
+	right: unset;
+}
