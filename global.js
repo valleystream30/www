@@ -63,10 +63,12 @@ onReady(() => {
             }, 500);
         });
         var breadcrumbs = document.querySelector('main > .row:has(.breadcrumb)');
-        var breadcrumbsMargin = (document.body.clientWidth - breadcrumbs.clientWidth) / 2;
-        if (breadcrumbsMargin > 0) {
-            breadcrumbs.style.marginLeft = `-${breadcrumbsMargin}px`;
-            breadcrumbs.style.width = '100vw';
+        if (breadcrumbs) {
+            var breadcrumbsMargin = (document.body.clientWidth - breadcrumbs.clientWidth) / 2;
+            if (breadcrumbsMargin > 0) {
+                breadcrumbs.style.marginLeft = `-${breadcrumbsMargin}px`;
+                breadcrumbs.style.width = '100vw';
+            };
         };
         const pageTitle = document.querySelector('title').textContent.toLowerCase();
         if (pageTitle.includes('partnership')) {

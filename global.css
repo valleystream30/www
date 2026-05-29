@@ -143,6 +143,10 @@
 		display: flex;
 		flex-direction: column;
 	}
+
+	.customElement.links .stack-links-container {
+		grid-template-columns: 1fr;
+	}
 }
 
 @media screen and (max-width: 800px) {
@@ -995,4 +999,11 @@ html.translated-rtl .customElement.staff:has(.phone) .email {
 
 .customElement.sideBySide .spotlight-component-body-content {
 	padding: 50px 80px !important;
+}
+
+.ss-color .ss-accordion-btn:hover,
+.ss-color .ss-accordion-btn:focus,
+.ss-color .ss-accordion-btn.open {
+	background-color: var(--red) !important;
+	color: #ffffff !important;
 }
