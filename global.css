@@ -1007,3 +1007,10 @@ html.translated-rtl .customElement.staff:has(.phone) .email {
 	background-color: var(--red) !important;
 	color: #ffffff !important;
 }
+
+.ss-im-icon-bar .ss-icon.ss-custom-icon.ss-circle-icon {
+	padding: 20px;
+	overflow: visible;
+	height: 80px;
+	width: 80px;
+}
