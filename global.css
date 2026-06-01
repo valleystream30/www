@@ -36,7 +36,7 @@
 }
 
 @media screen and (min-width: 1000px) {
-	header .ss-site-header-main-links-container > a:last-of-type {
+	header .ss-site-header-main-links-container > a {
 		margin-right: 10px;
 	}
 
@@ -86,6 +86,16 @@
 
 	header .ss-site-header-hero-container {
 		padding: 0 !important;
+	}
+
+	header .ss-site-header-main-links-container > a.shaw,
+	header .ss-site-header-main-links-container > a.clearStream,
+	header .ss-site-header-main-links-container > a.forest {
+		color: transparent !important;
+		max-width: 0px !important;
+		transition:
+			0.5s max-width,
+			0.25s color;
 	}
 
 	header .ss-site-header-mobile-menu button {
@@ -676,6 +686,70 @@ header .ss-site-header-main-links-container {
 header .ss-site-header-main-links-container > a {
 	color: var(--header-color) !important;
 	font-weight: bold;
+}
+
+header .ss-site-header-main-links-container > a.shaw,
+header .ss-site-header-main-links-container > a.clearStream,
+header .ss-site-header-main-links-container > a.forest {
+	position: relative;
+	padding-left: 60px;
+	max-width: 350px;
+	overflow: hidden;
+	height: 45px;
+	transition:
+		0.75s max-width,
+		0.25s color,
+		0.25s rotate;
+}
+
+header .ss-site-header-main-links-container > a p {
+	width: max-content !important;
+	margin: 0 !important;
+	line-height: 45px;
+}
+
+header .ss-site-header-main-links-container > a.shaw:not(:hover),
+header .ss-site-header-main-links-container > a.clearStream:not(:hover),
+header .ss-site-header-main-links-container > a.forest:not(:hover) {
+	color: transparent !important;
+	max-width: 0px !important;
+	transition:
+		0.5s max-width,
+		0.25s color;
+}
+
+header .ss-site-header-main-links-container > a.shaw::before,
+header .ss-site-header-main-links-container > a.clearStream::before,
+header .ss-site-header-main-links-container > a.forest::before {
+	content: "";
+	width: 50px;
+	height: 45px;
+	display: inline-flex;
+	position: absolute;
+	background-repeat: no-repeat;
+	background-position: right center;
+	background-size: contain;
+	left: 0;
+	transition: 0.25s rotate;
+}
+
+header .ss-site-header-main-links-container > a.shaw:hover::before,
+header .ss-site-header-main-links-container > a.clearStream:hover::before,
+header .ss-site-header-main-links-container > a.forest:hover::before {
+	rotate: -5deg;
+	transition: 0.25s rotate;
+}
+
+header .ss-site-header-main-links-container > a.shaw::before {
+	background-image: url("https://github.com/valleystream30/www/blob/main/images/shaw.png?raw=true");
+}
+
+header .ss-site-header-main-links-container > a.clearStream::before {
+	background-image: url("https://github.com/valleystream30/www/blob/main/images/clearstream.png?raw=true");
+}
+
+header .ss-site-header-main-links-container > a.forest::before {
+	background-image: url("https://github.com/valleystream30/www/blob/main/images/forest.png?raw=true");
 }
 
 .spotlight-layout-medium
