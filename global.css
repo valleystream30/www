@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playpen+Sans:wght@100..800&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playpen+Sans:wght@100..800&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 @media screen and (max-width: 1300px) {
 	.sitemap-masonry.desktop,
@@ -276,12 +277,7 @@ html[font="2"] * {
 	word-spacing: -2px !important;
 }
 
-html[font="3"] * {
-	/* --ss-nav-font-family: Sniglet, sans-serif !important;
-	--ss-menu-font-family: Sniglet, sans-serif !important;
-	--ss-site-name-font-family: Sniglet, sans-serif !important;
-	--ss-utility-font-family: Sniglet, sans-serif !important;
-	--ss-default-font-family: Sniglet, sans-serif !important; */
+/* html[font="3"] * {
 	--ss-menu-font-family: Playpen Sans, sans-serif !important;
 	--ss-site-name-font-family: Playpen Sans, sans-serif !important;
 	--ss-utility-font-family: Playpen Sans, sans-serif !important;
@@ -313,7 +309,7 @@ html[font="4"] {
 	.ss-accordion-tabs a:not(.btn) {
 		font-weight: 600;
 	}
-}
+} */
 
 html[font] {
 	body:not(.customFont),

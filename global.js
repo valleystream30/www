@@ -224,7 +224,8 @@ onReady(() => {
         };
         var font = 0;
         var header = 0;
-        const fontValues = ['', '1', '2', '3', '4'];
+        // const fontValues = ['', '1', '2', '3', '4'];
+        const fontValues = ['', '1', '2'];
         const headerValues = ['', '1', '2', '3', '4', '5'];
         document.addEventListener('keydown', e => {
             switch (e.key) {
