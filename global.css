@@ -75,9 +75,9 @@
 		gap: 5px !important;
 	}
 
-	header .ss-site-header-title-container {
+	/* header .ss-site-header-title-container {
 		text-align: center !important;
-	}
+	} */
 
 	header .ss-site-header-mobile-menu {
 		position: relative;
@@ -623,23 +623,23 @@ header .ss-site-header-hero-container {
 	gap: 25px !important;
 }
 
-header .ss-site-header-title-container {
+/* header .ss-site-header-title-container {
 	display: flex !important;
 	text-decoration: none !important;
 }
 
 header .ss-site-header-title-container * {
 	color: var(--header-color) !important;
-}
+} */
 
 html[font="2"] header .ss-site-header-school-name:not(.forceStyle) {
 	word-spacing: -6px !important;
 }
 
-header .ss-site-header-school-tagline {
+/* header .ss-site-header-school-tagline {
 	font-family: Charm !important;
 	font-size: 20px !important;
-}
+} */
 
 header .ss-site-header-main-nav > .ss-site-header-page-links {
 	margin: unset !important;

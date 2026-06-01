@@ -1,4 +1,3 @@
-document.querySelector('header img').src = 'https://faisaln.com/share/1779572955.png'; // remove after approval
 function resetTranslate() {
     var iframe = document.getElementsByClassName('goog-te-banner-frame')[0] || document.getElementById(':1.container');
     if (!iframe) return;
@@ -20,7 +19,7 @@ function onReady(callback) {
 };
 onReady(() => {
     try {
-        document.querySelector('header .ss-site-header-school-tagline').classList.add('customFont');
+        // document.querySelector('header .ss-site-header-school-tagline').classList.add('customFont');
         var nav = Array.from(document.querySelectorAll('header nav')).find(nav => nav.clientHeight);
         document.querySelector('header').prepend(nav);
         document.querySelector('header').style.paddingTop = `${nav.clientHeight}px`;
@@ -29,7 +28,7 @@ onReady(() => {
             nav2.className = 'ss-site-header-main-links-container';
             nav2.style.display = 'flex';
             nav2.style.justifyContent = 'center';
-            Array.from(document.querySelectorAll('#ss-schools-modal a')).forEach(schoolLink => {
+            Array.from(document.querySelectorAll('#ss-schools-modal a')).sort((a, b) => a.innerText.localeCompare(b.innerText)).forEach(schoolLink => {
                 var newLink = schoolLink.cloneNode(true);
                 newLink.innerText = newLink.innerText.replace(' School', '').replace(' Avenue', ' Ave');
                 nav2.append(newLink);
@@ -37,18 +36,18 @@ onReady(() => {
             document.querySelector('header .ss-site-header-main-container').appendChild(nav2);
         } else {
             document.querySelectorAll('.ss-site-header-main-links-container').forEach(nav2 => {
-                Array.from(document.querySelectorAll('#ss-schools-modal a')).reverse().forEach(schoolLink => {
+                Array.from(document.querySelectorAll('#ss-schools-modal a')).sort((a, b) => b.innerText.localeCompare(a.innerText)).forEach(schoolLink => {
                     var newLink = schoolLink.cloneNode(true);
                     newLink.innerText = newLink.innerText.replace(' School', '');
                     nav2.prepend(newLink);
                 });
             });
         };
-        var newLink = document.createElement('a');
-        newLink.className = 'ss-site-header-title-container';
-        newLink.href = '/';
-        newLink.append(...document.querySelectorAll('header .ss-site-header-title-container *'));
-        document.querySelector('header .ss-site-header-title-container').replaceWith(newLink);
+        // var newLink = document.createElement('a');
+        // newLink.className = 'ss-site-header-title-container';
+        // newLink.href = '/';
+        // newLink.append(...document.querySelectorAll('header .ss-site-header-title-container *'));
+        // document.querySelector('header .ss-site-header-title-container').replaceWith(newLink);
         if (document.querySelector('.alert-badge i')) document.querySelector('.alert-badge i').className = "fa-solid fa-bell";
         document.querySelector('.alert-badge')?.addEventListener('click', () => {
             var changeIconInterval = setInterval(() => {
