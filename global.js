@@ -31,6 +31,9 @@ onReady(() => {
             Array.from(document.querySelectorAll('#ss-schools-modal a')).sort((a, b) => a.innerText.localeCompare(b.innerText)).forEach(schoolLink => {
                 var newLink = schoolLink.cloneNode(true);
                 newLink.innerText = newLink.innerText.replace(' School', '').replace(' Avenue', ' Ave');
+                if (newLink.innerText.toLowerCase().includes('shaw')) newLink.classList.add('shaw');
+                if (newLink.innerText.toLowerCase().includes('clear')) newLink.classList.add('clearStream');
+                if (newLink.innerText.toLowerCase().includes('forest')) newLink.classList.add('forest');
                 nav2.append(newLink);
             });
             document.querySelector('header .ss-site-header-main-container').appendChild(nav2);
@@ -38,7 +41,10 @@ onReady(() => {
             document.querySelectorAll('.ss-site-header-main-links-container').forEach(nav2 => {
                 Array.from(document.querySelectorAll('#ss-schools-modal a')).sort((a, b) => b.innerText.localeCompare(a.innerText)).forEach(schoolLink => {
                     var newLink = schoolLink.cloneNode(true);
-                    newLink.innerText = newLink.innerText.replace(' School', '');
+                    newLink.innerHTML = `<p>${newLink.innerText.replace(' School', '')}</p>`;
+                    if (newLink.innerText.toLowerCase().includes('shaw')) newLink.classList.add('shaw');
+                    if (newLink.innerText.toLowerCase().includes('clear')) newLink.classList.add('clearStream');
+                    if (newLink.innerText.toLowerCase().includes('forest')) newLink.classList.add('forest');
                     nav2.prepend(newLink);
                 });
             });
