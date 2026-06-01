@@ -227,6 +227,11 @@ onReady(() => {
             document.querySelector('.pageBody').appendChild(mobileMasonry);
             document.querySelector('.pageBody').appendChild(tabletMasonry);
             document.querySelector('.pageBody > ul').remove();
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('s')) {
+                siteMapSearch.value = urlParams.get('s');
+                siteMapSearch.dispatchEvent(new Event('input'));
+            };
         };
         var font = 0;
         var header = 0;
