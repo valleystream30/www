@@ -1,3 +1,4 @@
+document.querySelector('header img').src = 'https://faisaln.com/share/1780427119.png'; // remove after approval
 function resetTranslate() {
     var iframe = document.getElementsByClassName('goog-te-banner-frame')[0] || document.getElementById(':1.container');
     if (!iframe) return;
