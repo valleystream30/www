@@ -1,5 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playpen+Sans:wght@100..800&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap"); */
-@import url("https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 @media screen and (max-width: 1300px) {
 	.sitemap-masonry.desktop,
@@ -228,6 +227,11 @@ html * {
 	--ss-nav-font-color: var(--header-nav-color) !important;
 	--ss-menu-background-color: var(--red) !important;
 	--ss-menu-font-color: #ffffff !important;
+	--ss-nav-font-family: Montserrat, sans-serif !important;
+	--ss-menu-font-family: Montserrat, sans-serif !important;
+	--ss-site-name-font-family: Montserrat, sans-serif !important;
+	--ss-utility-font-family: Montserrat, sans-serif !important;
+	--ss-default-font-family: Montserrat, sans-serif !important;
 	font-variant-ligatures: none;
 }
 
@@ -270,71 +274,18 @@ html[header="5"] * {
 	--header-nav-color: var(--red);
 }
 
-html[font="1"] * {
-	--ss-nav-font-family: Montserrat, sans-serif !important;
-	--ss-menu-font-family: Montserrat, sans-serif !important;
-	--ss-site-name-font-family: Montserrat, sans-serif !important;
-	--ss-utility-font-family: Montserrat, sans-serif !important;
-	--ss-default-font-family: Montserrat, sans-serif !important;
-}
-
-html[font="2"] * {
-	--ss-nav-font-family: Elms Sans, sans-serif !important;
-	--ss-menu-font-family: Elms Sans, sans-serif !important;
-	--ss-site-name-font-family: Elms Sans, sans-serif !important;
-	--ss-utility-font-family: Elms Sans, sans-serif !important;
-	--ss-default-font-family: Elms Sans, sans-serif !important;
-	word-spacing: -2px !important;
-}
-
-/* html[font="3"] * {
-	--ss-menu-font-family: Playpen Sans, sans-serif !important;
-	--ss-site-name-font-family: Playpen Sans, sans-serif !important;
-	--ss-utility-font-family: Playpen Sans, sans-serif !important;
-	--ss-default-font-family: Playpen Sans, sans-serif !important;
-}
-
-html[font="3"] {
-	b,
-	strong,
-	.ss-editor-content a:not(.btn),
-	.ss-columns a:not(.btn),
-	.ss-accordion-tabs a:not(.btn) {
-		font-weight: 600;
-	}
-}
-
-html[font="4"] * {
-	--ss-menu-font-family: Shantell Sans, sans-serif !important;
-	--ss-site-name-font-family: Shantell Sans, sans-serif !important;
-	--ss-utility-font-family: Shantell Sans, sans-serif !important;
-	--ss-default-font-family: Shantell Sans, sans-serif !important;
-}
-
-html[font="4"] {
-	b,
-	strong,
-	.ss-editor-content a:not(.btn),
-	.ss-columns a:not(.btn),
-	.ss-accordion-tabs a:not(.btn) {
-		font-weight: 600;
-	}
-} */
-
-html[font] {
-	body:not(.customFont),
-	h1:not(.customFont),
-	h2:not(.customFont),
-	h3:not(.customFont),
-	h4:not(.customFont),
-	h5:not(.customFont),
-	h6:not(.customFont),
-	p:not(.customFont),
-	a:not(.customFont),
-	span:not(.customFont),
-	div:not(.customFont) {
-		font-family: var(--ss-default-font-family) !important;
-	}
+body:not(.customFont),
+h1:not(.customFont),
+h2:not(.customFont),
+h3:not(.customFont),
+h4:not(.customFont),
+h5:not(.customFont),
+h6:not(.customFont),
+p:not(.customFont),
+a:not(.customFont),
+span:not(.customFont),
+div:not(.customFont) {
+	font-family: var(--ss-default-font-family) !important;
 }
 
 .alert-badge.ss-button {
