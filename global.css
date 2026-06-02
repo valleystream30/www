@@ -235,45 +235,6 @@ html * {
 	font-variant-ligatures: none;
 }
 
-html[header="1"] * {
-	--blue: #26428b;
-	--red: #8e0000;
-}
-
-html[header="2"] * {
-	--blue: #26428b;
-	--red: #8e0000;
-	--header-nav-background-color: var(--yellow);
-	--header-nav-color: var(--red);
-}
-
-html[header="3"] * {
-	--header-background-color: #ffffff;
-	--header-nav-background-color: #aac7ff;
-	--header-color: var(--blue);
-	--blue: #26428b;
-	--red: #8e0000;
-	--header-nav-color: var(--blue);
-}
-
-html[header="4"] * {
-	--header-background-color: #ffffff;
-	--header-nav-background-color: #bfd7ff;
-	--header-color: var(--blue);
-	--blue: #26428b;
-	--red: #8e0000;
-	--header-nav-color: var(--blue);
-}
-
-html[header="5"] * {
-	--header-background-color: #ffffff;
-	--header-nav-background-color: var(--yellow);
-	--header-color: var(--blue);
-	--blue: #26428b;
-	--red: #8e0000;
-	--header-nav-color: var(--red);
-}
-
 body:not(.customFont),
 h1:not(.customFont),
 h2:not(.customFont),
