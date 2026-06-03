@@ -568,9 +568,14 @@ header > nav {
 	/* top: 0; */
 	position: absolute !important;
 	left: 0;
-	z-index: 1049 !important;
+	z-index: 1048 !important;
 	width: 100%;
 	box-shadow: 0 0 10px var(--blue);
+}
+
+header > nav.scrolled {
+	position: fixed !important;
+	top: 0;
 }
 
 header .top-nav {
@@ -1064,4 +1069,8 @@ html.translated-rtl .customElement.staff:has(.phone) .email {
 	max-height: unset;
 	object-fit: cover;
 	width: 100%;
+}
+
+header .ss-site-header-main-container {
+	z-index: 1049;
 }

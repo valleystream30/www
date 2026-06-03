@@ -25,16 +25,6 @@ onReady(() => {
         // document.querySelector('header').prepend(nav);
         // document.querySelector('header').style.paddingTop = `${nav.clientHeight}px`;
         document.querySelector('header').append(nav);
-        setTimeout(() => {
-            document.querySelector('header').style.paddingBottom = `${nav.clientHeight}px`;
-            navMaxTop = document.querySelector('header').clientHeight - nav.clientHeight - nav.clientHeight;
-            nav.style.position = (window.scrollY >= navMaxTop) ? 'fixed' : 'absolute';
-            nav.style.top = (window.scrollY >= navMaxTop) ? '0' : '';
-        }, 100);
-        window.addEventListener('scroll', () => {
-            nav.style.position = (window.scrollY >= navMaxTop) ? 'fixed' : 'absolute';
-            nav.style.top = (window.scrollY >= navMaxTop) ? '0' : '';
-        });
         if (window.innerWidth <= 1000) {
             var nav2 = document.createElement('nav');
             nav2.className = 'ss-site-header-main-links-container';
@@ -61,6 +51,25 @@ onReady(() => {
                 });
             });
         };
+        var navMaxTop = document.querySelector('header').clientHeight - nav.clientHeight;
+        setTimeout(() => {
+            document.querySelector('header').style.paddingBottom = `${nav.clientHeight}px`;
+            setTimeout(() => {
+                navMaxTop = document.querySelector('header').clientHeight - nav.clientHeight;
+                if (window.scrollY >= navMaxTop) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                };
+            }, 100);
+        }, 100);
+        window.addEventListener('scroll', () => {
+            if (window.scrollY >= navMaxTop) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            };
+        });
         // var newLink = document.createElement('a');
         // newLink.className = 'ss-site-header-title-container';
         // newLink.href = '/';
