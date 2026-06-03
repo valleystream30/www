@@ -604,19 +604,19 @@ header .ss-site-header-main-links-container > a p {
 }
 
 header .ss-site-header-main-links-container > a.shaw::before {
-	background-image: url("https://github.com/valleystream30/www/blob/main/images/shaw.png?raw=true");
+	background-image: url("https://github.com/valleystream30/www/blob/main/images/shaw-new.png?raw=true");
 }
 
 header .ss-site-header-main-links-container > a.clearStream::before {
-	background-image: url("https://github.com/valleystream30/www/blob/main/images/clearstream.png?raw=true");
+	background-image: url("https://github.com/valleystream30/www/blob/main/images/clearstream-new.png?raw=true");
 }
 
 header .ss-site-header-main-links-container > a.forest::before {
-	background-image: url("https://github.com/valleystream30/www/blob/main/images/forest.png?raw=true");
+	background-image: url("https://github.com/valleystream30/www/blob/main/images/forest-new.png?raw=true");
 }
 
 :root {
-	--header-school-mascot-height: 45px;
+	--header-school-mascot-height: min(95px, 18vw);
 }
 
 /* html:not(.two) { */
@@ -1053,4 +1053,15 @@ html.translated-rtl .customElement.staff:has(.phone) .email {
 	overflow: visible;
 	height: 80px;
 	width: 80px;
+}
+
+.ss-component[data-comp="feature-video"] .ss-component-content,
+.ss-component[data-comp="spotlight"] .ss-component-content {
+	background-color: var(--blue) !important;
+}
+
+.customElement.spotlight .spotlight-image-container img {
+	max-height: unset;
+	object-fit: cover;
+	width: 100%;
 }
