@@ -368,6 +368,12 @@ li:has(> .anchor-plates) {
 	border: none;
 	justify-content: center;
 	position: fixed;
+	z-index: 1050 !important;
+}
+
+.adminBar.affix-top:not(.forceStyle),
+.adminBar.affix:not(.forceStyle) {
+	z-index: 1050 !important;
 }
 
 .adminBar > :first-child,
