@@ -21,10 +21,11 @@ function onReady(callback) {
 onReady(() => {
     try {
         // document.querySelector('header .ss-site-header-school-tagline').classList.add('customFont');
-        var nav = Array.from(document.querySelectorAll('header nav')).find(nav => nav.clientHeight);
-        // document.querySelector('header').prepend(nav);
-        // document.querySelector('header').style.paddingTop = `${nav.clientHeight}px`;
-        document.querySelector('header').append(nav);
+        var header = document.querySelector('header');
+        var nav = Array.from(header.querySelectorAll('nav')).find(nav => nav.clientHeight);
+        // header.prepend(nav);
+        // header.style.paddingTop = `${nav.clientHeight}px`;
+        header.append(nav);
         if (window.innerWidth <= 1000) {
             var nav2 = document.createElement('nav');
             nav2.className = 'ss-site-header-main-links-container';
@@ -38,7 +39,7 @@ onReady(() => {
                 if (newLink.innerText.toLowerCase().includes('forest')) newLink.classList.add('forest');
                 nav2.append(newLink);
             });
-            document.querySelector('header .ss-site-header-main-container').appendChild(nav2);
+            header.querySelector('.ss-site-header-main-container').appendChild(nav2);
         } else {
             document.querySelectorAll('.ss-site-header-main-links-container').forEach(nav2 => {
                 Array.from(document.querySelectorAll('#ss-schools-modal a')).sort((a, b) => b.innerText.localeCompare(a.innerText)).forEach(schoolLink => {
@@ -51,11 +52,11 @@ onReady(() => {
                 });
             });
         };
-        var navMaxTop = document.querySelector('header').clientHeight - nav.clientHeight;
+        var navMaxTop = header.clientHeight - nav.clientHeight;
         setTimeout(() => {
-            document.querySelector('header').style.paddingBottom = `${nav.clientHeight}px`;
+            header.style.paddingBottom = `${nav.clientHeight}px`;
             setTimeout(() => {
-                navMaxTop = document.querySelector('header').clientHeight - nav.clientHeight;
+                navMaxTop = header.clientHeight - nav.clientHeight;
                 if (window.scrollY >= navMaxTop) {
                     nav.classList.add('scrolled');
                 } else {
@@ -73,8 +74,8 @@ onReady(() => {
         // var newLink = document.createElement('a');
         // newLink.className = 'ss-site-header-title-container';
         // newLink.href = '/';
-        // newLink.append(...document.querySelectorAll('header .ss-site-header-title-container *'));
-        // document.querySelector('header .ss-site-header-title-container').replaceWith(newLink);
+        // newLink.append(...header.querySelectorAll('.ss-site-header-title-container *'));
+        // header.querySelector('.ss-site-header-title-container').replaceWith(newLink);
         if (document.querySelector('.alert-badge i')) document.querySelector('.alert-badge i').className = "fa-solid fa-bell";
         document.querySelector('.alert-badge')?.addEventListener('click', () => {
             var changeIconInterval = setInterval(() => {
@@ -112,17 +113,24 @@ onReady(() => {
                 };
             }, 100);
         } else if (pageTitle.includes('home')) {
-            Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
-                var firstSection = document.querySelector('.stack_sort_area').children[0];
-                if (firstSection.querySelector('.spotlight-container')) {
-                    firstSection.querySelectorAll('.spotlight-slide').forEach(slide => {
-                        if (window.innerWidth <= 1000) {
-                            slide.style.height = `calc(100vh - ${document.querySelector('header').clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
-                        } else {
-                            slide.style.minHeight = `calc(100vh - ${document.querySelector('header').clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
-                        };
-                    });
-                };
+            var firstSection = document.querySelector('.stack_sort_area').children[0];
+            if (firstSection.querySelector('.spotlight-container')) Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
+                var homepageShowcaseHeightInterval = setInterval(() => {
+                    if (header.hasAttribute('style')) {
+                        firstSection.querySelectorAll('.spotlight-slide').forEach(slide => {
+                            if (window.innerWidth <= 1000) {
+                                slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
+                            } else {
+                                if (document.querySelector('.stack_sort_area section + section').classList.contains('ss-icon-matrix')) {
+                                    slide.style.minHeight = `calc(100vh - ${header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
+                                } else {
+                                    slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
+                                };
+                            };
+                        });
+                        clearInterval(homepageShowcaseHeightInterval);
+                    };
+                }, 100);
             });
             var homepageAboutImagesInterval = setInterval(() => {
                 if ((document.querySelectorAll('.ss-image-link[style]').length === 3) || (document.querySelectorAll('.ss-image-link img[height]').length === 3)) {
@@ -254,28 +262,28 @@ onReady(() => {
                 siteMapSearch.dispatchEvent(new Event('input'));
             };
         };
-        var font = 0;
-        var header = 0;
+        var fontN = 0;
+        var headerN = 0;
         // const fontValues = ['', '1', '2', '3', '4'];
         const fontValues = ['', '1', '2'];
         const headerValues = ['', '1', '2', '3', '4', '5'];
         document.addEventListener('keydown', e => {
             switch (e.key) {
                 case 'ArrowUp':
-                    font = (font + 1) % fontValues.length;
-                    updateAttribute('font', fontValues[font]);
+                    fontN = (fontN + 1) % fontValues.length;
+                    updateAttribute('font', fontValues[fontN]);
                     break;
                 case 'ArrowDown':
-                    font = (font - 1 + fontValues.length) % fontValues.length;
-                    updateAttribute('font', fontValues[font]);
+                    fontN = (fontN - 1 + fontValues.length) % fontValues.length;
+                    updateAttribute('font', fontValues[fontN]);
                     break;
                 case 'ArrowRight':
-                    header = (header + 1) % headerValues.length;
-                    updateAttribute('header', headerValues[header]);
+                    headerN = (headerN + 1) % headerValues.length;
+                    updateAttribute('header', headerValues[headerN]);
                     break;
                 case 'ArrowLeft':
-                    header = (header - 1 + headerValues.length) % headerValues.length;
-                    updateAttribute('header', headerValues[header]);
+                    headerN = (headerN - 1 + headerValues.length) % headerValues.length;
+                    updateAttribute('header', headerValues[headerN]);
                     break;
             }
         });
@@ -409,7 +417,7 @@ onReady(() => {
                                 });
                             });
                         };
-                        document.querySelectorAll('header .translate > a').forEach(translateButton => {
+                        header.querySelectorAll('.translate > a').forEach(translateButton => {
                             translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span').forEach(option => {
                                 option.classList.toggle('active', (option.getAttribute('data-code') === langCode) || ((option.getAttribute('data-code') === '') && (langCode === 'en')));
                             });
@@ -421,9 +429,9 @@ onReady(() => {
             };
         }, 500);
         document.querySelectorAll('section:has(.ss-component-header-title)').forEach(section => {
-            var header = section.querySelector('.ss-component-header-title');
-            if (header.innerText.includes('customElement.')) {
-                var customElement = header.innerText.split('customElement.')[1].trim();
+            var pageRedBar = section.querySelector('.ss-component-header-title');
+            if (pageRedBar.innerText.includes('customElement.')) {
+                var customElement = pageRedBar.innerText.split('customElement.')[1].trim();
                 section.classList.add('customElement', customElement);
                 section.querySelector('.ss-component-header').remove();
                 switch (customElement) {

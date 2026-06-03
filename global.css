@@ -1074,3 +1074,10 @@ html.translated-rtl .customElement.staff:has(.phone) .email {
 header .ss-site-header-main-container {
 	z-index: 1049;
 }
+
+.scrollover-cover .image-rollover-container::before,
+.scrollover-cover-centered .image-rollover-container::before {
+	background-color: unset !important;
+	background: linear-gradient(0deg, var(--blue), transparent);
+	transition: 0.25s opacity;
+}
