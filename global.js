@@ -25,10 +25,12 @@ onReady(() => {
         // document.querySelector('header').prepend(nav);
         // document.querySelector('header').style.paddingTop = `${nav.clientHeight}px`;
         document.querySelector('header').append(nav);
-        document.querySelector('header').style.paddingBottom = `${nav.clientHeight}px`;
-        navMaxTop = document.querySelector('header').clientHeight - nav.clientHeight - nav.clientHeight;
-        nav.style.position = (window.scrollY >= navMaxTop) ? 'fixed' : 'absolute';
-        nav.style.top = (window.scrollY >= navMaxTop) ? '0' : '';
+        setTimeout(() => {
+            document.querySelector('header').style.paddingBottom = `${nav.clientHeight}px`;
+            navMaxTop = document.querySelector('header').clientHeight - nav.clientHeight - nav.clientHeight;
+            nav.style.position = (window.scrollY >= navMaxTop) ? 'fixed' : 'absolute';
+            nav.style.top = (window.scrollY >= navMaxTop) ? '0' : '';
+        }, 100);
         window.addEventListener('scroll', () => {
             nav.style.position = (window.scrollY >= navMaxTop) ? 'fixed' : 'absolute';
             nav.style.top = (window.scrollY >= navMaxTop) ? '0' : '';
