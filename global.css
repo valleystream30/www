@@ -564,8 +564,8 @@ header .ss-site-header-main-nav > .ss-site-header-page-links {
 
 header > nav {
 	background: var(--header-nav-background-color) !important;
-	position: fixed !important;
-	top: 0;
+	/* position: fixed !important; */
+	/* top: 0; */
 	left: 0;
 	z-index: 1049 !important;
 	width: 100%;

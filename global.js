@@ -22,8 +22,17 @@ onReady(() => {
     try {
         // document.querySelector('header .ss-site-header-school-tagline').classList.add('customFont');
         var nav = Array.from(document.querySelectorAll('header nav')).find(nav => nav.clientHeight);
-        document.querySelector('header').prepend(nav);
-        document.querySelector('header').style.paddingTop = `${nav.clientHeight}px`;
+        // document.querySelector('header').prepend(nav);
+        // document.querySelector('header').style.paddingTop = `${nav.clientHeight}px`;
+        document.querySelector('header').append(nav);
+        document.querySelector('header').style.paddingBottom = `${nav.clientHeight}px`;
+        navMaxTop = document.querySelector('header').clientHeight - nav.clientHeight - nav.clientHeight;
+        nav.style.position = (window.scrollY >= navMaxTop) ? 'fixed' : 'absolute';
+        nav.style.top = (window.scrollY >= navMaxTop) ? '0' : '';
+        window.addEventListener('scroll', () => {
+            nav.style.position = (window.scrollY >= navMaxTop) ? 'fixed' : 'absolute';
+            nav.style.top = (window.scrollY >= navMaxTop) ? '0' : '';
+        });
         if (window.innerWidth <= 1000) {
             var nav2 = document.createElement('nav');
             nav2.className = 'ss-site-header-main-links-container';
