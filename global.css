@@ -228,6 +228,7 @@ html * {
 	--ss-site-name-font-family: Montserrat, sans-serif !important;
 	--ss-utility-font-family: Montserrat, sans-serif !important;
 	--ss-default-font-family: Montserrat, sans-serif !important;
+	--psq-font-family: Montserrat, sans-serif !important;
 	font-variant-ligatures: none;
 }
 
@@ -241,7 +242,8 @@ h6:not(.customFont),
 p:not(.customFont),
 a:not(.customFont),
 span:not(.customFont),
-div:not(.customFont) {
+div:not(.customFont),
+button:not(.customFont) {
 	font-family: var(--ss-default-font-family) !important;
 }
 
@@ -987,7 +989,7 @@ html.translated-rtl .customElement.staff:has(.phone) .email {
 }
 
 .customElement.about .ss-component-column-wrapper {
-	column-gap: 75px;
+	column-gap: min(75px, 3vw);
 }
 
 .customElement.about .ss-column-one {
@@ -1004,7 +1006,7 @@ html.translated-rtl .customElement.staff:has(.phone) .email {
 }
 
 .customElement.about + section:has(.stack-links-container) {
-	padding-top: 20px !important;
+	padding-top: 60px !important;
 }
 
 .customElement.links li {
@@ -1013,9 +1015,20 @@ html.translated-rtl .customElement.staff:has(.phone) .email {
 }
 
 .customElement.links li:hover {
-	margin-top: -10px;
-	margin-bottom: 10px;
+	margin-top: -5px;
+	margin-bottom: 5px;
 	transition: 0.25s;
+}
+
+.customElement.links
+	.stack-links-container.large-graphic
+	.link-graphic-container {
+	height: 50px;
+	width: 75px;
+}
+
+.customElement.links .stack-links-container i {
+	font-size: 50px;
 }
 
 .customElement.sideBySide .ss-component-header-title {
