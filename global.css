@@ -38,6 +38,13 @@
 	header .ss-site-header-main-links-container > a {
 		margin-right: 10px;
 	}
+
+	header .ss-site-header-main-links-container > a.shaw:hover::before,
+	header .ss-site-header-main-links-container > a.clearStream:hover::before,
+	header .ss-site-header-main-links-container > a.forest:hover::before {
+		zoom: 0.9;
+		transition: 0.25s zoom;
+	}
 }
 
 @media screen and (max-width: 1000px) {
@@ -629,9 +636,9 @@ header .ss-site-header-main-links-container > a.shaw,
 header .ss-site-header-main-links-container > a.clearStream,
 header .ss-site-header-main-links-container > a.forest {
 	position: relative;
-	padding-left: calc(var(--header-school-mascot-height) + 15px);
+	padding-left: calc(var(--header-school-mascot-height) + 10px);
 	max-width: calc(300px + var(--header-school-mascot-height));
-	overflow: hidden;
+	overflow-x: hidden;
 	height: var(--header-school-mascot-height);
 	transition:
 		0.75s max-width,
@@ -665,14 +672,9 @@ header .ss-site-header-main-links-container > a.forest::before {
 	background-position: right center;
 	background-size: contain;
 	left: 0;
-	transition: 0.25s rotate;
-}
-
-header .ss-site-header-main-links-container > a.shaw:hover::before,
-header .ss-site-header-main-links-container > a.clearStream:hover::before,
-header .ss-site-header-main-links-container > a.forest:hover::before {
-	rotate: -5deg;
-	transition: 0.25s rotate;
+	bottom: calc(50% - (var(--header-school-mascot-height) / 2));
+	top: calc(50% - (var(--header-school-mascot-height) / 2));
+	transition: 0.25s zoom;
 }
 /* } */
 

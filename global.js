@@ -20,6 +20,10 @@ function onReady(callback) {
 };
 onReady(() => {
     try {
+        const tasks = [];
+        function addTask(promise) {
+            tasks.push(promise);
+        };
         // document.querySelector('header .ss-site-header-school-tagline').classList.add('customFont');
         var header = document.querySelector('header');
         var nav = Array.from(header.querySelectorAll('nav')).find(nav => nav.clientHeight);
@@ -101,53 +105,65 @@ onReady(() => {
         if (pageTitle.includes('partnership')) {
             document.querySelector('.ss-editor-content p:last-child').classList.add('partnerships');
         } else if (pageTitle.includes('schools')) {
-            var schoolsPageInterval = setInterval(() => {
-                if ((document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a[style]').length === 3) || (document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a img[height]').length === 3)) {
-                    var minHeight = Array.from(document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child img')).map(img => img.clientHeight).sort()[0];
-                    document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a').forEach(img => {
-                        img.style.height = `${minHeight}px`;
-                        img.style.width = 'unset';
-                        img.style.borderRadius = '10px';
-                    });
-                    clearInterval(schoolsPageInterval);
-                };
-            }, 100);
-        } else if (pageTitle.includes('home')) {
-            var firstSection = document.querySelector('.stack_sort_area').children[0];
-            if (firstSection.querySelector('.spotlight-container')) Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
-                var homepageShowcaseHeightInterval = setInterval(() => {
-                    if (header.hasAttribute('style')) {
-                        firstSection.querySelectorAll('.spotlight-slide').forEach(slide => {
-                            if (window.innerWidth <= 1000) {
-                                slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
-                            } else {
-                                if (document.querySelector('.stack_sort_area section + section').classList.contains('ss-icon-matrix')) {
-                                    slide.style.minHeight = `calc(100vh - ${header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
-                                } else {
-                                    slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
-                                };
-                            };
+            const schoolsPagePromise = new Promise(resolve => {
+                var schoolsPageInterval = setInterval(() => {
+                    if ((document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a[style]').length === 3) || (document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a img[height]').length === 3)) {
+                        var minHeight = Array.from(document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child img')).map(img => img.clientHeight).sort()[0];
+                        document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a').forEach(img => {
+                            img.style.height = `${minHeight}px`;
+                            img.style.width = 'unset';
+                            img.style.borderRadius = '10px';
                         });
-                        clearInterval(homepageShowcaseHeightInterval);
+                        clearInterval(schoolsPageInterval);
+                        resolve();
                     };
                 }, 100);
             });
-            var homepageAboutImagesInterval = setInterval(() => {
-                if ((document.querySelectorAll('.ss-image-link[style]').length === 3) || (document.querySelectorAll('.ss-image-link img[height]').length === 3)) {
-                    document.querySelector('section:has(.ss-image-link[style]), section:has(.ss-image-link img[height])').style.padding = 'min(70px, 7vh) min(20px, 2vw)';
-                    document.querySelectorAll('.ss-image-link, .ss-image-link img').forEach(img => {
-                        img.style.width = 'unset';
-                        img.removeAttribute('height');
-                    });
-                    var minHeight = Array.from(document.querySelectorAll('.ss-image-link img')).map(img => img.clientHeight).sort()[0];
-                    document.querySelectorAll('.ss-image-link').forEach(img => {
-                        img.style.height = `${minHeight}px`;
-                        img.style.borderRadius = '10px';
-                        if (window.innerWidth <= 1000) img.style.width = '100%';
-                    });
-                    clearInterval(homepageAboutImagesInterval);
-                };
-            }, 100);
+            addTask(schoolsPagePromise);
+        } else if (pageTitle.includes('home')) {
+            var firstSection = document.querySelector('.stack_sort_area').children[0];
+            if (firstSection.querySelector('.spotlight-container')) Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
+                const homepageShowcasePromise = new Promise(resolve => {
+                    var homepageShowcaseHeightInterval = setInterval(() => {
+                        if (header.hasAttribute('style')) {
+                            firstSection.querySelectorAll('.spotlight-slide').forEach(slide => {
+                                if (window.innerWidth <= 1000) {
+                                    slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
+                                } else {
+                                    if (document.querySelector('.stack_sort_area section + section').classList.contains('ss-icon-matrix')) {
+                                        slide.style.minHeight = `calc(100vh - ${header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
+                                    } else {
+                                        slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
+                                    };
+                                };
+                            });
+                            clearInterval(homepageShowcaseHeightInterval);
+                            resolve();
+                        };
+                    }, 100);
+                });
+                addTask(homepageShowcasePromise);
+            });
+            const homepageAboutImagesPromise = new Promise(resolve => {
+                var homepageAboutImagesInterval = setInterval(() => {
+                    if ((document.querySelectorAll('.ss-image-link[style]').length === 3) || (document.querySelectorAll('.ss-image-link img[height]').length === 3)) {
+                        document.querySelector('section:has(.ss-image-link[style]), section:has(.ss-image-link img[height])').style.padding = 'min(70px, 7vh) min(20px, 2vw)';
+                        document.querySelectorAll('.ss-image-link, .ss-image-link img').forEach(img => {
+                            img.style.width = 'unset';
+                            img.removeAttribute('height');
+                        });
+                        var minHeight = Array.from(document.querySelectorAll('.ss-image-link img')).map(img => img.clientHeight).sort()[0];
+                        document.querySelectorAll('.ss-image-link').forEach(img => {
+                            img.style.height = `${minHeight}px`;
+                            img.style.borderRadius = '10px';
+                            if (window.innerWidth <= 1000) img.style.width = '100%';
+                        });
+                        clearInterval(homepageAboutImagesInterval);
+                        resolve();
+                    };
+                }, 100);
+            });
+            addTask(homepageAboutImagesPromise);
             var statsSection = document.querySelectorAll('section:has(.ss-im-icons-list)')[1];
             if (statsSection) {
                 statsSection.style.overflow = 'hidden';
@@ -310,124 +326,128 @@ onReady(() => {
             });
         });
         bodyObserver.observe(document.body, { childList: true });
-        var languagesInterval = setInterval(() => {
-            if (document.getElementById('GoogleTranslate')?.options.length) {
-                clearInterval(languagesInterval);
-                var languages = Array.from(document.getElementById('GoogleTranslate').options).slice(1).map(option => {
-                    return {
-                        'language': option.innerText,
-                        'code': option.value,
-                    };
-                });
-                languages.push({
-                    'language': 'English',
-                    'code': '',
-                });
-                if (languages.find(lang => lang.code === 'nhe')) languages.find(lang => lang.code === 'nhe').language = 'Nahuatl';
-                languages.forEach(lang => {
-                    if (lang.language.includes('(') && lang.language.includes(')')) {
-                        const mainLanguage = lang.language.split('(')[0].trim();
-                        const subLanguage = lang.language.split('(')[1].split(')')[0].trim();
-                        lang.language = `${mainLanguage}, ${subLanguage}`;
-                    } else if (lang.language.includes('(') || lang.language.includes(')')) {
-                        lang.language = lang.language.replace('(', '').replace(')', '').trim();
-                    };
-                });
-                languages.sort((a, b) => {
-                    if (a.code === '') return -1;
-                    if (b.code === '') return 1;
-                    if (a.code === 'es') return -1;
-                    if (b.code === 'es') return 1;
-                    if (a.code === 'ur') return -1;
-                    if (b.code === 'ur') return 1;
-                    return 0;
-                });
-                document.querySelectorAll('header .translate > a').forEach(translateButton => {
-                    var languageSelector = document.createElement('div');
-                    languageSelector.className = 'languageSelector notranslate';
-                    languageSelector.innerHTML = `<b>Site Language</b><input type="text" id="languageSearch" placeholder="Search languages..." /><div class="languageOptions">${languages.map(lang => `<span data-code="${lang.code}">${lang.language}</span>`).join('')}</div>`;
-                    translateButton.parentElement.appendChild(languageSelector);
-                    translateButton.addEventListener('click', (event) => {
-                        event.preventDefault();
-                        var languageSelector = translateButton.parentElement.querySelector('.languageSelector');
-                        languageSelector.classList.toggle('active');
-                        if (languageSelector.classList.contains('active')) setTimeout(() => {
-                            languageSelector.querySelector('#languageSearch').focus();
-                        }, 100);
-                    });
-                    translateButton.parentElement.querySelector('.languageSelector #languageSearch').addEventListener('input', (event) => {
-                        const searchTerm = event.target.value.toLowerCase();
-                        translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span').forEach(option => {
-                            option.style.display = option.innerText.toLowerCase().includes(searchTerm) ? 'block' : 'none';
-                        });
-                    });
-                    translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span').forEach(option => {
-                        if (option.getAttribute('data-code') === '') option.classList.add('active');
-                        option.addEventListener('click', () => {
-                            if (option.classList.contains('active')) return;
-                            option.classList.add('active');
-                            resetTranslate();
-                            if (option.getAttribute('data-code')) {
-                                document.getElementById('GoogleTranslate').value = option.getAttribute('data-code');
-                                document.getElementById('GoogleTranslate').dispatchEvent(new Event('change'));
-                                translateButton.parentElement.querySelector('.languageSelector').classList.remove('active');
-                            };
-                        });
-                    });
-                });
-                document.addEventListener('click', (event) => {
-                    if (!event.target.closest('.languageSelector') && !event.target.closest('.translate')) document.querySelectorAll('.languageSelector').forEach(languageSelector => {
-                        languageSelector.classList.remove('active');
-                    });
-                });
-                document.addEventListener('keydown', (event) => {
-                    if (event.key === 'Escape') document.querySelectorAll('.languageSelector').forEach(languageSelector => {
-                        languageSelector.classList.remove('active');
-                    });
-                });
-                const htmlObserver = new MutationObserver(mutations => {
-                    mutations.forEach(mutation => {
-                        if (mutation.attributeName !== 'lang') return;
-                        var langCode = document.documentElement.getAttribute('lang');
-                        var langName = languages.find(lang => lang.code === langCode)?.language || langCode;
-                        console.log(`Language changing to ${langName} (${langCode})`);
-                        document.querySelectorAll('[lang]:not(html), a:not([tabindex])').forEach(el => {
-                            el.style.display = '';
-                        });
-                        if ((langCode !== 'auto') && (langCode !== 'en') && (langCode !== '')) {
-                            document.querySelectorAll('section').forEach(section => {
-                                var totalFound = [];
-                                section.querySelectorAll('[lang]:not(html)').forEach(el => {
-                                    if (el.getAttribute('lang') === langCode) {
-                                        el.style.display = 'none';
-                                    } else {
-                                        totalFound.push(el);
-                                    };
-                                });
-                                section.querySelectorAll('a:not([tabindex])').forEach(el => {
-                                    if (!languages.map(lang => lang.language).some(lang => el.innerText.includes(lang))) return;
-                                    if (!el.innerText.includes(langName)) {
-                                        el.style.display = 'none';
-                                    } else {
-                                        totalFound.push(el);
-                                    };
-                                });
-                                if (totalFound.length === 0) section.querySelectorAll('[lang]:not(html), a:not([tabindex])').forEach(el => {
-                                    el.style.display = '';
-                                });
-                            });
+        const languagesPromise = new Promise(resolve => {
+            var languagesInterval = setInterval(() => {
+                if (document.getElementById('GoogleTranslate')?.options.length) {
+                    clearInterval(languagesInterval);
+                    var languages = Array.from(document.getElementById('GoogleTranslate').options).slice(1).map(option => {
+                        return {
+                            'language': option.innerText,
+                            'code': option.value,
                         };
-                        header.querySelectorAll('.translate > a').forEach(translateButton => {
+                    });
+                    languages.push({
+                        'language': 'English',
+                        'code': '',
+                    });
+                    if (languages.find(lang => lang.code === 'nhe')) languages.find(lang => lang.code === 'nhe').language = 'Nahuatl';
+                    languages.forEach(lang => {
+                        if (lang.language.includes('(') && lang.language.includes(')')) {
+                            const mainLanguage = lang.language.split('(')[0].trim();
+                            const subLanguage = lang.language.split('(')[1].split(')')[0].trim();
+                            lang.language = `${mainLanguage}, ${subLanguage}`;
+                        } else if (lang.language.includes('(') || lang.language.includes(')')) {
+                            lang.language = lang.language.replace('(', '').replace(')', '').trim();
+                        };
+                    });
+                    languages.sort((a, b) => {
+                        if (a.code === '') return -1;
+                        if (b.code === '') return 1;
+                        if (a.code === 'es') return -1;
+                        if (b.code === 'es') return 1;
+                        if (a.code === 'ur') return -1;
+                        if (b.code === 'ur') return 1;
+                        return 0;
+                    });
+                    document.querySelectorAll('header .translate > a').forEach(translateButton => {
+                        var languageSelector = document.createElement('div');
+                        languageSelector.className = 'languageSelector notranslate';
+                        languageSelector.innerHTML = `<b>Site Language</b><input type="text" id="languageSearch" placeholder="Search languages..." /><div class="languageOptions">${languages.map(lang => `<span data-code="${lang.code}">${lang.language}</span>`).join('')}</div>`;
+                        translateButton.parentElement.appendChild(languageSelector);
+                        translateButton.addEventListener('click', (event) => {
+                            event.preventDefault();
+                            var languageSelector = translateButton.parentElement.querySelector('.languageSelector');
+                            languageSelector.classList.toggle('active');
+                            if (languageSelector.classList.contains('active')) setTimeout(() => {
+                                languageSelector.querySelector('#languageSearch').focus();
+                            }, 100);
+                        });
+                        translateButton.parentElement.querySelector('.languageSelector #languageSearch').addEventListener('input', (event) => {
+                            const searchTerm = event.target.value.toLowerCase();
                             translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span').forEach(option => {
-                                option.classList.toggle('active', (option.getAttribute('data-code') === langCode) || ((option.getAttribute('data-code') === '') && (langCode === 'en')));
+                                option.style.display = option.innerText.toLowerCase().includes(searchTerm) ? 'block' : 'none';
                             });
                         });
-                        console.log(`Language changed to ${langName} (${langCode})`);
+                        translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span').forEach(option => {
+                            if (option.getAttribute('data-code') === '') option.classList.add('active');
+                            option.addEventListener('click', () => {
+                                if (option.classList.contains('active')) return;
+                                option.classList.add('active');
+                                resetTranslate();
+                                if (option.getAttribute('data-code')) {
+                                    document.getElementById('GoogleTranslate').value = option.getAttribute('data-code');
+                                    document.getElementById('GoogleTranslate').dispatchEvent(new Event('change'));
+                                    translateButton.parentElement.querySelector('.languageSelector').classList.remove('active');
+                                };
+                            });
+                        });
                     });
-                });
-                htmlObserver.observe(document.documentElement, { attributes: true });
-            };
-        }, 500);
+                    document.addEventListener('click', (event) => {
+                        if (!event.target.closest('.languageSelector') && !event.target.closest('.translate')) document.querySelectorAll('.languageSelector').forEach(languageSelector => {
+                            languageSelector.classList.remove('active');
+                        });
+                    });
+                    document.addEventListener('keydown', (event) => {
+                        if (event.key === 'Escape') document.querySelectorAll('.languageSelector').forEach(languageSelector => {
+                            languageSelector.classList.remove('active');
+                        });
+                    });
+                    const htmlObserver = new MutationObserver(mutations => {
+                        mutations.forEach(mutation => {
+                            if (mutation.attributeName !== 'lang') return;
+                            var langCode = document.documentElement.getAttribute('lang');
+                            var langName = languages.find(lang => lang.code === langCode)?.language || langCode;
+                            console.log(`Language changing to ${langName} (${langCode})`);
+                            document.querySelectorAll('[lang]:not(html), a:not([tabindex])').forEach(el => {
+                                el.style.display = '';
+                            });
+                            if ((langCode !== 'auto') && (langCode !== 'en') && (langCode !== '')) {
+                                document.querySelectorAll('section').forEach(section => {
+                                    var totalFound = [];
+                                    section.querySelectorAll('[lang]:not(html)').forEach(el => {
+                                        if (el.getAttribute('lang') === langCode) {
+                                            el.style.display = 'none';
+                                        } else {
+                                            totalFound.push(el);
+                                        };
+                                    });
+                                    section.querySelectorAll('a:not([tabindex])').forEach(el => {
+                                        if (!languages.map(lang => lang.language).some(lang => el.innerText.includes(lang))) return;
+                                        if (!el.innerText.includes(langName)) {
+                                            el.style.display = 'none';
+                                        } else {
+                                            totalFound.push(el);
+                                        };
+                                    });
+                                    if (totalFound.length === 0) section.querySelectorAll('[lang]:not(html), a:not([tabindex])').forEach(el => {
+                                        el.style.display = '';
+                                    });
+                                });
+                            };
+                            header.querySelectorAll('.translate > a').forEach(translateButton => {
+                                translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span').forEach(option => {
+                                    option.classList.toggle('active', (option.getAttribute('data-code') === langCode) || ((option.getAttribute('data-code') === '') && (langCode === 'en')));
+                                });
+                            });
+                            console.log(`Language changed to ${langName} (${langCode})`);
+                        });
+                    });
+                    htmlObserver.observe(document.documentElement, { attributes: true });
+                    resolve();
+                };
+            }, 500);
+        });
+        addTask(languagesPromise);
         document.querySelectorAll('section:has(.ss-component-header-title)').forEach(section => {
             var pageRedBar = section.querySelector('.ss-component-header-title');
             if (pageRedBar.innerText.includes('customElement.')) {
@@ -474,7 +494,17 @@ onReady(() => {
                 window.location.href = link.href;
             });
         });
-        document.documentElement.classList.add('ready');
+        try {
+            const allTasksPromise = (tasks.length) ? Promise.all(tasks) : Promise.resolve();
+            const timeout = new Promise(resolve => setTimeout(resolve, 5000));
+            Promise.race([allTasksPromise, timeout]).then(() => {
+                document.documentElement.classList.add('ready');
+            }).catch(() => {
+                document.documentElement.classList.add('ready');
+            });
+        } catch (err) {
+            document.documentElement.classList.add('ready');
+        };
     } catch (e) {
         console.error(e);
     };
