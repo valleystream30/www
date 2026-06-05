@@ -18,6 +18,10 @@ function onReady(callback) {
         callback();
     };
 };
+
+var header = document.querySelector('header');
+var nav = Array.from(header.querySelectorAll('nav')).find(nav => nav.clientHeight);
+
 onReady(() => {
     try {
         const tasks = [];
@@ -25,11 +29,26 @@ onReady(() => {
             tasks.push(promise);
         };
         // document.querySelector('header .ss-site-header-school-tagline').classList.add('customFont');
-        var header = document.querySelector('header');
-        var nav = Array.from(header.querySelectorAll('nav')).find(nav => nav.clientHeight);
         // header.prepend(nav);
         // header.style.paddingTop = `${nav.clientHeight}px`;
         header.append(nav);
+        if ((window.innerWidth > 1000) && header.querySelector('.ss-site-header-main-links-container .translate a')) {
+            nav.append(header.querySelector('.ss-site-header-main-links-container .translate a'));
+            header.querySelectorAll('.ss-site-header-main-links-container .translate').forEach(translate => {
+                translate.remove();
+            });
+        };
+        var searchBar = document.createElement('div');
+        searchBar.className = 'searchBar';
+        searchBar.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Search..." id="siteSearchInput" /><button id="siteSearchButton"><i class="fa-solid fa-arrow-right"></i></button>`;
+        header.querySelector('.ss-site-header-main-container').insertBefore(searchBar, header.querySelector('.ss-site-header-main-container').lastElementChild);
+        document.getElementById('siteSearchButton').addEventListener('click', () => {
+            var query = document.getElementById('siteSearchInput').value;
+            if (query) window.location.href = `/search?s=${encodeURIComponent(query)}`;
+        });
+        document.getElementById('siteSearchInput').addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') document.getElementById('siteSearchButton').click();
+        });
         if (window.innerWidth <= 1000) {
             var nav2 = document.createElement('nav');
             nav2.className = 'ss-site-header-main-links-container';
@@ -56,25 +75,6 @@ onReady(() => {
                 });
             });
         };
-        var navMaxTop = header.clientHeight - nav.clientHeight;
-        setTimeout(() => {
-            header.style.paddingBottom = `${nav.clientHeight}px`;
-            setTimeout(() => {
-                navMaxTop = header.clientHeight - nav.clientHeight;
-                if (window.scrollY >= navMaxTop) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
-                };
-            }, 100);
-        }, 100);
-        window.addEventListener('scroll', () => {
-            if (window.scrollY >= navMaxTop) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            };
-        });
         // var newLink = document.createElement('a');
         // newLink.className = 'ss-site-header-title-container';
         // newLink.href = '/';
@@ -120,7 +120,7 @@ onReady(() => {
                 }, 100);
             });
             addTask(schoolsPagePromise);
-        } else if (pageTitle.includes('home')) {
+        } else if (pageTitle.includes('home new')) {
             var firstSection = document.querySelector('.stack_sort_area').children[0];
             if (firstSection.querySelector('.spotlight-container')) Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
                 const homepageShowcasePromise = new Promise(resolve => {
@@ -130,10 +130,12 @@ onReady(() => {
                                 if (window.innerWidth <= 1000) {
                                     slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
                                 } else {
-                                    if (document.querySelector('.stack_sort_area section + section').classList.contains('ss-icon-matrix')) {
-                                        slide.style.minHeight = `calc(100vh - ${header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
+                                    if (document.querySelector('.stack_sort_area > * + section').classList.contains('ss-icon-matrix')) {
+                                        slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
+                                        document.querySelector('.spotlight-wrapper').style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
                                     } else {
                                         slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
+                                        document.querySelector('.spotlight-wrapper').style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
                                     };
                                 };
                             });
@@ -149,17 +151,19 @@ onReady(() => {
                     if ((document.querySelectorAll('.ss-image-link[style]').length === 3) || (document.querySelectorAll('.ss-image-link img[height]').length === 3)) {
                         document.querySelector('section:has(.ss-image-link[style]), section:has(.ss-image-link img[height])').style.padding = 'min(70px, 7vh) min(20px, 2vw)';
                         document.querySelectorAll('.ss-image-link, .ss-image-link img').forEach(img => {
-                            img.style.width = 'unset';
+                            img.style.width = '100%';
                             img.removeAttribute('height');
                         });
                         var minHeight = Array.from(document.querySelectorAll('.ss-image-link img')).map(img => img.clientHeight).sort()[0];
-                        document.querySelectorAll('.ss-image-link').forEach(img => {
-                            img.style.height = `${minHeight}px`;
-                            img.style.borderRadius = '10px';
-                            if (window.innerWidth <= 1000) img.style.width = '100%';
-                        });
-                        clearInterval(homepageAboutImagesInterval);
-                        resolve();
+                        if (minHeight > 0) {
+                            document.querySelectorAll('.ss-image-link').forEach(img => {
+                                img.style.height = `${minHeight}px`;
+                                img.style.borderRadius = '10px';
+                                if (window.innerWidth <= 1000) img.style.width = '100%';
+                            });
+                            clearInterval(homepageAboutImagesInterval);
+                            resolve();
+                        };
                     };
                 }, 100);
             });
@@ -365,7 +369,7 @@ onReady(() => {
                         if (b.code === 'ur') return 1;
                         return 0;
                     });
-                    document.querySelectorAll('header .translate > a').forEach(translateButton => {
+                    document.querySelectorAll('header .translate > a, header > nav > a').forEach(translateButton => {
                         var languageSelector = document.createElement('div');
                         languageSelector.className = 'languageSelector notranslate';
                         languageSelector.innerHTML = `<b>Site Language</b><input type="text" id="languageSearch" placeholder="Search languages..." /><div class="languageOptions">${languages.map(lang => `<span data-code="${lang.code}">${lang.language}</span>`).join('')}</div>`;
@@ -376,6 +380,7 @@ onReady(() => {
                             languageSelector.classList.toggle('active');
                             if (languageSelector.classList.contains('active')) setTimeout(() => {
                                 languageSelector.querySelector('#languageSearch').focus();
+                                languageSelector.scrollTop = 0;
                             }, 100);
                         });
                         translateButton.parentElement.querySelector('.languageSelector #languageSearch').addEventListener('input', (event) => {
@@ -399,7 +404,7 @@ onReady(() => {
                         });
                     });
                     document.addEventListener('click', (event) => {
-                        if (!event.target.closest('.languageSelector') && !event.target.closest('.translate')) document.querySelectorAll('.languageSelector').forEach(languageSelector => {
+                        if (!event.target.closest('.languageSelector') && !event.target.closest('header .translate > a, header > nav > a')) document.querySelectorAll('.languageSelector').forEach(languageSelector => {
                             languageSelector.classList.remove('active');
                         });
                     });
@@ -485,6 +490,109 @@ onReady(() => {
                             };
                         });
                         break;
+                    case 'spotlight':
+                        var spotlightWrapper = document.createElement('div');
+                        spotlightWrapper.className = 'spotlight-wrapper';
+                        if (window.innerWidth > 1000) {
+                            section.parentElement.insertBefore(spotlightWrapper, section);
+                            spotlightWrapper.appendChild(section);
+                        } else {
+                            document.querySelector('.stack_sort_area').insertBefore(spotlightWrapper, document.querySelector('.stack_sort_area').children[2]);
+                        };
+                        var spotlightSidebar = document.createElement('div');
+                        spotlightSidebar.className = 'spotlight-sidebar';
+                        spotlightWrapper.appendChild(spotlightSidebar);
+                        if (window.innerWidth > 1000) spotlightSidebar.innerHTML = `<div class="spotlight-info"><i class="fa-solid fa-chevron-left"></i><h3>${section.querySelector('.carousel-inner > .item.active .spotlight-slide-title').innerText}</h3><p>${section.querySelector('.carousel-inner > .item.active .spotlight-text-cta-container').innerText}</p></div>`;
+                        const homepageEventsPromise = new Promise(resolve => {
+                            var homepageEventsInterval = setInterval(() => {
+                                if (document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event').length) {
+                                    clearInterval(homepageEventsInterval);
+                                    var eventGroups = [];
+                                    for (event of document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event')) {
+                                        var eventDiv = event.shadowRoot.querySelector('.calendar-event-container');
+                                        var eventDate = eventDiv.querySelector('.event-date-container').innerText.replaceAll('\n', ' ').trim();
+                                        var eventTitleDiv = eventDiv.querySelector('.event-title a');
+                                        var eventLink = eventTitleDiv.getAttribute('href');
+                                        var eventTitle = eventTitleDiv.innerText.trim();
+                                        var eventTime = eventDiv.querySelector('.event-time').innerText.trim();
+                                        if (!eventGroups.find(eventGroup => eventGroup.name === eventDate) || !eventGroups.find(eventGroup => eventGroup.name === eventDate).events.find(event => (event.link === eventLink))) {
+                                            if (!eventGroups.find(eventGroup => eventGroup.name === eventDate)) eventGroups.push({
+                                                name: eventDate,
+                                                events: [],
+                                            });
+                                            eventGroups.find(eventGroup => eventGroup.name === eventDate).events.push({
+                                                link: eventLink,
+                                                title: eventTitle,
+                                                date: eventDate.slice(eventDate.indexOf(' ') + 1),
+                                                time: eventTime
+                                            });
+                                        };
+                                    };
+                                    if (eventGroups.length) {
+                                        var eventsContainer = document.createElement('div');
+                                        eventsContainer.className = 'events-container';
+                                        var now = new Date();
+                                        var today = now.toLocaleDateString(undefined, { month: 'short', day: '2-digit' });
+                                        var tomorrow = (new Date(now.getTime() + 24 * 60 * 60 * 1000)).toLocaleDateString(undefined, { month: 'short', day: '2-digit' });
+                                        const months = {
+                                            Jan: 'January',
+                                            Feb: 'February',
+                                            Mar: 'March',
+                                            Apr: 'April',
+                                            May: 'May',
+                                            Jun: 'June',
+                                            Jul: 'July',
+                                            Aug: 'August',
+                                            Sep: 'September',
+                                            Oct: 'October',
+                                            Nov: 'November',
+                                            Dec: 'December',
+                                        };
+                                        if (window.innerWidth <= 1000) eventGroups = eventGroups.slice(0, 1);
+                                        for (eventGroupN in eventGroups) {
+                                            var eventGroup = eventGroups[eventGroupN];
+                                            var eventsTitle = Number(eventGroupN) ? document.createElement('p') : document.createElement('h2');
+                                            if (eventGroup.name.endsWith(today)) {
+                                                eventsTitle.innerText = `Today's Events`;
+                                                eventsContainer.append(eventsTitle);
+                                            } else if (eventGroup.name.endsWith(tomorrow)) {
+                                                eventsTitle.innerText = 'Tomorrow';
+                                                eventsContainer.append(eventsTitle);
+                                            } else {
+                                                var [day, mon, date] = eventGroup.name.split(' ');
+                                                eventsTitle.innerText = `${day.charAt(0).toUpperCase() + day.slice(1).toLowerCase()}, ${months[mon]} ${parseInt(date, 10) + (["th", "st", "nd", "rd"][((["th", "st", "nd", "rd"] % 100) - 20) % 10] || ["th", "st", "nd", "rd"][(parseInt(date, 10) % 100)] || ["th", "st", "nd", "rd"][0])}`;
+                                                eventsContainer.append(eventsTitle);
+                                            };
+                                            for (event of eventGroup.events) {
+                                                var eventLink = document.createElement('a');
+                                                eventLink.href = event.link;
+                                                eventLink.classList.add('event');
+                                                eventLink.innerHTML = `<div class="event-date">${event.date.replace(' ', '<br>')}</div><div class="event-info"><b>${event.title}</b><p>${event.time}</p></div>`;
+                                                eventsContainer.appendChild(eventLink);
+                                            };
+                                        };
+                                        spotlightSidebar.prepend(eventsContainer);
+                                    };
+                                    document.querySelector('.customElement.spotlightCalendar')?.remove();
+                                    resolve();
+                                };
+                            }, 500);
+                        });
+                        addTask(homepageEventsPromise);
+                        if (window.innerWidth <= 1000) break;
+                        const carouselObserver = new MutationObserver(mutations => {
+                            mutations.forEach(mutation => {
+                                if (mutation.attributeName !== 'class') return;
+                                if (mutation.target.classList.contains('item') && mutation.target.classList.contains('active') && !mutation.target.classList.contains('left')) {
+                                    document.querySelector('.spotlight-sidebar .spotlight-info h3').innerText = mutation.target.querySelector('.spotlight-slide-title').innerText.replaceAll('\n', '');
+                                    document.querySelector('.spotlight-sidebar .spotlight-info p').innerText = mutation.target.querySelector('.spotlight-text-cta-container').innerText.replaceAll('\n', '');
+                                };
+                            });
+                        });
+                        section.querySelectorAll('.carousel-inner > .item').forEach(item => {
+                            carouselObserver.observe(item, { attributeFilter: ['class'] });
+                        });
+                        break;
                 };
             };
         });
@@ -503,15 +611,35 @@ onReady(() => {
         try {
             const allTasksPromise = (tasks.length) ? Promise.all(tasks) : Promise.resolve();
             const timeout = new Promise(resolve => setTimeout(resolve, 5000));
-            Promise.race([allTasksPromise, timeout]).then(() => {
-                document.documentElement.classList.add('ready');
-            }).catch(() => {
-                document.documentElement.classList.add('ready');
-            });
+            Promise.race([allTasksPromise, timeout]).then(afterReady).catch(afterReady);
         } catch (err) {
-            document.documentElement.classList.add('ready');
+            console.error(err);
+            afterReady();
         };
     } catch (e) {
         console.error(e);
     };
 });
+
+function afterReady() {
+    header.style.paddingBottom = `${nav.clientHeight}px`;
+    var navMaxTop = header.clientHeight - nav.clientHeight;
+    setTimeout(() => {
+        navMaxTop = header.clientHeight - nav.clientHeight;
+        if (window.scrollY >= navMaxTop) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        };
+    }, 100);
+    window.addEventListener('scroll', () => {
+        if (window.scrollY >= navMaxTop) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        };
+    });
+    setTimeout(() => {
+        document.documentElement.classList.add('ready');
+    }, 100);
+};

@@ -16,4 +16,7 @@ Most fixes, upgrades, and additions to the district website are recorded on the 
 - [global.css](/global.css) - New CSS rules added to the website.
 - [global.js](/global.js) - New JavaScript code added to the website.
 - [headInject.html](/headInject.html) - Added head tags for code versioning and analytics.
+- [llms.txt](/llms.txt) - Site llms.txt file.
+- [worker.js](/worker.js) - Service worker for custom 404 redirects.
+- [wrangler.jsonc](/wrangler.jsonc) - Cloudflare Workers configuration file.
 - ...
