@@ -277,6 +277,12 @@ onReady(() => {
                 siteMapSearch.value = urlParams.get('s');
                 siteMapSearch.dispatchEvent(new Event('input'));
             };
+        } else if (pageTitle.includes('search results')) {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('s')) {
+                document.getElementById('search_field').value = urlParams.get('s');
+                document.querySelector('.search-btn button').click();
+            };
         };
         var fontN = 0;
         var headerN = 0;
