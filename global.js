@@ -642,6 +642,7 @@ onReady(() => {
 
 function afterReady() {
     header.style.paddingBottom = `${nav.clientHeight}px`;
+    document.documentElement.style.scrollPadding = `${nav.clientHeight}px`;
     var navMaxTop = header.clientHeight - nav.clientHeight;
     setTimeout(() => {
         navMaxTop = header.clientHeight - nav.clientHeight;
