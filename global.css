@@ -489,10 +489,12 @@ section.ss-has-bg .ss-component-header-title:only-child {
 	padding: 0;
 }
 
-.ss-component-content .ss-one-column .ss-component-column:has(h3) {
+section.ss-has-bg .ss-component-content .ss-one-column .ss-component-column:has(h3),
+section.ss-has-bg .ss-component-content .ss-one-column .ss-component-column:has(span) {
 	overflow: visible !important;
 
-	h3 {
+	h3,
+	span {
 		margin-top: 0;
 		margin-bottom: 0;
 	}
