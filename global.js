@@ -433,16 +433,16 @@ onReady(() => {
                                         };
                                     });
                                     section.querySelectorAll('a:not([tabindex])').forEach(el => {
-                                        if (!languages.map(lang => lang.language).some(lang => el.innerText.includes(lang))) return;
-                                        if (!el.innerText.includes(langName)) {
+                                        if (!languages.map(lang => lang.language).some(lang => el.innerText.toLowerCase().includes(lang.toLowerCase()))) return;
+                                        if (!el.innerText.toLowerCase().includes(langName.toLowerCase())) {
                                             el.style.display = 'none';
                                         } else {
                                             totalFound.push(el);
                                         };
                                     });
                                     section.querySelectorAll('img[alt]').forEach(el => {
-                                        if (!languages.map(lang => lang.language).some(lang => el.alt.includes(lang))) return;
-                                        if (!el.alt.includes(langName)) {
+                                        if (!languages.map(lang => lang.language).some(lang => el.alt.toLowerCase().includes(lang.toLowerCase()))) return;
+                                        if (!el.alt.toLowerCase().includes(langName.toLowerCase())) {
                                             el.style.display = 'none';
                                         } else {
                                             totalFound.push(el);
