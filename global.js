@@ -592,6 +592,17 @@ onReady(() => {
                         section.querySelectorAll('.carousel-inner > .item').forEach(item => {
                             carouselObserver.observe(item, { attributeFilter: ['class'] });
                         });
+                        document.addEventListener('keydown', e => {
+                            if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
+                            switch (e.key) {
+                                case 'ArrowLeft':
+                                    section.querySelector('.carousel-nav-option-prev').click();
+                                    break;
+                                case 'ArrowRight':
+                                    section.querySelector('.carousel-nav-option-next').click();
+                                    break;
+                            };
+                        });
                         break;
                 };
             };
