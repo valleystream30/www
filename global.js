@@ -658,6 +658,7 @@ function afterReady() {
             nav.classList.remove('scrolled');
         };
     });
+    if (window.innerWidth > 1000) header.querySelector('.ss-site-header-hero-container').style.minWidth = `${header.querySelector('.ss-site-header-main-links-container:has(.search)').clientWidth}px`;
     setTimeout(() => {
         document.documentElement.classList.add('ready');
     }, 100);

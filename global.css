@@ -1,19 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 @media screen and (min-width: 1300px) {
-	header .ss-site-header-main-container > * {
-		width: calc(100% / 3);
+	header .ss-site-header-main-container > *:first-child {
+		justify-content: start !important;
+	}
 
-		&:first-child {
-			justify-content: start !important;
-		}
-
-		&:last-child {
-			justify-content: end !important;
-		}
+	header .ss-site-header-main-container > *:last-child {
+		justify-content: end !important;
 	}
 
 	header .searchBar {
+		width: calc(100% / 3);
 		transition:
 			0.25s margin-left,
 			0.25s margin-right,
@@ -735,6 +732,7 @@ header {
 
 	.ss-site-header-hero-container {
 		gap: 25px !important;
+		padding-right: 0 !important;
 	}
 
 	/* .ss-site-header-title-container {
