@@ -419,7 +419,7 @@ onReady(() => {
                             var langCode = document.documentElement.getAttribute('lang');
                             var langName = languages.find(lang => lang.code === langCode)?.language || langCode;
                             console.log(`Language changing to ${langName} (${langCode})`);
-                            document.querySelectorAll('[lang]:not(html), a:not([tabindex])').forEach(el => {
+                            document.querySelectorAll('[lang]:not(html), a:not([tabindex]), img[alt]').forEach(el => {
                                 el.style.display = '';
                             });
                             if ((langCode !== 'auto') && (langCode !== 'en') && (langCode !== '')) {
@@ -440,12 +440,20 @@ onReady(() => {
                                             totalFound.push(el);
                                         };
                                     });
-                                    if (totalFound.length === 0) section.querySelectorAll('[lang]:not(html), a:not([tabindex])').forEach(el => {
+                                    section.querySelectorAll('img[alt]').forEach(el => {
+                                        if (!languages.map(lang => lang.language).some(lang => el.alt.includes(lang))) return;
+                                        if (!el.alt.includes(langName)) {
+                                            el.style.display = 'none';
+                                        } else {
+                                            totalFound.push(el);
+                                        };
+                                    });
+                                    if (totalFound.length === 0) section.querySelectorAll('[lang]:not(html), a:not([tabindex]), img[alt]').forEach(el => {
                                         el.style.display = '';
                                     });
                                 });
                             };
-                            header.querySelectorAll('.translate > a').forEach(translateButton => {
+                            header.querySelectorAll('.translate > a, header > nav > a').forEach(translateButton => {
                                 translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span').forEach(option => {
                                     option.classList.toggle('active', (option.getAttribute('data-code') === langCode) || ((option.getAttribute('data-code') === '') && (langCode === 'en')));
                                 });
