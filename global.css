@@ -94,6 +94,14 @@
 	.ss-site-header-main-nav-mobile {
 		display: none !important;
 	}
+
+	.spotlight-sidebar > * {
+		padding-right: 35px !important;
+	}
+
+	.spotlight-sidebar .events-container {
+		padding-bottom: 40px;
+	}
 }
 
 @media screen and (max-width: 1000px) {
@@ -1414,7 +1422,7 @@ html.translated-rtl .customElement.staff:has(.phone) .email {
 
 .spotlight-sidebar {
 	display: flex;
-	padding: 5px 45px 20px 30px;
+	padding: 0 10px 20px 30px;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: end;
@@ -1432,6 +1440,7 @@ html.translated-rtl .customElement.staff:has(.phone) .email {
 .spotlight-sidebar h2 {
 	width: max-content;
 	font-weight: bold;
+	margin-top: 30px !important;
 }
 
 .spotlight-sidebar .events-container {
