@@ -619,7 +619,7 @@ onReady(() => {
                                 'title': section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span').innerText
                             };
                         }).forEach(sectionInfo => {
-                            document.querySelector('.customElement.about .ss-column-one ul').innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
+                            section.querySelector('.ss-column-one ul').innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
                         });
                         break;
                 };

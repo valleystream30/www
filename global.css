@@ -491,8 +491,14 @@ section.ss-has-bg .ss-component-header-title:only-child {
 	padding: 0;
 }
 
-section.ss-has-bg .ss-component-content .ss-one-column .ss-component-column:has(h3),
-section.ss-has-bg .ss-component-content .ss-one-column .ss-component-column:has(span) {
+section.ss-has-bg
+	.ss-component-content
+	.ss-one-column
+	.ss-component-column:has(h3),
+section.ss-has-bg
+	.ss-component-content
+	.ss-one-column
+	.ss-component-column:has(span) {
 	overflow: visible !important;
 
 	h3,
@@ -1258,6 +1264,11 @@ footer
 	padding: 50px 80px !important;
 }
 
+.customElement.sideBySide
+	.spotlight-component-body-panel.spotlight-slide-bg-color {
+	padding: 0;
+}
+
 .ss-color .ss-accordion-btn:hover,
 .ss-color .ss-accordion-btn:focus,
 .ss-color .ss-accordion-btn.open {
@@ -1450,4 +1461,8 @@ footer
 
 footer::before {
 	z-index: 0 !important;
+}
+
+p:has(> iframe[height="100%"]) {
+	height: 100%;
 }
