@@ -337,6 +337,7 @@
 
 html {
 	background: var(--blue);
+	scroll-behavior: smooth;
 
 	&:not(.ready)::before {
 		content: "";
@@ -904,7 +905,7 @@ header {
 			border: none;
 			font-size: 18px;
 			width: -webkit-fill-available;
-			padding: 15px 50px;
+			padding: 12px 50px;
 			border: 2px solid #ffffff;
 			border-radius: 100px !important;
 			max-width: 100%;
