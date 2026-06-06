@@ -242,6 +242,7 @@
 
 	.spotlight-sidebar {
 		padding: 15px 30px 20px 30px !important;
+		width: 100vw !important;
 
 		.event-date {
 			display: none !important;
@@ -1359,7 +1360,7 @@ footer
 	align-self: stretch;
 	background-color: var(--blue);
 	transition: 1.25s;
-	width: min(700px, 100vw);
+	width: min(700px, 40vw);
 
 	* {
 		color: #ffffff !important;
