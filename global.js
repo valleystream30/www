@@ -369,7 +369,7 @@ onReady(() => {
                         if (b.code === 'ur') return 1;
                         return 0;
                     });
-                    document.querySelectorAll('header .translate > a, header > nav > a').forEach(translateButton => {
+                    document.querySelectorAll('header .translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type').forEach(translateButton => {
                         var languageSelector = document.createElement('div');
                         languageSelector.className = 'languageSelector notranslate';
                         languageSelector.innerHTML = `<b>Site Language</b><input type="text" id="languageSearch" placeholder="Search languages..." /><div class="languageOptions">${languages.map(lang => `<span data-code="${lang.code}">${lang.language}</span>`).join('')}</div>`;
@@ -404,7 +404,7 @@ onReady(() => {
                         });
                     });
                     document.addEventListener('click', (event) => {
-                        if (!event.target.closest('.languageSelector') && !event.target.closest('header .translate > a, header > nav > a')) document.querySelectorAll('.languageSelector').forEach(languageSelector => {
+                        if (!event.target.closest('.languageSelector') && !event.target.closest('header .translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type')) document.querySelectorAll('.languageSelector').forEach(languageSelector => {
                             languageSelector.classList.remove('active');
                         });
                     });
@@ -453,7 +453,7 @@ onReady(() => {
                                     });
                                 });
                             };
-                            header.querySelectorAll('.translate > a, header > nav > a').forEach(translateButton => {
+                            header.querySelectorAll('.translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type').forEach(translateButton => {
                                 translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span').forEach(option => {
                                     option.classList.toggle('active', (option.getAttribute('data-code') === langCode) || ((option.getAttribute('data-code') === '') && (langCode === 'en')));
                                 });
@@ -467,6 +467,39 @@ onReady(() => {
             }, 500);
         });
         addTask(languagesPromise);
+        var pageSections = Array.from(document.querySelectorAll('section.ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section.ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off))')).slice(1).map(section => {
+            return {
+                'id': section.id,
+                'title': section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span').innerText
+            };
+        });
+        if (pageSections.length) {
+            var pageSectionsLink = document.createElement('a');
+            pageSectionsLink.className = 'pageSectionsToggle';
+            pageSectionsLink.setAttribute('role', 'button');
+            pageSectionsLink.setAttribute('tabindex', '0');
+            var pageSectionsIcon = document.createElement('i');
+            pageSectionsIcon.classList = 'fa-solid fa-list';
+            pageSectionsLink.appendChild(pageSectionsIcon);
+            var pageSectionsDiv = document.createElement('div');
+            pageSectionsDiv.className = 'pageSections';
+            pageSectionsDiv.innerHTML = `<b>Page Sections</b><ul class="pageSectionsList">${pageSections.map(pageSection => `<li><a href="#${pageSection.id}">${pageSection.title}</a></li>`).join('')}</ul>`;
+            pageSectionsLink.appendChild(pageSectionsDiv);
+            nav.prepend(pageSectionsLink);
+            pageSectionsLink.addEventListener('click', (event) => {
+                if (event.target.closest('.pageSectionsList a')) return;
+                pageSectionsDiv.classList.toggle('active');
+            });
+            pageSectionsLink.addEventListener('keydown', (event) => {
+                if ((event.key === 'Enter') || (event.key === ' ')) {
+                    event.preventDefault();
+                    pageSectionsDiv.classList.toggle('active');
+                };
+            });
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('.pageSections') && !event.target.closest('.pageSectionsToggle')) pageSectionsDiv.classList.remove('active');
+            });
+        };
         document.querySelectorAll('section:has(.ss-component-header-title)').forEach(section => {
             var pageRedBar = section.querySelector('.ss-component-header-title');
             if (pageRedBar.innerText.includes('customElement.')) {
@@ -613,12 +646,7 @@ onReady(() => {
                         });
                         break;
                     case 'about':
-                        Array.from(document.querySelectorAll('section.ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section.ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off))')).slice(1).map(section => {
-                            return {
-                                'id': section.id,
-                                'title': section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span').innerText
-                            };
-                        }).forEach(sectionInfo => {
+                        pageSections.forEach(sectionInfo => {
                             section.querySelector('.ss-column-one ul').innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
                         });
                         break;
