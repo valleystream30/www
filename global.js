@@ -467,13 +467,13 @@ onReady(() => {
             }, 500);
         });
         addTask(languagesPromise);
-        var pageSections = Array.from(document.querySelectorAll('section.ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section.ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off))')).slice(1).map(section => {
+        var pageSections = Array.from(document.querySelectorAll('section.ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section.ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off))')).map(section => {
             return {
                 'id': section.id,
                 'title': section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span').innerText
             };
         });
-        if (pageSections.length) {
+        if (pageSections.length > 1) {
             var pageSectionsLink = document.createElement('a');
             pageSectionsLink.className = 'pageSectionsToggle';
             pageSectionsLink.setAttribute('role', 'button');
@@ -646,7 +646,7 @@ onReady(() => {
                         });
                         break;
                     case 'about':
-                        pageSections.forEach(sectionInfo => {
+                        pageSections.slice(1).forEach(sectionInfo => {
                             section.querySelector('.ss-column-one ul').innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
                         });
                         break;
