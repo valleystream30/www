@@ -531,15 +531,12 @@ section.ss-has-bg .ss-component-header-title:only-child {
 section.ss-has-bg
 	.ss-component-content
 	.ss-one-column
-	.ss-component-column:has(h3),
-section.ss-has-bg
-	.ss-component-content
-	.ss-one-column
-	.ss-component-column:has(span) {
+	.ss-component-column:has(> *:only-child):has(h3, span) {
 	overflow: visible !important;
 
 	h3,
-	span {
+	span,
+	p {
 		margin-top: 0;
 		margin-bottom: 0;
 	}
@@ -1272,6 +1269,12 @@ footer
 
 	ul {
 		margin: 0;
+	}
+
+	.sectionsOnPage {
+		background-color: #f2f3f3 !important;
+		padding: 40px 40px !important;
+		border-radius: 10px !important;
 	}
 }
 

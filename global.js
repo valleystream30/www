@@ -467,7 +467,7 @@ onReady(() => {
             }, 500);
         });
         addTask(languagesPromise);
-        var pageSections = Array.from(document.querySelectorAll('section.ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section.ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off))')).map(section => {
+        var pageSections = Array.from(document.querySelectorAll('section.ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section.ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off))')).filter(section => section.querySelector('.ss-component-content .ss-one-column .ss-component-column').children.length === 1).map(section => {
             return {
                 'id': section.id,
                 'title': section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span').innerText
@@ -483,7 +483,7 @@ onReady(() => {
             pageSectionsLink.appendChild(pageSectionsIcon);
             var pageSectionsDiv = document.createElement('div');
             pageSectionsDiv.className = 'pageSections';
-            pageSectionsDiv.innerHTML = `<b>Page Sections</b><ul class="pageSectionsList">${pageSections.map(pageSection => `<li><a href="#${pageSection.id}">${pageSection.title}</a></li>`).join('')}</ul>`;
+            pageSectionsDiv.innerHTML = `<b>On This Page</b><ul class="pageSectionsList">${pageSections.map(pageSection => `<li><a href="#${pageSection.id}">${pageSection.title}</a></li>`).join('')}</ul>`;
             pageSectionsLink.appendChild(pageSectionsDiv);
             nav.prepend(pageSectionsLink);
             pageSectionsLink.addEventListener('click', (event) => {
@@ -646,24 +646,36 @@ onReady(() => {
                         });
                         break;
                     case 'about':
-                        pageSections.slice(1).forEach(sectionInfo => {
-                            section.querySelector('.ss-column-one ul').innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
-                        });
+                        // section.querySelector('.ss-column-one').innerHTML += '<p>&nbsp;</p>';
+                        // var sectionsOnPageDiv = document.createElement('div');
+                        // sectionsOnPageDiv.className = 'sectionsOnPage';
+                        // sectionsOnPageDiv.innerHTML = `<b>On This Page</b><ul class="sectionsOnPageList"></ul>`;
+                        // section.querySelector('.ss-column-one').append(sectionsOnPageDiv);
+                        // pageSections.slice(1).forEach(sectionInfo => {
+                        //     sectionsOnPageDiv.querySelector('ul').innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
+                        // });
                         break;
                 };
             };
-        });
-        document.querySelectorAll('a[href=""]').forEach(link => {
-            var newLink = document.createElement('div');
-            newLink.className = link.className;
-            newLink.innerHTML = link.innerHTML;
-            link.replaceWith(newLink);
         });
         document.querySelectorAll('.customElement.links li').forEach(li => {
             var link = li.querySelector('a');
             if (link) li.addEventListener('click', () => {
                 window.location.href = link.href;
             });
+        });
+        document.querySelectorAll('a[href]').forEach(link => {
+            if (link.getAttribute('href') === '') {
+                var newLink = document.createElement('div');
+                newLink.className = link.className;
+                newLink.innerHTML = link.innerHTML;
+                link.replaceWith(newLink);
+            } else if ((link.getAttribute('href') === '#') || (link.getAttribute('href') === window.location.href)) {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            };
         });
         try {
             const allTasksPromise = (tasks.length) ? Promise.all(tasks) : Promise.resolve();
@@ -675,30 +687,36 @@ onReady(() => {
         };
     } catch (e) {
         console.error(e);
+        afterReady();
     };
 });
 
 function afterReady() {
-    header.style.paddingBottom = `${nav.clientHeight}px`;
-    document.documentElement.style.scrollPadding = `${nav.clientHeight}px`;
-    var navMaxTop = header.clientHeight - nav.clientHeight;
-    setTimeout(() => {
-        navMaxTop = header.clientHeight - nav.clientHeight;
-        if (window.scrollY >= navMaxTop) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        };
-    }, 100);
-    window.addEventListener('scroll', () => {
-        if (window.scrollY >= navMaxTop) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        };
-    });
-    if (window.innerWidth > 1000) header.querySelector('.ss-site-header-hero-container').style.minWidth = `${header.querySelector('.ss-site-header-main-links-container:has(.search)').clientWidth}px`;
-    setTimeout(() => {
+    try {
+        header.style.paddingBottom = `${nav.clientHeight}px`;
+        document.documentElement.style.scrollPadding = `${nav.clientHeight}px`;
+        var navMaxTop = header.clientHeight - nav.clientHeight;
+        setTimeout(() => {
+            navMaxTop = header.clientHeight - nav.clientHeight;
+            if (window.scrollY >= navMaxTop) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            };
+        }, 100);
+        window.addEventListener('scroll', () => {
+            if (window.scrollY >= navMaxTop) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            };
+        });
+        if (window.innerWidth > 1000) header.querySelector('.ss-site-header-hero-container').style.minWidth = `${header.querySelector('.ss-site-header-main-links-container:has(.search)').clientWidth}px`;
+        setTimeout(() => {
+            document.documentElement.classList.add('ready');
+        }, 100);
+    } catch (e) {
+        console.error(e);
         document.documentElement.classList.add('ready');
-    }, 100);
+    };
 };
