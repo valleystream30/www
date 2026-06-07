@@ -332,6 +332,10 @@
 		justify-content: center;
 		padding: 0 0 0 20px;
 	}
+
+	section.ss-accordion-tabs .ss-component-content {
+		padding: 0;
+	}
 }
 
 @media screen and (max-width: 800px) {
@@ -590,6 +594,7 @@ li:has(> .anchor-plates) {
 	margin-right: 14px;
 
 	span {
+		position: absolute;
 		top: calc(50% - 12px);
 		transform: none;
 		right: -12px;
@@ -668,7 +673,7 @@ li:has(> .anchor-plates) {
 
 	&:not(.active) {
 		opacity: 0;
-		height: 16px;
+		margin-top: -16px;
 		transition: 0.25s;
 		pointer-events: none;
 		user-select: none;
@@ -734,11 +739,15 @@ font {
 	box-shadow: none !important;
 }
 
-.spotlight-container:has(.item:only-of-type) .spotlight-text-container {
+.spotlight-container:has(.item:only-of-type)
+	.spotlight-slide-component:not(.spotlight-hide-bg)
+	.spotlight-text-container {
 	background: linear-gradient(#0000, #042450f0) !important;
 }
 
-.spotlight-container:not(:has(.item:only-of-type)) .spotlight-text-container {
+.spotlight-container:not(:has(.item:only-of-type))
+	.spotlight-slide-component:not(.spotlight-hide-bg)
+	.spotlight-text-container {
 	background-color: #042450f0 !important;
 }
 
