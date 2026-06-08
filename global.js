@@ -654,6 +654,15 @@ onReady(() => {
                         // pageSections.slice(1).forEach(sectionInfo => {
                         //     sectionsOnPageDiv.querySelector('ul').innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
                         // });
+                        section.querySelectorAll('.ss-column-one div > ul').forEach(ul => {
+                            var lis = ul.querySelectorAll('li');
+                            var removeLi = Array.from(lis).find(li => li.innerText.toLowerCase().includes('subpages here'));
+                            if (!removeLi) return;
+                            removeLi.remove();
+                            pageSections.slice(1).forEach(sectionInfo => {
+                                ul.innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
+                            });
+                        });
                         break;
                 };
             };
