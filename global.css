@@ -237,10 +237,18 @@
 	table tr {
 		display: flex;
 		flex-direction: column;
+
+		td {
+			width: 100% !important;
+		}
 	}
 
 	.customElement.links .stack-links-container {
 		grid-template-columns: 1fr;
+
+		&.center-alignment .stack-link-text-container {
+			text-align: center;
+		}
 	}
 
 	header .ss-site-header-main-nav-contained {
