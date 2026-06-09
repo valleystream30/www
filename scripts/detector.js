@@ -5,6 +5,7 @@ var linksWithBackTo = [];
 var linksWithSectionHome = [];
 var linksWithAccordion = [];
 var linksWithError = [];
+var linksWithSUNY = [];
 var interval = setInterval(() => {
     if (sitemap.length === 0) {
         clearInterval(interval);
@@ -13,6 +14,7 @@ var interval = setInterval(() => {
         console.log('Home page links:', linksWithSectionHome);
         console.log('Accordion:', linksWithAccordion);
         console.log('Errors:', linksWithError);
+        console.log('SUNY:', linksWithSUNY);
         return;
     };
     const link = sitemap.shift();
@@ -20,6 +22,7 @@ var interval = setInterval(() => {
         if (res.toLowerCase().includes('back to')) linksWithBackTo.push(link);
         if (res.toLowerCase().includes('home page') || res.includes(' HOME')) linksWithSectionHome.push(link);
         if (res.toLowerCase().includes('ss-accordion-heading')) linksWithAccordion.push(link);
+        if (res.toLowerCase().includes('state university of new york at')) linksWithSUNY.push(link);
     }).catch(err => {
         console.log('Error on', link);
         linksWithError.push(link);
