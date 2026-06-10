@@ -656,7 +656,7 @@ onReady(() => {
                         // });
                         section.querySelectorAll('.ss-column-one div > ul').forEach(ul => {
                             var lis = ul.querySelectorAll('li');
-                            var removeLi = Array.from(lis).find(li => li.innerText.toLowerCase().includes('subpages here'));
+                            var removeLi = Array.from(lis).find(li => li.innerText.toLowerCase().includes('page sections here'));
                             if (!removeLi) return;
                             removeLi.remove();
                             pageSections.slice(1).forEach(sectionInfo => {
