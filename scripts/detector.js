@@ -27,7 +27,7 @@ var interval = setInterval(async () => {
         if (res.toLowerCase().includes('state university of new york at')) linksWithSUNY.push(link);
         var parser = new DOMParser();
         var doc = parser.parseFromString(res, "text/html");
-        var images = doc.querySelectorAll('main img:not(.ss-document-icon):not([alt]), main img[alt=""]:not(.ss-document-icon)');
+        var images = doc.querySelectorAll('main img:not(.ss-document-icon):not(.rellax):not([alt]), main img[alt=""]:not(.ss-document-icon):not(.rellax)');
         if (images.length) linksWithImageWithoutAlt[link] = Array.from(images).map(img => img.outerHTML);
     }).catch(err => {
         console.log('Error on', link);
