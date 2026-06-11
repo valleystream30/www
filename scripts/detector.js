@@ -24,12 +24,12 @@ var interval = setInterval(async () => {
     const link = sitemap.shift();
     await fetch(link).then(res => res.text()).then(res => {
         var lowercase = res.toLowerCase();
-        if (lowercase.includes('back to')) linksWithBackTo.push(link);
-        if (lowercase.includes('home page') || res.includes(' HOME')) linksWithSectionHome.push(link);
-        if (lowercase.includes('ss-accordion-heading')) linksWithAccordion.push(link);
-        if (lowercase.includes('state university of new york at')) linksWithSUNY.push(link);
         var parser = new DOMParser();
         var doc = parser.parseFromString(res, "text/html");
+        if (lowercase.includes('back to')) linksWithBackTo.push(link);
+        if (lowercase.includes('home page') || res.includes(' HOME')) linksWithSectionHome.push(link);
+        if (doc.querySelectorAll('.ss-accordion').length - doc.querySelectorAll('.ss-tabs-display:has(.ss-accordion)').length > 0) linksWithAccordion.push(link);
+        if (lowercase.includes('state university of new york at')) linksWithSUNY.push(link);
         var images = doc.querySelectorAll('main img:not(.ss-document-icon):not(.rellax):not([alt]), main img[alt=""]:not(.ss-document-icon):not(.rellax)');
         if (images.length) linksWithImageWithoutAlt[link] = Array.from(images).map(img => img.outerHTML);
         var textPosition = lowercase.indexOf('clearstream');
@@ -39,7 +39,7 @@ var interval = setInterval(async () => {
             textPosition = lowercase.indexOf('clearstream', textPosition + 1);
         };
     }).catch(err => {
-        console.err('Error on', link, err);
+        console.error('Error on', link, err);
         linksWithError.push(link);
     });
 }, 2000);
