@@ -19,4 +19,6 @@ Most fixes, upgrades, and additions to the district website are recorded on the 
 - [llms.txt](/llms.txt) - Site llms.txt file.
 - [worker.js](/worker.js) - Service worker for custom 404 redirects.
 - [wrangler.jsonc](/wrangler.jsonc) - Cloudflare Workers configuration file.
+- [index.html](/index.html) - Redirects the CDN root to the main website.
+- [404.html](/404.html) - Redirects the CDN 404 error page to the main website.
 - ...
