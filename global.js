@@ -739,6 +739,7 @@ function afterReady() {
             };
         });
         if (window.innerWidth > 1000) header.querySelector('.ss-site-header-hero-container').style.minWidth = `${header.querySelector('.ss-site-header-main-links-container:has(.search)').clientWidth}px`;
+        if (location.href.includes('index.php?pageID=') && !location.href.includes('&adminArea')) window.history.replaceState({}, '', location.href.replace('index.php?pageID=', ''));
         setTimeout(() => {
             document.documentElement.classList.add('ready');
         }, 100);
