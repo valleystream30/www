@@ -181,6 +181,7 @@
 	header .ss-site-header-main-container {
 		flex-direction: column;
 		gap: 20px !important;
+		padding: 25px 30px !important;
 	}
 
 	header .ss-site-header-hero-container {
