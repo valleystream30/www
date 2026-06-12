@@ -7,8 +7,8 @@
     gtag('config', 'G-E6KVHZR05F');
 </script>
 <script>
-    console.log(document.querySelector('.adminBar') ? 'Admin' : 'User');
-    const host = document.querySelector('.adminBar') ? 'http://localhost:5500/' : 'https://cdn.valleystream30.com/';
+    // console.log((document.querySelector('.adminBar') || location.search.includes('dev')) ? 'Admin' : 'User');
+    const host = (document.querySelector('.adminBar') || location.search.includes('dev')) ? 'http://100.100.10.10:5500/' : 'https://cdn.valleystream30.com/';
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = host + 'global.css';
@@ -17,6 +17,10 @@
     script.src = host + 'global.js';
     script.async = false;
     document.head.appendChild(script);
+    if (host === 'http://100.100.10.10:5500/') script.onerror = () => {
+        link.href = 'https://cdn.valleystream30.com/global.css';
+        script.src = 'https://cdn.valleystream30.com/global.js';
+    };
 </script>
 <!--<style>
     .ss-site-header-title-container {
