@@ -20,7 +20,7 @@ function onReady(callback) {
 };
 
 var header = document.querySelector('header');
-var nav = Array.from(header.querySelectorAll('nav')).find(nav => nav.clientHeight);
+var nav = Array.from(header.querySelectorAll('nav')).find(nav => (nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1)));
 
 onReady(() => {
     try {
@@ -30,7 +30,7 @@ onReady(() => {
         };
         // document.querySelector('header .ss-site-header-school-tagline').classList.add('customFont');
         // header.prepend(nav);
-        // header.style.paddingTop = `${nav.clientHeight}px`;
+        // header.style.paddingTop = `${(nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1))}px`;
         header.append(nav);
         if ((window.innerWidth > 1000) && header.querySelector('.ss-site-header-main-links-container .translate a')) {
             nav.append(header.querySelector('.ss-site-header-main-links-container .translate a'));
@@ -129,13 +129,21 @@ onReady(() => {
                             firstSection.querySelectorAll('.spotlight-slide').forEach(slide => {
                                 if (window.innerWidth <= 1000) {
                                     slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
-                                } else {
+                                } else if (window.innerWidth > 1300) {
                                     if (document.querySelector('.stack_sort_area > * + section').classList.contains('ss-icon-matrix')) {
                                         slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
                                         document.querySelector('.spotlight-wrapper').style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
                                     } else {
                                         slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
                                         document.querySelector('.spotlight-wrapper').style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
+                                    };
+                                } else {
+                                    if (document.querySelector('.stack_sort_area > * + section').classList.contains('ss-icon-matrix')) {
+                                        slide.style.minHeight = `calc(100vh - ${header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
+                                        document.querySelector('.spotlight-wrapper').style.minHeight = `calc(100vh - ${header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
+                                    } else {
+                                        slide.style.minHeight = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
+                                        document.querySelector('.spotlight-wrapper').style.minHeight = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
                                     };
                                 };
                             });
@@ -382,6 +390,7 @@ onReady(() => {
                                 languageSelector.querySelector('#languageSearch').focus();
                                 languageSelector.scrollTop = 0;
                             }, 100);
+                            document.querySelector('.pageSections')?.classList.remove('active');
                         });
                         translateButton.parentElement.querySelector('.languageSelector #languageSearch').addEventListener('input', (event) => {
                             const searchTerm = event.target.value.toLowerCase();
@@ -489,6 +498,9 @@ onReady(() => {
             pageSectionsLink.addEventListener('click', (event) => {
                 if (event.target.closest('.pageSectionsList a')) return;
                 pageSectionsDiv.classList.toggle('active');
+                document.querySelectorAll('.languageSelector').forEach(languageSelector => {
+                    languageSelector.classList.remove('active');
+                });
             });
             pageSectionsLink.addEventListener('keydown', (event) => {
                 if ((event.key === 'Enter') || (event.key === ' ')) {
@@ -686,6 +698,12 @@ onReady(() => {
                 });
             };
         });
+        if (window.innerWidth <= 1000) {
+            document.addEventListener('scroll', () => {
+                document.querySelector('header .ss-site-header-main-links-container > a.forest').style.marginLeft = `-${Math.min(window.scrollY, 50)}px`;
+                document.querySelector('header .ss-site-header-main-links-container > a.shaw').style.marginTop = `-${Math.min(window.scrollY, 45)}px`;
+            });
+        };
         try {
             const allTasksPromise = (tasks.length) ? Promise.all(tasks) : Promise.resolve();
             const timeout = new Promise(resolve => setTimeout(resolve, 5000));
@@ -702,11 +720,11 @@ onReady(() => {
 
 function afterReady() {
     try {
-        header.style.paddingBottom = `${nav.clientHeight}px`;
-        document.documentElement.style.scrollPadding = `${nav.clientHeight}px`;
-        var navMaxTop = header.clientHeight - nav.clientHeight;
+        header.style.paddingBottom = `${(nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1))}px`;
+        document.documentElement.style.scrollPadding = `${(nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1))}px`;
+        var navMaxTop = header.clientHeight - (nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1));
         setTimeout(() => {
-            navMaxTop = header.clientHeight - nav.clientHeight;
+            navMaxTop = header.clientHeight - (nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1));
             if (window.scrollY >= navMaxTop) {
                 nav.classList.add('scrolled');
             } else {
@@ -729,3 +747,11 @@ function afterReady() {
         document.documentElement.classList.add('ready');
     };
 };
+
+var resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        window.location.reload();
+    }, 500);
+});
