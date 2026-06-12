@@ -665,6 +665,10 @@ table p {
 	margin: 0;
 }
 
+table[cellpadding="1"] td {
+	padding: 5px !important;
+}
+
 li:has(> .anchor-plates) {
 	width: fit-content !important;
 }
@@ -1714,5 +1718,27 @@ p:has(> iframe[height="100%"]) {
 				color: var(--blue);
 			}
 		}
+	}
+}
+
+ul:has(li[style="text-align: center;"]) {
+	width: max-content;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	li[style="text-align: center;"] {
+		width: fit-content;
+	}
+}
+
+section.ss-accordion-tabs:has(.ss-tabs-list) {
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+	.ss-tabs-list {
+		justify-content: center;
 	}
 }
