@@ -156,6 +156,10 @@
 		aspect-ratio: unset !important;
 		max-height: unset;
 	}
+
+	section.ss-accordion-tabs + section.ss-accordion-tabs {
+		padding-top: 20px;
+	}
 }
 
 @media screen and (max-width: 1000px) {
@@ -424,6 +428,10 @@
 		padding: 0;
 	}
 
+	section.ss-accordion-tabs + section.ss-accordion-tabs {
+		padding-top: 0;
+	}
+
 	header .ss-site-header-main-container {
 		flex-direction: row !important;
 		flex-wrap: nowrap !important;
@@ -636,6 +644,20 @@ section.ss-has-bg
 	p {
 		margin-top: 0;
 		margin-bottom: 0;
+	}
+}
+
+section.ss-has-bg.ss-banner:has(
+		.ss-component-content .ss-one-column .ss-component-column > *:only-child
+	):has(
+		.ss-component-content .ss-one-column .ss-component-column h3,
+		.ss-component-content .ss-one-column .ss-component-column span
+	) {
+	min-height: unset !important;
+	padding: 80px 0;
+
+	&::before {
+		opacity: 0.8 !important;
 	}
 }
 
@@ -1654,10 +1676,6 @@ footer::before {
 
 p:has(> iframe[height="100%"]) {
 	height: 100%;
-}
-
-section.ss-accordion-tabs + section.ss-accordion-tabs {
-	padding-top: 0;
 }
 
 .pageSections {
