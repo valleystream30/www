@@ -1,6 +1,6 @@
 var startTime = new Date().getTime();
 
-document.querySelector('header img').src = 'https://faisaln.com/share/1780427119.png'; // remove after approval
+document.querySelector('header img').src = host.includes('https') ? (host + 'images/logo-new.png') : 'https://faisaln.com/share/1780427119.png'; // remove after approval, requires https
 
 function resetTranslate() {
     var iframe = document.getElementsByClassName('goog-te-banner-frame')[0] || document.getElementById(':1.container');
