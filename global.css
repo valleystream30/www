@@ -424,10 +424,6 @@
 		}
 	}
 
-	section.ss-accordion-tabs .ss-component-content {
-		padding: 0;
-	}
-
 	section.ss-accordion-tabs + section.ss-accordion-tabs {
 		padding-top: 0;
 	}
@@ -633,31 +629,34 @@ section.ss-has-bg .ss-component-header-title:only-child {
 	padding: 0;
 }
 
-section.ss-has-bg
-	.ss-component-content
-	.ss-one-column
-	.ss-component-column:has(> *:only-child):has(h3, span) {
-	overflow: visible !important;
-
-	h3,
-	span,
-	p {
-		margin-top: 0;
-		margin-bottom: 0;
-	}
-}
-
-section.ss-has-bg.ss-banner:has(
+section.ss-has-bg:has(
 		.ss-component-content .ss-one-column .ss-component-column > *:only-child
 	):has(
 		.ss-component-content .ss-one-column .ss-component-column h3,
 		.ss-component-content .ss-one-column .ss-component-column span
 	) {
-	min-height: unset !important;
-	padding: 80px 0;
+	padding: min(80px, 7.5vh) 0 !important;
 
-	&::before {
-		opacity: 0.8 !important;
+	.ss-component-content
+		.ss-one-column
+		.ss-component-column:has(> *:only-child):has(h3, span) {
+		overflow: visible !important;
+
+		h3,
+		span,
+		p {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
+
+	&.ss-banner {
+		min-height: unset !important;
+		padding: 80px 0 !important;
+
+		&::before {
+			opacity: 0.8 !important;
+		}
 	}
 }
 
@@ -1734,21 +1733,41 @@ ul:has(li[style="text-align: center;"]) {
 	}
 }
 
+section.ss-accordion-tabs .ss-component-content {
+	padding: 0;
+}
+
 section.ss-accordion-tabs:has(.ss-tabs-list) {
 	padding-top: 40px;
 	padding-bottom: 30px;
 
 	.ss-tabs-list {
 		justify-content: center;
+
+		.ss-tab {
+			text-align: center;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
 	}
 }
 
-.customElement.tabbedElements:has(.ss-tabs) .ss-tabs-panels {
+.customElement.tabbedElements .ss-tabs {
+	display: block !important;
+}
+
+.customElement.tabbedElements .ss-accordion,
+.customElement.tabbedElements .ss-tabs-panels {
 	display: none !important;
 }
 
 .customElement.tabbedElement {
 	padding: 20px 0 80px 0 !important;
+
+	.ss-component-content {
+		padding: 0;
+	}
 
 	&:not(.active) {
 		display: none !important;

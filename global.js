@@ -254,8 +254,8 @@ onReady(() => {
                 if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
                 return 0;
             });
-            var currentBlock = 0;
-            for (var block of blocks) {
+            for (var currentBlock in blocks) {
+                var block = blocks[currentBlock];
                 if ((currentBlock % 3) === 0) {
                     column1.appendChild(block.element);
                 } else if ((currentBlock % 3) === 1) {
@@ -269,7 +269,6 @@ onReady(() => {
                     tabletColumn2.appendChild(block.element.cloneNode(true));
                 };
                 mobileMasonry.appendChild(block.element.cloneNode(true));
-                currentBlock++;
             };
             masonry.appendChild(column1);
             masonry.appendChild(column2);
@@ -373,7 +372,7 @@ onReady(() => {
                         if (b.code === 'ur') return 1;
                         return 0;
                     });
-                    for (var translateButton of document.querySelectorAll('header .translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type')) {
+                    document.querySelectorAll('header .translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type').forEach(translateButton => {
                         var languageSelector = document.createElement('div');
                         languageSelector.className = 'languageSelector notranslate';
                         languageSelector.innerHTML = `<b>Site Language</b><input type="text" id="languageSearch" placeholder="Search languages..." /><div class="languageOptions">${languages.map(lang => `<span data-code="${lang.code}">${lang.language}</span>`).join('')}</div>`;
@@ -392,7 +391,7 @@ onReady(() => {
                             const searchTerm = event.target.value.toLowerCase();
                             for (var option of translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span')) option.style.display = option.innerText.toLowerCase().includes(searchTerm) ? 'block' : 'none';
                         });
-                        for (var option of translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span')) {
+                        translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span').forEach(option => {
                             if (option.getAttribute('data-code') === '') option.classList.add('active');
                             option.addEventListener('click', () => {
                                 if (option.classList.contains('active')) return;
@@ -404,17 +403,13 @@ onReady(() => {
                                     translateButton.parentElement.querySelector('.languageSelector').classList.remove('active');
                                 };
                             });
-                        };
-                    };
+                        });
+                    });
                     document.addEventListener('click', (event) => {
-                        if (!event.target.closest('.languageSelector') && !event.target.closest('header .translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type')) {
-                            for (var languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
-                        };
+                        if (!event.target.closest('.languageSelector') && !event.target.closest('header .translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type')) for (var languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
                     });
                     document.addEventListener('keydown', (event) => {
-                        if (event.key === 'Escape') {
-                            for (var languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
-                        };
+                        if (event.key === 'Escape') for (var languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
                     });
                     const htmlObserver = new MutationObserver(mutations => {
                         for (var mutation of mutations) {
@@ -453,9 +448,7 @@ onReady(() => {
                                 };
                             };
                             for (var translateButton of header.querySelectorAll('.translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type')) {
-                                for (var option of translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span')) {
-                                    option.classList.toggle('active', (option.getAttribute('data-code') === langCode) || ((option.getAttribute('data-code') === '') && (langCode === 'en')));
-                                };
+                                for (var option of translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span')) option.classList.toggle('active', (option.getAttribute('data-code') === langCode) || ((option.getAttribute('data-code') === '') && (langCode === 'en')));
                             };
                             console.log(`Language changed to ${langName} (${langCode})`);
                         };
@@ -685,10 +678,10 @@ onReady(() => {
             document.querySelector('header .ss-site-header-main-links-container > a.forest').style.marginLeft = `-${Math.min(window.scrollY, 50)}px`;
             document.querySelector('header .ss-site-header-main-links-container > a.shaw').style.marginTop = `-${Math.min(window.scrollY, 45)}px`;
         });
-        for (var tabbedElements of document.querySelectorAll('.customElement.tabbedElements')) {
+        document.querySelectorAll('.customElement.tabbedElements').forEach(tabbedElements => {
             var tabs = tabbedElements.querySelectorAll('.ss-tab');
             var targetElements = [];
-            for (var tab of tabs) {
+            tabs.forEach(tab => {
                 var targetElement = document.querySelector(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
                 if (targetElement) targetElements.push(targetElement);
                 tab.addEventListener('click', () => {
@@ -701,9 +694,9 @@ onReady(() => {
                         tab.click();
                     };
                 });
-            };
+            });
             if (tabs.length) tabs[0].click();
-        };
+        });
         try {
             const allTasksPromise = (tasks.length) ? Promise.all(tasks) : Promise.resolve();
             const timeout = new Promise(resolve => setTimeout(resolve, 5000));
