@@ -160,6 +160,17 @@
 	section.ss-accordion-tabs + section.ss-accordion-tabs {
 		padding-top: 20px;
 	}
+
+	#waterFountain {
+		width: 150px;
+		height: 250px;
+		position: absolute;
+		right: 10px;
+		rotate: -10deg;
+		z-index: -1;
+		transform: rotateY(180deg);
+		top: -35px;
+	}
 }
 
 @media screen and (max-width: 1000px) {
@@ -1772,4 +1783,19 @@ section.ss-accordion-tabs:has(.ss-tabs-list) {
 	&:not(.active) {
 		display: none !important;
 	}
+}
+
+.ss-accordion-btn {
+	text-align: center;
+	justify-content: center;
+}
+
+.ss-component:not(.break-out) .ss-component-content {
+	padding: 0;
+}
+
+section:has(.ss-component-header-title):not(:has([style="text-align: center;"]))
+	.ss-component-header-title {
+	justify-content: start !important;
+	text-align: left !important;
 }
