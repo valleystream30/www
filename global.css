@@ -1735,10 +1735,22 @@ ul:has(li[style="text-align: center;"]) {
 }
 
 section.ss-accordion-tabs:has(.ss-tabs-list) {
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 40px;
+	padding-bottom: 30px;
 
 	.ss-tabs-list {
 		justify-content: center;
+	}
+}
+
+.customElement.tabbedElements:has(.ss-tabs) .ss-tabs-panels {
+	display: none !important;
+}
+
+.customElement.tabbedElement {
+	padding: 20px 0 80px 0 !important;
+
+	&:not(.active) {
+		display: none !important;
 	}
 }

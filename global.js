@@ -1,4 +1,7 @@
+var startTime = new Date().getTime();
+
 document.querySelector('header img').src = 'https://faisaln.com/share/1780427119.png'; // remove after approval
+
 function resetTranslate() {
     var iframe = document.getElementsByClassName('goog-te-banner-frame')[0] || document.getElementById(':1.container');
     if (!iframe) return;
@@ -11,6 +14,7 @@ function resetTranslate() {
         };
     };
 };
+
 function onReady(callback) {
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', callback);
@@ -34,9 +38,7 @@ onReady(() => {
         header.append(nav);
         if ((window.innerWidth > 1000) && header.querySelector('.ss-site-header-main-links-container .translate a')) {
             nav.append(header.querySelector('.ss-site-header-main-links-container .translate a'));
-            header.querySelectorAll('.ss-site-header-main-links-container .translate').forEach(translate => {
-                translate.remove();
-            });
+            for (var translate of header.querySelectorAll('.ss-site-header-main-links-container .translate')) translate.remove();
         };
         var searchBar = document.createElement('div');
         searchBar.className = 'searchBar';
@@ -54,26 +56,26 @@ onReady(() => {
             nav2.className = 'ss-site-header-main-links-container';
             nav2.style.display = 'flex';
             nav2.style.justifyContent = 'center';
-            Array.from(document.querySelectorAll('#ss-schools-modal a')).sort((a, b) => a.innerText.localeCompare(b.innerText)).forEach(schoolLink => {
+            for (var schoolLink of Array.from(document.querySelectorAll('#ss-schools-modal a')).sort((a, b) => a.innerText.localeCompare(b.innerText))) {
                 var newLink = schoolLink.cloneNode(true);
                 newLink.innerText = newLink.innerText.replace(' School', '').replace(' Avenue', ' Ave');
                 if (newLink.innerText.toLowerCase().includes('shaw')) newLink.classList.add('shaw');
                 if (newLink.innerText.toLowerCase().includes('clear')) newLink.classList.add('clearStream');
                 if (newLink.innerText.toLowerCase().includes('forest')) newLink.classList.add('forest');
                 nav2.append(newLink);
-            });
+            };
             header.querySelector('.ss-site-header-main-container').appendChild(nav2);
         } else {
-            document.querySelectorAll('.ss-site-header-main-links-container').forEach(nav2 => {
-                Array.from(document.querySelectorAll('#ss-schools-modal a')).sort((a, b) => b.innerText.localeCompare(a.innerText)).forEach(schoolLink => {
+            for (var nav2 of document.querySelectorAll('.ss-site-header-main-links-container')) {
+                for (var schoolLink of Array.from(document.querySelectorAll('#ss-schools-modal a')).sort((a, b) => b.innerText.localeCompare(a.innerText))) {
                     var newLink = schoolLink.cloneNode(true);
                     newLink.innerHTML = `<p>${newLink.innerText.replace(' School', '')}</p>`;
                     if (newLink.innerText.toLowerCase().includes('shaw')) newLink.classList.add('shaw');
                     if (newLink.innerText.toLowerCase().includes('clear')) newLink.classList.add('clearStream');
                     if (newLink.innerText.toLowerCase().includes('forest')) newLink.classList.add('forest');
                     nav2.prepend(newLink);
-                });
-            });
+                };
+            };
         };
         // var newLink = document.createElement('a');
         // newLink.className = 'ss-site-header-title-container';
@@ -109,11 +111,11 @@ onReady(() => {
                 var schoolsPageInterval = setInterval(() => {
                     if ((document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a[style]').length === 3) || (document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a img[height]').length === 3)) {
                         var minHeight = Array.from(document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child img')).map(img => img.clientHeight).sort()[0];
-                        document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a').forEach(img => {
+                        for (var img of document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a')) {
                             img.style.height = `${minHeight}px`;
                             img.style.width = 'unset';
                             img.style.borderRadius = '10px';
-                        });
+                        };
                         clearInterval(schoolsPageInterval);
                         resolve();
                     };
@@ -126,7 +128,7 @@ onReady(() => {
                 const homepageShowcasePromise = new Promise(resolve => {
                     var homepageShowcaseHeightInterval = setInterval(() => {
                         if (header.hasAttribute('style')) {
-                            firstSection.querySelectorAll('.spotlight-slide').forEach(slide => {
+                            for (var slide of firstSection.querySelectorAll('.spotlight-slide')) {
                                 if (window.innerWidth <= 1000) {
                                     slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
                                 } else if (window.innerWidth > 1300) {
@@ -146,7 +148,7 @@ onReady(() => {
                                         document.querySelector('.spotlight-wrapper').style.minHeight = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
                                     };
                                 };
-                            });
+                            };
                             clearInterval(homepageShowcaseHeightInterval);
                             resolve();
                         };
@@ -158,17 +160,17 @@ onReady(() => {
                 var homepageAboutImagesInterval = setInterval(() => {
                     if ((document.querySelectorAll('.ss-image-link[style]').length === 3) || (document.querySelectorAll('.ss-image-link img[height]').length === 3)) {
                         document.querySelector('section:has(.ss-image-link[style]), section:has(.ss-image-link img[height])').style.padding = 'min(70px, 7vh) min(20px, 2vw)';
-                        document.querySelectorAll('.ss-image-link, .ss-image-link img').forEach(img => {
+                        for (var img of document.querySelectorAll('.ss-image-link, .ss-image-link img')) {
                             img.style.width = '100%';
                             img.removeAttribute('height');
-                        });
+                        };
                         var minHeight = Array.from(document.querySelectorAll('.ss-image-link img')).map(img => img.clientHeight).sort()[0];
                         if (minHeight > 0) {
-                            document.querySelectorAll('.ss-image-link').forEach(img => {
+                            for (var img of document.querySelectorAll('.ss-image-link')) {
                                 img.style.height = `${minHeight}px`;
                                 img.style.borderRadius = '10px';
                                 if (window.innerWidth <= 1000) img.style.width = '100%';
-                            });
+                            };
                             clearInterval(homepageAboutImagesInterval);
                             resolve();
                         };
@@ -200,9 +202,7 @@ onReady(() => {
             siteMapSearch.focus();
             siteMapSearch.addEventListener('input', (event) => {
                 const searchTerm = event.target.value.toLowerCase();
-                document.querySelectorAll('.sitemap-block').forEach(block => {
-                    block.style.display = block.innerText.toLowerCase().includes(searchTerm) ? 'flex' : 'none';
-                });
+                for (var block of document.querySelectorAll('.sitemap-block')) block.style.display = block.innerText.toLowerCase().includes(searchTerm) ? 'flex' : 'none';
             });
             var masonry = document.createElement('div');
             masonry.className = 'sitemap-masonry desktop';
@@ -232,34 +232,30 @@ onReady(() => {
                     console.log(link.innerText, leaves.length, branches.length);
                     if (leaves.length) {
                         newLink.innerHTML += `<hr>`;
-                        leaves.forEach(leaf => {
+                        for (var leaf of leaves) {
                             var subLink = leaf.querySelector('a');
                             var newSubLink = document.createElement('a');
                             newSubLink.className = 'sitemap-sublink';
                             newSubLink.href = subLink.href;
                             newSubLink.innerText = subLink.innerText;
                             newLink.appendChild(newSubLink);
-                        });
+                        };
                     };
-                    branches.forEach(branch => {
-                        createSitemapBlock(branch);
-                    });
+                    for (var branch of branches) createSitemapBlock(branch);
                 };
                 blocks.push({
                     'name': link.innerText,
                     'element': newLink,
                 });
             };
-            document.querySelectorAll('.pageBody > ul > li').forEach(block => {
-                createSitemapBlock(block);
-            });
+            for (var block of document.querySelectorAll('.pageBody > ul > li')) createSitemapBlock(block);
             blocks.sort((a, b) => {
                 if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
                 if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
                 return 0;
             });
             var currentBlock = 0;
-            blocks.forEach(block => {
+            for (var block of blocks) {
                 if ((currentBlock % 3) === 0) {
                     column1.appendChild(block.element);
                 } else if ((currentBlock % 3) === 1) {
@@ -274,7 +270,7 @@ onReady(() => {
                 };
                 mobileMasonry.appendChild(block.element.cloneNode(true));
                 currentBlock++;
-            });
+            };
             masonry.appendChild(column1);
             masonry.appendChild(column2);
             masonry.appendChild(column3);
@@ -329,19 +325,19 @@ onReady(() => {
             };
         };
         document.querySelector('footer a').href = 'https://maps.app.goo.gl/TPDs2TqNehEzxuMY8';
-        document.querySelectorAll('a.btn').forEach(btn => {
-            if (btn.querySelector('.ss-button-icon')) return;
+        for (var btn of document.querySelectorAll('a.btn')) {
+            if (btn.querySelector('.ss-button-icon')) break;
             const icon = document.createElement('span');
             icon.setAttribute('aria-hidden', 'true');
             icon.className = 'ss-button-icon';
             btn.appendChild(icon);
-        });
+        };
         const bodyObserver = new MutationObserver(mutations => {
-            mutations.forEach(mutation => {
-                mutation.addedNodes.forEach(node => {
+            for (var mutation of mutations) {
+                for (var node of mutation.addedNodes) {
                     if (node.classList && node.classList.contains('modal-backdrop') && (document.querySelectorAll('.modal-backdrop').length > 1)) node.remove();
-                });
-            });
+                };
+            };
         });
         bodyObserver.observe(document.body, { childList: true });
         const languagesPromise = new Promise(resolve => {
@@ -359,7 +355,7 @@ onReady(() => {
                         'code': '',
                     });
                     if (languages.find(lang => lang.code === 'nhe')) languages.find(lang => lang.code === 'nhe').language = 'Nahuatl';
-                    languages.forEach(lang => {
+                    for (var lang of languages) {
                         if (lang.language.includes('(') && lang.language.includes(')')) {
                             const mainLanguage = lang.language.split('(')[0].trim();
                             const subLanguage = lang.language.split('(')[1].split(')')[0].trim();
@@ -367,7 +363,7 @@ onReady(() => {
                         } else if (lang.language.includes('(') || lang.language.includes(')')) {
                             lang.language = lang.language.replace('(', '').replace(')', '').trim();
                         };
-                    });
+                    };
                     languages.sort((a, b) => {
                         if (a.code === '') return -1;
                         if (b.code === '') return 1;
@@ -377,7 +373,7 @@ onReady(() => {
                         if (b.code === 'ur') return 1;
                         return 0;
                     });
-                    document.querySelectorAll('header .translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type').forEach(translateButton => {
+                    for (var translateButton of document.querySelectorAll('header .translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type')) {
                         var languageSelector = document.createElement('div');
                         languageSelector.className = 'languageSelector notranslate';
                         languageSelector.innerHTML = `<b>Site Language</b><input type="text" id="languageSearch" placeholder="Search languages..." /><div class="languageOptions">${languages.map(lang => `<span data-code="${lang.code}">${lang.language}</span>`).join('')}</div>`;
@@ -394,11 +390,9 @@ onReady(() => {
                         });
                         translateButton.parentElement.querySelector('.languageSelector #languageSearch').addEventListener('input', (event) => {
                             const searchTerm = event.target.value.toLowerCase();
-                            translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span').forEach(option => {
-                                option.style.display = option.innerText.toLowerCase().includes(searchTerm) ? 'block' : 'none';
-                            });
+                            for (var option of translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span')) option.style.display = option.innerText.toLowerCase().includes(searchTerm) ? 'block' : 'none';
                         });
-                        translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span').forEach(option => {
+                        for (var option of translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span')) {
                             if (option.getAttribute('data-code') === '') option.classList.add('active');
                             option.addEventListener('click', () => {
                                 if (option.classList.contains('active')) return;
@@ -410,65 +404,61 @@ onReady(() => {
                                     translateButton.parentElement.querySelector('.languageSelector').classList.remove('active');
                                 };
                             });
-                        });
-                    });
+                        };
+                    };
                     document.addEventListener('click', (event) => {
-                        if (!event.target.closest('.languageSelector') && !event.target.closest('header .translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type')) document.querySelectorAll('.languageSelector').forEach(languageSelector => {
-                            languageSelector.classList.remove('active');
-                        });
+                        if (!event.target.closest('.languageSelector') && !event.target.closest('header .translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type')) {
+                            for (var languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
+                        };
                     });
                     document.addEventListener('keydown', (event) => {
-                        if (event.key === 'Escape') document.querySelectorAll('.languageSelector').forEach(languageSelector => {
-                            languageSelector.classList.remove('active');
-                        });
+                        if (event.key === 'Escape') {
+                            for (var languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
+                        };
                     });
                     const htmlObserver = new MutationObserver(mutations => {
-                        mutations.forEach(mutation => {
-                            if (mutation.attributeName !== 'lang') return;
+                        for (var mutation of mutations) {
+                            if (mutation.attributeName !== 'lang') break;
                             var langCode = document.documentElement.getAttribute('lang');
                             var langName = languages.find(lang => lang.code === langCode)?.language || langCode;
                             console.log(`Language changing to ${langName} (${langCode})`);
-                            document.querySelectorAll('[lang]:not(html), a:not([tabindex]), img[alt]').forEach(el => {
-                                el.style.display = '';
-                            });
+                            for (var el of document.querySelectorAll('[lang]:not(html), a:not([tabindex]), img[alt]')) el.style.display = '';
                             if ((langCode !== 'auto') && (langCode !== 'en') && (langCode !== '')) {
-                                document.querySelectorAll('section').forEach(section => {
+                                for (var section of document.querySelectorAll('section')) {
                                     var totalFound = [];
-                                    section.querySelectorAll('[lang]:not(html)').forEach(el => {
+                                    for (var el of section.querySelectorAll('[lang]:not(html)')) {
                                         if (el.getAttribute('lang') === langCode) {
                                             el.style.display = 'none';
                                         } else {
                                             totalFound.push(el);
                                         };
-                                    });
-                                    section.querySelectorAll('a:not([tabindex])').forEach(el => {
-                                        if (!languages.map(lang => lang.language).some(lang => el.innerText.toLowerCase().includes(lang.toLowerCase()))) return;
+                                    };
+                                    for (var el of section.querySelectorAll('a:not([tabindex])')) {
+                                        if (!languages.map(lang => lang.language).some(lang => el.innerText.toLowerCase().includes(lang.toLowerCase()))) break;
                                         if (!el.innerText.toLowerCase().includes(langName.toLowerCase())) {
                                             el.style.display = 'none';
                                         } else {
                                             totalFound.push(el);
                                         };
-                                    });
-                                    section.querySelectorAll('img[alt]').forEach(el => {
-                                        if (!languages.map(lang => lang.language).some(lang => el.alt.toLowerCase().includes(lang.toLowerCase()))) return;
+                                    };
+                                    for (var el of section.querySelectorAll('img[alt]')) {
+                                        if (!languages.map(lang => lang.language).some(lang => el.alt.toLowerCase().includes(lang.toLowerCase()))) break;
                                         if (!el.alt.toLowerCase().includes(langName.toLowerCase())) {
                                             el.style.display = 'none';
                                         } else {
                                             totalFound.push(el);
                                         };
-                                    });
-                                    if (totalFound.length === 0) section.querySelectorAll('[lang]:not(html), a:not([tabindex]), img[alt]').forEach(el => {
-                                        el.style.display = '';
-                                    });
-                                });
+                                    };
+                                    if (totalFound.length === 0) for (var el of section.querySelectorAll('[lang]:not(html), a:not([tabindex]), img[alt]')) el.style.display = '';
+                                };
                             };
-                            header.querySelectorAll('.translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type').forEach(translateButton => {
-                                translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span').forEach(option => {
+                            for (var translateButton of header.querySelectorAll('.translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type')) {
+                                for (var option of translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span')) {
                                     option.classList.toggle('active', (option.getAttribute('data-code') === langCode) || ((option.getAttribute('data-code') === '') && (langCode === 'en')));
-                                });
-                            });
+                                };
+                            };
                             console.log(`Language changed to ${langName} (${langCode})`);
-                        });
+                        };
                     });
                     htmlObserver.observe(document.documentElement, { attributes: true });
                     resolve();
@@ -498,9 +488,7 @@ onReady(() => {
             pageSectionsLink.addEventListener('click', (event) => {
                 if (event.target.closest('.pageSectionsList a')) return;
                 pageSectionsDiv.classList.toggle('active');
-                document.querySelectorAll('.languageSelector').forEach(languageSelector => {
-                    languageSelector.classList.remove('active');
-                });
+                for (var languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
             });
             pageSectionsLink.addEventListener('keydown', (event) => {
                 if ((event.key === 'Enter') || (event.key === ' ')) {
@@ -512,15 +500,16 @@ onReady(() => {
                 if (!event.target.closest('.pageSections') && !event.target.closest('.pageSectionsToggle')) pageSectionsDiv.classList.remove('active');
             });
         };
-        document.querySelectorAll('section:has(.ss-component-header-title)').forEach(section => {
+        for (var section of document.querySelectorAll('section:has(.ss-component-header-title)')) {
             var pageRedBar = section.querySelector('.ss-component-header-title');
             if (pageRedBar.innerText.includes('customElement.')) {
-                var customElement = pageRedBar.innerText.split('customElement.')[1].trim();
-                section.classList.add('customElement', customElement);
+                section.classList.add('customElement');
+                for (var part of pageRedBar.innerText.split('customElement.')[1].split('.')) section.classList.add(part);
+                var customElement = pageRedBar.innerText.split('customElement.')[1].split('.')[0];
                 section.querySelector('.ss-component-header').remove();
                 switch (customElement) {
                     case 'staff':
-                        section.querySelectorAll('.ss-im-icon-wrapper-inner').forEach(wrapper => {
+                        for (var wrapper of section.querySelectorAll('.ss-im-icon-wrapper-inner')) {
                             const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
                             const emailMatch = wrapper.innerText.match(emailPattern);
                             const email = emailMatch ? emailMatch[0].replaceAll('ext', '#').replaceAll('.', '').replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '') : null;
@@ -541,7 +530,7 @@ onReady(() => {
                                 phoneLink.classList.add('phone');
                                 wrapper.appendChild(phoneLink);
                             };
-                        });
+                        };
                         break;
                     case 'spotlight':
                         var spotlightWrapper = document.createElement('div');
@@ -561,7 +550,7 @@ onReady(() => {
                                 if (document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event').length) {
                                     clearInterval(homepageEventsInterval);
                                     var eventGroups = [];
-                                    for (event of document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event')) {
+                                    for (var event of document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event')) {
                                         var eventDiv = event.shadowRoot.querySelector('.calendar-event-container');
                                         var eventDate = eventDiv.querySelector('.event-date-container').innerText.replaceAll('\n', ' ').trim();
                                         var eventTitleDiv = eventDiv.querySelector('.event-title a');
@@ -602,7 +591,7 @@ onReady(() => {
                                             Dec: 'December',
                                         };
                                         if (window.innerWidth <= 1000) eventGroups = eventGroups.slice(0, 1);
-                                        for (eventGroupN in eventGroups) {
+                                        for (var eventGroupN in eventGroups) {
                                             var eventGroup = eventGroups[eventGroupN];
                                             var eventsTitle = Number(eventGroupN) ? document.createElement('p') : document.createElement('h2');
                                             if (eventGroup.name.endsWith(today)) {
@@ -616,7 +605,7 @@ onReady(() => {
                                                 eventsTitle.innerText = `${day.charAt(0).toUpperCase() + day.slice(1).toLowerCase()}, ${months[mon]} ${parseInt(date, 10) + (["th", "st", "nd", "rd"][((["th", "st", "nd", "rd"] % 100) - 20) % 10] || ["th", "st", "nd", "rd"][(parseInt(date, 10) % 100)] || ["th", "st", "nd", "rd"][0])}`;
                                                 eventsContainer.append(eventsTitle);
                                             };
-                                            for (event of eventGroup.events) {
+                                            for (var event of eventGroup.events) {
                                                 var eventLink = document.createElement('a');
                                                 eventLink.href = event.link;
                                                 eventLink.classList.add('event');
@@ -634,17 +623,15 @@ onReady(() => {
                         addTask(homepageEventsPromise);
                         if (window.innerWidth <= 1000) break;
                         const carouselObserver = new MutationObserver(mutations => {
-                            mutations.forEach(mutation => {
-                                if (mutation.attributeName !== 'class') return;
+                            for (var mutation of mutations) {
+                                if (mutation.attributeName !== 'class') break;
                                 if (mutation.target.classList.contains('item') && mutation.target.classList.contains('active') && !mutation.target.classList.contains('left')) {
                                     document.querySelector('.spotlight-sidebar .spotlight-info h3').innerText = mutation.target.querySelector('.spotlight-slide-title').innerText.replaceAll('\n', '');
                                     document.querySelector('.spotlight-sidebar .spotlight-info p').innerText = mutation.target.querySelector('.spotlight-text-cta-container').innerText.replaceAll('\n', '');
                                 };
-                            });
+                            };
                         });
-                        section.querySelectorAll('.carousel-inner > .item').forEach(item => {
-                            carouselObserver.observe(item, { attributeFilter: ['class'] });
-                        });
+                        for (var item of section.querySelectorAll('.carousel-inner > .item')) carouselObserver.observe(item, { attributeFilter: ['class'] });
                         document.addEventListener('keydown', e => {
                             if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
                             switch (e.key) {
@@ -663,29 +650,25 @@ onReady(() => {
                         // sectionsOnPageDiv.className = 'sectionsOnPage';
                         // sectionsOnPageDiv.innerHTML = `<b>On This Page</b><ul class="sectionsOnPageList"></ul>`;
                         // section.querySelector('.ss-column-one').append(sectionsOnPageDiv);
-                        // pageSections.slice(1).forEach(sectionInfo => {
-                        //     sectionsOnPageDiv.querySelector('ul').innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
-                        // });
-                        section.querySelectorAll('.ss-column-one div > ul').forEach(ul => {
+                        // for (var sectionInfo of pageSections.slice(1)) sectionsOnPageDiv.querySelector('ul').innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
+                        for (var ul of section.querySelectorAll('.ss-column-one div > ul')) {
                             var lis = ul.querySelectorAll('li');
                             var removeLi = Array.from(lis).find(li => li.innerText.toLowerCase().includes('page sections here'));
-                            if (!removeLi) return;
+                            if (!removeLi) break;
                             removeLi.remove();
-                            pageSections.slice(1).forEach(sectionInfo => {
-                                ul.innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
-                            });
-                        });
+                            for (var sectionInfo of pageSections.slice(1)) ul.innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
+                        };
                         break;
                 };
             };
-        });
-        document.querySelectorAll('.customElement.links li').forEach(li => {
+        };
+        for (var li of document.querySelectorAll('.customElement.links li')) {
             var link = li.querySelector('a');
             if (link) li.addEventListener('click', () => {
                 window.location.href = link.href;
             });
-        });
-        document.querySelectorAll('a[href]').forEach(link => {
+        };
+        for (var link of document.querySelectorAll('a[href]')) {
             if (link.getAttribute('href') === '') {
                 var newLink = document.createElement('div');
                 newLink.className = link.className;
@@ -697,12 +680,29 @@ onReady(() => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             };
+        };
+        if (window.innerWidth <= 1000) document.addEventListener('scroll', () => {
+            document.querySelector('header .ss-site-header-main-links-container > a.forest').style.marginLeft = `-${Math.min(window.scrollY, 50)}px`;
+            document.querySelector('header .ss-site-header-main-links-container > a.shaw').style.marginTop = `-${Math.min(window.scrollY, 45)}px`;
         });
-        if (window.innerWidth <= 1000) {
-            document.addEventListener('scroll', () => {
-                document.querySelector('header .ss-site-header-main-links-container > a.forest').style.marginLeft = `-${Math.min(window.scrollY, 50)}px`;
-                document.querySelector('header .ss-site-header-main-links-container > a.shaw').style.marginTop = `-${Math.min(window.scrollY, 45)}px`;
-            });
+        for (var tabbedElements of document.querySelectorAll('.customElement.tabbedElements')) {
+            var tabs = tabbedElements.querySelectorAll('.ss-tab');
+            var targetElements = [];
+            for (var tab of tabs) {
+                var targetElement = document.querySelector(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
+                if (targetElement) targetElements.push(targetElement);
+                tab.addEventListener('click', () => {
+                    for (var el of targetElements) el.classList.remove('active');
+                    if (targetElement) targetElement.classList.add('active');
+                });
+                tab.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        tab.click();
+                    };
+                });
+            };
+            if (tabs.length) tabs[0].click();
         };
         try {
             const allTasksPromise = (tasks.length) ? Promise.all(tasks) : Promise.resolve();
@@ -747,6 +747,8 @@ function afterReady() {
         console.error(e);
         document.documentElement.classList.add('ready');
     };
+    var finishTime = new Date().getTime();
+    console.log(`Page loaded in ${(finishTime - startTime) / 1000} seconds`);
 };
 
 var resizeTimeout;
