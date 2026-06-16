@@ -459,7 +459,7 @@ onReady(() => {
             }, 500);
         });
         addTask(languagesPromise);
-        var pageSections = Array.from(document.querySelectorAll('section.ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section.ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off)), section:has(.ss-component-header-title)')).filter(section => section.querySelector('.ss-component-header-title') ? true : (section.querySelector('.ss-component-content .ss-one-column .ss-component-column').children.length === 1)).map(section => {
+        var pageSections = Array.from(document.querySelectorAll('section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off)), section:not(.ss-hidden-component):has(.ss-component-header-title)')).filter(section => section.querySelector('.ss-component-header-title') ? true : (section.querySelector('.ss-component-content .ss-one-column .ss-component-column').children.length === 1)).map(section => {
             return {
                 'id': section.id,
                 'title': section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span, .ss-component-header-title').innerText
