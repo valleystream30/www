@@ -651,6 +651,25 @@ onReady(() => {
                             removeLi.remove();
                             for (var sectionInfo of pageSections.slice(1)) ul.innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
                         };
+                        section.querySelectorAll('img, video').forEach(aboutImage => {
+                            if (aboutImage && (window.innerWidth > 1000) && (aboutImage.style.maxWidth === 'min(750px, 100%)') && (aboutImage.style.borderRadius === '10px')) {
+                                aboutImage.style.transition = 'width .25s';
+                                var settingAboutImageSize = false;
+                                function setAboutImageSize() {
+                                    if (settingAboutImageSize) return;
+                                    settingAboutImageSize = true;
+                                    requestAnimationFrame(() => {
+                                        const rect = aboutImage.getBoundingClientRect();
+                                        const parentWidth = aboutImage.parentElement.getBoundingClientRect().width;
+                                        const newWidth = Math.max(Math.max(0, Math.min(rect.bottom, window.innerHeight || document.documentElement.clientHeight) - Math.max(rect.top, 0)) / rect.height * Math.min(750, parentWidth), Math.min(300, parentWidth)) + 'px';
+                                        aboutImage.style.width = newWidth;
+                                        settingAboutImageSize = false;
+                                    });
+                                };
+                                document.addEventListener('scroll', setAboutImageSize);
+                                setAboutImageSize();
+                            };
+                        });
                         break;
                 };
             };
