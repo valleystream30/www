@@ -674,7 +674,7 @@ onReady(() => {
                 });
             };
         };
-        if (window.innerWidth <= 1000) document.addEventListener('scroll', () => {
+        if (window.innerWidth <= 560) document.addEventListener('scroll', () => {
             document.querySelector('header .ss-site-header-main-links-container > a.forest').style.marginLeft = `-${Math.min(window.scrollY, 50)}px`;
             document.querySelector('header .ss-site-header-main-links-container > a.shaw').style.marginTop = `-${Math.min(window.scrollY, 45)}px`;
         });
