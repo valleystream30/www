@@ -674,12 +674,9 @@ onReady(() => {
                 };
             };
         };
-        for (var li of document.querySelectorAll('.customElement.links li')) {
-            var link = li.querySelector('a');
-            if (link) li.addEventListener('click', () => {
-                window.location.href = link.href;
-            });
-        };
+        for (var li of document.querySelectorAll('.customElement.links li:has(a)')) li.addEventListener('click', () => {
+            window.location.href = li.querySelector('a').href;
+        });
         for (var link of document.querySelectorAll('a[href]')) {
             if (link.getAttribute('href') === '') {
                 var newLink = document.createElement('div');
