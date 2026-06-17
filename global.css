@@ -1782,6 +1782,10 @@ section.ss-accordion-tabs:has(.ss-tabs-list) {
 	&:not(.active) {
 		display: none !important;
 	}
+
+	.wow {
+		visibility: unset !important;
+	}
 }
 
 .ss-accordion-btn {

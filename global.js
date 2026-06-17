@@ -351,7 +351,7 @@ onReady(async () => {
         };
         if (document.querySelector('footer a')) document.querySelector('footer a').href = 'https://maps.app.goo.gl/TPDs2TqNehEzxuMY8';
         for (var btn of document.querySelectorAll('a.btn')) {
-            if (btn.querySelector('.ss-button-icon')) break;
+            if (btn.querySelector('.ss-button-icon')) continue;
             const icon = document.createElement('span');
             icon.setAttribute('aria-hidden', 'true');
             icon.className = 'ss-button-icon';
@@ -439,7 +439,7 @@ onReady(async () => {
                     });
                     const htmlObserver = new MutationObserver(mutations => {
                         for (var mutation of mutations) {
-                            if (mutation.attributeName !== 'lang') break;
+                            if (mutation.attributeName !== 'lang') continue;
                             var langCode = document.documentElement.getAttribute('lang');
                             var langName = languages.find(lang => lang.code === langCode)?.language || langCode;
                             console.log(`Language changing to ${langName} (${langCode})`);
@@ -455,7 +455,7 @@ onReady(async () => {
                                         };
                                     };
                                     for (var el of section.querySelectorAll('a:not([tabindex])')) {
-                                        if (!languages.map(lang => lang.language).some(lang => el.innerText.toLowerCase().includes(lang.toLowerCase()))) break;
+                                        if (!languages.map(lang => lang.language).some(lang => el.innerText.toLowerCase().includes(lang.toLowerCase()))) continue;
                                         if (!el.innerText.toLowerCase().includes(langName.toLowerCase())) {
                                             el.style.display = 'none';
                                         } else {
@@ -463,7 +463,7 @@ onReady(async () => {
                                         };
                                     };
                                     for (var el of section.querySelectorAll('img[alt]')) {
-                                        if (!languages.map(lang => lang.language).some(lang => el.alt.toLowerCase().includes(lang.toLowerCase()))) break;
+                                        if (!languages.map(lang => lang.language).some(lang => el.alt.toLowerCase().includes(lang.toLowerCase()))) continue;
                                         if (!el.alt.toLowerCase().includes(langName.toLowerCase())) {
                                             el.style.display = 'none';
                                         } else {
@@ -646,7 +646,7 @@ onReady(async () => {
                     if (window.innerWidth <= 1000) break;
                     const carouselObserver = new MutationObserver(mutations => {
                         for (var mutation of mutations) {
-                            if (mutation.attributeName !== 'class') break;
+                            if (mutation.attributeName !== 'class') continue;
                             if (mutation.target.classList.contains('item') && mutation.target.classList.contains('active') && !mutation.target.classList.contains('left')) {
                                 document.querySelector('.spotlight-sidebar .spotlight-info h3').innerText = mutation.target.querySelector('.spotlight-slide-title').innerText.replaceAll('\n', '');
                                 document.querySelector('.spotlight-sidebar .spotlight-info p').innerText = mutation.target.querySelector('.spotlight-text-cta-container').innerText.replaceAll('\n', '');
@@ -676,7 +676,7 @@ onReady(async () => {
                     for (var ul of section.querySelectorAll('.ss-column-one div > ul')) {
                         var lis = ul.querySelectorAll('li');
                         var removeLi = Array.from(lis).find(li => li.innerText.toLowerCase().includes('page sections here'));
-                        if (!removeLi) break;
+                        if (!removeLi) continue;
                         for (var sectionInfo of pageSections.slice(1)) {
                             var newLi = document.createElement('li');
                             newLi.innerHTML = `<a href="#${sectionInfo.id}">${sectionInfo.title}</a>`;
