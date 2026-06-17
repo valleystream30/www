@@ -248,10 +248,10 @@ onReady(async () => {
             tabletColumn2.className = 'sitemap-column';
             var blocks = [];
             function createSitemapBlock(block) {
-                var link = block.querySelector('a');
+                var blockLink = block.querySelector('a');
                 var newLink = document.createElement('div');
                 newLink.className = 'sitemap-block';
-                newLink.innerHTML = `<a href="${link.href}">${link.innerText}</a>`;
+                newLink.innerHTML = `<a href="${blockLink.href}">${blockLink.innerText}</a>`;
                 if (block.querySelector('ul')) {
                     var leaves = Array.from(block.querySelector('ul').children).filter(li => !li.querySelector('ul'));
                     var branches = Array.from(block.querySelector('ul').children).filter(li => li.querySelector('ul'));
@@ -270,7 +270,7 @@ onReady(async () => {
                     for (var branch of branches) createSitemapBlock(branch);
                 };
                 blocks.push({
-                    'name': link.innerText,
+                    'name': blockLink.innerText,
                     'element': newLink,
                 });
             };
@@ -709,8 +709,12 @@ onReady(async () => {
                     if (!section.querySelector('.ss-editor-content').innerText.toLowerCase().includes('page sections here')) break;
                     section.querySelector('.ss-editor-content').innerHTML = section.querySelector('.ss-editor-content').innerHTML.replace(/page sections here/i, '');
                     if (section.querySelector('.ss-editor-content').innerText.trim() === '') section.querySelector('.ss-editor-content').remove();
-                    for (var link of section.querySelectorAll('.stack-link-container a')) {
+                    for (var container of section.querySelectorAll('.stack-link-container:has(a)')) {
+                        let link = container.querySelector('a');
                         if (pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase())) link.href = `#${pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase()).id}`;
+                        container.addEventListener('click', () => {
+                            window.location.href = link.href;
+                        });
                     };
                     break;
                 case 'tabbedElements':
@@ -762,9 +766,6 @@ onReady(async () => {
                     if (tabs.length) tabs[0].click();
                     break;
             };
-        });
-        for (var li of document.querySelectorAll('.customElement.links li:has(a)')) li.addEventListener('click', () => {
-            window.location.href = li.querySelector('a').href;
         });
         for (var link of document.querySelectorAll('a[href]')) {
             if (link.getAttribute('href') === '') {
