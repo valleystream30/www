@@ -671,6 +671,14 @@ onReady(() => {
                             };
                         });
                         break;
+                    case 'links':
+                        if (!section.querySelector('.ss-editor-content').innerText.toLowerCase().includes('page sections here')) break;
+                        section.querySelector('.ss-editor-content').innerHTML = section.querySelector('.ss-editor-content').innerHTML.replace(/page sections here/i, '');
+                        if (section.querySelector('.ss-editor-content').innerText.trim() === '') section.querySelector('.ss-editor-content').remove();
+                        for (var link in section.querySelectorAll('.stack-link-container a')) {
+                            if (pageSections[link + 1]) section.querySelectorAll('.stack-link-container a')[link].href = `#${pageSections[link + 1].id}`;
+                        };
+                        break;
                 };
             };
         };
