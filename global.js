@@ -16,11 +16,21 @@ function resetTranslate() {
 };
 
 function onReady(callback) {
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', callback);
-    } else {
-        callback();
+    var called = false;
+    const run = () => {
+        if (!called) {
+            called = true;
+            callback();
+        };
     };
+    if (document.readyState === 'complete') {
+        run();
+        return;
+    };
+    window.addEventListener('load', run);
+    setTimeout(() => {
+        if (!called) run();
+    }, 5000);
 };
 
 var header = document.querySelector('header');
@@ -229,7 +239,7 @@ onReady(() => {
                 if (block.querySelector('ul')) {
                     var leaves = Array.from(block.querySelector('ul').children).filter(li => !li.querySelector('ul'));
                     var branches = Array.from(block.querySelector('ul').children).filter(li => li.querySelector('ul'));
-                    console.log(link.innerText, leaves.length, branches.length);
+                    // console.log(link.innerText, leaves.length, branches.length);
                     if (leaves.length) {
                         newLink.innerHTML += `<hr>`;
                         for (var leaf of leaves) {
@@ -323,7 +333,7 @@ onReady(() => {
                 document.documentElement.setAttribute(name, value);
             };
         };
-        document.querySelector('footer a').href = 'https://maps.app.goo.gl/TPDs2TqNehEzxuMY8';
+        if (document.querySelector('footer a')) document.querySelector('footer a').href = 'https://maps.app.goo.gl/TPDs2TqNehEzxuMY8';
         for (var btn of document.querySelectorAll('a.btn')) {
             if (btn.querySelector('.ss-button-icon')) break;
             const icon = document.createElement('span');
@@ -495,194 +505,244 @@ onReady(() => {
         };
         for (var section of document.querySelectorAll('section:has(.ss-component-header-title)')) {
             var pageRedBar = section.querySelector('.ss-component-header-title');
+            // console.log(section, pageRedBar, pageRedBar.innerText, pageRedBar.innerText.includes('customElement.'))
             if (pageRedBar.innerText.includes('customElement.')) {
                 section.classList.add('customElement');
                 for (var part of pageRedBar.innerText.split('customElement.')[1].split('.')) section.classList.add(part);
                 var customElement = pageRedBar.innerText.split('customElement.')[1].split('.')[0];
+                section.setAttribute('customElement', customElement);
                 section.querySelector('.ss-component-header').remove();
-                switch (customElement) {
-                    case 'staff':
-                        for (var wrapper of section.querySelectorAll('.ss-im-icon-wrapper-inner')) {
-                            const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
-                            const emailMatch = wrapper.innerText.match(emailPattern);
-                            const email = emailMatch ? emailMatch[0].replaceAll('ext', '#').replaceAll('.', '').replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '') : null;
-                            const phonePattern = /(?:\+?\d{1,3}\s*)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}(?:\s*(?:ext\.?|x)\s*\d+)?/i;
-                            const phoneMatch = wrapper.innerText.match(phonePattern);
-                            const phone = phoneMatch ? phoneMatch[0] : null;
-                            if (email) {
-                                const emailLink = document.createElement('a');
-                                emailLink.href = `mailto:${email}`;
-                                emailLink.innerHTML = '<i class="fa-solid fa-envelope"></i>';
-                                emailLink.classList.add('email');
-                                wrapper.appendChild(emailLink);
-                            };
-                            if (phone) {
-                                const phoneLink = document.createElement('a');
-                                phoneLink.href = `tel:${phone.replaceAll(' ', '').replaceAll('-', '').replaceAll('.', '')}`;
-                                phoneLink.innerHTML = '<i class="fa-solid fa-phone"></i>';
-                                phoneLink.classList.add('phone');
-                                wrapper.appendChild(phoneLink);
-                            };
-                        };
-                        break;
-                    case 'spotlight':
-                        var spotlightWrapper = document.createElement('div');
-                        spotlightWrapper.className = 'spotlight-wrapper';
-                        if (window.innerWidth > 1000) {
-                            section.parentElement.insertBefore(spotlightWrapper, section);
-                            spotlightWrapper.appendChild(section);
-                        } else {
-                            document.querySelector('.stack_sort_area').insertBefore(spotlightWrapper, document.querySelector('.stack_sort_area').children[2]);
-                        };
-                        var spotlightSidebar = document.createElement('div');
-                        spotlightSidebar.className = 'spotlight-sidebar';
-                        spotlightWrapper.appendChild(spotlightSidebar);
-                        if (window.innerWidth > 1000) spotlightSidebar.innerHTML = `<div class="spotlight-info"><i class="fa-solid fa-chevron-left"></i><h3>${section.querySelector('.carousel-inner > .item.active .spotlight-slide-title').innerText}</h3><p>${section.querySelector('.carousel-inner > .item.active .spotlight-text-cta-container').innerText}</p></div>`;
-                        const homepageEventsPromise = new Promise(resolve => {
-                            var homepageEventsInterval = setInterval(() => {
-                                if (document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event').length) {
-                                    clearInterval(homepageEventsInterval);
-                                    var eventGroups = [];
-                                    for (var event of document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event')) {
-                                        var eventDiv = event.shadowRoot.querySelector('.calendar-event-container');
-                                        var eventDate = eventDiv.querySelector('.event-date-container').innerText.replaceAll('\n', ' ').trim();
-                                        var eventTitleDiv = eventDiv.querySelector('.event-title a');
-                                        var eventLink = eventTitleDiv.getAttribute('href');
-                                        var eventTitle = eventTitleDiv.innerText.trim();
-                                        var eventTime = eventDiv.querySelector('.event-time').innerText.trim();
-                                        if (!eventGroups.find(eventGroup => eventGroup.name === eventDate) || !eventGroups.find(eventGroup => eventGroup.name === eventDate).events.find(event => (event.link === eventLink))) {
-                                            if (!eventGroups.find(eventGroup => eventGroup.name === eventDate)) eventGroups.push({
-                                                name: eventDate,
-                                                events: [],
-                                            });
-                                            eventGroups.find(eventGroup => eventGroup.name === eventDate).events.push({
-                                                link: eventLink,
-                                                title: eventTitle,
-                                                date: eventDate.slice(eventDate.indexOf(' ') + 1),
-                                                time: eventTime
-                                            });
-                                        };
-                                    };
-                                    if (eventGroups.length) {
-                                        var eventsContainer = document.createElement('div');
-                                        eventsContainer.className = 'events-container';
-                                        var now = new Date();
-                                        var today = now.toLocaleDateString(undefined, { month: 'short', day: '2-digit' });
-                                        var tomorrow = (new Date(now.getTime() + 24 * 60 * 60 * 1000)).toLocaleDateString(undefined, { month: 'short', day: '2-digit' });
-                                        const months = {
-                                            Jan: 'January',
-                                            Feb: 'February',
-                                            Mar: 'March',
-                                            Apr: 'April',
-                                            May: 'May',
-                                            Jun: 'June',
-                                            Jul: 'July',
-                                            Aug: 'August',
-                                            Sep: 'September',
-                                            Oct: 'October',
-                                            Nov: 'November',
-                                            Dec: 'December',
-                                        };
-                                        if (window.innerWidth <= 1000) eventGroups = eventGroups.slice(0, 1);
-                                        for (var eventGroupN in eventGroups) {
-                                            var eventGroup = eventGroups[eventGroupN];
-                                            var eventsTitle = Number(eventGroupN) ? document.createElement('p') : document.createElement('h2');
-                                            if (eventGroup.name.endsWith(today)) {
-                                                eventsTitle.innerText = `Today's Events`;
-                                                eventsContainer.append(eventsTitle);
-                                            } else if (eventGroup.name.endsWith(tomorrow)) {
-                                                eventsTitle.innerText = 'Tomorrow';
-                                                eventsContainer.append(eventsTitle);
-                                            } else {
-                                                var [day, mon, date] = eventGroup.name.split(' ');
-                                                eventsTitle.innerText = `${day.charAt(0).toUpperCase() + day.slice(1).toLowerCase()}, ${months[mon]} ${parseInt(date, 10) + (["th", "st", "nd", "rd"][((["th", "st", "nd", "rd"] % 100) - 20) % 10] || ["th", "st", "nd", "rd"][(parseInt(date, 10) % 100)] || ["th", "st", "nd", "rd"][0])}`;
-                                                eventsContainer.append(eventsTitle);
-                                            };
-                                            for (var event of eventGroup.events) {
-                                                var eventLink = document.createElement('a');
-                                                eventLink.href = event.link;
-                                                eventLink.classList.add('event');
-                                                eventLink.innerHTML = `<div class="event-date">${event.date.replace(' ', '<br>')}</div><div class="event-info"><b>${event.title}</b><p>${event.time}</p></div>`;
-                                                eventsContainer.appendChild(eventLink);
-                                            };
-                                        };
-                                        spotlightSidebar.prepend(eventsContainer);
-                                    };
-                                    document.querySelector('.customElement.spotlightCalendar')?.remove();
-                                    resolve();
-                                };
-                            }, 500);
-                        });
-                        addTask(homepageEventsPromise);
-                        if (window.innerWidth <= 1000) break;
-                        const carouselObserver = new MutationObserver(mutations => {
-                            for (var mutation of mutations) {
-                                if (mutation.attributeName !== 'class') break;
-                                if (mutation.target.classList.contains('item') && mutation.target.classList.contains('active') && !mutation.target.classList.contains('left')) {
-                                    document.querySelector('.spotlight-sidebar .spotlight-info h3').innerText = mutation.target.querySelector('.spotlight-slide-title').innerText.replaceAll('\n', '');
-                                    document.querySelector('.spotlight-sidebar .spotlight-info p').innerText = mutation.target.querySelector('.spotlight-text-cta-container').innerText.replaceAll('\n', '');
-                                };
-                            };
-                        });
-                        for (var item of section.querySelectorAll('.carousel-inner > .item')) carouselObserver.observe(item, { attributeFilter: ['class'] });
-                        document.addEventListener('keydown', e => {
-                            if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
-                            switch (e.key) {
-                                case 'ArrowLeft':
-                                    section.querySelector('.carousel-nav-option-prev').click();
-                                    break;
-                                case 'ArrowRight':
-                                    section.querySelector('.carousel-nav-option-next').click();
-                                    break;
-                            };
-                        });
-                        break;
-                    case 'about':
-                        // section.querySelector('.ss-column-one').innerHTML += '<p>&nbsp;</p>';
-                        // var sectionsOnPageDiv = document.createElement('div');
-                        // sectionsOnPageDiv.className = 'sectionsOnPage';
-                        // sectionsOnPageDiv.innerHTML = `<b>On This Page</b><ul class="sectionsOnPageList"></ul>`;
-                        // section.querySelector('.ss-column-one').append(sectionsOnPageDiv);
-                        // for (var sectionInfo of pageSections.slice(1)) sectionsOnPageDiv.querySelector('ul').innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
-                        for (var ul of section.querySelectorAll('.ss-column-one div > ul')) {
-                            var lis = ul.querySelectorAll('li');
-                            var removeLi = Array.from(lis).find(li => li.innerText.toLowerCase().includes('page sections here'));
-                            if (!removeLi) break;
-                            removeLi.remove();
-                            for (var sectionInfo of pageSections.slice(1)) ul.innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
-                        };
-                        section.querySelectorAll('img, video').forEach(aboutImage => {
-                            if (aboutImage && (window.innerWidth > 1000) && (aboutImage.style.maxWidth === 'min(750px, 100%)') && (aboutImage.style.borderRadius === '10px')) {
-                                aboutImage.classList.add('aboutImage');
-                                // aboutImage.style.transition = 'width .25s';
-                                // var settingAboutImageSize = false;
-                                // function setAboutImageSize() {
-                                //     if (settingAboutImageSize) return;
-                                //     settingAboutImageSize = true;
-                                //     requestAnimationFrame(() => {
-                                //         const rect = aboutImage.getBoundingClientRect();
-                                //         const parentWidth = aboutImage.parentElement.getBoundingClientRect().width;
-                                //         const newWidth = Math.max(Math.max(0, Math.min(rect.bottom, window.innerHeight || document.documentElement.clientHeight) - Math.max(rect.top, 0)) / rect.height * Math.min(750, parentWidth), Math.min(300, parentWidth)) + 'px';
-                                //         aboutImage.style.width = newWidth;
-                                //         settingAboutImageSize = false;
-                                //     });
-                                // };
-                                // document.addEventListener('scroll', setAboutImageSize);
-                                // setAboutImageSize();
-                            };
-                        });
-                        break;
-                    case 'links':
-                        if (!section.querySelector('.ss-editor-content').innerText.toLowerCase().includes('page sections here')) break;
-                        section.querySelector('.ss-editor-content').innerHTML = section.querySelector('.ss-editor-content').innerHTML.replace(/page sections here/i, '');
-                        if (section.querySelector('.ss-editor-content').innerText.trim() === '') section.querySelector('.ss-editor-content').remove();
-                        for (var link in section.querySelectorAll('.stack-link-container a')) {
-                            if (pageSections[Number(link) + 1]) section.querySelectorAll('.stack-link-container a')[Number(link)].href = `#${pageSections[Number(link) + 1].id}`;
-                        };
-                        break;
-                };
             };
         };
+        document.querySelectorAll('section.customElement[customelement]').forEach(section => {
+            switch (section.getAttribute('customelement')) {
+                case 'staff':
+                    for (var wrapper of section.querySelectorAll('.ss-im-icon-wrapper-inner')) {
+                        const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
+                        const emailMatch = wrapper.innerText.match(emailPattern);
+                        const email = emailMatch ? emailMatch[0].replaceAll('ext', '#').replaceAll('.', '').replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '') : null;
+                        const phonePattern = /(?:\+?\d{1,3}\s*)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}(?:\s*(?:ext\.?|x)\s*\d+)?/i;
+                        const phoneMatch = wrapper.innerText.match(phonePattern);
+                        const phone = phoneMatch ? phoneMatch[0] : null;
+                        if (email) {
+                            const emailLink = document.createElement('a');
+                            emailLink.href = `mailto:${email}`;
+                            emailLink.innerHTML = '<i class="fa-solid fa-envelope"></i>';
+                            emailLink.classList.add('email');
+                            wrapper.appendChild(emailLink);
+                        };
+                        if (phone) {
+                            const phoneLink = document.createElement('a');
+                            phoneLink.href = `tel:${phone.replaceAll(' ', '').replaceAll('-', '').replaceAll('.', '')}`;
+                            phoneLink.innerHTML = '<i class="fa-solid fa-phone"></i>';
+                            phoneLink.classList.add('phone');
+                            wrapper.appendChild(phoneLink);
+                        };
+                    };
+                    break;
+                case 'spotlight':
+                    var spotlightWrapper = document.createElement('div');
+                    spotlightWrapper.className = 'spotlight-wrapper';
+                    if (window.innerWidth > 1000) {
+                        section.parentElement.insertBefore(spotlightWrapper, section);
+                        spotlightWrapper.appendChild(section);
+                    } else {
+                        document.querySelector('.stack_sort_area').insertBefore(spotlightWrapper, document.querySelector('.stack_sort_area').children[2]);
+                    };
+                    var spotlightSidebar = document.createElement('div');
+                    spotlightSidebar.className = 'spotlight-sidebar';
+                    spotlightWrapper.appendChild(spotlightSidebar);
+                    if (window.innerWidth > 1000) spotlightSidebar.innerHTML = `<div class="spotlight-info"><i class="fa-solid fa-chevron-left"></i><h3>${section.querySelector('.carousel-inner > .item.active .spotlight-slide-title').innerText}</h3><p>${section.querySelector('.carousel-inner > .item.active .spotlight-text-cta-container').innerText}</p></div>`;
+                    const homepageEventsPromise = new Promise(resolve => {
+                        var homepageEventsInterval = setInterval(() => {
+                            if (document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event').length) {
+                                clearInterval(homepageEventsInterval);
+                                var eventGroups = [];
+                                for (var event of document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event')) {
+                                    var eventDiv = event.shadowRoot.querySelector('.calendar-event-container');
+                                    var eventDate = eventDiv.querySelector('.event-date-container').innerText.replaceAll('\n', ' ').trim();
+                                    var eventTitleDiv = eventDiv.querySelector('.event-title a');
+                                    var eventLink = eventTitleDiv.getAttribute('href');
+                                    var eventTitle = eventTitleDiv.innerText.trim();
+                                    var eventTime = eventDiv.querySelector('.event-time').innerText.trim();
+                                    if (!eventGroups.find(eventGroup => eventGroup.name === eventDate) || !eventGroups.find(eventGroup => eventGroup.name === eventDate).events.find(event => (event.link === eventLink))) {
+                                        if (!eventGroups.find(eventGroup => eventGroup.name === eventDate)) eventGroups.push({
+                                            name: eventDate,
+                                            events: [],
+                                        });
+                                        eventGroups.find(eventGroup => eventGroup.name === eventDate).events.push({
+                                            link: eventLink,
+                                            title: eventTitle,
+                                            date: eventDate.slice(eventDate.indexOf(' ') + 1),
+                                            time: eventTime
+                                        });
+                                    };
+                                };
+                                if (eventGroups.length) {
+                                    var eventsContainer = document.createElement('div');
+                                    eventsContainer.className = 'events-container';
+                                    var now = new Date();
+                                    var today = now.toLocaleDateString(undefined, { month: 'short', day: '2-digit' });
+                                    var tomorrow = (new Date(now.getTime() + 24 * 60 * 60 * 1000)).toLocaleDateString(undefined, { month: 'short', day: '2-digit' });
+                                    const months = {
+                                        Jan: 'January',
+                                        Feb: 'February',
+                                        Mar: 'March',
+                                        Apr: 'April',
+                                        May: 'May',
+                                        Jun: 'June',
+                                        Jul: 'July',
+                                        Aug: 'August',
+                                        Sep: 'September',
+                                        Oct: 'October',
+                                        Nov: 'November',
+                                        Dec: 'December',
+                                    };
+                                    if (window.innerWidth <= 1000) eventGroups = eventGroups.slice(0, 1);
+                                    for (var eventGroupN in eventGroups) {
+                                        var eventGroup = eventGroups[eventGroupN];
+                                        var eventsTitle = Number(eventGroupN) ? document.createElement('p') : document.createElement('h2');
+                                        if (eventGroup.name.endsWith(today)) {
+                                            eventsTitle.innerText = `Today's Events`;
+                                            eventsContainer.append(eventsTitle);
+                                        } else if (eventGroup.name.endsWith(tomorrow)) {
+                                            eventsTitle.innerText = 'Tomorrow';
+                                            eventsContainer.append(eventsTitle);
+                                        } else {
+                                            var [day, mon, date] = eventGroup.name.split(' ');
+                                            eventsTitle.innerText = `${day.charAt(0).toUpperCase() + day.slice(1).toLowerCase()}, ${months[mon]} ${parseInt(date, 10) + (["th", "st", "nd", "rd"][((["th", "st", "nd", "rd"] % 100) - 20) % 10] || ["th", "st", "nd", "rd"][(parseInt(date, 10) % 100)] || ["th", "st", "nd", "rd"][0])}`;
+                                            eventsContainer.append(eventsTitle);
+                                        };
+                                        for (var event of eventGroup.events) {
+                                            var eventLink = document.createElement('a');
+                                            eventLink.href = event.link;
+                                            eventLink.classList.add('event');
+                                            eventLink.innerHTML = `<div class="event-date">${event.date.replace(' ', '<br>')}</div><div class="event-info"><b>${event.title}</b><p>${event.time}</p></div>`;
+                                            eventsContainer.appendChild(eventLink);
+                                        };
+                                    };
+                                    spotlightSidebar.prepend(eventsContainer);
+                                };
+                                document.querySelector('.customElement.spotlightCalendar')?.remove();
+                                resolve();
+                            };
+                        }, 500);
+                    });
+                    addTask(homepageEventsPromise);
+                    if (window.innerWidth <= 1000) break;
+                    const carouselObserver = new MutationObserver(mutations => {
+                        for (var mutation of mutations) {
+                            if (mutation.attributeName !== 'class') break;
+                            if (mutation.target.classList.contains('item') && mutation.target.classList.contains('active') && !mutation.target.classList.contains('left')) {
+                                document.querySelector('.spotlight-sidebar .spotlight-info h3').innerText = mutation.target.querySelector('.spotlight-slide-title').innerText.replaceAll('\n', '');
+                                document.querySelector('.spotlight-sidebar .spotlight-info p').innerText = mutation.target.querySelector('.spotlight-text-cta-container').innerText.replaceAll('\n', '');
+                            };
+                        };
+                    });
+                    for (var item of section.querySelectorAll('.carousel-inner > .item')) carouselObserver.observe(item, { attributeFilter: ['class'] });
+                    document.addEventListener('keydown', e => {
+                        if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
+                        switch (e.key) {
+                            case 'ArrowLeft':
+                                section.querySelector('.carousel-nav-option-prev').click();
+                                break;
+                            case 'ArrowRight':
+                                section.querySelector('.carousel-nav-option-next').click();
+                                break;
+                        };
+                    });
+                    break;
+                case 'about':
+                    // section.querySelector('.ss-column-one').innerHTML += '<p>&nbsp;</p>';
+                    // var sectionsOnPageDiv = document.createElement('div');
+                    // sectionsOnPageDiv.className = 'sectionsOnPage';
+                    // sectionsOnPageDiv.innerHTML = `<b>On This Page</b><ul class="sectionsOnPageList"></ul>`;
+                    // section.querySelector('.ss-column-one').append(sectionsOnPageDiv);
+                    // for (var sectionInfo of pageSections.slice(1)) sectionsOnPageDiv.querySelector('ul').innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
+                    for (var ul of section.querySelectorAll('.ss-column-one div > ul')) {
+                        var lis = ul.querySelectorAll('li');
+                        var removeLi = Array.from(lis).find(li => li.innerText.toLowerCase().includes('page sections here'));
+                        if (!removeLi) break;
+                        for (var sectionInfo of pageSections.slice(1)) {
+                            var newLi = document.createElement('li');
+                            newLi.innerHTML = `<a href="#${sectionInfo.id}">${sectionInfo.title}</a>`;
+                            removeLi.parentNode.insertBefore(newLi, removeLi.nextSibling);
+                        };
+                        removeLi.remove();
+                    };
+                    section.querySelectorAll('img, video').forEach(aboutImage => {
+                        if (aboutImage && (window.innerWidth > 1000) && (aboutImage.style.maxWidth === 'min(750px, 100%)') && (aboutImage.style.borderRadius === '10px')) {
+                            aboutImage.classList.add('aboutImage');
+                            // aboutImage.style.transition = 'width .25s';
+                            // var settingAboutImageSize = false;
+                            // function setAboutImageSize() {
+                            //     if (settingAboutImageSize) return;
+                            //     settingAboutImageSize = true;
+                            //     requestAnimationFrame(() => {
+                            //         const rect = aboutImage.getBoundingClientRect();
+                            //         const parentWidth = aboutImage.parentElement.getBoundingClientRect().width;
+                            //         const newWidth = Math.max(Math.max(0, Math.min(rect.bottom, window.innerHeight || document.documentElement.clientHeight) - Math.max(rect.top, 0)) / rect.height * Math.min(750, parentWidth), Math.min(300, parentWidth)) + 'px';
+                            //         aboutImage.style.width = newWidth;
+                            //         settingAboutImageSize = false;
+                            //     });
+                            // };
+                            // document.addEventListener('scroll', setAboutImageSize);
+                            // setAboutImageSize();
+                        };
+                    });
+                    break;
+                case 'links':
+                    if (!section.querySelector('.ss-editor-content').innerText.toLowerCase().includes('page sections here')) break;
+                    section.querySelector('.ss-editor-content').innerHTML = section.querySelector('.ss-editor-content').innerHTML.replace(/page sections here/i, '');
+                    if (section.querySelector('.ss-editor-content').innerText.trim() === '') section.querySelector('.ss-editor-content').remove();
+                    for (var link in section.querySelectorAll('.stack-link-container a')) {
+                        if (pageSections[Number(link) + 1]) section.querySelectorAll('.stack-link-container a')[Number(link)].href = `#${pageSections[Number(link) + 1].id}`;
+                    };
+                    break;
+                case 'tabbedElements':
+                    var tabs = section.querySelectorAll('.ss-tab');
+                    var targetElements = [];
+                    for (var tab of tabs) {
+                        var targetElement = null;
+                        try {
+                            targetElement = document.querySelector(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
+                        } catch (e) {
+                            console.error(e);
+                        };
+                        // console.log(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'), targetElement)
+                        if (targetElement) {
+                            targetElements.push(targetElement);
+                            document.getElementById(tab.getAttribute('aria-controls')).style.display = 'none';
+                            if (!targetElement.classList.contains('customElement')) targetElement.style.display = 'none';
+                        };
+                        tab.addEventListener('click', () => {
+                            for (var el of targetElements) {
+                                if (el.classList.contains('customElement')) {
+                                    el.classList.remove('active');
+                                } else {
+                                    el.style.display = 'none';
+                                };
+                            };
+                            // console.log('to', targetElement)
+                            if (targetElement) {
+                                if (targetElement.classList.contains('customElement')) {
+                                    targetElement.classList.add('active');
+                                } else {
+                                    targetElement.style.display = '';
+                                };
+                            };
+                        });
+                        tab.addEventListener('keydown', (event) => {
+                            if (event.key === 'Enter' || event.key === ' ') {
+                                event.preventDefault();
+                                tab.click();
+                            };
+                        });
+                    };
+                    if (tabs.length) tabs[0].click();
+                    break;
+            };
+        });
         for (var li of document.querySelectorAll('.customElement.links li:has(a)')) li.addEventListener('click', () => {
             window.location.href = li.querySelector('a').href;
         });
@@ -703,33 +763,6 @@ onReady(() => {
             document.querySelector('header .ss-site-header-main-links-container > a.forest').style.marginLeft = `-${Math.min(window.scrollY, 50)}px`;
             document.querySelector('header .ss-site-header-main-links-container > a.shaw').style.marginTop = `-${Math.min(window.scrollY, 45)}px`;
         });
-        document.querySelectorAll('.customElement.tabbedElements').forEach(tabbedElements => {
-            var tabs = tabbedElements.querySelectorAll('.ss-tab');
-            var targetElements = [];
-            tabs.forEach(tab => {
-                var targetElement = null;
-                try {
-                    targetElement = document.querySelector(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
-                } catch (e) {
-                    console.error(e);
-                };
-                if (targetElement) {
-                    targetElements.push(targetElement);
-                    document.getElementById(tab.getAttribute('aria-controls')).style.display = 'none';
-                };
-                tab.addEventListener('click', () => {
-                    for (var el of targetElements) el.classList.remove('active');
-                    if (targetElement) targetElement.classList.add('active');
-                });
-                tab.addEventListener('keydown', (event) => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        tab.click();
-                    };
-                });
-            });
-            if (tabs.length) tabs[0].click();
-        });
         try {
             const allTasksPromise = (tasks.length) ? Promise.all(tasks) : Promise.resolve();
             const timeout = new Promise(resolve => setTimeout(resolve, 5000));
@@ -745,6 +778,7 @@ onReady(() => {
 });
 
 function afterReady() {
+    console.log(`Proceeding in ${(new Date().getTime() - startTime) / 1000} seconds`);
     try {
         header.style.paddingBottom = `${(nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1))}px`;
         document.documentElement.style.scrollPadding = `${(nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1))}px`;

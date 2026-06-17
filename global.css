@@ -1749,8 +1749,8 @@ section.ss-accordion-tabs .ss-component-content {
 }
 
 section.ss-accordion-tabs:has(.ss-tabs-list) {
-	padding-top: 40px;
-	padding-bottom: 30px;
+	padding-top: 40px !important;
+	padding-bottom: 30px !important;
 
 	.ss-tabs-list {
 		justify-content: center;
