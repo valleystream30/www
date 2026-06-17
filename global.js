@@ -706,8 +706,16 @@ onReady(() => {
             var tabs = tabbedElements.querySelectorAll('.ss-tab');
             var targetElements = [];
             tabs.forEach(tab => {
-                var targetElement = document.querySelector(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
-                if (targetElement) targetElements.push(targetElement);
+                var targetElement = null;
+                try {
+                    targetElement = document.querySelector(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
+                } catch (e) {
+                    console.error(e);
+                };
+                if (targetElement) {
+                    targetElements.push(targetElement);
+                    document.getElementById(tab.getAttribute('aria-controls')).style.display = 'none';
+                };
                 tab.addEventListener('click', () => {
                     for (var el of targetElements) el.classList.remove('active');
                     if (targetElement) targetElement.classList.add('active');

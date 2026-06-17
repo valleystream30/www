@@ -1768,8 +1768,7 @@ section.ss-accordion-tabs:has(.ss-tabs-list) {
 	display: block !important;
 }
 
-.customElement.tabbedElements .ss-accordion,
-.customElement.tabbedElements .ss-tabs-panels {
+.customElement.tabbedElements .ss-accordion {
 	display: none !important;
 }
 
