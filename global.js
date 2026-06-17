@@ -653,21 +653,22 @@ onReady(() => {
                         };
                         section.querySelectorAll('img, video').forEach(aboutImage => {
                             if (aboutImage && (window.innerWidth > 1000) && (aboutImage.style.maxWidth === 'min(750px, 100%)') && (aboutImage.style.borderRadius === '10px')) {
-                                aboutImage.style.transition = 'width .25s';
-                                var settingAboutImageSize = false;
-                                function setAboutImageSize() {
-                                    if (settingAboutImageSize) return;
-                                    settingAboutImageSize = true;
-                                    requestAnimationFrame(() => {
-                                        const rect = aboutImage.getBoundingClientRect();
-                                        const parentWidth = aboutImage.parentElement.getBoundingClientRect().width;
-                                        const newWidth = Math.max(Math.max(0, Math.min(rect.bottom, window.innerHeight || document.documentElement.clientHeight) - Math.max(rect.top, 0)) / rect.height * Math.min(750, parentWidth), Math.min(300, parentWidth)) + 'px';
-                                        aboutImage.style.width = newWidth;
-                                        settingAboutImageSize = false;
-                                    });
-                                };
-                                document.addEventListener('scroll', setAboutImageSize);
-                                setAboutImageSize();
+                                aboutImage.classList.add('aboutImage');
+                                // aboutImage.style.transition = 'width .25s';
+                                // var settingAboutImageSize = false;
+                                // function setAboutImageSize() {
+                                //     if (settingAboutImageSize) return;
+                                //     settingAboutImageSize = true;
+                                //     requestAnimationFrame(() => {
+                                //         const rect = aboutImage.getBoundingClientRect();
+                                //         const parentWidth = aboutImage.parentElement.getBoundingClientRect().width;
+                                //         const newWidth = Math.max(Math.max(0, Math.min(rect.bottom, window.innerHeight || document.documentElement.clientHeight) - Math.max(rect.top, 0)) / rect.height * Math.min(750, parentWidth), Math.min(300, parentWidth)) + 'px';
+                                //         aboutImage.style.width = newWidth;
+                                //         settingAboutImageSize = false;
+                                //     });
+                                // };
+                                // document.addEventListener('scroll', setAboutImageSize);
+                                // setAboutImageSize();
                             };
                         });
                         break;
@@ -676,7 +677,7 @@ onReady(() => {
                         section.querySelector('.ss-editor-content').innerHTML = section.querySelector('.ss-editor-content').innerHTML.replace(/page sections here/i, '');
                         if (section.querySelector('.ss-editor-content').innerText.trim() === '') section.querySelector('.ss-editor-content').remove();
                         for (var link in section.querySelectorAll('.stack-link-container a')) {
-                            if (pageSections[link + 1]) section.querySelectorAll('.stack-link-container a')[link].href = `#${pageSections[link + 1].id}`;
+                            if (pageSections[Number(link) + 1]) section.querySelectorAll('.stack-link-container a')[Number(link)].href = `#${pageSections[Number(link) + 1].id}`;
                         };
                         break;
                 };

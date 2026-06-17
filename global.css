@@ -1798,3 +1798,13 @@ section:has(.ss-component-header-title):not(:has([style="text-align: center;"]))
 	justify-content: start !important;
 	text-align: left !important;
 }
+
+.customElement.about .aboutImage:not(:hover) {
+	max-width: min(300px, 100%) !important;
+	transition: 0.25s max-width;
+}
+
+.customElement.about .aboutImage:hover {
+	max-width: min(750px, 100%) !important;
+	transition: 0.25s max-width;
+}
