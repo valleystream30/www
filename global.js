@@ -15,32 +15,51 @@ function resetTranslate() {
     };
 };
 
-function onReady(callback) {
-    var called = false;
-    const run = () => {
-        if (!called) {
-            called = true;
-            callback();
-        };
+async function onReady(callback) {
+    function waitForCondition(checkFn, timeout = 2000, interval = 100) {
+        return new Promise(resolve => {
+            try {
+                if (checkFn()) return resolve(true);
+            } catch (e) { };
+            const stop = () => {
+                clearInterval(iv);
+                clearTimeout(to);
+                resolve(false);
+            };
+            const iv = setInterval(() => {
+                try {
+                    if (checkFn()) {
+                        stop();
+                        resolve(true);
+                    };
+                } catch (e) { };
+            }, interval);
+            const to = setTimeout(stop, timeout);
+        });
     };
-    if (document.readyState === 'complete') {
-        run();
-        return;
+    if (document.readyState !== 'complete') {
+        const loadPromise = new Promise(resolve => window.addEventListener('load', resolve, { once: true }));
+        await Promise.race([loadPromise, new Promise(r => setTimeout(r, 1500))]);
     };
-    window.addEventListener('load', run);
-    setTimeout(() => {
-        if (!called) run();
-    }, 5000);
+    await waitForCondition(() => {
+        return !!document.querySelector('#GoogleTranslate, .calendar-event, .slick-slide, .ss-alert-modal-svg-container');
+    }, 2000, 100);
+    try {
+        await callback();
+    } catch (e) {
+        console.error(e);
+    };
 };
 
 var header = document.querySelector('header');
 var nav = Array.from(header.querySelectorAll('nav')).find(nav => (nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1)));
 
-onReady(() => {
+onReady(async () => {
     try {
+        // tasks will hold functions that return promises so we can run them sequentially and preserve order
         const tasks = [];
-        function addTask(promise) {
-            tasks.push(promise);
+        function addTask(taskFactory) {
+            tasks.push(taskFactory);
         };
         // document.querySelector('header .ss-site-header-school-tagline').classList.add('customFont');
         // header.prepend(nav);
@@ -117,7 +136,7 @@ onReady(() => {
         if (pageTitle.includes('partnership')) {
             document.querySelector('.ss-editor-content p:last-child').classList.add('partnerships');
         } else if (pageTitle.includes('schools')) {
-            const schoolsPagePromise = new Promise(resolve => {
+            addTask(() => new Promise(resolve => {
                 var schoolsPageInterval = setInterval(() => {
                     if ((document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a[style]').length === 3) || (document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a img[height]').length === 3)) {
                         var minHeight = Array.from(document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child img')).map(img => img.clientHeight).sort()[0];
@@ -130,12 +149,11 @@ onReady(() => {
                         resolve();
                     };
                 }, 100);
-            });
-            addTask(schoolsPagePromise);
+            }));
         } else if (pageTitle.includes('home new')) {
             var firstSection = document.querySelector('.stack_sort_area').children[0];
             if (firstSection.querySelector('.spotlight-container')) Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
-                const homepageShowcasePromise = new Promise(resolve => {
+                addTask(() => new Promise(resolve => {
                     var homepageShowcaseHeightInterval = setInterval(() => {
                         if (header.hasAttribute('style')) {
                             for (var slide of firstSection.querySelectorAll('.spotlight-slide')) {
@@ -163,10 +181,9 @@ onReady(() => {
                             resolve();
                         };
                     }, 100);
-                });
-                addTask(homepageShowcasePromise);
+                }));
             });
-            const homepageAboutImagesPromise = new Promise(resolve => {
+            addTask(() => new Promise(resolve => {
                 var homepageAboutImagesInterval = setInterval(() => {
                     if ((document.querySelectorAll('.ss-image-link[style]').length === 3) || (document.querySelectorAll('.ss-image-link img[height]').length === 3)) {
                         document.querySelector('section:has(.ss-image-link[style]), section:has(.ss-image-link img[height])').style.padding = 'min(70px, 7vh) min(20px, 2vw)';
@@ -186,8 +203,7 @@ onReady(() => {
                         };
                     };
                 }, 100);
-            });
-            addTask(homepageAboutImagesPromise);
+            }));
             var statsSection = document.querySelectorAll('section:has(.ss-im-icons-list)')[1];
             if (statsSection) {
                 statsSection.style.overflow = 'hidden';
@@ -349,7 +365,7 @@ onReady(() => {
             };
         });
         bodyObserver.observe(document.body, { childList: true });
-        const languagesPromise = new Promise(resolve => {
+        addTask(() => new Promise(resolve => {
             var languagesInterval = setInterval(() => {
                 if (document.getElementById('GoogleTranslate')?.options.length) {
                     clearInterval(languagesInterval);
@@ -465,10 +481,9 @@ onReady(() => {
                     });
                     htmlObserver.observe(document.documentElement, { attributes: true });
                     resolve();
-                };
+                }
             }, 500);
-        });
-        addTask(languagesPromise);
+        }));
         var pageSections = Array.from(document.querySelectorAll('section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off)), section:not(.ss-hidden-component):has(.ss-component-header-title)')).filter(section => section.querySelector('.ss-component-header-title') ? true : (section.querySelector('.ss-component-content .ss-one-column .ss-component-column').children.length === 1)).map(section => {
             return {
                 'id': section.id,
@@ -553,7 +568,7 @@ onReady(() => {
                     spotlightSidebar.className = 'spotlight-sidebar';
                     spotlightWrapper.appendChild(spotlightSidebar);
                     if (window.innerWidth > 1000) spotlightSidebar.innerHTML = `<div class="spotlight-info"><i class="fa-solid fa-chevron-left"></i><h3>${section.querySelector('.carousel-inner > .item.active .spotlight-slide-title').innerText}</h3><p>${section.querySelector('.carousel-inner > .item.active .spotlight-text-cta-container').innerText}</p></div>`;
-                    const homepageEventsPromise = new Promise(resolve => {
+                    addTask(() => new Promise(resolve => {
                         var homepageEventsInterval = setInterval(() => {
                             if (document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event').length) {
                                 clearInterval(homepageEventsInterval);
@@ -627,8 +642,7 @@ onReady(() => {
                                 resolve();
                             };
                         }, 500);
-                    });
-                    addTask(homepageEventsPromise);
+                    }));
                     if (window.innerWidth <= 1000) break;
                     const carouselObserver = new MutationObserver(mutations => {
                         for (var mutation of mutations) {
@@ -715,13 +729,19 @@ onReady(() => {
                             document.getElementById(tab.getAttribute('aria-controls')).style.display = 'none';
                             if (!targetElement.classList.contains('customElement')) targetElement.style.display = 'none';
                         };
-                        tab.addEventListener('click', () => {
+                        tab.addEventListener('click', (event) => {
                             for (var el of targetElements) {
                                 if (el.classList.contains('customElement')) {
                                     el.classList.remove('active');
                                 } else {
                                     el.style.display = 'none';
                                 };
+                            };
+                            var targetElement = null;
+                            try {
+                                targetElement = document.querySelector(('.' + document.getElementById(event.target.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
+                            } catch (e) {
+                                console.error(e);
                             };
                             // console.log('to', targetElement)
                             if (targetElement) {
@@ -763,16 +783,28 @@ onReady(() => {
             document.querySelector('header .ss-site-header-main-links-container > a.forest').style.marginLeft = `-${Math.min(window.scrollY, 50)}px`;
             document.querySelector('header .ss-site-header-main-links-container > a.shaw').style.marginTop = `-${Math.min(window.scrollY, 45)}px`;
         });
+        async function sequentialRun(taskFactories) {
+            const runWithTimeout = (taskFn, t) => Promise.race([
+                (async () => { try { return await taskFn(); } catch (e) { console.error(e); return null; } })(),
+                new Promise(resolve => setTimeout(() => resolve(null), t))
+            ]);
+            try {
+                for (const factory of taskFactories) {
+                    const taskFn = (typeof factory === 'function') ? factory : () => factory;
+                    await runWithTimeout(taskFn, 2000);
+                };
+            } catch (e) {
+                console.error(e);
+            };
+        };
         try {
-            const allTasksPromise = (tasks.length) ? Promise.all(tasks) : Promise.resolve();
-            const timeout = new Promise(resolve => setTimeout(resolve, 5000));
-            Promise.race([allTasksPromise, timeout]).then(afterReady).catch(afterReady);
+            await sequentialRun(tasks, 2000, 5000);
         } catch (err) {
             console.error(err);
-            afterReady();
         };
-    } catch (e) {
-        console.error(e);
+        afterReady();
+    } catch (err) {
+        console.error(err);
         afterReady();
     };
 });
