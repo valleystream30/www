@@ -677,7 +677,7 @@ onReady(async () => {
                         var lis = ul.querySelectorAll('li');
                         var removeLi = Array.from(lis).find(li => li.innerText.toLowerCase().includes('page sections here'));
                         if (!removeLi) continue;
-                        for (var sectionInfo of pageSections.slice(1)) {
+                        for (var sectionInfo of pageSections.slice(1).reverse()) {
                             var newLi = document.createElement('li');
                             newLi.innerHTML = `<a href="#${sectionInfo.id}">${sectionInfo.title}</a>`;
                             removeLi.parentNode.insertBefore(newLi, removeLi.nextSibling);
@@ -709,8 +709,8 @@ onReady(async () => {
                     if (!section.querySelector('.ss-editor-content').innerText.toLowerCase().includes('page sections here')) break;
                     section.querySelector('.ss-editor-content').innerHTML = section.querySelector('.ss-editor-content').innerHTML.replace(/page sections here/i, '');
                     if (section.querySelector('.ss-editor-content').innerText.trim() === '') section.querySelector('.ss-editor-content').remove();
-                    for (var link in section.querySelectorAll('.stack-link-container a')) {
-                        if (pageSections[Number(link) + 1]) section.querySelectorAll('.stack-link-container a')[Number(link)].href = `#${pageSections[Number(link) + 1].id}`;
+                    for (var link of section.querySelectorAll('.stack-link-container a')) {
+                        if (pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase())) link.href = `#${pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase()).id}`;
                     };
                     break;
                 case 'tabbedElements':
@@ -844,9 +844,22 @@ function afterReady() {
 };
 
 var resizeTimeout;
+var previousWidth = window.innerWidth;
 window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-        window.location.reload();
-    }, 500);
+    const newWidth = window.innerWidth;
+    const needsReloading = false;
+    if (((previousWidth > 1300) && (newWidth <= 1300)) || ((previousWidth <= 1300) && (newWidth > 1300)) ||
+        ((previousWidth > 1023) && (newWidth <= 1023)) || ((previousWidth <= 1023) && (newWidth > 1023)) ||
+        ((previousWidth > 1000) && (newWidth <= 1000)) || ((previousWidth <= 1000) && (newWidth > 1000)) ||
+        ((previousWidth > 800) && (newWidth <= 800)) || ((previousWidth <= 800) && (newWidth > 800)) ||
+        ((previousWidth > 767) && (newWidth <= 767)) || ((previousWidth <= 767) && (newWidth > 767)) ||
+        ((previousWidth > 576) && (newWidth <= 576)) || ((previousWidth <= 576) && (newWidth > 576))) needsReloading = true;
+    if (needsReloading) {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            window.location.reload();
+        }, 500);
+    } else {
+        previousWidth = newWidth;
+    };
 });
