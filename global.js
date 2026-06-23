@@ -53,6 +53,7 @@ async function onReady(callback) {
 
 var header = document.querySelector('header');
 var nav = Array.from(header.querySelectorAll('nav')).find(nav => (nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1)));
+var pageSections = [];
 
 onReady(async () => {
     try {
@@ -484,10 +485,12 @@ onReady(async () => {
                 }
             }, 500);
         }));
-        var pageSections = Array.from(document.querySelectorAll('section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off)), section:not(.ss-hidden-component):has(.ss-component-header-title)')).filter(section => section.querySelector('.ss-component-header-title') ? true : (section.querySelector('.ss-component-content .ss-one-column .ss-component-column').children.length === 1)).map(section => {
+        pageSections = Array.from(document.querySelectorAll('section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off)), section:not(.ss-hidden-component):has(.ss-component-header-title)')).filter(section => section.querySelector('.ss-component-header-title') ? true : (section.querySelector('.ss-component-content .ss-one-column .ss-component-column').children.length === 1)).map(section => {
+            var title = section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span, .ss-component-header-title').innerText;
             return {
                 'id': section.id,
-                'title': section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span, .ss-component-header-title').innerText
+                'title': title,
+                'slug': title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
             };
         }).filter(section => (section.title.trim() !== '') && !section.title.toLowerCase().includes('customelement'));
         if (pageSections.length > 1) {
@@ -500,7 +503,7 @@ onReady(async () => {
             pageSectionsLink.appendChild(pageSectionsIcon);
             var pageSectionsDiv = document.createElement('div');
             pageSectionsDiv.className = 'pageSections';
-            pageSectionsDiv.innerHTML = `<b>On This Page</b><ul class="pageSectionsList">${pageSections.map(pageSection => `<li><a href="#${pageSection.id}">${pageSection.title}</a></li>`).join('')}</ul>`;
+            pageSectionsDiv.innerHTML = `<b>On This Page</b><ul class="pageSectionsList">${pageSections.map(pageSection => `<li><a href="#${pageSection.slug}">${pageSection.title}</a></li>`).join('')}</ul>`;
             pageSectionsLink.appendChild(pageSectionsDiv);
             nav.prepend(pageSectionsLink);
             pageSectionsLink.addEventListener('click', (event) => {
@@ -679,7 +682,7 @@ onReady(async () => {
                         if (!removeLi) continue;
                         for (var sectionInfo of pageSections.slice(1).reverse()) {
                             var newLi = document.createElement('li');
-                            newLi.innerHTML = `<a href="#${sectionInfo.id}">${sectionInfo.title}</a>`;
+                            newLi.innerHTML = `<a href="#${sectionInfo.slug}">${sectionInfo.title}</a>`;
                             removeLi.parentNode.insertBefore(newLi, removeLi.nextSibling);
                         };
                         removeLi.remove();
@@ -711,7 +714,7 @@ onReady(async () => {
                     if (section.querySelector('.ss-editor-content').innerText.trim() === '') section.querySelector('.ss-editor-content').remove();
                     for (var container of section.querySelectorAll('.stack-link-container:has(a)')) {
                         let link = container.querySelector('a');
-                        if (pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase())) link.href = `#${pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase()).id}`;
+                        if (pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase())) link.href = `#${pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase()).slug}`;
                         container.addEventListener('click', () => {
                             window.location.href = link.href;
                         });
@@ -840,6 +843,7 @@ function afterReady() {
     };
     var finishTime = new Date().getTime();
     console.log(`Page loaded in ${(finishTime - startTime) / 1000} seconds`);
+    scrollToHash();
 };
 
 var resizeTimeout;
@@ -861,4 +865,16 @@ window.addEventListener('resize', () => {
     } else {
         previousWidth = newWidth;
     };
+});
+
+function scrollToHash() {
+    if (!window.location.hash || !window.location.hash.split('#')[1]) return;
+    var pageSection = pageSections.find(pageSection => pageSection.slug.toLowerCase() === window.location.hash.split('#')[1]);
+    if (pageSection) setTimeout(() => {
+        document.getElementById(pageSection.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+};
+
+window.addEventListener('hashchange', () => {
+    scrollToHash();
 });
