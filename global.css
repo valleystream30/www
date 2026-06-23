@@ -500,6 +500,27 @@ html {
 		border-top-color: #ffffff;
 		border-radius: 50%;
 		animation: spin 0.9s linear infinite;
+		user-select: none;
+		pointer-events: none;
+	}
+
+	&:not(.ready)::after {
+		content: "Hello, " attr(user);
+		top: calc(50% + 60px);
+		left: 0;
+		position: absolute;
+		width: 100vw;
+		text-align: center;
+		font-size: 20px;
+		color: #fff;
+		transition: 0.25s opacity;
+	}
+
+	&:not(.ready):not([user])::after {
+		opacity: 0;
+		user-select: none;
+		pointer-events: none;
+		transition: 0.25s opacity;
 	}
 
 	* {
@@ -582,6 +603,7 @@ html {
 	}
 }
 
+html:not(:has(body.customFont)),
 body:not(.customFont),
 h1:not(.customFont),
 h2:not(.customFont),
@@ -751,9 +773,9 @@ li:has(> .anchor-plates) {
 	border-radius: 10px;
 	padding: 10px 20px;
 	transition:
-		zoom 0.5s ease 0.5s,
-		bottom 0.25s ease 0.5s,
-		all 0.25s;
+		all 0.25s,
+		zoom 0.5s ease 1.75s,
+		bottom 0.25s ease 1.75s;
 	backdrop-filter: blur(5px);
 	box-shadow: 0 0 0px var(--red);
 

@@ -65,6 +65,7 @@ onReady(async () => {
         try {
             loggedInUser = JSON.parse(String('{' + (document.querySelector('.adminBar script') ? '\'' + document.querySelector('.adminBar script').innerText.trim().split(`visitor: {`)[1].split('}')[0].trim().replaceAll('  ', '').replaceAll('\n', ' ').slice(0, -1).replaceAll(', ', ', \'').replaceAll(':', '\':') : '') + '}').replaceAll('\'', '"'));
         } catch { };
+        if (loggedInUser.full_name) document.documentElement.setAttribute('user', loggedInUser.full_name.split(' ')[0]);
         const tasks = [];
         function addTask(taskFactory) {
             tasks.push(taskFactory);
