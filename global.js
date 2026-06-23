@@ -874,7 +874,7 @@ var resizeTimeout;
 var previousWidth = window.innerWidth;
 window.addEventListener('resize', () => {
     const newWidth = window.innerWidth;
-    const needsReloading = false;
+    var needsReloading = false;
     if (((previousWidth > 1300) && (newWidth <= 1300)) || ((previousWidth <= 1300) && (newWidth > 1300)) ||
         ((previousWidth > 1023) && (newWidth <= 1023)) || ((previousWidth <= 1023) && (newWidth > 1023)) ||
         ((previousWidth > 1000) && (newWidth <= 1000)) || ((previousWidth <= 1000) && (newWidth > 1000)) ||
