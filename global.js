@@ -719,36 +719,34 @@ onReady(async () => {
                     break;
                 case 'tabbedElements':
                     var tabs = section.querySelectorAll('.ss-tab');
-                    var targetElements = [];
+                    var allTabsTargetElements = [];
                     for (var tab of tabs) {
-                        var targetElement = null;
+                        var targetElements = [];
                         try {
-                            targetElement = document.querySelector(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
+                            targetElements = document.querySelectorAll(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
                         } catch (e) {
                             console.error(e);
                         };
-                        // console.log(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'), targetElement)
-                        if (targetElement) {
-                            targetElements.push(targetElement);
-                            document.getElementById(tab.getAttribute('aria-controls')).style.display = 'none';
-                            if (!targetElement.classList.contains('customElement')) targetElement.style.display = 'none';
-                        };
+                        // console.log(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'), targetElements)
+                        allTabsTargetElements = allTabsTargetElements.concat(Array.from(targetElements));
+                        document.getElementById(tab.getAttribute('aria-controls')).style.display = 'none';
+                        for (var targetElement of targetElements) if (!targetElement.classList.contains('customElement')) targetElement.style.display = 'none';
                         tab.addEventListener('click', (event) => {
-                            for (var el of targetElements) {
+                            for (var el of allTabsTargetElements) {
                                 if (el.classList.contains('customElement')) {
                                     el.classList.remove('active');
                                 } else {
                                     el.style.display = 'none';
                                 };
                             };
-                            var targetElement = null;
+                            var targetElements = [];
                             try {
-                                targetElement = document.querySelector(('.' + document.getElementById(event.target.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
+                                targetElements = document.querySelectorAll(('.' + document.getElementById(event.target.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
                             } catch (e) {
                                 console.error(e);
                             };
-                            // console.log('to', targetElement)
-                            if (targetElement) {
+                            // console.log('to', targetElements)
+                            for (var targetElement of targetElements) {
                                 if (targetElement.classList.contains('customElement')) {
                                     targetElement.classList.add('active');
                                 } else {
