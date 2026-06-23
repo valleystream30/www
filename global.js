@@ -54,10 +54,17 @@ async function onReady(callback) {
 var header = document.querySelector('header');
 var nav = Array.from(header.querySelectorAll('nav')).find(nav => (nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1)));
 var pageSections = [];
+var loggedInUser = {
+    visitor: null,
+    email: null,
+    full_name: null,
+};
 
 onReady(async () => {
     try {
-        // tasks will hold functions that return promises so we can run them sequentially and preserve order
+        try {
+            loggedInUser = JSON.parse(String('{' + (document.querySelector('.adminBar script') ? '\'' + document.querySelector('.adminBar script').innerText.trim().split(`visitor: {`)[1].split('}')[0].trim().replaceAll('  ', '').replaceAll('\n', ' ').slice(0, -1).replaceAll(', ', ', \'').replaceAll(':', '\':') : '') + '}').replaceAll('\'', '"'));
+        } catch { };
         const tasks = [];
         function addTask(taskFactory) {
             tasks.push(taskFactory);
@@ -538,10 +545,10 @@ onReady(async () => {
                     for (var wrapper of section.querySelectorAll('.ss-im-icon-wrapper-inner')) {
                         const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
                         const emailMatch = wrapper.innerText.match(emailPattern);
-                        const email = emailMatch ? emailMatch[0].replaceAll('ext', '#').replaceAll('.', '').replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '') : null;
+                        const email = emailMatch ? emailMatch[0] : null;
                         const phonePattern = /(?:\+?\d{1,3}\s*)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}(?:\s*(?:ext\.?|x)\s*\d+)?/i;
                         const phoneMatch = wrapper.innerText.match(phonePattern);
-                        const phone = phoneMatch ? phoneMatch[0] : null;
+                        const phone = phoneMatch ? phoneMatch[0].replaceAll('.', '').replaceAll(' ', '').replaceAll('ext', ',').replaceAll('Ext', ',').replaceAll('(', '').replaceAll(')', '') : null;
                         if (email) {
                             const emailLink = document.createElement('a');
                             emailLink.href = `mailto:${email}`;
@@ -556,6 +563,7 @@ onReady(async () => {
                             phoneLink.classList.add('phone');
                             wrapper.appendChild(phoneLink);
                         };
+                        if (wrapper.querySelector('.ss-icon-title') && (loggedInUser.email && email && (loggedInUser.email.toLowerCase() === email.toLowerCase())) || (loggedInUser.full_name && (wrapper.querySelector('.ss-icon-title').innerText.toLowerCase() === loggedInUser.full_name.toLowerCase()))) wrapper.querySelector('.ss-icon-title').innerText += ' (You)';
                     };
                     break;
                 case 'spotlight':
@@ -785,9 +793,24 @@ onReady(async () => {
             document.querySelector('header .ss-site-header-main-links-container > a.forest').style.marginLeft = `-${Math.min(window.scrollY, 50)}px`;
             document.querySelector('header .ss-site-header-main-links-container > a.shaw').style.marginTop = `-${Math.min(window.scrollY, 45)}px`;
         });
+        const signInLink = loggedInUser.full_name && document.querySelector('footer .school-footer-col:last-of-type nav:last-of-type ul:last-of-type li:last-of-type');
+        try {
+            signInLink.querySelector('a').innerText = 'Log Out';
+            signInLink.querySelector('a').href = `${location.origin}/?logout=true`;
+        } catch {
+            signInLink?.remove();
+        };
+        (loggedInUser.full_name && document.querySelector('.adminBar'))?.setAttribute('logged-in-as', loggedInUser.full_name);
         async function sequentialRun(taskFactories) {
             const runWithTimeout = (taskFn, t) => Promise.race([
-                (async () => { try { return await taskFn(); } catch (e) { console.error(e); return null; } })(),
+                (async () => {
+                    try {
+                        return await taskFn();
+                    } catch (e) {
+                        console.error(e);
+                        return null;
+                    };
+                })(),
                 new Promise(resolve => setTimeout(() => resolve(null), t))
             ]);
             try {
