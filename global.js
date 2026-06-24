@@ -801,7 +801,7 @@ onReady(async () => {
         } catch {
             signInLink?.remove();
         };
-        (loggedInUser.full_name && document.querySelector('.adminBar'))?.setAttribute('logged-in-as', loggedInUser.full_name);
+        (loggedInUser.full_name && document.querySelector('.adminBar') && document.querySelector('.adminBar').lastElementChild)?.setAttribute('logged-in-as', loggedInUser.full_name);
         async function sequentialRun(taskFactories) {
             const runWithTimeout = (taskFn, t) => Promise.race([
                 (async () => {
@@ -860,10 +860,22 @@ function afterReady() {
         if (location.href.includes('index.php?pageID=') && !location.href.includes('&adminArea')) window.history.replaceState({}, '', location.href.replace('index.php?pageID=', ''));
         setTimeout(() => {
             document.documentElement.classList.add('ready');
+            setTimeout(() => {
+                document.querySelector('.adminBar').classList.add('visible');
+                setTimeout(() => {
+                    document.querySelector('.adminBar').classList.remove('visible');
+                }, 2500);
+            }, 1750);
         }, 100);
     } catch (e) {
         console.error(e);
-        document.documentElement.classList.add('ready');
+        document.querySelector('.adminBar').classList.add('visible');
+        setTimeout(() => {
+            document.querySelector('.adminBar').classList.add('visible');
+            setTimeout(() => {
+                document.querySelector('.adminBar').classList.remove('visible');
+            }, 2500);
+        }, 1750);
     };
     var finishTime = new Date().getTime();
     console.log(`Page loaded in ${(finishTime - startTime) / 1000} seconds`);
@@ -902,3 +914,5 @@ function scrollToHash() {
 window.addEventListener('hashchange', () => {
     scrollToHash();
 });
+
+// if mouse cursor is within 50px around .adminBar or inside .adminBar, add class visible, else remove class visible

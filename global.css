@@ -559,11 +559,6 @@ html {
 		opacity: 0 !important;
 		overflow: hidden !important;
 		max-height: 100vh;
-
-		.adminBar {
-			zoom: 0.5 !important;
-			bottom: -50px !important;
-		}
 	}
 
 	&[font="2"] header .ss-site-header-school-name:not(.forceStyle) {
@@ -760,7 +755,7 @@ li:has(> .anchor-plates) {
 	height: fit-content;
 	min-height: unset !important;
 	display: flex;
-	background: #500404b8 !important;
+	background-color: transparent !important;
 	border: none;
 	justify-content: center;
 	position: fixed;
@@ -768,20 +763,8 @@ li:has(> .anchor-plates) {
 	width: fit-content;
 	left: 50%;
 	transform: translateX(-50%);
-	bottom: 20px;
-	color: #fff !important;
-	border-radius: 10px;
-	padding: 10px 20px;
-	transition:
-		all 0.25s,
-		zoom 0.5s ease 1.75s,
-		bottom 0.25s ease 1.75s;
-	backdrop-filter: blur(5px);
-	box-shadow: 0 0 0px var(--red);
-
-	&::before {
-		content: "Logged in as " attr(logged-in-as);
-	}
+	padding: 50px 175px;
+	bottom: 0;
 
 	&.affix-top:not(.forceStyle),
 	&.affix:not(.forceStyle) {
@@ -794,22 +777,49 @@ li:has(> .anchor-plates) {
 	}
 
 	& > :last-child {
+		display: flex;
+		background: #500404b8 !important;
 		width: fit-content;
 		padding: 0px;
+		color: #fff !important;
+		border-radius: 10px;
+		padding: 10px 20px;
+		backdrop-filter: blur(5px);
+		box-shadow: 0 0 0px var(--red);
+		justify-content: center;
+		align-items: center;
+		margin-bottom: -20px;
+		transition:
+			all 0.25s,
+			zoom 0.5s ease,
+			margin-bottom 0.25s ease;
+
+		&::before {
+			content: "Logged in as " attr(logged-in-as);
+		}
+
+		* {
+			float: unset;
+		}
+
+		&:hover {
+			box-shadow: 0 0 10px var(--red);
+		}
 	}
 
 	em {
 		color: #ffffff !important;
 	}
 
-	&:hover {
-		box-shadow: 0 0 10px var(--red);
-	}
-
 	a {
 		padding: 0px;
 		margin-left: 10px;
 		width: fit-content;
+	}
+
+	&:not(.visible):not(:hover) > :last-child {
+		zoom: 0.5 !important;
+		margin-bottom: -300px !important;
 	}
 }
 
