@@ -842,9 +842,13 @@ onReady(async () => {
 });
 
 function afterReady() {
+    if (nav.clientHeight > 75) {
+        afterReady();
+        return;
+    };
     console.log(`Proceeding in ${(new Date().getTime() - startTime) / 1000} seconds`);
     try {
-        header.style.paddingBottom = `${(nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1))}px`;
+        header.style.paddingBottom = `min(${(nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1))}px, 59px)`;
         document.documentElement.style.scrollPadding = `${(nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1))}px`;
         var navMaxTop = header.clientHeight - (nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1));
         setTimeout(() => {
