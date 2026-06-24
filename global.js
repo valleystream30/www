@@ -742,7 +742,13 @@ onReady(async () => {
                         // console.log(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'), targetElements)
                         allTabsTargetElements = allTabsTargetElements.concat(Array.from(targetElements));
                         if (targetElements.length) document.getElementById(tab.getAttribute('aria-controls')).style.display = 'none';
-                        for (var targetElement of targetElements) if (!targetElement.classList.contains('customElement')) targetElement.style.display = 'none';
+                        for (var targetElement of targetElements) {
+                            if (targetElement.classList.contains('customElement')) {
+                                targetElement.classList.remove('break-out');
+                            } else {
+                                targetElement.style.display = 'none';
+                            };
+                        };
                         tab.addEventListener('click', (event) => {
                             for (var el of allTabsTargetElements) {
                                 if (el.classList.contains('customElement')) {

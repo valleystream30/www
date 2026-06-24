@@ -506,7 +506,7 @@ html {
 
 	&:not(.ready)::after {
 		content: "Hello, " attr(user);
-		top: calc(50% + 60px);
+		top: calc(50% + 50px);
 		left: 0;
 		position: absolute;
 		width: 100vw;
@@ -779,7 +779,7 @@ li:has(> .anchor-plates) {
 	& > :last-child {
 		display: flex;
 		background: #500404b8 !important;
-		width: fit-content;
+		width: max-content;
 		padding: 0px;
 		color: #fff !important;
 		border-radius: 10px;
@@ -794,7 +794,7 @@ li:has(> .anchor-plates) {
 			zoom 0.5s ease,
 			margin-bottom 0.25s ease;
 
-		&::before {
+		&[logged-in-as]::before {
 			content: "Logged in as " attr(logged-in-as);
 		}
 
@@ -1818,8 +1818,8 @@ section.ss-accordion-tabs:has(.ss-tabs-list) {
 	display: none !important;
 }
 
-.customElement.tabbedElement {
-	padding: 20px 0 80px 0 !important;
+.customElement.tabbedElement:not(.forceStyle) {
+	padding: 5px 0 80px 0 !important;
 
 	.ss-component-content {
 		padding: 0;
@@ -1831,6 +1831,10 @@ section.ss-accordion-tabs:has(.ss-tabs-list) {
 
 	.wow {
 		visibility: unset !important;
+	}
+
+	&.active:has(+ .customElement.tabbedElement.active) {
+		padding-bottom: 25px !important;
 	}
 }
 
