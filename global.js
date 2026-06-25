@@ -61,6 +61,7 @@ var loggedInUser = {
 };
 var currentSlug = null;
 var currentSectionTimer = null;
+var intersecting = new Set();
 
 onReady(async () => {
     try {
@@ -515,7 +516,18 @@ onReady(async () => {
             pageSectionsLink.appendChild(pageSectionsIcon);
             var pageSectionsDiv = document.createElement('div');
             pageSectionsDiv.className = 'pageSections';
-            pageSectionsDiv.innerHTML = `<b>On This Page</b><ul class="pageSectionsList">${pageSections.map(pageSection => `<li><a href="#${pageSection.slug}">${pageSection.title}</a></li>`).join('')}</ul>`;
+            pageSectionsDiv.innerHTML = `<b>On This Page</b><ul class="pageSectionsList"></ul>`;
+            for (var pageSection of pageSections) {
+                var pageSectionLi = document.createElement('li');
+                let pageSectionLink = document.createElement('a');
+                pageSectionLink.href = `#${pageSection.slug}`;
+                pageSectionLink.innerText = pageSection.title;
+                pageSectionLi.appendChild(pageSectionLink);
+                pageSectionsDiv.querySelector('.pageSectionsList').appendChild(pageSectionLi);
+                pageSectionLi.addEventListener('click', () => {
+                    if (window.location.hash === pageSectionLink.getAttribute('href')) scrollToHash();
+                });
+            };
             pageSectionsLink.appendChild(pageSectionsDiv);
             nav.prepend(pageSectionsLink);
             pageSectionsLink.addEventListener('click', (event) => {
@@ -694,12 +706,12 @@ onReady(async () => {
                         var removeLi = Array.from(lis).find(li => li.innerText.toLowerCase().includes('page sections here'));
                         if (!removeLi) continue;
                         for (var sectionInfo of pageSections.slice(1).reverse()) {
-                            var newLi = document.createElement('li');
+                            let newLi = document.createElement('li');
                             newLi.innerHTML = `<a href="#${sectionInfo.slug}">${sectionInfo.title}</a>`;
                             removeLi.parentNode.insertBefore(newLi, removeLi.nextSibling);
-                            newLi.onclick = () => {
+                            newLi.addEventListener('click', () => {
                                 if (window.location.hash === newLi.querySelector('a').getAttribute('href')) scrollToHash();
-                            };
+                            });
                         };
                         removeLi.remove();
                     };
@@ -731,11 +743,11 @@ onReady(async () => {
                     for (var container of section.querySelectorAll('.stack-link-container:has(a)')) {
                         let link = container.querySelector('a');
                         if (pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase())) link.href = `#${pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase()).slug}`;
-                        link.onclick = () => {
-                            if (window.location.hash === link.href) scrollToHash();
-                        };
+                        link.addEventListener('click', () => {
+                            if (window.location.hash === link.getAttribute('href')) scrollToHash();
+                        });
                         container.addEventListener('click', () => {
-                            if (window.location.hash === link.href) scrollToHash();
+                            if (window.location.hash === link.getAttribute('href')) scrollToHash();
                             window.location.href = link.href;
                         });
                     };
@@ -903,17 +915,34 @@ function afterReady() {
     scrollToHash();
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
             const matched = pageSections.find(section => section.element === entry.target);
-            if (matched && (matched.slug !== currentSlug)) {
-                currentSlug = matched.slug;
-                clearTimeout(currentSectionTimer);
-                currentSectionTimer = setTimeout(() => {
-                    window.history.replaceState({}, '', `#${currentSlug}`);
-                    currentSectionTimer = null;
-                }, 5000);
+            if (!matched) return;
+            if (entry.isIntersecting) {
+                intersecting.add(matched);
+            } else {
+                intersecting.delete(matched);
             };
         });
+        if (intersecting.size === 0) {
+            clearTimeout(currentSectionTimer);
+            currentSectionTimer = null;
+            return;
+        };
+        clearTimeout(currentSectionTimer);
+        currentSectionTimer = setTimeout(() => {
+            const topmost = [...intersecting].reduce((best, section) => {
+                const rect = section.element.getBoundingClientRect();
+                return (!best || (rect.top < best.top)) ? {
+                    section,
+                    top: rect.top
+                } : best;
+            }, null).section;
+            if (topmost && topmost.slug !== currentSlug) {
+                currentSlug = topmost.slug;
+                window.history.replaceState({}, '', `#${currentSlug}`);
+            };
+            currentSectionTimer = null;
+        }, 2500);
     }, {
         root: null,
         rootMargin: `0px 0px ${window.innerHeight / 5}px`,
