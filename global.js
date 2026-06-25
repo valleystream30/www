@@ -59,6 +59,8 @@ var loggedInUser = {
     email: null,
     full_name: null,
 };
+var currentSlug = null;
+var currentSectionTimer = null;
 
 onReady(async () => {
     try {
@@ -497,6 +499,7 @@ onReady(async () => {
             var title = section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span, .ss-component-header-title').innerText;
             section.classList.add('pageSection');
             return {
+                'element': section,
                 'id': section.id,
                 'title': title,
                 'slug': title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
@@ -694,6 +697,9 @@ onReady(async () => {
                             var newLi = document.createElement('li');
                             newLi.innerHTML = `<a href="#${sectionInfo.slug}">${sectionInfo.title}</a>`;
                             removeLi.parentNode.insertBefore(newLi, removeLi.nextSibling);
+                            newLi.onclick = () => {
+                                if (window.location.hash === newLi.querySelector('a').getAttribute('href')) scrollToHash();
+                            };
                         };
                         removeLi.remove();
                     };
@@ -725,7 +731,11 @@ onReady(async () => {
                     for (var container of section.querySelectorAll('.stack-link-container:has(a)')) {
                         let link = container.querySelector('a');
                         if (pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase())) link.href = `#${pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase()).slug}`;
+                        link.onclick = () => {
+                            if (window.location.hash === link.href) scrollToHash();
+                        };
                         container.addEventListener('click', () => {
+                            if (window.location.hash === link.href) scrollToHash();
                             window.location.href = link.href;
                         });
                     };
@@ -891,6 +901,25 @@ function afterReady() {
     var finishTime = new Date().getTime();
     console.log(`Page loaded in ${(finishTime - startTime) / 1000} seconds`);
     scrollToHash();
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const matched = pageSections.find(section => section.element === entry.target);
+            if (matched && (matched.slug !== currentSlug)) {
+                currentSlug = matched.slug;
+                clearTimeout(currentSectionTimer);
+                currentSectionTimer = setTimeout(() => {
+                    window.history.replaceState({}, '', `#${currentSlug}`);
+                    currentSectionTimer = null;
+                }, 5000);
+            };
+        });
+    }, {
+        root: null,
+        rootMargin: `0px 0px ${window.innerHeight / 5}px`,
+        threshold: 0
+    });
+    pageSections.forEach(section => observer.observe(section.element));
 };
 
 var resizeTimeout;
@@ -918,19 +947,8 @@ function scrollToHash() {
     if (!window.location.hash || !window.location.hash.split('#')[1]) return;
     var pageSection = pageSections.find(pageSection => pageSection.slug.toLowerCase() === window.location.hash.split('#')[1]);
     if (pageSection) setTimeout(() => {
-        document.getElementById(pageSection.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        pageSection.element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
 };
 
-window.addEventListener('hashchange', () => {
-    scrollToHash();
-});
-
-window.addEventListener('scroll', () => {
-    for (var pageSection of pageSections) {
-        var section = document.getElementById(pageSection.id);
-        if (!section) continue;
-        var sectionTop = section.getBoundingClientRect().top + window.scrollY;
-        if ((window.scrollY >= sectionTop) && (window.scrollY < (sectionTop + section.offsetHeight)) && (window.location.hash.split('#')[1] !== pageSection.slug)) window.history.replaceState({}, '', `#${pageSection.slug}`);
-    };
-});
+window.addEventListener('hashchange', scrollToHash);
