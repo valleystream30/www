@@ -695,7 +695,7 @@ table p {
 }
 
 table[cellpadding="1"] td {
-	padding: 5px !important;
+	padding: 15px !important;
 }
 
 li:has(> .anchor-plates) {
@@ -1778,7 +1778,6 @@ p:has(> iframe[height="100%"]) {
 }
 
 ul:has(li[style="text-align: center;"]) {
-	width: max-content;
 	margin-left: auto;
 	margin-right: auto;
 	display: flex;
@@ -1787,6 +1786,7 @@ ul:has(li[style="text-align: center;"]) {
 
 	li[style="text-align: center;"] {
 		width: fit-content;
+		list-style-position: inside;
 	}
 }
 

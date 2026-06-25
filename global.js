@@ -495,6 +495,7 @@ onReady(async () => {
         }));
         pageSections = Array.from(document.querySelectorAll('section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off)), section:not(.ss-hidden-component):has(.ss-component-header-title)')).filter(section => section.querySelector('.ss-component-header-title') ? true : (section.querySelector('.ss-component-content .ss-one-column .ss-component-column').children.length === 1)).map(section => {
             var title = section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span, .ss-component-header-title').innerText;
+            section.classList.add('pageSection');
             return {
                 'id': section.id,
                 'title': title,
@@ -925,4 +926,11 @@ window.addEventListener('hashchange', () => {
     scrollToHash();
 });
 
-// if mouse cursor is within 50px around .adminBar or inside .adminBar, add class visible, else remove class visible
+window.addEventListener('scroll', () => {
+    for (var pageSection of pageSections) {
+        var section = document.getElementById(pageSection.id);
+        if (!section) continue;
+        var sectionTop = section.getBoundingClientRect().top + window.scrollY;
+        if ((window.scrollY >= sectionTop) && (window.scrollY < (sectionTop + section.offsetHeight)) && (window.location.hash.split('#')[1] !== pageSection.slug)) window.history.replaceState({}, '', `#${pageSection.slug}`);
+    };
+});
