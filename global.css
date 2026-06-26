@@ -620,6 +620,16 @@ body {
 	&:has(.alert-badge:not(.active)) .ss-alert-modal-svg-container svg {
 		display: none !important;
 	}
+
+	&:has(.translationOffer) {
+		background: black;
+
+		& > :not(.translationOffer) {
+			opacity: 0.5;
+			pointer-events: none;
+			user-select: none;
+		}
+	}
 }
 
 .alert-badge.ss-button {
@@ -1877,4 +1887,63 @@ section:has(.ss-component-header-title):not(:has([style="text-align: center;"]))
 .customElement.about .aboutImage:hover {
 	max-width: min(750px, 100%) !important;
 	transition: 0.25s max-width;
+}
+
+.translationOffer {
+	position: fixed;
+	top: 50%;
+	left: calc(50% - (min(750px, 90%) / 2));
+	width: min(750px, 90%);
+	background: #fff;
+	padding: 50px 40px;
+	border-radius: 10px;
+	translate: 0 -50%;
+	z-index: 1049;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 10px;
+	border: 5px solid var(--blue);
+	box-shadow: 10px 10px 0px var(--blue);
+
+	h2,
+	p {
+		margin: 0;
+	}
+
+	.languages {
+		display: flex;
+		gap: 10px;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin-top: 25px;
+
+		button {
+			padding: 10px 30px;
+			font-size: 17.5px;
+			transition: 0.25s;
+		}
+	}
+
+	.translationOfferClose {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		cursor: pointer;
+		padding: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 40px;
+		width: 40px;
+		border-radius: 100%;
+		transition: 0.25s;
+
+		&:hover {
+			background: var(--blue);
+			color: #ffffff;
+			transition: 0.25s;
+		}
+	}
 }

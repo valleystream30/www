@@ -62,6 +62,7 @@ var loggedInUser = {
 var currentSlug = null;
 var currentSectionTimer = null;
 var intersecting = new Set();
+var languages = [];
 
 onReady(async () => {
     try {
@@ -393,7 +394,7 @@ onReady(async () => {
             var languagesInterval = setInterval(() => {
                 if (document.getElementById('GoogleTranslate')?.options.length) {
                     clearInterval(languagesInterval);
-                    var languages = Array.from(document.getElementById('GoogleTranslate').options).slice(1).map(option => {
+                    languages = Array.from(document.getElementById('GoogleTranslate').options).slice(1).map(option => {
                         return {
                             'language': option.innerText,
                             'code': option.value,
@@ -967,6 +968,60 @@ function afterReady() {
         threshold: 0
     });
     pageSections.forEach(section => observer.observe(section.element));
+    if ((!document.documentElement.hasAttribute('lang') || (document.documentElement.getAttribute('lang') === 'en')) && !localStorage.getItem('firstPageLoad')) {
+        var translationOffer = document.createElement('div');
+        translationOffer.className = 'translationOffer';
+        var translationOfferTitle = document.createElement('h2');
+        translationOfferTitle.innerText = 'Translate Our Website';
+        translationOffer.appendChild(translationOfferTitle);
+        var translationOfferText = document.createElement('p');
+        translationOfferText.innerText = 'Valley Stream District 30 is committed to providing a website that is accessible to all. Our website is available to be translated into your preferred language.';
+        translationOffer.appendChild(translationOfferText);
+        var translationOfferLanguages = document.createElement('div');
+        translationOfferLanguages.className = 'languages';
+        for (let language of languages.slice(0, 6)) {
+            var languageButton = document.createElement('button');
+            languageButton.className = 'btn btn-default';
+            languageButton.innerText = language.language;
+            languageButton.addEventListener('click', () => {
+                document.getElementById('GoogleTranslate').value = language.code;
+                document.getElementById('GoogleTranslate').dispatchEvent(new Event('change'));
+                translationOffer.remove();
+                document.removeEventListener('click', translationOfferCloseEvent);
+            });
+            translationOfferLanguages.appendChild(languageButton);
+        };
+        var languageButton = document.createElement('button');
+        languageButton.className = 'btn btn-default';
+        languageButton.innerText = 'More Languages';
+        languageButton.addEventListener('click', () => {
+            translationOffer.remove();
+            document.removeEventListener('click', translationOfferCloseEvent);
+            setTimeout(() => {
+                for (translateButton of document.querySelectorAll('header .translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type')) {
+                    const style = window.getComputedStyle(translateButton);
+                    if ((style.display !== 'none') && (style.visibility !== 'hidden') && (style.opacity !== '0') && ((translateButton.offsetWidth > 0) || (translateButton.offsetHeight > 0) || (translateButton.getClientRects().length > 0))) translateButton.click();
+                };
+            }, 100);
+        });
+        translationOfferLanguages.appendChild(languageButton);
+        translationOffer.appendChild(translationOfferLanguages);
+        var translationOfferClose = document.createElement('i');
+        translationOfferClose.className = 'translationOfferClose fa-regular fa-close';
+        translationOfferClose.addEventListener('click', () => {
+            translationOffer.remove();
+            document.removeEventListener('click', translationOfferCloseEvent);
+        });
+        translationOffer.appendChild(translationOfferClose);
+        document.body.prepend(translationOffer);
+        function translationOfferCloseEvent(event) {
+            if (event.target.closest('.translationOffer')) return;
+            translationOffer.remove();
+            document.removeEventListener('click', translationOfferCloseEvent);
+        };
+        document.addEventListener('click', translationOfferCloseEvent);
+        localStorage.setItem('firstPageLoad', 'true');
+    };
 };
 
 var resizeTimeout;
