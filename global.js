@@ -842,7 +842,13 @@ onReady(async () => {
         } catch {
             signInLink?.remove();
         };
-        (loggedInUser.full_name && document.querySelector('.adminBar') && document.querySelector('.adminBar').lastElementChild)?.setAttribute('logged-in-as', loggedInUser.full_name);
+        var adminBarInner = loggedInUser.full_name && document.querySelector('.adminBar') && document.querySelector('.adminBar').lastElementChild;
+        adminBarInner?.setAttribute('logged-in-as', loggedInUser.full_name);
+        if (adminBarInner) adminBarInner.innerHTML += `<a aria-label="Reload Page" href="" class="admin-btn1 col-sm-3">
+            <em class="fa-light fa-fw fa-rotate logout_loggedin_icon psq_bar_icon_xl hidden-lg hidden-md hidden-sm visible-xs-12"></em>
+            <em class="fa-light fa-fw fa-rotate logout_loggedin_icon visible-lg-12 visible-md-12 visible-sm-12 hidden-xs"></em>
+            <span class="hidden-xs">Sign Out</span>
+        </a>`;
         async function sequentialRun(taskFactories) {
             const runWithTimeout = (taskFn, t) => Promise.race([
                 (async () => {

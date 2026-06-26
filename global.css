@@ -805,10 +805,20 @@ li:has(> .anchor-plates) {
 		&:hover {
 			box-shadow: 0 0 10px var(--red);
 		}
-	}
 
-	em {
-		color: #ffffff !important;
+		.fa-rotate {
+			font-size: 17.5px;
+		}
+
+		em {
+			color: #ffffff !important;
+			transition: 0.25s;
+		}
+
+		&:has(em:hover) em:not(:hover) {
+			opacity: 0.5;
+			transition: 0.25s;
+		}
 	}
 
 	a {
