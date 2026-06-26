@@ -505,7 +505,7 @@ html {
 	}
 
 	&:not(.ready)::after {
-		content: "Hello, " attr(user);
+		content: attr(greeting) ", " attr(user);
 		top: calc(50% + 50px);
 		left: 0;
 		position: absolute;
