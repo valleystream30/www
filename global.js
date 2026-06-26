@@ -767,7 +767,7 @@ onReady(async () => {
                         if (targetElements.length) document.getElementById(tab.getAttribute('aria-controls')).style.display = 'none';
                         for (var targetElement of targetElements) {
                             if (targetElement.classList.contains('customElement')) {
-                                targetElement.classList.remove('break-out');
+                                if (!targetElement.classList.contains('ss-has-bg')) targetElement.classList.remove('break-out');
                             } else {
                                 targetElement.style.display = 'none';
                             };
