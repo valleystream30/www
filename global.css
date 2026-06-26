@@ -315,6 +315,15 @@
 		}
 	}
 
+	html.translated-rtl
+		.customElement.spotlight
+		+ section:has(.ss-im-icons-list)
+		.ss-im-icons-list {
+		margin-left: unset !important;
+		margin-right: 50%;
+		transform: translateX(50%) !important;
+	}
+
 	table tr {
 		display: flex;
 		flex-direction: column;
@@ -413,6 +422,12 @@
 			margin-left: 50%;
 			transform: translateX(-50%);
 		}
+	}
+
+	html.translated-rtl .customElement.about .ss-column-one {
+		margin-left: unset;
+		margin-right: 50%;
+		transform: translateX(50%) !important;
 	}
 
 	.pageSections {
@@ -569,6 +584,11 @@ html {
 		display: none !important;
 	}
 
+	&.translated-rtl .ss-site-header-page-links .dropdown-menu > li > a,
+	&.translated-rtl header .searchBar input {
+		text-align: right;
+	}
+
 	&.translated-rtl .nav {
 		justify-content: end;
 		text-align: right;
@@ -589,6 +609,41 @@ html {
 	&.translated-rtl .customElement.staff:has(.phone) .email {
 		left: 50px;
 		right: unset;
+	}
+
+	&.translated-rtl .adminBar:not(.forceStyle),
+	&.translated-rtl .spotlight-wrapper,
+	&.translated-rtl
+		.ss-component.break-out:not(:has(.stack_off)):not(
+			.customElement.spotlight
+		) {
+		left: unset;
+		right: 50% !important;
+		transform: translateX(50%) !important;
+	}
+
+	&.translated-rtl .customElement.spotlight .spotlight-nav-options {
+		flex-direction: row-reverse;
+	}
+
+	&.translated-rtl .carousel-inner {
+		border-radius: 0 0 0 40px !important;
+	}
+
+	&.translated-rtl .spotlight-wrapper section .carousel-nav-option-cycle,
+	&.translated-rtl .spotlight-wrapper section .carousel-nav-option-pause {
+		right: unset !important;
+		left: -1px;
+		border-radius: 0 30px !important;
+		padding: 10px 12px 12px 10px !important;
+
+		&:hover {
+			padding: 15px 17px 17px 15px !important;
+		}
+	}
+
+	&.translated-rtl li {
+		text-align: right;
 	}
 }
 
