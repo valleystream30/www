@@ -79,7 +79,7 @@ onReady(async () => {
         header.append(nav);
         if ((window.innerWidth > 1000) && header.querySelector('.ss-site-header-main-links-container .translate a')) {
             nav.append(header.querySelector('.ss-site-header-main-links-container .translate a'));
-            for (var translate of header.querySelectorAll('.ss-site-header-main-links-container .translate')) translate.remove();
+            for (var translate of header.querySelectorAll('.ss-site-header-main-links-container .translate')) translate.style.display = 'none';
         };
         var searchBar = document.createElement('div');
         searchBar.className = 'searchBar';

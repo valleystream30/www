@@ -820,6 +820,7 @@ li:has(> .anchor-plates) {
 	&:not(.visible):not(:hover) > :last-child {
 		zoom: 0.5 !important;
 		margin-bottom: -300px !important;
+		opacity: 0;
 	}
 }
 
