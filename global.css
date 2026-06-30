@@ -1853,7 +1853,8 @@ p:has(> iframe[height="100%"]) {
 	}
 }
 
-ul:has(li[style="text-align: center;"]) {
+ul:has(li[style="text-align: center;"]),
+ol:has(li[style="text-align: center;"]) {
 	margin-left: auto;
 	margin-right: auto;
 	display: flex;
