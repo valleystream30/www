@@ -511,7 +511,6 @@ onReady(async () => {
         }));
         pageSections = Array.from(document.querySelectorAll('section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off)), section:not(.ss-hidden-component):has(.ss-component-header-title)')).filter(section => section.querySelector('.ss-component-header-title') ? true : (section.querySelector('.ss-component-content .ss-one-column .ss-component-column').children.length === 1)).map(section => {
             var title = section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span, .ss-component-header-title').innerText;
-            section.classList.add('pageSection');
             return {
                 'element': section,
                 'id': section.id,
@@ -519,6 +518,7 @@ onReady(async () => {
                 'slug': title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
             };
         }).filter(section => (section.title.trim() !== '') && !section.title.toLowerCase().includes('customelement'));
+        for (var pageSection of pageSections) pageSection.element.classList.add('pageSection');
         if (pageSections.length > 1) {
             var pageSectionsLink = document.createElement('a');
             pageSectionsLink.className = 'pageSectionsToggle';

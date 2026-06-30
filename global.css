@@ -775,6 +775,10 @@ section.ss-has-bg:has(
 			opacity: 0.8 !important;
 		}
 	}
+
+	&:not(:first-of-type) {
+		padding: min(70px, 6.5vh) 0 !important;
+	}
 }
 
 table p {
@@ -1894,8 +1898,8 @@ section.ss-accordion-tabs .ss-component-content {
 }
 
 section.ss-accordion-tabs:has(.ss-tabs-list) {
-	padding-top: 40px !important;
-	padding-bottom: 30px !important;
+	padding-top: 50px !important;
+	padding-bottom: 50px !important;
 
 	.ss-tabs-list {
 		justify-content: center;
@@ -2024,4 +2028,11 @@ section:has(.ss-component-header-title):not(:has([style="text-align: center;"]))
 			transition: 0.25s;
 		}
 	}
+}
+
+.pageSection:not(:first-of-type) .ss-component-header-title,
+.pageSection:not(:first-of-type):not(:has(.ss-component-header-title))
+	.ss-editor-content
+	*:not(.forceStyle) {
+	font-size: clamp(26px, 6vw, 40px) !important;
 }
