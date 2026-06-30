@@ -171,6 +171,23 @@
 		transform: rotateY(180deg);
 		top: -35px;
 	}
+
+	section:not(.customElement.tabbedElements)
+		.ss-tabs:has(.ss-tab-panel:nth-child(7)) {
+		display: flex;
+		gap: 10px;
+
+		.ss-tabs-list {
+			flex-direction: column;
+			justify-content: start;
+			height: fit-content;
+			margin-top: 20px;
+		}
+
+		.ss-tabs-panels {
+			width: 100%;
+		}
+	}
 }
 
 @media screen and (max-width: 1000px) {
