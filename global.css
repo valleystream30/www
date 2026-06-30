@@ -480,6 +480,11 @@
 	.ss-site-header-main-nav a {
 		font-size: 18px;
 	}
+
+	.customElement.sideBySide
+		.spotlight-component-body-content:not(.forceStyle) {
+		padding: min(50px, 10%) min(80px, 2.5%) !important;
+	}
 }
 
 @media screen and (max-width: 800px) {
