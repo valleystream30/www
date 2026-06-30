@@ -1474,32 +1474,49 @@ footer .school-footer-col:last-of-type nav:last-of-type ul:last-of-type {
 	display: none;
 }
 
-.customElement.staff .ss-im-icon-wrapper-inner {
-	align-items: start;
-	text-align: left;
+.customElement.staff {
+	margin-bottom: 60px !important;
 
-	&::before {
-		border: 2px solid var(--blue) !important;
-		border-radius: 10px;
-	}
+	.ss-im-icon-wrapper {
+		min-width: 400px;
 
-	.ss-icon {
-		border-color: var(--blue) !important;
-		background-color: var(--blue) !important;
-		transition:
-			0.25s zoom,
-			0.25s margin-bottom,
-			0.25s rotate;
-	}
+		.ss-im-icon-wrapper-inner {
+			align-items: start;
+			text-align: left;
 
-	&:hover .ss-icon {
-		margin-bottom: 10.75px;
-		zoom: 1.1;
-		rotate: -7deg;
-		transition:
-			0.25s zoom,
-			0.25s margin-bottom,
-			0.25s rotate;
+			&::before {
+				border: 2px solid var(--blue) !important;
+				border-radius: 10px;
+			}
+
+			.ss-icon {
+				border-color: var(--blue) !important;
+				background-color: var(--blue) !important;
+				transition:
+					0.25s zoom,
+					0.25s margin-bottom,
+					0.25s rotate;
+			}
+
+			&:hover .ss-icon {
+				margin-bottom: 10.75px;
+				zoom: 1.1;
+				rotate: -7deg;
+				transition:
+					0.25s zoom,
+					0.25s margin-bottom,
+					0.25s rotate;
+			}
+		}
+
+		&:has(.ss-icon) {
+			margin-top: 60px;
+			margin-bottom: 0 !important;
+		}
+
+		&:not(:has(.ss-icon)) {
+			margin-bottom: 0 !important;
+		}
 	}
 }
 
@@ -1517,10 +1534,6 @@ footer .school-footer-col:last-of-type nav:last-of-type ul:last-of-type {
 .customElement.staff .email {
 	font-size: 24.4px;
 	margin-top: -4px;
-}
-
-.customElement.staff .ss-im-icon-wrapper {
-	min-width: 400px;
 }
 
 .customElement.project .ss-component-column {
