@@ -819,19 +819,6 @@ onReady(async () => {
                     break;
             };
         });
-        for (var link of document.querySelectorAll('a[href]')) {
-            if (link.getAttribute('href') === '') {
-                var newLink = document.createElement('div');
-                newLink.className = link.className;
-                newLink.innerHTML = link.innerHTML;
-                link.replaceWith(newLink);
-            } else if ((link.getAttribute('href') === '#') || (link.getAttribute('href') === window.location.href)) {
-                link.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            };
-        };
         if (window.innerWidth <= 560) document.addEventListener('scroll', () => {
             document.querySelector('header .ss-site-header-main-links-container > a.forest').style.marginLeft = `-${Math.min(window.scrollY, 50)}px`;
             document.querySelector('header .ss-site-header-main-links-container > a.shaw').style.marginTop = `-${Math.min(window.scrollY, 45)}px`;
@@ -850,6 +837,23 @@ onReady(async () => {
             <em class="fa-light fa-fw fa-rotate logout_loggedin_icon visible-lg-12 visible-md-12 visible-sm-12 hidden-xs"></em>
             <span class="hidden-xs">Sign Out</span>
         </a>`;
+        for (let link of document.querySelectorAll('a[href]')) {
+            if (link.getAttribute('href') === '') {
+                var newLink = document.createElement('div');
+                newLink.className = link.className;
+                newLink.innerHTML = link.innerHTML;
+                link.replaceWith(newLink);
+            } else if ((link.getAttribute('href') === '#') || (link.getAttribute('href') === window.location.href)) {
+                link.addEventListener('click', (event) => {
+                    if (link.getAttribute('href') !== '#') return;
+                    if (link.getAttribute('href') !== window.location.href) return;
+                    event.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            } else if (link.getAttribute('href').startsWith('#')) link.addEventListener('click', () => {
+                if (window.location.hash === link.getAttribute('href')) scrollToHash();
+            });
+        };
         async function sequentialRun(taskFactories) {
             const runWithTimeout = (taskFn, t) => Promise.race([
                 (async () => {
@@ -1022,11 +1026,6 @@ function afterReady() {
         document.addEventListener('click', translationOfferCloseEvent);
         localStorage.setItem('firstPageLoad', 'true');
     };
-    document.querySelectorAll('a[href]').forEach(link => {
-        if (link.getAttribute('href').startsWith('#')) link.addEventListener('click', () => {
-            if (window.location.hash === link.getAttribute('href')) scrollToHash();
-        });
-    });
 };
 
 var resizeTimeout;
