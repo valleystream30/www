@@ -709,8 +709,12 @@ body {
 	}
 }
 
-.alert-badge.ss-button {
-	background-color: var(--yellow);
+.alert-badge-container {
+	top: 250px;
+
+	.alert-badge.ss-button {
+		background-color: var(--yellow);
+	}
 }
 
 .ss-alert-modal-svg-container {
