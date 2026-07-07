@@ -707,10 +707,16 @@ body {
 			user-select: none;
 		}
 	}
+
+	&:has(nav.scrolled) .alert-badge-container {
+		top: 85px;
+		transition: 0.25s top;
+	}
 }
 
 .alert-badge-container {
 	top: 250px;
+	transition: 0.1s top;
 
 	.alert-badge.ss-button {
 		background-color: var(--yellow);
@@ -2070,7 +2076,8 @@ section:has(.ss-component-header-title):not(:has([style="text-align: center;"]))
 	font-size: clamp(26px, 6vw, 40px) !important;
 }
 
-.btn-lg {
+.btn-lg,
+.btn-default {
 	padding: 15px 30px !important;
 	zoom: 0.9;
 	border-radius: 5px !important;
