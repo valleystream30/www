@@ -515,7 +515,7 @@ onReady(async () => {
                 'element': section,
                 'id': section.id,
                 'title': title,
-                'slug': title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
+                'slug': title.toLowerCase().replaceAll('&', 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
             };
         }).filter(section => (section.title.trim() !== '') && !section.title.toLowerCase().includes('customelement'));
         for (var pageSection of pageSections) pageSection.element.classList.add('pageSection');
@@ -1022,6 +1022,11 @@ function afterReady() {
         document.addEventListener('click', translationOfferCloseEvent);
         localStorage.setItem('firstPageLoad', 'true');
     };
+    document.querySelectorAll('a[href]').forEach(link => {
+        if (link.getAttribute('href').startsWith('#')) link.addEventListener('click', () => {
+            if (window.location.hash === link.getAttribute('href')) scrollToHash();
+        });
+    });
 };
 
 var resizeTimeout;

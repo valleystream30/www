@@ -2049,3 +2049,13 @@ section:has(.ss-component-header-title):not(:has([style="text-align: center;"]))
 	*:not(.forceStyle) {
 	font-size: clamp(26px, 6vw, 40px) !important;
 }
+
+.btn-lg {
+	padding: 15px 30px !important;
+	zoom: 0.9;
+	border-radius: 5px !important;
+
+	&:hover {
+		padding: 15px 40px 15px 20px !important;
+	}
+}
