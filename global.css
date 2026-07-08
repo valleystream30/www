@@ -2090,3 +2090,12 @@ section:has(.ss-component-header-title):not(:has([style="text-align: center;"]))
 .modal-backdrop {
 	z-index: 1049;
 }
+
+.uwy.userway_p1 .userway_buttons_wrapper {
+	bottom: 15px !important;
+	top: unset !important;
+	right: 15px !important;
+	left: unset !important;
+	transform: unset !important;
+	zoom: 1.5;
+}
