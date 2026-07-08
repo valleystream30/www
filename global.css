@@ -2086,3 +2086,7 @@ section:has(.ss-component-header-title):not(:has([style="text-align: center;"]))
 		padding: 15px 40px 15px 20px !important;
 	}
 }
+
+.modal-backdrop {
+	z-index: 1049;
+}

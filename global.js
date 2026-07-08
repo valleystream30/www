@@ -833,7 +833,7 @@ onReady(async () => {
         };
         var adminBarInner = loggedInUser.full_name && document.querySelector('.adminBar') && document.querySelector('.adminBar').lastElementChild;
         adminBarInner?.setAttribute('logged-in-as', loggedInUser.full_name);
-        if (adminBarInner) adminBarInner.innerHTML += `<a aria-label="Reload Page" href="${window.location.href}" class="admin-btn1 col-sm-3">
+        if (adminBarInner) adminBarInner.innerHTML += `<a aria-label="Reload Page" href="${window.location.pathname}" class="admin-btn1 col-sm-3">
             <em class="fa-light fa-fw fa-rotate logout_loggedin_icon psq_bar_icon_xl hidden-lg hidden-md hidden-sm visible-xs-12"></em>
             <em class="fa-light fa-fw fa-rotate logout_loggedin_icon visible-lg-12 visible-md-12 visible-sm-12 hidden-xs"></em>
             <span class="hidden-xs">Reload Page</span>
@@ -1027,6 +1027,11 @@ function afterReady() {
         document.addEventListener('click', translationOfferCloseEvent);
         localStorage.setItem('firstPageLoad', 'true');
     };
+    setTimeout(() => {
+        for (var section of document.querySelectorAll('section:has(.ss-component-header-title)')) {
+            if (section.querySelector('.ss-component-header-title') && section.querySelector('.ss-component-header-title').innerText.includes('customElement.')) window.location.reload();
+        };
+    }, 5000);
 };
 
 var resizeTimeout;
