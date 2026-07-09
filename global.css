@@ -5,9 +5,9 @@
 	--header-school-mascot-height: min(75px, 15vw);
 }
 
-html:not(.disable) {
-	@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
+html:not(.disable) {
 	@media screen and (min-width: 1680px) {
 		.container {
 			max-width: 2000px !important;
@@ -563,6 +563,7 @@ html:not(.disable) {
 		font-size: 20px;
 		color: #fff;
 		transition: 0.25s opacity;
+		font-family: "Montserrat";
 	}
 
 	&:not(.ready):not([user])::after {
@@ -968,6 +969,11 @@ html:not(.disable) {
 			zoom: 0.5 !important;
 			margin-bottom: -300px !important;
 			opacity: 0;
+		}
+
+		&:not(.forceStyle):has(> :last-child:not([logged-in-as]))
+			a:first-of-type {
+			margin-left: 0;
 		}
 	}
 
