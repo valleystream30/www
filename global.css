@@ -2158,4 +2158,12 @@ html:not(.disable) {
 	.ss-component-content:not(.background-break-out) {
 		max-width: 100% !important;
 	}
+
+	.customElement.aboutUs .ss-component-content {
+		padding: 0 80px;
+	}
+
+	.spotlight-image-container img {
+		object-fit: cover !important;
+	}
 }
