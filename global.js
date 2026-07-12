@@ -967,6 +967,14 @@ if (window.location.search.includes('disable')) {
                         console.error(e);
                     };
                 };
+                document.querySelectorAll('i:not(:empty)').forEach(icon => {
+                    if (icon.innerHTML === '&nbsp;') icon.innerHTML = '';
+                });
+                var accessibilityIconInterval = setInterval(() => {
+                    if (!document.querySelector('#userwayAccessibilityIcon')) return;
+                    clearInterval(accessibilityIconInterval);
+                    document.querySelector('#userwayAccessibilityIcon').style.background = 'var(--blue)';
+                }, 500);
                 try {
                     await sequentialRun(tasks, 2000, 5000);
                 } catch (err) {

@@ -812,6 +812,11 @@ html:not(.disable) {
 		}
 	}
 
+	table,
+	table * {
+		border-color: var(--blue);
+	}
+
 	table p {
 		margin: 0;
 	}
@@ -1929,6 +1934,7 @@ html:not(.disable) {
 		max-height: 60vh;
 		box-shadow: 0 5px 30px var(--blue);
 		color: var(--blue);
+		width: max-content;
 
 		&:not(.active) {
 			opacity: 0;
@@ -1947,6 +1953,7 @@ html:not(.disable) {
 
 				a {
 					color: var(--blue);
+					text-wrap: auto;
 				}
 			}
 		}
@@ -2152,13 +2159,21 @@ html:not(.disable) {
 		z-index: 1049;
 	}
 
-	.uwy.userway_p1 .userway_buttons_wrapper {
+	.uwy .userway_buttons_wrapper {
 		bottom: 15px !important;
 		top: unset !important;
-		right: 15px !important;
-		left: unset !important;
 		transform: unset !important;
 		zoom: 1.5;
+	}
+
+	.uwy.userway_p1 .userway_buttons_wrapper {
+		right: 15px !important;
+		left: unset !important;
+	}
+
+	.uwy.userway_p7 .userway_buttons_wrapper {
+		left: 15px !important;
+		right: unset !important;
 	}
 
 	.ss-component-content:not(.background-break-out) {
@@ -2171,5 +2186,24 @@ html:not(.disable) {
 
 	.spotlight-image-container img {
 		object-fit: cover !important;
+	}
+
+	.ss-component.ss-has-bg::before {
+		left: -5px;
+		width: calc(100vw + 5px);
+	}
+
+	iframe,
+	object,
+	embed {
+		border-radius: 10px;
+	}
+
+	#userwayAccessibilityIcon {
+		background: var(--blue) !important;
+
+		&:focus-within {
+			outline-color: var(--blue) !important;
+		}
 	}
 }
