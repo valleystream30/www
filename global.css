@@ -775,6 +775,34 @@ html:not(.disable) {
 		}
 	}
 
+	button:has(span) {
+		position: relative;
+		transition: padding 0.5s ease;
+
+		span::after {
+			content: "\f054";
+			font-family: "Font Awesome 7 Pro";
+			display: block;
+			position: absolute;
+			right: -15px;
+			transform: translateY(-50%);
+			top: 50%;
+			transition:
+				right 0.5s ease,
+				opacity 0.5s ease;
+			opacity: 0;
+			font-weight: 700;
+			font-size: calc(100% - 5px);
+			text-align: right;
+			width: 10px;
+		}
+
+		&:hover span::after {
+			right: 20px;
+			opacity: 1;
+		}
+	}
+
 	.alert-badge-container {
 		top: 250px;
 		transition: 0.1s top;
@@ -2155,29 +2183,6 @@ html:not(.disable) {
 				transition: 0.25s;
 			}
 		}
-
-		button span::after {
-			content: "\f054";
-			font-family: "Font Awesome 7 Pro";
-			display: block;
-			position: absolute;
-			right: -15px;
-			transform: translateY(-50%);
-			top: 50%;
-			transition:
-				right 0.5s ease,
-				opacity 0.5s ease;
-			opacity: 0;
-			font-weight: 700;
-			font-size: calc(100% - 5px);
-			text-align: right;
-			width: 10px;
-		}
-
-		button:hover span::after {
-			right: 20px;
-			opacity: 1;
-		}
 	}
 
 	.pageSection:not(:first-of-type) .ss-component-header-title,
@@ -2253,5 +2258,22 @@ html:not(.disable) {
 		&:focus-within {
 			outline-color: var(--blue) !important;
 		}
+	}
+
+	#skiptocontent > *,
+	.well {
+		float: none !important;
+	}
+
+	.search-site-button {
+		margin: auto;
+	}
+
+	#results .title {
+		color: var(--red);
+	}
+
+	#results .url {
+		color: var(--blue);
 	}
 }
