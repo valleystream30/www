@@ -52,6 +52,10 @@ if (window.location.search.includes('disable')) {
         };
     };
 
+    function nextFrame() { return new Promise(resolve => requestAnimationFrame(resolve)); };
+
+    function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); };
+
     var header = null;
 
     var headerLoadInterval = setInterval(() => {
@@ -165,199 +169,6 @@ if (window.location.search.includes('disable')) {
                     if (breadcrumbsMargin > 0) {
                         breadcrumbs.style.marginLeft = `-${breadcrumbsMargin}px`;
                         breadcrumbs.style.width = '100vw';
-                    };
-                };
-                const pageTitle = document.querySelector('title').textContent.toLowerCase();
-                if (pageTitle.includes('partnership')) {
-                    document.querySelector('.ss-editor-content p:last-child').classList.add('partnerships');
-                } else if (pageTitle.includes('schools')) {
-                    addTask(() => new Promise(resolve => {
-                        var schoolsPageInterval = setInterval(() => {
-                            if ((document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a[style]').length === 3) || (document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a img[height]').length === 3)) {
-                                var minHeight = Array.from(document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child img')).map(img => img.clientHeight).sort()[0];
-                                for (var img of document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a')) {
-                                    img.style.height = `${minHeight}px`;
-                                    img.style.width = 'unset';
-                                    img.style.borderRadius = '10px';
-                                };
-                                clearInterval(schoolsPageInterval);
-                                resolve();
-                            };
-                        }, 100);
-                    }));
-                } else if (pageTitle.includes('home')) {
-                    var firstSection = document.querySelector('.stack_sort_area').children[0];
-                    if (firstSection.querySelector('.spotlight-container')) Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
-                        addTask(() => new Promise(resolve => {
-                            var homepageShowcaseHeightInterval = setInterval(() => {
-                                if (header.hasAttribute('style')) for (var slide of firstSection.querySelectorAll('.spotlight-slide')) {
-                                    if (window.innerWidth <= 1000) {
-                                        slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
-                                        clearInterval(homepageShowcaseHeightInterval);
-                                        resolve();
-                                    } else if (window.innerWidth > 1300) {
-                                        if (document.querySelector('.stack_sort_area > * + section').classList.contains('ss-icon-matrix')) {
-                                            slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
-                                            document.querySelector('.spotlight-wrapper').style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
-                                            clearInterval(homepageShowcaseHeightInterval);
-                                            resolve();
-                                        } else {
-                                            slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
-                                            document.querySelector('.spotlight-wrapper').style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
-                                            clearInterval(homepageShowcaseHeightInterval);
-                                            resolve();
-                                        };
-                                    } else {
-                                        if (document.querySelector('.stack_sort_area > * + section').classList.contains('ss-icon-matrix')) {
-                                            slide.style.minHeight = `calc(100vh - ${header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
-                                            document.querySelector('.spotlight-wrapper').style.minHeight = `calc(100vh - ${header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight}px)`;
-                                            clearInterval(homepageShowcaseHeightInterval);
-                                            resolve();
-                                        } else {
-                                            slide.style.minHeight = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
-                                            document.querySelector('.spotlight-wrapper').style.minHeight = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
-                                            clearInterval(homepageShowcaseHeightInterval);
-                                            resolve();
-                                        };
-                                    };
-                                };
-                            }, 100);
-                        }));
-                    }).then(() => {
-                        addTask(() => new Promise(resolve => {
-                            var homepageAboutImagesInterval = setInterval(() => {
-                                if ((document.querySelectorAll('.ss-image-link[style]').length === 3) || (document.querySelectorAll('.ss-image-link img[height]').length === 3)) {
-                                    document.querySelector('section:has(.ss-image-link[style]), section:has(.ss-image-link img[height])').style.padding = 'min(70px, 7vh) min(20px, 2vw)';
-                                    for (var img of document.querySelectorAll('.ss-image-link, .ss-image-link img')) {
-                                        img.style.width = '100%';
-                                        img.removeAttribute('height');
-                                    };
-                                    var minHeight = Array.from(document.querySelectorAll('.ss-image-link img')).map(img => img.clientHeight).sort()[0];
-                                    if (minHeight > 0) {
-                                        for (var img of document.querySelectorAll('.ss-image-link')) {
-                                            img.style.height = `${minHeight}px`;
-                                            img.style.borderRadius = '10px';
-                                            if (window.innerWidth <= 1000) img.style.width = '100%';
-                                        };
-                                        clearInterval(homepageAboutImagesInterval);
-                                        resolve();
-                                    };
-                                };
-                            }, 100);
-                        }));
-                    }).then(() => {
-                        var statsSection = document.querySelectorAll('section:has(.ss-im-icons-list)')[1];
-                        if (statsSection) {
-                            statsSection.style.overflow = 'hidden';
-                            var parallaxSection = statsSection.nextElementSibling;
-                            if (parallaxSection) {
-                                var parallaxImage = parallaxSection.querySelector('img.rellax');
-                                if (parallaxImage) {
-                                    statsSection.appendChild(parallaxImage);
-                                    parallaxSection.remove();
-                                    parallaxImage.src = getComputedStyle(statsSection)['background-image'].split('"')[1].split('"')[0];
-                                    parallaxImage.classList.add('parallax-image');
-                                    statsSection.style.background = 'none';
-                                };
-                            };
-                        };
-                    });
-                } else if (pageTitle.includes('site map')) {
-                    var siteMapSearch = document.createElement('input');
-                    siteMapSearch.type = 'text';
-                    siteMapSearch.placeholder = 'Search site map...';
-                    siteMapSearch.className = 'sitemap-search';
-                    document.querySelector('.pageBody').prepend(siteMapSearch);
-                    siteMapSearch.focus();
-                    siteMapSearch.addEventListener('input', (event) => {
-                        const searchTerm = event.target.value.toLowerCase();
-                        for (var block of document.querySelectorAll('.sitemap-block')) block.style.display = block.innerText.toLowerCase().includes(searchTerm) ? 'flex' : 'none';
-                    });
-                    var masonry = document.createElement('div');
-                    masonry.className = 'sitemap-masonry desktop';
-                    var mobileMasonry = document.createElement('div');
-                    mobileMasonry.className = 'sitemap-masonry mobile';
-                    var tabletMasonry = document.createElement('div');
-                    tabletMasonry.className = 'sitemap-masonry tablet';
-                    var column1 = document.createElement('div');
-                    var column2 = document.createElement('div');
-                    var column3 = document.createElement('div');
-                    var tabletColumn1 = document.createElement('div');
-                    var tabletColumn2 = document.createElement('div');
-                    column1.className = 'sitemap-column';
-                    column2.className = 'sitemap-column';
-                    column3.className = 'sitemap-column';
-                    tabletColumn1.className = 'sitemap-column';
-                    tabletColumn2.className = 'sitemap-column';
-                    var blocks = [];
-                    function createSitemapBlock(block) {
-                        var blockLink = block.querySelector('a');
-                        var newLink = document.createElement('div');
-                        newLink.className = 'sitemap-block';
-                        newLink.innerHTML = `<a href="${blockLink.href}">${blockLink.innerText}</a>`;
-                        if (block.querySelector('ul')) {
-                            var leaves = Array.from(block.querySelector('ul').children).filter(li => !li.querySelector('ul'));
-                            var branches = Array.from(block.querySelector('ul').children).filter(li => li.querySelector('ul'));
-                            // console.log(link.innerText, leaves.length, branches.length);
-                            if (leaves.length) {
-                                newLink.innerHTML += `<hr>`;
-                                for (var leaf of leaves) {
-                                    var subLink = leaf.querySelector('a');
-                                    var newSubLink = document.createElement('a');
-                                    newSubLink.className = 'sitemap-sublink';
-                                    newSubLink.href = subLink.href;
-                                    newSubLink.innerText = subLink.innerText;
-                                    newLink.appendChild(newSubLink);
-                                };
-                            };
-                            for (var branch of branches) createSitemapBlock(branch);
-                        };
-                        blocks.push({
-                            'name': blockLink.innerText,
-                            'element': newLink,
-                        });
-                    };
-                    for (var block of document.querySelectorAll('.pageBody > ul > li')) createSitemapBlock(block);
-                    blocks.sort((a, b) => {
-                        if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-                        if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-                        return 0;
-                    });
-                    for (var currentBlock in blocks) {
-                        var block = blocks[currentBlock];
-                        if ((currentBlock % 3) === 0) {
-                            column1.appendChild(block.element);
-                        } else if ((currentBlock % 3) === 1) {
-                            column2.appendChild(block.element);
-                        } else {
-                            column3.appendChild(block.element);
-                        };
-                        if ((currentBlock % 2) === 0) {
-                            tabletColumn1.appendChild(block.element.cloneNode(true));
-                        } else if ((currentBlock % 2) === 1) {
-                            tabletColumn2.appendChild(block.element.cloneNode(true));
-                        };
-                        mobileMasonry.appendChild(block.element.cloneNode(true));
-                    };
-                    masonry.appendChild(column1);
-                    masonry.appendChild(column2);
-                    masonry.appendChild(column3);
-                    tabletMasonry.appendChild(tabletColumn1);
-                    tabletMasonry.appendChild(tabletColumn2);
-                    document.querySelector('.pageBody').appendChild(masonry);
-                    document.querySelector('.pageBody').appendChild(mobileMasonry);
-                    document.querySelector('.pageBody').appendChild(tabletMasonry);
-                    document.querySelector('.pageBody > ul').remove();
-                    const urlParams = new URLSearchParams(window.location.search);
-                    if (urlParams.has('s')) {
-                        siteMapSearch.value = urlParams.get('s');
-                        siteMapSearch.dispatchEvent(new Event('input'));
-                    };
-                } else if (pageTitle.includes('search results')) {
-                    const urlParams = new URLSearchParams(window.location.search);
-                    if (urlParams.has('s')) {
-                        document.getElementById('search_field').value = urlParams.get('s');
-                        document.querySelector('.search-btn button').click();
                     };
                 };
                 var fontN = 0;
@@ -982,60 +793,51 @@ if (window.location.search.includes('disable')) {
                 } catch (err) {
                     console.error(err);
                 };
-                afterReady();
             } catch (err) {
                 console.error(err);
-                afterReady();
             };
+            await afterReady();
+            await specificPages();
+            document.documentElement.classList.add('ready');
+            setTimeout(() => {
+                const adminBar = document.querySelector('.adminBar');
+                if (adminBar) {
+                    adminBar.classList.add('visible');
+                    setTimeout(() => {
+                        adminBar.classList.remove('visible');
+                    }, 2500);
+                };
+            }, 1750);
         });
 
-        function afterReady() {
-            if (nav.clientHeight > 75) {
-                afterReady();
-                return;
-            };
+        async function afterReady() {
+            while (nav.clientHeight > 75) await nextFrame();
             console.log(`Proceeding in ${(new Date().getTime() - startTime) / 1000} seconds`);
             try {
-                header.style.paddingBottom = `min(${(nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1))}px, 59px)`;
-                document.documentElement.style.scrollPadding = `${(nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1))}px`;
-                var navMaxTop = header.clientHeight - (nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1));
-                setTimeout(() => {
-                    navMaxTop = header.clientHeight - (nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1));
+                header.style.paddingBottom = `min(${nav.clientHeight * (window.innerWidth <= 1000 ? 0.8 : 1)}px, 59px)`;
+                document.documentElement.style.scrollPadding = `${nav.clientHeight * (window.innerWidth <= 1000 ? 0.8 : 1)}px`;
+                let navMaxTop = header.clientHeight - nav.clientHeight * (window.innerWidth <= 1000 ? 0.8 : 1);
+                await delay(100);
+                navMaxTop = header.clientHeight - nav.clientHeight * (window.innerWidth <= 1000 ? 0.8 : 1);
+                const onScroll = () => {
                     if (window.scrollY >= navMaxTop) {
                         nav.classList.add('scrolled');
                     } else {
                         nav.classList.remove('scrolled');
                     };
-                }, 100);
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY >= navMaxTop) {
-                        nav.classList.add('scrolled');
-                    } else {
-                        nav.classList.remove('scrolled');
-                    };
-                });
-                if (window.innerWidth > 1000) header.querySelector('.ss-site-header-hero-container').style.minWidth = `${header.querySelector('.ss-site-header-main-links-container:has(.search)').clientWidth}px`;
+                };
+                window.addEventListener('scroll', onScroll);
+                onScroll();
+                if (window.innerWidth > 1000) {
+                    const hero = header.querySelector('.ss-site-header-hero-container');
+                    const links = header.querySelector('.ss-site-header-main-links-container:has(.search)');
+                    if (hero && links) hero.style.minWidth = `${links.clientWidth}px`;
+                };
                 if (location.href.includes('index.php?pageID=') && !location.href.includes('&adminArea')) window.history.replaceState({}, '', location.href.replace('index.php?pageID=', ''));
-                setTimeout(() => {
-                    document.documentElement.classList.add('ready');
-                    setTimeout(() => {
-                        document.querySelector('.adminBar').classList.add('visible');
-                        setTimeout(() => {
-                            document.querySelector('.adminBar').classList.remove('visible');
-                        }, 2500);
-                    }, 1750);
-                }, 100);
             } catch (e) {
                 console.error(e);
-                document.querySelector('.adminBar').classList.add('visible');
-                setTimeout(() => {
-                    document.querySelector('.adminBar').classList.add('visible');
-                    setTimeout(() => {
-                        document.querySelector('.adminBar').classList.remove('visible');
-                    }, 2500);
-                }, 1750);
             };
-            var finishTime = new Date().getTime();
+            const finishTime = Date.now();
             console.log(`Page loaded in ${(finishTime - startTime) / 1000} seconds`);
             scrollToHash();
             const observer = new IntersectionObserver(entries => {
@@ -1055,13 +857,10 @@ if (window.location.search.includes('disable')) {
                 };
                 clearTimeout(currentSectionTimer);
                 currentSectionTimer = setTimeout(() => {
-                    const topmost = [...intersecting].reduce((best, section) => {
-                        const rect = section.element.getBoundingClientRect();
-                        return (!best || (rect.top < best.top)) ? {
-                            section,
-                            top: rect.top
-                        } : best;
-                    }, null).section;
+                    const topmost = [...intersecting].reduce((best, { element }) => {
+                        const rect = element.getBoundingClientRect();
+                        return !best || (rect.top < best.top) ? { element, top: rect.top } : best;
+                    }, null).element?.__section;
                     if (topmost && topmost.slug !== currentSlug) {
                         currentSlug = topmost.slug;
                         window.history.replaceState({}, '', `#${currentSlug}`);
@@ -1075,10 +874,196 @@ if (window.location.search.includes('disable')) {
             });
             pageSections.forEach(section => observer.observe(section.element));
             setTimeout(() => {
-                for (var section of document.querySelectorAll('section:has(.ss-component-header-title)')) {
-                    if (section.querySelector('.ss-component-header-title') && section.querySelector('.ss-component-header-title').innerText.includes('customElement.')) window.location.reload();
-                };
+                document.querySelectorAll('section:has(.ss-component-header-title)').forEach(section => {
+                    const title = section.querySelector('.ss-component-header-title');
+                    if (title && title.innerText.includes('customElement.')) window.location.reload();
+                });
             }, 5000);
+            const main = document.querySelector('main');
+            const footer = document.querySelector('footer');
+            if (main && footer) main.style.marginBottom = `${(window.innerWidth > 1000) ? (footer.clientHeight + 20) : 0}px`;
+        };
+
+        async function specificPages() {
+            const pageTitle = document.querySelector('title').textContent.toLowerCase();
+            if (pageTitle.includes('partnership')) {
+                document.querySelector('.ss-editor-content p:last-child')?.classList.add('partnerships');
+                return;
+            } else if (pageTitle.includes('schools')) {
+                while (true) {
+                    const imgs = document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a img');
+                    const anchors = document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a[style]');
+                    if (imgs.length === 3 || anchors.length === 3) break;
+                    await delay(100);
+                };
+                const imgElements = Array.from(document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child img'));
+                const minHeight = imgElements.map(img => img.clientHeight).sort((a, b) => a - b)[0];
+                for (const a of document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a')) {
+                    a.style.height = `${minHeight}px`;
+                    a.style.width = '100%';
+                    a.style.borderRadius = '10px';
+                };
+                return;
+            } else if (pageTitle.includes('home')) {
+                const firstSection = document.querySelector('.stack_sort_area')?.children[0];
+                if (!firstSection) return;
+                const headerImgs = Array.from(document.querySelectorAll('header img')).filter(img => !img.complete);
+                if (headerImgs.length) await Promise.all(headerImgs.map(img => new Promise(resolve => {
+                    img.onload = img.onerror = resolve;
+                })));
+                while (!header.hasAttribute('style')) await nextFrame();
+                const adjustSlides = () => {
+                    for (const slide of firstSection.querySelectorAll('.spotlight-slide')) {
+                        if (window.innerWidth <= 1000) {
+                            slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
+                        } else if (window.innerWidth > 1300) {
+                            const hasMatrix = document.querySelector('.stack_sort_area > * + section')?.classList.contains('ss-icon-matrix');
+                            const base = hasMatrix ? header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight : header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight;
+                            slide.style.height = `calc(100vh - ${base}px)`;
+                            document.querySelector('.spotlight-wrapper').style.height = `calc(100vh - ${base}px)`;
+                        } else {
+                            const hasMatrix = document.querySelector('.stack_sort_area > * + section')?.classList.contains('ss-icon-matrix');
+                            const base = hasMatrix ? header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight : header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight;
+                            slide.style.minHeight = `calc(100vh - ${base}px)`;
+                            document.querySelector('.spotlight-wrapper').style.minHeight = `calc(100vh - ${base}px)`;
+                        };
+                    };
+                };
+                while (true) {
+                    adjustSlides();
+                    if (firstSection.querySelector('.spotlight-slide')?.style.height || firstSection.querySelector('.spotlight-slide')?.style.minHeight) break;
+                    await delay(100);
+                };
+                while (true) {
+                    const styledLinks = document.querySelectorAll('.ss-image-link[style]');
+                    const sizedImgs = document.querySelectorAll('.ss-image-link img[height]');
+                    if (styledLinks.length === 3 || sizedImgs.length === 3) {
+                        const section = document.querySelector('section:has(.ss-image-link[style]), section:has(.ss-image-link img[height])');
+                        if (section) section.style.padding = 'min(70px, 7vh) min(20px, 2vw)';
+                        for (const el of document.querySelectorAll('.ss-image-link, .ss-image-link img')) {
+                            el.style.width = '100%';
+                            el.removeAttribute('height');
+                        };
+                        const imgEls = Array.from(document.querySelectorAll('.ss-image-link img'));
+                        const minImgHeight = imgEls.map(img => img.clientHeight).sort((a, b) => a - b)[0];
+                        if (minImgHeight > 0) {
+                            for (const link of document.querySelectorAll('.ss-image-link')) {
+                                link.style.height = `${minImgHeight}px`;
+                                link.style.borderRadius = '10px';
+                                if (window.innerWidth <= 1000) link.style.width = '100%';
+                            };
+                            break;
+                        };
+                    };
+                    await delay(100);
+                };
+                const statsSection = document.querySelectorAll('section:has(.ss-im-icons-list)')[1];
+                if (statsSection) {
+                    statsSection.style.overflow = 'hidden';
+                    const parallaxSection = statsSection.nextElementSibling;
+                    if (parallaxSection) {
+                        const parallaxImg = parallaxSection.querySelector('img.rellax');
+                        if (parallaxImg) {
+                            statsSection.appendChild(parallaxImg);
+                            parallaxSection.remove();
+                            const bgUrl = getComputedStyle(statsSection)['background-image'].match(/url\(["']?([^"')]+)["']?\)/)?.[1];
+                            if (bgUrl) parallaxImg.src = bgUrl;
+                            parallaxImg.classList.add('parallax-image');
+                            statsSection.style.background = 'none';
+                        };
+                    };
+                };
+                return;
+            } else if (pageTitle.includes('site map')) {
+                const pageBody = document.querySelector('.pageBody');
+                if (!pageBody) return;
+                const siteMapSearch = document.createElement('input');
+                siteMapSearch.type = 'text';
+                siteMapSearch.placeholder = 'Search site map...';
+                siteMapSearch.className = 'sitemap-search';
+                pageBody.prepend(siteMapSearch);
+                siteMapSearch.focus();
+                siteMapSearch.addEventListener('input', event => {
+                    const term = event.target.value.toLowerCase();
+                    document.querySelectorAll('.sitemap-block').forEach(block => {
+                        block.style.display = block.innerText.toLowerCase().includes(term) ? 'flex' : 'none';
+                    });
+                });
+                const masonry = document.createElement('div');
+                masonry.className = 'sitemap-masonry desktop';
+                const mobileMasonry = document.createElement('div');
+                mobileMasonry.className = 'sitemap-masonry mobile';
+                const tabletMasonry = document.createElement('div');
+                tabletMasonry.className = 'sitemap-masonry tablet';
+                const col1 = document.createElement('div');
+                const col2 = document.createElement('div');
+                const col3 = document.createElement('div');
+                const tabletCol1 = document.createElement('div');
+                const tabletCol2 = document.createElement('div');
+                col1.className = col2.className = col3.className = 'sitemap-column';
+                tabletCol1.className = tabletCol2.className = 'sitemap-column';
+                const blocks = [];
+                function createBlock(block) {
+                    const link = block.querySelector('a');
+                    const newDiv = document.createElement('div');
+                    newDiv.className = 'sitemap-block';
+                    newDiv.innerHTML = `<a href="${link.href}">${link.innerText}</a>`;
+                    const subList = block.querySelector('ul');
+                    if (subList) {
+                        const leaves = Array.from(subList.children).filter(li => !li.querySelector('ul'));
+                        const branches = Array.from(subList.children).filter(li => li.querySelector('ul'));
+                        if (leaves.length) {
+                            newDiv.innerHTML += `<hr>`;
+                            for (const leaf of leaves) {
+                                const leafLink = leaf.querySelector('a');
+                                const subLink = document.createElement('a');
+                                subLink.className = 'sitemap-sublink';
+                                subLink.href = leafLink.href;
+                                subLink.innerText = leafLink.innerText;
+                                newDiv.appendChild(subLink);
+                            };
+                        };
+                        for (const branch of branches) createBlock(branch);
+                    };
+                    blocks.push({ name: link.innerText, element: newDiv });
+                };
+                document.querySelectorAll('.pageBody > ul > li').forEach(createBlock);
+                blocks.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })).forEach((blk, i) => {
+                    if ((i % 3) === 0) {
+                        col1.appendChild(blk.element);
+                    } else if ((i % 3) === 1) {
+                        col2.appendChild(blk.element);
+                    } else {
+                        col3.appendChild(blk.element);
+                    };
+                    if ((i % 2) === 0) {
+                        tabletCol1.appendChild(blk.element.cloneNode(true));
+                    } else {
+                        tabletCol2.appendChild(blk.element.cloneNode(true));
+                    };
+                    mobileMasonry.appendChild(blk.element.cloneNode(true));
+                });
+                masonry.append(col1, col2, col3);
+                tabletMasonry.append(tabletCol1, tabletCol2);
+                pageBody.append(masonry, mobileMasonry, tabletMasonry);
+                const oldList = pageBody.querySelector('.pageBody > ul');
+                if (oldList) oldList.remove();
+                const params = new URLSearchParams(window.location.search);
+                if (params.has('s')) {
+                    siteMapSearch.value = params.get('s');
+                    siteMapSearch.dispatchEvent(new Event('input'));
+                };
+                return;
+            } else if (pageTitle.includes('search results')) {
+                const params = new URLSearchParams(window.location.search);
+                if (params.has('s')) {
+                    const field = document.getElementById('search_field');
+                    if (field) field.value = params.get('s');
+                    const btn = document.querySelector('.search-btn button');
+                    if (btn) btn.click();
+                }
+                return;
+            };
         };
 
         var resizeTimeout;
@@ -1110,6 +1095,11 @@ if (window.location.search.includes('disable')) {
                 };
                 if (!document.querySelector('.ss-alert-modal-svg-container')) clearInterval(changeIconInterval);
             }, 500);
+            if ((window.innerWidth > 1000) && document.querySelector('main') && document.querySelector('footer')) {
+                document.querySelector('main').style.marginBottom = document.querySelector('footer').clientHeight + 'px';
+            } else {
+                document.querySelector('main').style.marginBottom = '0px';
+            };
         });
 
         function scrollToHash() {
