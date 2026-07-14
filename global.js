@@ -1,3 +1,5 @@
+if (window.location.pathname.includes('-')) history.replaceState(null, '', window.location.pathname.replace(/-/g, '/'));
+
 if (window.location.search.includes('disable')) {
     document.documentElement.classList.add('ready', 'disable');
 } else {
@@ -742,6 +744,10 @@ if (window.location.search.includes('disable')) {
             </a>`;
                 };
                 for (let link of document.querySelectorAll('a[href]')) {
+                    try {
+                        var url = new URL(link.getAttribute('href'));
+                        if ((url.hostname.split('.')[url.hostname.split('.').length - 1] === window.location.hostname.split('.')[window.location.hostname.split('.').length - 1]) && (url.hostname.split('.')[url.hostname.split('.').length - 2] === window.location.hostname.split('.')[window.location.hostname.split('.').length - 2])) link.setAttribute('href', url.origin + '/' + url.pathname.slice(1).replaceAll('/', '-') + url.search + url.hash);
+                    } catch (e) { };
                     if (link.getAttribute('href') === '') {
                         var newLink = document.createElement('div');
                         newLink.className = link.className;

@@ -9,6 +9,8 @@ addEventListener("fetch", event => {
 
 async function handleRequest(request) {
     const upstream = await fetch(request);
+    const upstreamURL = new URL(upstream.url);
+    if (upstreamURL.pathname.slice(1).includes('/')) return Response.redirect(`${request.url.replace(/https?:\/\/(www\.)?valleystream30\.com(.*)/, 'https://$1valleystream30.com')}/${upstreamURL.pathname.slice(1).replace(/\//g, '-'), 301}`);
     if (upstream.status !== 404) return upstream;
     const redirects = [
         {
