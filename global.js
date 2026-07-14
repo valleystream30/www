@@ -1010,7 +1010,7 @@ if (window.location.search.includes('disable')) {
                     newDiv.innerHTML = `<a href="${link.href}">${link.innerText}</a>`;
                     const subList = block.querySelector('ul');
                     if (subList) {
-                        const leaves = Array.from(subList.children).filter(li => !li.querySelector('ul'));
+                        const leaves = Array.from(subList.children).filter(li => !li.querySelector('ul') || li.querySelector('ul a'));
                         const branches = Array.from(subList.children).filter(li => li.querySelector('ul'));
                         if (leaves.length) {
                             newDiv.innerHTML += `<hr>`;
