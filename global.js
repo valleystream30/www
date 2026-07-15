@@ -866,12 +866,14 @@ if (window.location.search.includes('disable')) {
                 };
                 clearTimeout(currentSectionTimer);
                 currentSectionTimer = setTimeout(() => {
-                    const topmost = [...intersecting].reduce((best, { element }) => {
+                    var topmost = [...intersecting].reduce((best, { element }) => {
                         const rect = element.getBoundingClientRect();
                         return !best || (rect.top < best.top) ? { element, top: rect.top } : best;
-                    }, null).element?.__section;
-                    if (topmost && topmost.slug !== currentSlug) {
+                    }, null).element;
+                    if (topmost) topmost = pageSections.find(section => (section.element === topmost.element) || (section.element === topmost));
+                    if (topmost && (topmost.slug !== currentSlug)) {
                         currentSlug = topmost.slug;
+                        console.log(topmost.slug)
                         window.history.replaceState({}, '', `#${currentSlug}`);
                     };
                     currentSectionTimer = null;
@@ -1089,6 +1091,9 @@ if (window.location.search.includes('disable')) {
                     img.style.height = '400px';
                     img.style.aspectRatio = '765/990';
                     img.style.borderRadius = '10px';
+                });
+                document.querySelectorAll('.ss-component-header-title').forEach(heading => {
+                    heading.style.paddingBottom = '10px';
                 });
             };
         };
