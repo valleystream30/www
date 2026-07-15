@@ -22,6 +22,11 @@ async function handleRequest(request) {
             from: /https?:\/\/(?:www\.)?valleystream30\.com\/policies/,
             to: 'https://www.boardpolicyonline.com/?b=valley_stream_30',
             status: 302
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/foil/,
+            to: 'https://www.valleystream30.com/business#freedom-of-information-foil',
+            status: 302
         }
     ];
     for (const { from, to, status } of redirects) {
