@@ -17,6 +17,11 @@ async function handleRequest(request) {
             from: /https?:\/\/(?:www\.)?valleystream30\.com\/admin/,
             to: 'https://www.valleystream30.com/index.php?pageID=admin_main&adminArea=1',
             status: 302
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/policies/,
+            to: 'https://www.boardpolicyonline.com/?b=valley_stream_30',
+            status: 302
         }
     ];
     for (const { from, to, status } of redirects) {
