@@ -227,7 +227,6 @@ html:not(.disable) {
 			z-index: 10;
 			margin-bottom: 400px;
 			position: relative;
-			padding-bottom: 30px;
 
 			&::before {
 				background: #ffffff;
@@ -246,6 +245,10 @@ html:not(.disable) {
 				width: 120vw;
 				height: 10px;
 				background: var(--red);
+			}
+
+			&:has(.sitemap-masonry) {
+				padding-bottom: 30px;
 			}
 		}
 	}
@@ -2266,6 +2269,7 @@ html:not(.disable) {
 	}
 
 	.search-site-button {
+		display: flex;
 		margin: auto;
 	}
 

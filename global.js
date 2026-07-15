@@ -913,7 +913,7 @@ if (window.location.search.includes('disable')) {
                     a.style.borderRadius = '10px';
                 };
                 return;
-            } else if ((document.location.pathname === '/') || (document.location.pathname === '/home')) {
+            } else if ((document.location.pathname === '/') || (document.location.pathname === '/home') || (document.location.pathname === '/110901')) {
                 const firstSection = document.querySelector('.stack_sort_area')?.children[0];
                 if (!firstSection) return;
                 const headerImgs = Array.from(document.querySelectorAll('header img')).filter(img => !img.complete);
@@ -997,15 +997,8 @@ if (window.location.search.includes('disable')) {
                     document.querySelectorAll('.sitemap-block').forEach(block => {
                         block.style.display = block.innerText.toLowerCase().includes(term) ? 'flex' : 'none';
                     });
-                    // show/hide search site btn
                     const searchSiteButton = document.querySelector('.search-site-button');
-                    if (searchSiteButton) {
-                        if (term) {
-                            searchSiteButton.style.display = 'block';
-                        } else {
-                            searchSiteButton.style.display = 'none';
-                        };
-                    }
+                    if (searchSiteButton) searchSiteButton.style.display = term ? 'block' : 'none';
                 });
                 const masonry = document.createElement('div');
                 masonry.className = 'sitemap-masonry desktop';
@@ -1073,7 +1066,8 @@ if (window.location.search.includes('disable')) {
                 };
                 const searchSiteButton = document.createElement('button');
                 searchSiteButton.className = 'search-site-button btn btn-default';
-                searchSiteButton.innerHTML = 'Search Site For Keyword<span aria-hidden="true" class="ss-button-icon"></span>';
+                searchSiteButton.innerHTML = 'Search Keyword<span aria-hidden="true" class="ss-button-icon"></span>';
+                searchSiteButton.style.display = siteMapSearch.value.trim() ? 'block' : 'none';
                 searchSiteButton.addEventListener('click', () => {
                     const searchTerm = siteMapSearch.value.trim();
                     if (!searchTerm) return;
