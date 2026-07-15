@@ -1,4 +1,4 @@
-if (window.location.pathname.includes('-')) history.replaceState(null, '', window.location.pathname.replace(/-/g, '/'));
+// if (window.location.pathname.includes('-')) history.replaceState(null, '', window.location.pathname.replace(/-/g, '/'));
 
 if (window.location.search.includes('disable')) {
     document.documentElement.classList.add('ready', 'disable');
