@@ -1084,6 +1084,12 @@ if (window.location.search.includes('disable')) {
                     if (btn) btn.click();
                 }
                 return;
+            } else if ((document.location.pathname === '/newsletters') || pageTitle.includes('newsletters')) {
+                document.querySelectorAll('main img').forEach(img => {
+                    img.style.height = '400px';
+                    img.style.aspectRatio = '765/990';
+                    img.style.borderRadius = '10px';
+                });
             };
         };
 
@@ -1128,7 +1134,7 @@ if (window.location.search.includes('disable')) {
             var pageSection = pageSections.find(pageSection => pageSection.slug.toLowerCase() === window.location.hash.split('#')[1]);
             if (pageSection) setTimeout(() => {
                 if (pageSection.element.clientHeight > 100) {
-                pageSection.element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    pageSection.element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 } else {
                     var box = pageSection.element.getBoundingClientRect();
                     var body = document.body;

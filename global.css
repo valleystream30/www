@@ -1568,6 +1568,7 @@ html:not(.disable) {
 			height: 100%;
 			object-fit: cover;
 			width: 100% !important;
+			transition: 0.25s transform;
 		}
 
 		&:hover img {
@@ -2111,9 +2112,7 @@ html:not(.disable) {
 		padding: 0;
 	}
 
-	section:has(.ss-component-header-title):not(
-			:has([style="text-align: center;"])
-		)
+	.pageSection:not(:has([style="text-align: center;"]))
 		.ss-component-header-title {
 		justify-content: start !important;
 		text-align: left !important;
