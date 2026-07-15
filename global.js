@@ -406,8 +406,8 @@ if (window.location.search.includes('disable')) {
                         }
                     }, 500);
                 }));
-                pageSections = Array.from(document.querySelectorAll('section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off)), section:not(.ss-hidden-component):has(.ss-component-header-title)')).filter(section => section.querySelector('.ss-component-header-title') ? true : (section.querySelector('.ss-component-content .ss-one-column .ss-component-column').children.length === 1)).map(section => {
-                    var title = section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span, .ss-component-header-title').innerText;
+                pageSections = Array.from(document.querySelectorAll('.pageSection[id], section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off)), section:not(.ss-hidden-component):has(.ss-component-header-title)')).filter(section => section.classList.contains('pageSection') || (section.querySelector('.ss-component-header-title') ? true : (section.querySelector('.ss-component-content .ss-one-column .ss-component-column').children.length === 1))).map(section => {
+                    var title = section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span, .ss-component-header-title')?.innerText || section.innerText;
                     return {
                         'element': section,
                         'id': section.id,
@@ -1127,7 +1127,17 @@ if (window.location.search.includes('disable')) {
             if (!window.location.hash || !window.location.hash.split('#')[1]) return;
             var pageSection = pageSections.find(pageSection => pageSection.slug.toLowerCase() === window.location.hash.split('#')[1]);
             if (pageSection) setTimeout(() => {
+                if (pageSection.element.clientHeight > 100) {
                 pageSection.element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    var box = pageSection.element.getBoundingClientRect();
+                    var body = document.body;
+                    var docEl = document.documentElement;
+                    window.scrollTo({
+                        top: Math.round(box.top + (window.pageYOffset || docEl.scrollTop || body.scrollTop) - (docEl.clientTop || body.clientTop || 0)) - nav.clientHeight - 50,
+                        behavior: 'smooth'
+                    });
+                };
             }, 100);
         };
 
