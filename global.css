@@ -2035,8 +2035,8 @@ html:not(.disable) {
 		}
 	}
 
-	ul:has(li[style="text-align: center;"]),
-	ol:has(li[style="text-align: center;"]) {
+	ul:not(.ss-accordion-list):has(li[style="text-align: center;"]),
+	ol:not(.ss-accordion-list):has(li[style="text-align: center;"]) {
 		margin-left: auto;
 		margin-right: auto;
 		display: flex;

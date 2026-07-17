@@ -1183,6 +1183,10 @@ if (window.location.search.includes('disable')) {
                         break;
                     }
                 };
+                document.querySelectorAll('iframe').forEach(iframe => {
+                    iframe.style.height = 'max-content';
+                    iframe.style.aspectRatio = '1 / 0.6';
+                });
             };
         };
 
