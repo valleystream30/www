@@ -27,6 +27,281 @@ async function handleRequest(request) {
             from: /https?:\/\/(?:www\.)?valleystream30\.com\/foil/,
             to: 'https://www.valleystream30.com/business#freedom-of-information-foil',
             status: 302
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/board/,
+            to: 'https://www.valleystream30.com/boe',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/board-of-education/,
+            to: 'https://www.valleystream30.com/boe',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/global-leaders-of-tomorrow/,
+            to: 'https://www.valleystream30.com/global-leaders',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/district-history/,
+            to: 'https://www.valleystream30.com/history',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/voting-information/,
+            to: 'https://www.valleystream30.com/voting',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/community-resources/,
+            to: 'https://www.valleystream30.com/resources',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/freedom-of-information/,
+            to: 'https://www.valleystream30.com/foil',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/student-registration/,
+            to: 'https://www.valleystream30.com/registration',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/the-friendly-newsletters/,
+            to: 'https://www.valleystream30.com/newsletters',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/cs/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/csa/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/csas/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clear-stream/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clear-stream-avenue-school/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clear-stream-avenue-school/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/cs-supply-lists/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/csa-supply-lists/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/csas-supply-lists/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clear-stream-supply-lists/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clear-stream-avenue-school-supply-lists/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/fr/,
+            to: 'https://www.valleystream30.com/forest-road',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/frs/,
+            to: 'https://www.valleystream30.com/forest-road',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/forest/,
+            to: 'https://www.valleystream30.com/forest-road',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/forest-road-school/,
+            to: 'https://www.valleystream30.com/forest-road',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/fr-supply-lists/,
+            to: 'https://www.valleystream30.com/forest-road-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/frs-supply-lists/,
+            to: 'https://www.valleystream30.com/forest-road-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/forest-supply-lists/,
+            to: 'https://www.valleystream30.com/forest-road-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/forest-road-school-supply-lists/,
+            to: 'https://www.valleystream30.com/forest-road-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/sa/,
+            to: 'https://www.valleystream30.com/shaw-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/sas/,
+            to: 'https://www.valleystream30.com/shaw-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/shaw/,
+            to: 'https://www.valleystream30.com/shaw-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/shaw-avenue-school/,
+            to: 'https://www.valleystream30.com/shaw-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/sa-supply-lists/,
+            to: 'https://www.valleystream30.com/shaw-avenue-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/sas-supply-lists/,
+            to: 'https://www.valleystream30.com/shaw-avenue-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/shaw-supply-lists/,
+            to: 'https://www.valleystream30.com/shaw-avenue-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/shaw-avenue-school-supply-lists/,
+            to: 'https://www.valleystream30.com/shaw-avenue-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/depts/,
+            to: 'https://www.valleystream30.com/departments',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/curriculum/,
+            to: 'https://www.valleystream30.com/curriculum-and-instruction',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/facilities/,
+            to: 'https://www.valleystream30.com/facilities-and-operations',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/hr/,
+            to: 'https://www.valleystream30.com/human-resources',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/tech/,
+            to: 'https://www.valleystream30.com/technology',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/cal/,
+            to: 'https://www.valleystream30.com/calendars',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/cals/,
+            to: 'https://www.valleystream30.com/calendars',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/calendar/,
+            to: 'https://www.valleystream30.com/calendars',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/board-meetings/,
+            to: 'https://www.valleystream30.com/boe-meetings',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/board-of-education-meetings/,
+            to: 'https://www.valleystream30.com/boe-meetings',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/student-attendance/,
+            to: 'https://www.valleystream30.com/attendance',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/attendance-calendar/,
+            to: 'https://www.valleystream30.com/attendance',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/student-attendance-calendar/,
+            to: 'https://www.valleystream30.com/attendance',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/nassau-boces/,
+            to: 'https://www.valleystream30.com/boces',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/boces-calendar/,
+            to: 'https://www.valleystream30.com/boces',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/nassau-boces-calendar/,
+            to: 'https://www.valleystream30.com/boces',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/sitemap/,
+            to: 'https://www.valleystream30.com/sitemap',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/site_map.xml/,
+            to: 'https://www.valleystream30.com/sitemap.xml',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/llms/,
+            to: 'https://www.valleystream30.com/llms.txt',
+            status: 301
         }
     ];
     for (const { from, to, status } of redirects) {
