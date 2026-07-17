@@ -892,6 +892,9 @@ if (window.location.search.includes('disable')) {
             const main = document.querySelector('main');
             const footer = document.querySelector('footer');
             if (main && footer) main.style.marginBottom = `${(window.innerWidth > 1000) ? (footer.clientHeight + 20) : 0}px`;
+            const lastBreadcrumb = document.querySelector('.breadcrumb li:last-child');
+            const secondToLastBreadcrumb = document.querySelector('.breadcrumb li:nth-last-child(2)');
+            if ((lastBreadcrumb && secondToLastBreadcrumb) && (lastBreadcrumb.innerText === secondToLastBreadcrumb.innerText)) secondToLastBreadcrumb.remove();
         };
 
         async function specificPages() {
@@ -1090,6 +1093,11 @@ if (window.location.search.includes('disable')) {
                     img.style.aspectRatio = '765/990';
                     img.style.borderRadius = '10px';
                 });
+                if (document.querySelector('main table:has(img)')) {
+                    const latestNewsletter = document.querySelector('main table:has(img)').querySelectorAll('td:has(img)')[document.querySelector('main table:has(img)').querySelectorAll('td:has(img)').length - 1];
+                    latestNewsletter.style.background = 'var(--blue)';
+                    latestNewsletter.style.borderRadius = '25px';
+                };
                 document.querySelectorAll('.ss-component-header-title').forEach(heading => {
                     heading.style.paddingBottom = '10px';
                 });

@@ -1562,6 +1562,7 @@ html:not(.disable) {
 
 	.ss-image-link:has(img) {
 		transition: 0.25s transform;
+		overflow: visible !important;
 
 		img {
 			border-radius: 10px !important;
