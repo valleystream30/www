@@ -302,6 +302,16 @@ async function handleRequest(request) {
             from: /https?:\/\/(?:www\.)?valleystream30\.com\/llms/,
             to: 'https://www.valleystream30.com/llms.txt',
             status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/superintendent-of-schools/,
+            to: 'https://www.valleystream30.com/superintendent',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/district-superintendent/,
+            to: 'https://www.valleystream30.com/superintendent',
+            status: 301
         }
     ];
     for (const { from, to, status } of redirects) {
