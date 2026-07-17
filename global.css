@@ -2273,4 +2273,34 @@ html:not(.disable) {
 	#results .url {
 		color: var(--blue);
 	}
+
+	.age-calculator {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: stretch;
+		background-color: var(--blue);
+		border-radius: 10px;
+		width: max-content;
+
+		* {
+			padding: 10px 20px;
+			margin: 0 !important;
+			border: none;
+			color: #ffffff;
+			min-width: 100px;
+			background-color: transparent;
+			-moz-appearance: textfield;
+
+			&:last-child {
+				background-color: var(--red);
+				border-radius: 0 10px 10px 0;
+			}
+
+			&::-webkit-inner-spin-button,
+			&::-webkit-outer-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+		}
+	}
 }

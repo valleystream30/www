@@ -873,7 +873,6 @@ if (window.location.search.includes('disable')) {
                     if (topmost) topmost = pageSections.find(section => (section.element === topmost.element) || (section.element === topmost));
                     if (topmost && (topmost.slug !== currentSlug)) {
                         currentSlug = topmost.slug;
-                        console.log(topmost.slug)
                         window.history.replaceState({}, '', `#${currentSlug}`);
                     };
                     currentSectionTimer = null;
@@ -1084,8 +1083,7 @@ if (window.location.search.includes('disable')) {
                     if (field) field.value = params.get('s');
                     const btn = document.querySelector('.search-btn button');
                     if (btn) btn.click();
-                }
-                return;
+                };
             } else if ((document.location.pathname === '/newsletters') || pageTitle.includes('newsletters')) {
                 document.querySelectorAll('main img').forEach(img => {
                     img.style.height = '400px';
@@ -1095,6 +1093,96 @@ if (window.location.search.includes('disable')) {
                 document.querySelectorAll('.ss-component-header-title').forEach(heading => {
                     heading.style.paddingBottom = '10px';
                 });
+            } else if ((document.location.pathname === '/registration') || pageTitle.includes('registration')) {
+                for (let el of document.querySelectorAll('p')) {
+                    if (el.innerText.includes('age calculator here')) {
+                        el.innerHTML = '';
+                        function ageString(startMonth, startDay, startYear, endMonth, endDay, endYear) {
+                            const startDate = new Date(Number(startYear), Number(startMonth) - 1, Number(startDay));
+                            const endDate = new Date(Number(endYear), Number(endMonth) - 1, Number(endDay));
+                            let years = endDate.getFullYear() - startDate.getFullYear();
+                            let months = endDate.getMonth() - startDate.getMonth();
+                            let days = endDate.getDate() - startDate.getDate();
+                            if (days < 0) {
+                                const prevMonth = new Date(endDate.getFullYear(), endDate.getMonth(), 0);
+                                days += prevMonth.getDate();
+                                months--;
+                            };
+                            if (months < 0) {
+                                months += 12;
+                                years--;
+                            };
+                            return `${years} years, ${months} months, and ${days} days old`;
+                        };
+                        const ageCalculator = document.createElement('form');
+                        ageCalculator.className = 'age-calculator';
+                        const monthInput = document.createElement('input');
+                        monthInput.type = 'number';
+                        monthInput.placeholder = 'Month';
+                        monthInput.min = '1';
+                        monthInput.max = '12';
+                        monthInput.required = true;
+                        ageCalculator.append(monthInput);
+                        const dayInput = document.createElement('input');
+                        dayInput.type = 'number';
+                        dayInput.placeholder = 'Day';
+                        dayInput.min = '1';
+                        dayInput.max = '31';
+                        dayInput.required = true;
+                        ageCalculator.append(dayInput);
+                        const yearInput = document.createElement('input');
+                        yearInput.type = 'number';
+                        yearInput.placeholder = 'Year';
+                        yearInput.min = '1900';
+                        yearInput.max = new Date().getFullYear();
+                        yearInput.required = true;
+                        ageCalculator.append(yearInput);
+                        const results = document.createElement('div');
+                        results.style.marginTop = '10px';
+                        results.style.fontWeight = 'bold';
+                        results.style.fontSize = '1.2em';
+                        results.innerText = 'Age Calculator';
+                        ageCalculator.append(results);
+                        el.appendChild(ageCalculator);
+                        monthInput.addEventListener('input', () => {
+                            if (monthInput.value === '') return;
+                            else if (Number(monthInput.value) < 1) monthInput.value = 1;
+                            else if (Number(monthInput.value) > 12) monthInput.value = 12;
+                            updateAgeCalculatorResults();
+                            if (String(Number(monthInput.value)).length === 2) dayInput.focus();
+                        });
+                        dayInput.addEventListener('input', () => {
+                            if (dayInput.value === '') return;
+                            else if (Number(dayInput.value) < 1) dayInput.value = 1;
+                            else if (Number(dayInput.value) > 31) dayInput.value = 31;
+                            updateAgeCalculatorResults();
+                            if (String(Number(dayInput.value)).length === 2) yearInput.focus();
+                        });
+                        yearInput.addEventListener('input', () => {
+                            if (yearInput.value === '') return;
+                            if (yearInput.value.length != 4) yearInput.value = String(Number(yearInput.value)).padStart(4, '0').slice(0, 4);
+                            if ((String(Number(yearInput.value)).length === 4) && (Number(yearInput.value) < 1900)) yearInput.value = 1900;
+                            if ((String(Number(yearInput.value)).length === 4) && (Number(yearInput.value) > new Date().getFullYear())) yearInput.value = new Date().getFullYear();
+                            if (String(Number(yearInput.value)).length === 4) {
+                                updateAgeCalculatorResults();
+                            } else {
+                                results.innerText = 'Invalid Date';
+                                results.classList.add('error');
+                            };
+                        });
+                        function updateAgeCalculatorResults() {
+                            if (!monthInput.value || !dayInput.value || !yearInput.value) {
+                                results.innerText = 'Invalid Date';
+                                results.classList.add('error');
+                                return;
+                            };
+                            const today = new Date();
+                            results.innerText = ageString(monthInput.value, dayInput.value, yearInput.value, today.getMonth() + 1, today.getDate(), today.getFullYear());
+                            results.classList.remove('error');
+                        };
+                        break;
+                    }
+                };
             };
         };
 
