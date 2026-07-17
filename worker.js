@@ -89,7 +89,27 @@ async function handleRequest(request) {
             status: 301
         },
         {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clearstream/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clearstreamave/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clearstreamavenue/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue',
+            status: 301
+        },
+        {
             from: /https?:\/\/(?:www\.)?valleystream30\.com\/clear-stream/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clear-stream-ave/,
             to: 'https://www.valleystream30.com/clear-stream-avenue',
             status: 301
         },
@@ -144,6 +164,16 @@ async function handleRequest(request) {
             status: 301
         },
         {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/forestroad/,
+            to: 'https://www.valleystream30.com/forest-road',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/forestroadschool/,
+            to: 'https://www.valleystream30.com/forest-road',
+            status: 301
+        },
+        {
             from: /https?:\/\/(?:www\.)?valleystream30\.com\/forest-road-school/,
             to: 'https://www.valleystream30.com/forest-road',
             status: 301
@@ -180,6 +210,16 @@ async function handleRequest(request) {
         },
         {
             from: /https?:\/\/(?:www\.)?valleystream30\.com\/shaw/,
+            to: 'https://www.valleystream30.com/shaw-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/shawavenue/,
+            to: 'https://www.valleystream30.com/shaw-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/shawavenueschool/,
             to: 'https://www.valleystream30.com/shaw-avenue',
             status: 301
         },
