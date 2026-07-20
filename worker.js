@@ -44,6 +44,11 @@ async function handleRequest(request) {
             status: 301
         },
         {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/glot/,
+            to: 'https://www.valleystream30.com/global-leaders',
+            status: 301
+        },
+        {
             from: /https?:\/\/(?:www\.)?valleystream30\.com\/district-history/,
             to: 'https://www.valleystream30.com/history',
             status: 301
