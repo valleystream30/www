@@ -109,6 +109,16 @@ async function handleRequest(request) {
             status: 301
         },
         {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clearstreamaveschool/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clearstreamavenueschool/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue',
+            status: 301
+        },
+        {
             from: /https?:\/\/(?:www\.)?valleystream30\.com\/clear-stream/,
             to: 'https://www.valleystream30.com/clear-stream-avenue',
             status: 301
@@ -119,7 +129,7 @@ async function handleRequest(request) {
             status: 301
         },
         {
-            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clear-stream-avenue-school/,
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clear-stream-ave-school/,
             to: 'https://www.valleystream30.com/clear-stream-avenue',
             status: 301
         },
