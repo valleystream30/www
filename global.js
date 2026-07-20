@@ -110,17 +110,19 @@ if (window.location.search.includes('disable')) {
                     nav.append(header.querySelector('.ss-site-header-main-links-container .translate a'));
                     for (var translate of header.querySelectorAll('.ss-site-header-main-links-container .translate')) translate.style.display = 'none';
                 };
-                var searchBar = document.createElement('div');
-                searchBar.className = 'searchBar';
-                searchBar.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Search..." id="siteSearchInput" /><button id="siteSearchButton"><i class="fa-solid fa-arrow-right"></i></button>`;
-                header.querySelector('.ss-site-header-main-container').insertBefore(searchBar, header.querySelector('.ss-site-header-main-container').lastElementChild);
-                document.getElementById('siteSearchButton').addEventListener('click', () => {
-                    var query = document.getElementById('siteSearchInput').value;
-                    if (query) window.location.href = `/search?s=${encodeURIComponent(query)}`;
-                });
-                document.getElementById('siteSearchInput').addEventListener('keydown', (event) => {
-                    if (event.key === 'Enter') document.getElementById('siteSearchButton').click();
-                });
+                if (window.innerWidth >= 1200) {
+                    var searchBar = document.createElement('div');
+                    searchBar.className = 'searchBar';
+                    searchBar.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Search..." id="siteSearchInput" /><button id="siteSearchButton"><i class="fa-solid fa-arrow-right"></i></button>`;
+                    header.querySelector('.ss-site-header-main-container').insertBefore(searchBar, header.querySelector('.ss-site-header-main-container').lastElementChild);
+                    document.getElementById('siteSearchButton').addEventListener('click', () => {
+                        var query = document.getElementById('siteSearchInput').value;
+                        if (query) window.location.href = `/search?s=${encodeURIComponent(query)}`;
+                    });
+                    document.getElementById('siteSearchInput').addEventListener('keydown', (event) => {
+                        if (event.key === 'Enter') document.getElementById('siteSearchButton').click();
+                    });
+                };
                 if (window.innerWidth <= 1000) {
                     var nav2 = document.createElement('nav');
                     nav2.className = 'ss-site-header-main-links-container';
@@ -925,7 +927,7 @@ if (window.location.search.includes('disable')) {
                     img.onload = img.onerror = resolve;
                 })));
                 while (!header.hasAttribute('style')) await nextFrame();
-                const adjustSlides = () => {
+                while (true) {
                     for (const slide of firstSection.querySelectorAll('.spotlight-slide')) {
                         if (window.innerWidth <= 1000) {
                             slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
@@ -941,9 +943,6 @@ if (window.location.search.includes('disable')) {
                             document.querySelector('.spotlight-wrapper').style.minHeight = `calc(100vh - ${base}px)`;
                         };
                     };
-                };
-                while (true) {
-                    adjustSlides();
                     if (firstSection.querySelector('.spotlight-slide')?.style.height || firstSection.querySelector('.spotlight-slide')?.style.minHeight) break;
                     await delay(100);
                 };
@@ -986,7 +985,6 @@ if (window.location.search.includes('disable')) {
                         };
                     };
                 };
-                return;
             } else if (pageTitle.includes('site map')) {
                 const pageBody = document.querySelector('.pageBody');
                 if (!pageBody) return;
@@ -1195,6 +1193,21 @@ if (window.location.search.includes('disable')) {
                     iframe.style.height = 'max-content';
                     iframe.style.aspectRatio = '1 / 0.6';
                 });
+            } else if (pageTitle.includes('clear stream avenue') || pageTitle.includes('forest road') || pageTitle.includes('shaw avenue')) {
+                const firstSection = document.querySelector('.stack_sort_area')?.children[1];
+                const secondSection = document.querySelector('.stack_sort_area')?.children[2];
+                if ((window.innerWidth < 2000) || !firstSection || !secondSection || !firstSection.querySelector('.spotlight-container') || !secondSection.classList.contains('ss-icon-matrix')) return;
+                var schoolSpotlightContainer = document.createElement('div');
+                schoolSpotlightContainer.className = 'school-spotlight-container';
+                schoolSpotlightContainer.appendChild(firstSection);
+                schoolSpotlightContainer.appendChild(secondSection);
+                document.querySelector('.stack_sort_area').insertBefore(schoolSpotlightContainer, document.querySelector('.stack_sort_area').children[1]);
+                const headerImgs = Array.from(document.querySelectorAll('header img')).filter(img => !img.complete);
+                if (headerImgs.length) await Promise.all(headerImgs.map(img => new Promise(resolve => {
+                    img.onload = img.onerror = resolve;
+                })));
+                while (!header.hasAttribute('style')) await nextFrame();
+                schoolSpotlightContainer.style.minHeight = `calc(100vh - ${header.getBoundingClientRect().height + (document.querySelector('.breadcrumb')?.getBoundingClientRect()?.height || 0) + document.querySelector('.stack_sort_area')?.children[0]?.getBoundingClientRect()?.height || 0}px)`;
             };
         };
 
@@ -1203,7 +1216,9 @@ if (window.location.search.includes('disable')) {
         window.addEventListener('resize', () => {
             const newWidth = window.innerWidth;
             var needsReloading = false;
-            if (((previousWidth > 1300) && (newWidth <= 1300)) || ((previousWidth <= 1300) && (newWidth > 1300)) ||
+            if (((previousWidth > 1900) && (newWidth <= 1900)) || ((previousWidth <= 1900) && (newWidth > 1900)) ||
+                ((previousWidth > 1300) && (newWidth <= 1300)) || ((previousWidth <= 1300) && (newWidth > 1300)) ||
+                ((previousWidth > 1100) && (newWidth <= 1100)) || ((previousWidth <= 1100) && (newWidth > 1100)) ||
                 ((previousWidth > 1023) && (newWidth <= 1023)) || ((previousWidth <= 1023) && (newWidth > 1023)) ||
                 ((previousWidth > 1000) && (newWidth <= 1000)) || ((previousWidth <= 1000) && (newWidth > 1000)) ||
                 ((previousWidth > 800) && (newWidth <= 800)) || ((previousWidth <= 800) && (newWidth > 800)) ||
