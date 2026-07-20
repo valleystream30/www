@@ -159,6 +159,21 @@ async function handleRequest(request) {
             status: 301
         },
         {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clear-stream-ave-supply-lists/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clear-stream-avenue-supply-lists/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue-supply-lists',
+            status: 301
+        },
+        {
+            from: /https?:\/\/(?:www\.)?valleystream30\.com\/clear-stream-ave-school-supply-lists/,
+            to: 'https://www.valleystream30.com/clear-stream-avenue-supply-lists',
+            status: 301
+        },
+        {
             from: /https?:\/\/(?:www\.)?valleystream30\.com\/clear-stream-avenue-school-supply-lists/,
             to: 'https://www.valleystream30.com/clear-stream-avenue-supply-lists',
             status: 301
