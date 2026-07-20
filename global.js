@@ -875,7 +875,7 @@ if (window.location.search.includes('disable')) {
                     if (topmost) topmost = pageSections.find(section => (section.element === topmost.element) || (section.element === topmost));
                     if (topmost && (topmost.slug !== currentSlug)) {
                         currentSlug = topmost.slug;
-                        window.history.replaceState({}, '', `#${currentSlug}`);
+                        window.history.replaceState({}, '', `#${(topmost !== pageSections[0]) ? currentSlug : ''}`);
                     };
                     currentSectionTimer = null;
                 }, 2500);

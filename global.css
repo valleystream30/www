@@ -2346,6 +2346,10 @@ html:not(.disable) {
 			.ss-im-icon-wrapper {
 				width: 100%;
 			}
+
+			&:nth-child(odd) .ss-im-icon-wrapper:last-child {
+				grid-column: span 1 / -1;
+			}
 		}
 
 		.ss-component-content,
