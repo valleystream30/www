@@ -1093,8 +1093,7 @@ if (window.location.search.includes('disable')) {
                 });
                 if (document.querySelector('main table:has(img)')) {
                     const latestNewsletter = document.querySelector('main table:has(img)').querySelectorAll('td:has(img)')[document.querySelector('main table:has(img)').querySelectorAll('td:has(img)').length - 1];
-                    latestNewsletter.style.background = 'var(--blue)';
-                    latestNewsletter.style.borderRadius = '25px';
+                    latestNewsletter?.classList.add('latestNewsletter');
                 };
                 document.querySelectorAll('.ss-component-header-title').forEach(heading => {
                     heading.style.paddingBottom = '10px';

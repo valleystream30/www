@@ -2361,4 +2361,22 @@ html:not(.disable) {
 			height: 100%;
 		}
 	}
+
+	.latestNewsletter {
+		background: var(--blue);
+		border-radius: 25px;
+		position: relative;
+
+		&::after {
+			content: "Latest";
+			background: var(--blue);
+			color: #ffffff;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			padding: 10px;
+			border-radius: 0 0 25px 25px;
+		}
+	}
 }
