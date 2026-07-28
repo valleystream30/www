@@ -893,7 +893,7 @@ if (window.location.search.includes('disable')) {
             }, 5000);
             const main = document.querySelector('main');
             const footer = document.querySelector('footer');
-            if (main && footer) main.style.marginBottom = `${(window.innerWidth > 1000) ? (footer.clientHeight + 20) : 0}px`;
+            if (main && footer && footer.clientHeight) main.style.marginBottom = `${(window.innerWidth > 1000) ? (footer.clientHeight + 20) : 0}px`;
             const lastBreadcrumb = document.querySelector('.breadcrumb li:last-child');
             const secondToLastBreadcrumb = document.querySelector('.breadcrumb li:nth-last-child(2)');
             if ((lastBreadcrumb && secondToLastBreadcrumb) && (lastBreadcrumb.innerText === secondToLastBreadcrumb.innerText)) secondToLastBreadcrumb.remove();
@@ -1241,8 +1241,8 @@ if (window.location.search.includes('disable')) {
                 };
                 if (!document.querySelector('.ss-alert-modal-svg-container')) clearInterval(changeIconInterval);
             }, 500);
-            if ((window.innerWidth > 1000) && document.querySelector('main') && document.querySelector('footer')) {
-                document.querySelector('main').style.marginBottom = document.querySelector('footer').clientHeight + 'px';
+            if ((window.innerWidth > 1000) && document.querySelector('main') && document.querySelector('footer') && document.querySelector('footer').clientHeight) {
+                document.querySelector('main').style.marginBottom = document.querySelector('footer').clientHeight + 20 + 'px';
             } else {
                 document.querySelector('main').style.marginBottom = '0px';
             };
