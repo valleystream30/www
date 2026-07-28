@@ -685,7 +685,10 @@ if (window.location.search.includes('disable')) {
                                     linksWithSubLinkItem.element.classList.add('hasSubLinks');
                                     linksWithSubLinkItem.element.querySelector('a').addEventListener('click', (event) => {
                                         event.preventDefault();
-                                        if (linksWithSubLinkItem.element.querySelector('.subLinksPopup')) return;
+                                        if (linksWithSubLinkItem.element.querySelector('.subLinksPopup')) {
+                                            linksWithSubLinkItem.element.querySelector('.subLinksPopup').remove();
+                                            return;
+                                        };
                                         const subLinksPopup = document.createElement('div');
                                         subLinksPopup.classList = 'subLinksPopup';
                                         var newMainNode = linksWithSubLinkItem.element.cloneNode(true);
