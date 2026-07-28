@@ -649,18 +649,57 @@ if (window.location.search.includes('disable')) {
                             });
                             break;
                         case 'links':
-                            if (!section.querySelector('.ss-editor-content').innerText.toLowerCase().includes('page sections here')) break;
-                            section.querySelector('.ss-editor-content').innerHTML = section.querySelector('.ss-editor-content').innerHTML.replace(/page sections here/i, '');
-                            if (section.querySelector('.ss-editor-content').innerText.trim() === '') section.querySelector('.ss-editor-content').remove();
-                            for (var container of section.querySelectorAll('.stack-link-container:has(a)')) {
-                                let link = container.querySelector('a');
-                                if (pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase())) link.href = `#${pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase()).slug}`;
-                                link.addEventListener('click', () => {
-                                    if (window.location.hash === link.getAttribute('href')) scrollToHash();
-                                });
-                                container.addEventListener('click', () => {
-                                    if (window.location.hash === link.getAttribute('href')) scrollToHash();
-                                    window.location.href = link.href;
+                            if (section.querySelector('.ss-editor-content').innerText.toLowerCase().includes('page sections here')) {
+                                section.querySelector('.ss-editor-content').innerHTML = section.querySelector('.ss-editor-content').innerHTML.replace(/page sections here/i, '');
+                                if (section.querySelector('.ss-editor-content').innerText.trim() === '') section.querySelector('.ss-editor-content').remove();
+                                for (var container of section.querySelectorAll('.stack-link-container:has(a)')) {
+                                    let link = container.querySelector('a');
+                                    if (pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase())) link.href = `#${pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase()).slug}`;
+                                    link.addEventListener('click', () => {
+                                        if (window.location.hash === link.getAttribute('href')) scrollToHash();
+                                    });
+                                    container.addEventListener('click', () => {
+                                        if (window.location.hash === link.getAttribute('href')) scrollToHash();
+                                        window.location.href = link.href;
+                                    });
+                                };
+                            } else {
+                                var linksWithSubLinks = {};
+                                for (var container of Array.from(section.querySelectorAll('.stack-link-container:has(a)')).filter(link => link.innerText.includes('->'))) {
+                                    const originTitle = container.innerText.split('->')[0].trim();
+                                    if (linksWithSubLinks[originTitle]) {
+                                        container.querySelector('a').innerText = container.innerText.split('->')[1].trim();
+                                        linksWithSubLinks[originTitle].subLinks.push(container);
+                                    } else {
+                                        linksWithSubLinks[originTitle] = {
+                                            title: container.innerText.split('->')[1].trim(),
+                                            element: container,
+                                            subLinks: [],
+                                        };
+                                        container.querySelector('a').innerText = originTitle;
+                                    };
+                                };
+                                for (let linksWithSubLink of Object.keys(linksWithSubLinks)) {
+                                    const linksWithSubLinkItem = linksWithSubLinks[linksWithSubLink];
+                                    if (linksWithSubLinkItem.subLinks.length < 1) continue;
+                                    linksWithSubLinkItem.element.classList.add('hasSubLinks');
+                                    linksWithSubLinkItem.element.querySelector('a').addEventListener('click', (event) => {
+                                        event.preventDefault();
+                                        if (linksWithSubLinkItem.element.querySelector('.subLinksPopup')) return;
+                                        const subLinksPopup = document.createElement('div');
+                                        subLinksPopup.classList = 'subLinksPopup';
+                                        var newMainNode = linksWithSubLinkItem.element.cloneNode(true);
+                                        newMainNode.querySelector('a').innerText = linksWithSubLinkItem.title;
+                                        subLinksPopup.appendChild(newMainNode);
+                                        for (var subLink of linksWithSubLinkItem.subLinks) subLinksPopup.appendChild(subLink);
+                                        linksWithSubLinkItem.element.appendChild(subLinksPopup);
+                                    });
+                                    for (var subLink of linksWithSubLinkItem.subLinks) subLink.remove();
+                                };
+                                document.addEventListener('click', (event) => {
+                                    if (!event.target.closest('.subLinksPopup') && !event.target.closest('.hasSubLinks')) {
+                                        for (var subLinksPopup of document.querySelectorAll('.subLinksPopup')) subLinksPopup.remove();
+                                    };
                                 });
                             };
                             break;

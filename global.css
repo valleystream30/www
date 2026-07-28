@@ -1731,15 +1731,51 @@ html:not(.disable) {
 		padding-top: 60px !important;
 	}
 
-	.customElement.links .stack-links-container li {
+	.customElement.links .stack-links-container > li {
 		cursor: pointer;
 		transition: 0.25s;
 
-		&:hover {
+		&:not(.hasSubLinks):hover {
 			margin-top: -5px;
 			margin-bottom: 5px;
 			transition: 0.25s;
 		}
+
+		&.hasSubLinks {
+			position: relative;
+
+			> .stack-link-text-container a::after {
+				content: "▼";
+				margin-left: 5px;
+			}
+
+			.subLinksPopup {
+				position: absolute;
+				background: var(--blue);
+				color: #fff;
+				top: 100%;
+				border-radius: 10px;
+				z-index: 1;
+				display: flex;
+				flex-direction: column;
+				gap: 15px;
+				padding: 20px 20px 20px 10px;
+
+				* {
+					color: #fff !important;
+					border: none;
+					padding: 0px;
+				}
+			}
+		}
+	}
+
+	.customElement.links
+		.stack-links-container:has(.subLinksPopup)
+		> li:not(:has(.subLinksPopup)) {
+		opacity: 0.5;
+		user-select: none;
+		pointer-events: none;
 	}
 
 	.customElement.links
