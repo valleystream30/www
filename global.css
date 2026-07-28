@@ -1731,7 +1731,7 @@ html:not(.disable) {
 		padding-top: 60px !important;
 	}
 
-	.customElement.links li {
+	.customElement.links .stack-links-container li {
 		cursor: pointer;
 		transition: 0.25s;
 
