@@ -259,6 +259,10 @@ html:not(.disable) {
 				padding-bottom: 30px;
 			}
 		}
+
+		.stack-links-container > * {
+			max-width: 30% !important;
+		}
 	}
 
 	@media screen and (max-width: 1000px) {
@@ -560,6 +564,12 @@ html:not(.disable) {
 		}
 	}
 
+	@media screen and (min-width: 800px) {
+		.stack-links-container > * {
+			max-width: 40%;
+		}
+	}
+	
 	@media screen and (max-width: 800px) {
 		.sitemap-masonry.desktop,
 		.sitemap-masonry.tablet {
@@ -1633,6 +1643,7 @@ html:not(.disable) {
 			.ss-im-icon-wrapper-inner {
 				align-items: start;
 				text-align: left;
+				padding-right: 50px;
 
 				&::before {
 					border: 2px solid var(--blue) !important;
@@ -2413,6 +2424,26 @@ html:not(.disable) {
 			width: 100%;
 			padding: 10px;
 			border-radius: 0 0 25px 25px;
+		}
+	}
+
+	.stack-links-container {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		row-gap: 25px;
+		width: 100%;
+
+		> * {
+			width: 100%;
+			border-top: 0.5px solid #555 !important;
+			border-bottom: 0.5px solid gray !important;
+			padding: 15px 0;
+			min-width: 200px;
+		}
+
+		i {
+			color: var(--blue) !important;
 		}
 	}
 }
