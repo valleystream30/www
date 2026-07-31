@@ -61,7 +61,7 @@ html:not(.disable) {
 	@media screen and (max-width: 1099px) {
 		.spotlight-container:has(.item:only-of-type)
 			.spotlight-slide-component:not(.spotlight-hide-bg)
-			.spotlight-text-container {
+			.spotlight-text-container:not(.forceStyle) {
 			background: #042450f0 !important;
 		}
 	}
@@ -492,7 +492,7 @@ html:not(.disable) {
 		}
 
 		.breadcrumb {
-			padding: 20px 5px !important;
+			padding: 15px 5px !important;
 		}
 
 		footer {
@@ -2544,5 +2544,20 @@ html:not(.disable) {
 
 	.ss-close-modal {
 		z-index: 10;
+	}
+
+	.map {
+		transition: 0.25s opacity;
+
+		&:not(.active) {
+			opacity: 0;
+			user-select: none;
+			pointer-events: none;
+			transition: 0.25s opacity;
+		}
+	}
+
+	.spotlight-nav-container:not(:has(.spotlight-nav-options > *)) {
+		display: none;
 	}
 }

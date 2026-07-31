@@ -1041,7 +1041,7 @@ if (window.location.search.includes('disable')) {
                         <div class="spotlight-slide" style="height: initial;">
                             <div class="spotlight-slide-component">
                                 <div class="spotlight-image-container">
-                                    <iframe src="https://maps.google.com/maps?q=Clear%20Stream%20Avenue%20School&amp;t=h&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    <iframe src="https://maps.google.com/maps?q=Clear%20Stream%20Avenue%20School&t=h&z=14&ie=UTF8&iwloc=B&output=embed" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -1050,7 +1050,7 @@ if (window.location.search.includes('disable')) {
                         <div class="spotlight-slide" style="height: initial;">
                             <div class="spotlight-slide-component">
                                 <div class="spotlight-image-container">
-                                    <iframe src="https://maps.google.com/maps?q=Forest%20Road%20School&amp;t=h&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    <iframe src="https://maps.google.com/maps?q=Forest%20Road%20School&t=h&z=14&ie=UTF8&iwloc=B&output=embed" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -1059,7 +1059,7 @@ if (window.location.search.includes('disable')) {
                         <div class="spotlight-slide" style="height: initial;">
                             <div class="spotlight-slide-component">
                                 <div class="spotlight-image-container">
-                                    <iframe src="https://maps.google.com/maps?q=Shaw%20Avenue%20School&amp;t=h&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    <iframe src="https://maps.google.com/maps?q=Shaw%20Avenue%20School&t=h&z=14&ie=UTF8&iwloc=B&output=embed" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -1291,6 +1291,32 @@ if (window.location.search.includes('disable')) {
                 })));
                 while (!header.hasAttribute('style')) await nextFrame();
                 schoolSpotlightContainer.style.minHeight = `calc(100vh - ${header.getBoundingClientRect().height + (document.querySelector('.breadcrumb')?.getBoundingClientRect()?.height || 0) + document.querySelector('.stack_sort_area')?.children[0]?.getBoundingClientRect()?.height || 0}px)`;
+                const zerothSection = document.querySelector('.stack_sort_area')?.children[0];
+                if (zerothSection) {
+                    const map = document.createElement('iframe');
+                    map.classList = 'map';
+                    map.src = `https://maps.google.com/maps?q=${zerothSection.innerText.replaceAll(' ', '%20')}&t=h&z=14&ie=UTF8&iwloc=B&output=embed`;
+                    map.style.position = 'absolute';
+                    map.style.top = '0';
+                    map.style.left = '0';
+                    map.style.width = '100%';
+                    map.style.height = '100%';
+                    map.style.border = '0';
+                    map.setAttribute('allowfullscreen', '');
+                    map.setAttribute('loading', 'lazy');
+                    map.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+                    firstSection.appendChild(map);
+                    if (firstSection.querySelector('h2')) {
+                        firstSection.querySelector('h2').innerHTML = `<i aria-hidden="true" class="ss-icon ss-medium-icon ss-circle-icon fa fa-regular fa-map-location-dot" style="display: inline; font-size: 30px; margin-right: 2.5px;"></i> ${firstSection.querySelector('h2').innerHTML}`;
+                        firstSection.querySelector('h2').style.cursor = 'pointer';
+                        firstSection.querySelector('h2').addEventListener('click', () => {
+                            firstSection.querySelector('.map')?.classList.toggle('active');
+                        });
+                        firstSection.addEventListener('mouseleave', () => {
+                            firstSection.querySelector('.map')?.classList.remove('active');
+                        });
+                    };
+                };
             };
         };
 
