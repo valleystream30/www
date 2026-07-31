@@ -388,24 +388,28 @@ html:not(.disable) {
 			margin-left: 50%;
 			transform: translateX(-50%);
 
-			.ss-im-icon-wrapper-inner {
-				padding: 15px;
-				zoom: 0.8;
-				justify-content: center;
-				aspect-ratio: 1;
-			}
+			.ss-im-icon-wrapper {
+				width: unset !important;
 
-			.ss-im-icon-wrapper:nth-child(2n-1) {
-				border-right: 1px solid #ffffff7a;
-				margin-left: 0.5px;
-			}
+				.ss-im-icon-wrapper-inner {
+					padding: 15px;
+					zoom: 0.8;
+					justify-content: center;
+					aspect-ratio: 1;
+				}
 
-			/* .ss-im-icon-wrapper:nth-child(2n) {
-			border-left: 1px solid #ffffff7a;
-		} */
+				&:nth-child(2n-1) {
+					border-right: 1px solid #ffffff7a;
+					margin-left: 0.5px;
+				}
 
-			.ss-im-icon-wrapper:not(:nth-child(1)):not(:nth-child(2)) {
-				border-top: 1px solid #ffffff7a;
+				/* &:nth-child(2n) {
+					border-left: 1px solid #ffffff7a;
+				} */
+
+				&:not(:nth-child(1)):not(:nth-child(2)) {
+					border-top: 1px solid #ffffff7a;
+				}
 			}
 		}
 
@@ -569,7 +573,7 @@ html:not(.disable) {
 			max-width: 40%;
 		}
 	}
-	
+
 	@media screen and (max-width: 800px) {
 		.sitemap-masonry.desktop,
 		.sitemap-masonry.tablet {
@@ -578,6 +582,32 @@ html:not(.disable) {
 
 		.sitemap-masonry.mobile {
 			display: flex !important;
+		}
+
+		.customElement.sideBySide.location .locationSwitch {
+			width: 90% !important;
+			left: 5%;
+		}
+
+		footer
+			.school-footer-col:last-of-type
+			nav:last-of-type
+			ul:last-of-type {
+			flex-direction: row !important;
+			justify-content: center;
+		}
+
+		.ss-alert-modal-icon-container {
+			border-radius: 7.5px;
+			margin-bottom: 10px !important;
+
+			.ss-alert-modal-svg-container {
+				align-items: center !important;
+			}
+		}
+
+		.ss-lightbox-modal-alert .ss-close-modal {
+			background-color: #fff;
 		}
 	}
 
@@ -843,6 +873,7 @@ html:not(.disable) {
 		svg {
 			width: 75%;
 			fill: #ffffff;
+			max-width: 20vw;
 		}
 	}
 
@@ -1814,6 +1845,62 @@ html:not(.disable) {
 		padding: 0;
 	}
 
+	.customElement.sideBySide.location .spotlight-image-container::before {
+		display: none;
+	}
+
+	.customElement.sideBySide.location iframe {
+		border-radius: 0px;
+	}
+
+	.customElement.sideBySide.location .locationSwitch {
+		width: 50%;
+		position: absolute;
+		bottom: 10px;
+		display: flex;
+		justify-content: center;
+
+		.inner {
+			display: flex;
+			background: var(--blue);
+			border-radius: 10px;
+			padding: 7.5px;
+			gap: 5px;
+			z-index: 100;
+			flex-wrap: wrap;
+			justify-content: center;
+
+			> * {
+				color: #ffffff;
+				margin: 0;
+				padding: 5px 10px;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: 0.25s;
+
+				&:hover {
+					background: var(--red);
+					transition: 0.25s;
+				}
+			}
+		}
+	}
+
+	.customElement.sideBySide.location:has(.item:nth-of-type(2).active)
+		.locationSwitch
+		.inner
+		> *:nth-child(1),
+	.customElement.sideBySide.location:has(.item:nth-of-type(3).active)
+		.locationSwitch
+		.inner
+		> *:nth-child(2),
+	.customElement.sideBySide.location:has(.item:nth-of-type(4).active)
+		.locationSwitch
+		.inner
+		> *:nth-child(3) {
+		background: var(--red);
+	}
+
 	.ss-color .ss-accordion-btn:hover,
 	.ss-color .ss-accordion-btn:focus,
 	.ss-color .ss-accordion-btn.open {
@@ -1940,6 +2027,13 @@ html:not(.disable) {
 		transition: 1.25s;
 		width: min(700px, 60vw);
 
+		&:has(.events-container) {
+			background-image: url(https://faisaln.com/share/1780427119.png);
+			background-position: center 40%;
+			background-repeat: no-repeat;
+			background-size: 50%;
+		}
+
 		* {
 			color: #ffffff !important;
 		}
@@ -1958,6 +2052,7 @@ html:not(.disable) {
 			align-self: stretch;
 			height: 100%;
 			overflow-y: scroll;
+			background-color: var(--blue);
 
 			& > p {
 				margin-top: 15px;
@@ -2445,5 +2540,9 @@ html:not(.disable) {
 		i {
 			color: var(--blue) !important;
 		}
+	}
+
+	.ss-close-modal {
+		z-index: 10;
 	}
 }
