@@ -59,6 +59,9 @@ if (window.location.search.includes('disable')) {
     function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); };
 
     var header = null;
+    var footer = null;
+    var main = null;
+    var feedback = null;
 
     var headerLoadInterval = setInterval(() => {
         header = document.querySelector('header');
@@ -751,14 +754,79 @@ if (window.location.search.includes('disable')) {
                     document.querySelector('header .ss-site-header-main-links-container > a.forest').style.marginLeft = `-${Math.min(window.scrollY, 50)}px`;
                     document.querySelector('header .ss-site-header-main-links-container > a.shaw').style.marginTop = `-${Math.min(window.scrollY, 45)}px`;
                 });
-                const signInLink = document.querySelector('footer .school-footer-col:last-of-type nav:last-of-type ul:last-of-type li:last-of-type');
-                try {
-                    if (document.querySelector('.adminBar')) {
-                        signInLink.querySelector('a').innerText = 'Log Out';
-                        signInLink.querySelector('a').href = `${location.origin}/?logout=true`;
+                var feedbackLink = document.querySelector('footer .school-footer-col:last-of-type nav:last-of-type ul:last-of-type li:last-of-type');
+                if (feedbackLink) {
+                    feedbackLink.parentElement.appendChild(feedbackLink.cloneNode(true));
+                    var signInLink = document.querySelector('footer .school-footer-col:last-of-type nav:last-of-type ul:last-of-type li:last-of-type');
+                    try {
+                        if (document.querySelector('.adminBar')) {
+                            signInLink.querySelector('a').innerText = 'Log Out';
+                            signInLink.querySelector('a').href = `${location.origin}/?logout=true`;
+                        } else {
+                            signInLink?.remove();
+                        };
+                    } catch {
+                        signInLink?.remove();
                     };
-                } catch {
-                    signInLink?.remove();
+                    feedbackLink.querySelector('a').innerText = 'Site Feedback';
+                    feedbackLink.querySelector('a').href = '#';
+                    feedbackLink.addEventListener('click', () => {
+                        if (feedback) {
+                            setTimeout(() => {
+                                feedback.classList.add('active');
+                            }, 100);
+                            return;
+                        };
+                        feedback = document.createElement('div');
+                        feedback.classList = 'feedback';
+                        feedback.innerHTML = `<form>
+                            <h3>VS30 Website Feedback</h3>
+                            <textarea placeholder="Enter your feedback here..." maxlength="1000"></textarea>
+                            <button type="button" class="btn btn-default">Submit Feedback<span aria-hidden="true" class="ss-button-icon"></span></button>
+                        </form>`;
+                        document.body.appendChild(feedback);
+                        setTimeout(() => {
+                            feedback.classList.add('active');
+                        }, 100);
+                        feedback.querySelector('button')?.addEventListener('click', async () => {
+                            if (!feedback.querySelector('textarea')) return;
+                            if (!feedback.querySelector('textarea').value) {
+                                if (feedback.querySelector('h3')) feedback.querySelector('h3').innerText = 'Feedback required to submit feedback.';
+                                feedback.querySelector('textarea')?.remove();
+                                if (feedback.querySelector('button')) feedback.querySelector('button').innerHTML = 'Close<span aria-hidden="true" class="ss-button-icon"></span>';
+                                feedback.querySelector('button')?.addEventListener('click', (event) => {
+                                    event.preventDefault();
+                                    feedback.remove();
+                                    feedback = null;
+                                });
+                                return;
+                            };
+                            const fields = {
+                                "entry.1335226607": encodeURIComponent(JSON.stringify(localStorage)).slice(-5000),
+                                "entry.1001555343": feedback.querySelector('textarea').value,
+                            };
+                            const params = new URLSearchParams(fields).toString();
+                            const url = "https://docs.google.com/forms/d/e/1FAIpQLSdT88jTAw3TYCukYAtNNqTOLHE5AH1Hlc-Z5QxXbVbTLfOB9g/formResponse?";
+                            const feedbackResult = await fetch(url + params, {
+                                method: "POST",
+                                mode: "no-cors",
+                                headers: {
+                                    "Content-Type": "application/x-www-form-urlencoded",
+                                },
+                            });
+                            if (feedback.querySelector('h3')) feedback.querySelector('h3').innerText = 'Successfully submitted feedback.';
+                            feedback.querySelector('textarea')?.remove();
+                            if (feedback.querySelector('button')) feedback.querySelector('button').innerHTML = 'Close<span aria-hidden="true" class="ss-button-icon"></span>';
+                            feedback.querySelector('button')?.addEventListener('click', (event) => {
+                                event.preventDefault();
+                                feedback.remove();
+                                feedback = null;
+                            });
+                        });
+                    });
+                    document.addEventListener('click', (e) => {
+                        if (feedback && feedback.querySelector('form') && !feedback.querySelector('form').contains(e.target)) feedback.classList.remove('active');
+                    });
                 };
                 var adminBarInner = document.querySelector('.adminBar') && document.querySelector('.adminBar').lastElementChild;
                 if (loggedInUser.full_name) adminBarInner?.setAttribute('logged-in-as', loggedInUser.full_name);
@@ -920,8 +988,8 @@ if (window.location.search.includes('disable')) {
                     if (title && title.innerText.includes('customElement.')) window.location.reload();
                 });
             }, 7500);
-            const main = document.querySelector('main');
-            const footer = document.querySelector('footer');
+            main = document.querySelector('main');
+            footer = document.querySelector('footer');
             if (main && footer && footer.clientHeight && (footer.clientHeight > 300)) main.style.marginBottom = `${(window.innerWidth > 1000) ? (footer.clientHeight + 20) : 0}px`;
             const lastBreadcrumb = document.querySelector('.breadcrumb li:last-child');
             const secondToLastBreadcrumb = document.querySelector('.breadcrumb li:nth-last-child(2)');
@@ -1071,7 +1139,7 @@ if (window.location.search.includes('disable')) {
                             </div>
                         </div>
                     </div>`;
-                    for (var i = 0; i < carouselInner.querySelectorAll('p').length; i++) carouselInner.querySelectorAll('p')[i].addEventListener('click', () => {
+                    for (let i = 0; i < carouselInner.querySelectorAll('.locationSwitch p').length; i++) carouselInner.querySelectorAll('.locationSwitch p')[i].addEventListener('click', () => {
                         carouselInner.querySelectorAll('.item').forEach(item => item.classList.remove('active'));
                         carouselInner.querySelectorAll('.item')[i].classList.add('active');
                     });
@@ -1358,8 +1426,8 @@ if (window.location.search.includes('disable')) {
                 };
                 if (!document.querySelector('.ss-alert-modal-svg-container')) clearInterval(changeIconInterval);
             }, 500);
-            var main = document.querySelector('main');
-            var footer = document.querySelector('footer');
+            main = document.querySelector('main');
+            footer = document.querySelector('footer');
             main.style.marginBottom = (((window.innerWidth > 1000) && main && footer && footer.clientHeight && (footer.clientHeight > 300)) ? (footer.clientHeight + 20) : 0) + 'px';
         });
 

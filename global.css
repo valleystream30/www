@@ -2560,4 +2560,56 @@ html:not(.disable) {
 	.spotlight-nav-container:not(:has(.spotlight-nav-options > *)) {
 		display: none;
 	}
+
+	& .feedback {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 1048;
+		background: rgba(0, 0, 0, 0.5);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100vw;
+		height: 100vh;
+
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		form {
+			background: #ffffff;
+			color: var(--blue);
+			transform: translateX(-50%) translateY(-50%);
+			padding: 30px;
+			border-radius: 10px;
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+			align-items: stretch;
+			top: 50%;
+			left: 50%;
+			position: absolute;
+			width: max-content;
+
+			h3 {
+				padding-right: 10px !important;
+			}
+
+			textarea {
+				outline: none;
+				border: none;
+				border-radius: 5px;
+				min-width: 50vw;
+				min-height: 20vh;
+			}
+		}
+
+		&:not(.active) {
+			opacity: 0;
+			user-select: none;
+			pointer-events: none;
+		}
+	}
 }
