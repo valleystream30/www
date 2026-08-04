@@ -826,7 +826,7 @@ html:not(.disable) {
 		}
 	}
 
-	button:has(span) {
+	button:has(span:not(:has(svg))) {
 		position: relative;
 		transition: padding 0.5s ease;
 
