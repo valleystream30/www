@@ -1354,44 +1354,64 @@ if (window.location.search.includes('disable')) {
             } else if (pageTitle.includes('clear stream avenue') || pageTitle.includes('forest road') || pageTitle.includes('shaw avenue')) {
                 const firstSection = document.querySelector('.stack_sort_area')?.children[1];
                 const secondSection = document.querySelector('.stack_sort_area')?.children[2];
-                if ((window.innerWidth < 2000) || !firstSection || !secondSection || !firstSection.querySelector('.spotlight-container') || !secondSection.classList.contains('ss-icon-matrix')) return;
-                var schoolSpotlightContainer = document.createElement('div');
-                schoolSpotlightContainer.className = 'school-spotlight-container';
-                schoolSpotlightContainer.appendChild(firstSection);
-                schoolSpotlightContainer.appendChild(secondSection);
-                document.querySelector('.stack_sort_area').insertBefore(schoolSpotlightContainer, document.querySelector('.stack_sort_area').children[1]);
-                const headerImgs = Array.from(document.querySelectorAll('header img')).filter(img => !img.complete);
-                if (headerImgs.length) await Promise.all(headerImgs.map(img => new Promise(resolve => {
-                    img.onload = img.onerror = resolve;
-                })));
-                while (!header.hasAttribute('style')) await nextFrame();
-                schoolSpotlightContainer.style.minHeight = `calc(100vh - ${header.getBoundingClientRect().height + (document.querySelector('.breadcrumb')?.getBoundingClientRect()?.height || 0) + document.querySelector('.stack_sort_area')?.children[0]?.getBoundingClientRect()?.height || 0}px)`;
-                const zerothSection = document.querySelector('.stack_sort_area')?.children[0];
-                if (zerothSection) {
-                    const map = document.createElement('iframe');
-                    map.classList = 'map';
-                    map.src = `https://maps.google.com/maps?q=${zerothSection.innerText.replaceAll(' ', '%20')}&t=h&z=14&ie=UTF8&iwloc=B&output=embed`;
-                    map.style.position = 'absolute';
-                    map.style.top = '0';
-                    map.style.left = '0';
-                    map.style.width = '100%';
-                    map.style.height = '100%';
-                    map.style.border = '0';
-                    map.setAttribute('allowfullscreen', '');
-                    map.setAttribute('loading', 'lazy');
-                    map.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
-                    firstSection.appendChild(map);
-                    if (firstSection.querySelector('h2')) {
-                        firstSection.querySelector('h2').innerHTML = `<i aria-hidden="true" class="ss-icon ss-medium-icon ss-circle-icon fa fa-regular fa-map-location-dot" style="display: inline; font-size: 30px; margin-right: 2.5px;"></i> ${firstSection.querySelector('h2').innerHTML}`;
-                        firstSection.querySelector('h2').style.cursor = 'pointer';
-                        firstSection.querySelector('h2').addEventListener('click', () => {
-                            firstSection.querySelector('.map')?.classList.toggle('active');
-                        });
-                        firstSection.addEventListener('mouseleave', () => {
-                            firstSection.querySelector('.map')?.classList.remove('active');
-                        });
+                if ((window.innerWidth >= 2000) && firstSection && secondSection && firstSection.querySelector('.spotlight-container') && secondSection.classList.contains('ss-icon-matrix')) {
+                    var schoolSpotlightContainer = document.createElement('div');
+                    schoolSpotlightContainer.className = 'school-spotlight-container';
+                    schoolSpotlightContainer.appendChild(firstSection);
+                    schoolSpotlightContainer.appendChild(secondSection);
+                    document.querySelector('.stack_sort_area').insertBefore(schoolSpotlightContainer, document.querySelector('.stack_sort_area').children[1]);
+                    const headerImgs = Array.from(document.querySelectorAll('header img')).filter(img => !img.complete);
+                    if (headerImgs.length) await Promise.all(headerImgs.map(img => new Promise(resolve => {
+                        img.onload = img.onerror = resolve;
+                    })));
+                    while (!header.hasAttribute('style')) await nextFrame();
+                    schoolSpotlightContainer.style.minHeight = `calc(100vh - ${header.getBoundingClientRect().height + (document.querySelector('.breadcrumb')?.getBoundingClientRect()?.height || 0) + document.querySelector('.stack_sort_area')?.children[0]?.getBoundingClientRect()?.height || 0}px)`;
+                    const zerothSection = document.querySelector('.stack_sort_area')?.children[0];
+                    if (zerothSection) {
+                        const map = document.createElement('iframe');
+                        map.classList = 'map';
+                        map.src = `https://maps.google.com/maps?q=${zerothSection.innerText.replaceAll(' ', '%20')}&t=h&z=14&ie=UTF8&iwloc=B&output=embed`;
+                        map.style.position = 'absolute';
+                        map.style.top = '0';
+                        map.style.left = '0';
+                        map.style.width = '100%';
+                        map.style.height = '100%';
+                        map.style.border = '0';
+                        map.setAttribute('allowfullscreen', '');
+                        map.setAttribute('loading', 'lazy');
+                        map.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+                        firstSection.appendChild(map);
+                        if (firstSection.querySelector('h2')) {
+                            firstSection.querySelector('h2').innerHTML = `<i aria-hidden="true" class="ss-icon ss-medium-icon ss-circle-icon fa fa-regular fa-map-location-dot" style="display: inline; font-size: 30px; margin-right: 2.5px;"></i> ${firstSection.querySelector('h2').innerHTML}`;
+                            firstSection.querySelector('h2').style.cursor = 'pointer';
+                            firstSection.querySelector('h2').addEventListener('click', () => {
+                                firstSection.querySelector('.map')?.classList.toggle('active');
+                            });
+                            firstSection.addEventListener('mouseleave', () => {
+                                firstSection.querySelector('.map')?.classList.remove('active');
+                            });
+                        };
                     };
                 };
+                // if (document.querySelector('section.ss-calendar-events') && document.querySelector('section.ss-calendar-events .slick-slide')) {
+                //     const initials = (pageTitle.includes('clear stream avenue') ? 'CS' : (pageTitle.includes('forest road') ? 'FR' : (pageTitle.includes('shaw avenue') ? 'SA' : ''))).toLowerCase();
+                //     const initialsAlt = (pageTitle.includes('clear stream avenue') ? 'CSA' : (pageTitle.includes('forest road') ? 'FRS' : (pageTitle.includes('shaw avenue') ? 'SAS' : ''))).toLowerCase();
+                //     const schoolName = (pageTitle.includes('clear stream avenue') ? 'Clear Stream' : (pageTitle.includes('forest road') ? 'Forest Road' : (pageTitle.includes('shaw avenue') ? 'Shaw Avenue' : ''))).toLowerCase();
+                //     const schoolNameAlt = (pageTitle.includes('clear stream avenue') ? 'Clear Stream Avenue' : (pageTitle.includes('forest road') ? 'Forest Road School' : (pageTitle.includes('shaw avenue') ? 'Shaw Avenue School' : ''))).toLowerCase();
+                //     const schoolNameShort = (pageTitle.includes('clear stream avenue') ? 'Clear Stream' : (pageTitle.includes('forest road') ? 'Forest' : (pageTitle.includes('shaw avenue') ? 'Shaw' : ''))).toLowerCase();
+                //     Array.from(document.querySelectorAll('section.ss-calendar-events .slick-slide')).filter(slide => {
+                //         const slideText = slide.querySelector('calendar-event').shadowRoot.textContent.trim().toLowerCase();
+                //         return !slideText.includes(initials) && !slideText.includes(initialsAlt) && !slideText.includes(schoolName) && !slideText.includes(schoolNameAlt) && !slideText.includes(schoolNameShort);
+                //     }).forEach(slide => slide.remove());
+                //     // re-index slides
+                //     const slidesLeft = Array.from(document.querySelectorAll('section.ss-calendar-events .slick-slide'));
+                //     var slideIndex = -4;
+                //     for (let slide of slidesLeft) {
+                //         slide
+                //         slideIndex++;
+                //     };
+                //     ...unfinished...
+                // };
             };
         };
 

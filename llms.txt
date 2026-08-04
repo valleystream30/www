@@ -81,24 +81,22 @@ Alternate slugs redirect to the page's main slug.
 | 12 | Schools | /schools | /our_schools |
 | 13 | - Clear Stream Avenue School | /clear-stream-avenue | /cs, /csa, /csas, /clearstream, /clearstreamavenue, /clearstreamave, /clearstreamavenueschool, /clearstreamaveschool, /clear-stream-ave, /clear-stream-ave-school, /clear-stream, /clear-stream-avenue-school |
 | 14 | - - Clear Stream Avenue Supply Lists | /clear-stream-avenue-supply-lists | /cs-supply-lists, /csa-supply-lists, /csas-supply-lists, /clear-stream-supply-lists, /clear-stream-avenue-school-supply-lists |
-| 15 | - - Clear Stream Avenue PTA | /clear-stream-avenue-pta | /cs-pta, /csa-pta, /csas-pta, /clear-stream-pta, /clear-stream-avenue-pta |
-| 16 | - Forest Road School | /forest-road | /fr, /frs, /forest, /forestroad, /forestroadschool, /forest-road-school |
-| 17 | - - Forest Road Supply Lists | /forest-road-supply-lists | /fr-supply-lists, /frs-supply-lists, /forest-supply-lists, /forest-road-school-supply-lists |
-| 18 | - - Forest Road PTA | /forest-road-pta | /fr-pta, /frs-pta, /forest-pta, /forest-road-school-pta |
-| 19 | - Shaw Avenue School | /shaw-avenue | /sa, /sas, /shaw, /shawavenue, /shawavenueschool, /shaw-avenue-school |
-| 20 | - - Shaw Avenue Supply Lists | /shaw-avenue-supply-lists | /sa-supply-lists, /sas-supply-lists, /shaw-supply-lists, /shaw-avenue-school-supply-lists |
-| 21 | - - Shaw Avenue PTA | /shaw-avenue-pta | /sa-pta, /sas-pta, /shaw-pta, /shaw-avenue-school-pta |
-| 22 | Departments | /departments | /depts |
-| 23 | - Business | /business | |
-| 24 | - Curriculum & Instruction | /curriculum-and-instruction | /curriculum |
-| 25 | - Facilities & Operations | /facilities-and-operations | /facilities |
-| 26 | - Human Resources | /human-resources | /hr |
-| 27 | - Special Services | /special-services | |
-| 28 | - Technology | /technology | /tech |
-| 29 | Calendars | /calendars | /cal, /cals, /calendar |
-| 30 | - BoE Meetings | /boe-meetings | /board-meetings, /board-of-education-meetings |
-| 31 | - Student Attendance | /attendance | /student-attendance, /attendance-calendar, /student-attendance-calendar |
-| 32 | - Nassau BOCES Calendar | /boces | /nassau-boces, /boces-calendar, /nassau-boces-calendar |
-| 33 | Accessibility | /accessibility | |
-| 34 | Site Map | /site_map | /sitemap |
-| 35 | LLMs.txt | /llms.txt | /llms | Backlog |
+| 15 | - Forest Road School | /forest-road | /fr, /frs, /forest, /forestroad, /forestroadschool, /forest-road-school |
+| 16 | - - Forest Road Supply Lists | /forest-road-supply-lists | /fr-supply-lists, /frs-supply-lists, /forest-supply-lists, /forest-road-school-supply-lists |
+| 17 | - - Forest Road PTA | /forest-road-pta | /fr-pta, /frs-pta, /forest-pta, /forest-road-school-pta |
+| 18 | - Shaw Avenue School | /shaw-avenue | /sa, /sas, /shaw, /shawavenue, /shawavenueschool, /shaw-avenue-school |
+| 19 | - - Shaw Avenue Supply Lists | /shaw-avenue-supply-lists | /sa-supply-lists, /sas-supply-lists, /shaw-supply-lists, /shaw-avenue-school-supply-lists |
+| 20 | Departments | /departments | /depts |
+| 21 | - Business | /business | |
+| 22 | - Curriculum & Instruction | /curriculum-and-instruction | /curriculum |
+| 23 | - Facilities & Operations | /facilities-and-operations | /facilities |
+| 24 | - Human Resources | /human-resources | /hr |
+| 25 | - Special Services | /special-services | |
+| 26 | - Technology | /technology | /tech |
+| 27 | Calendars | /calendars | /cal, /cals, /calendar |
+| 28 | - BoE Meetings | /boe-meetings | /board-meetings, /board-of-education-meetings |
+| 29 | - Student Attendance | /attendance | /student-attendance, /attendance-calendar, /student-attendance-calendar |
+| 30 | - Nassau BOCES Calendar | /boces | /nassau-boces, /boces-calendar, /nassau-boces-calendar |
+| 31 | Accessibility | /accessibility | |
+| 32 | Site Map | /site_map | /sitemap |
+| 33 | LLMs.txt | /llms.txt | /llms | Backlog |
