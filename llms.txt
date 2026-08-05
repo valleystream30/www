@@ -97,6 +97,7 @@ Alternate slugs redirect to the page's main slug.
 | 28 | - BoE Meetings | /boe-meetings | /board-meetings, /board-of-education-meetings |
 | 29 | - Student Attendance | /attendance | /student-attendance, /attendance-calendar, /student-attendance-calendar |
 | 30 | - Nassau BOCES Calendar | /boces | /nassau-boces, /boces-calendar, /nassau-boces-calendar |
-| 31 | Accessibility | /accessibility | |
-| 32 | Site Map | /site_map | /sitemap |
-| 33 | LLMs.txt | /llms.txt | /llms | Backlog |
+| 31 | Chain of Communication | /chain-of-communication | /coc, /c-o-c, /chain, /command, /chain-of-command |
+| 32 | Accessibility | /accessibility | |
+| 33 | Site Map | /site_map | /sitemap |
+| 34 | LLMs.txt | /llms.txt | /llms | Backlog |
