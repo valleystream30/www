@@ -1801,7 +1801,7 @@ html:not(.disable) {
 				display: flex;
 				flex-direction: column;
 				gap: 15px;
-				padding: 20px 20px 20px 10px;
+				padding: 20px 30px 20px 10px;
 
 				* {
 					color: #fff !important;
@@ -2611,5 +2611,13 @@ html:not(.disable) {
 			user-select: none;
 			pointer-events: none;
 		}
+	}
+
+	.ss-icon-matrix .ss-im-icon-wrapper-inner:has(> i) h3.ss-icon-title {
+		padding-bottom: 10px;
+	}
+
+	.ss-im-icon-wrapper-inner a {
+		cursor: pointer;
 	}
 }
