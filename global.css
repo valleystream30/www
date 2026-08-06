@@ -2621,7 +2621,7 @@ html:not(.disable) {
 		}
 
 		&:has(> i):has(h3.ss-icon-title) .ss-icon-text {
-			padding-bottom: 7px;
+			padding: 7px;
 		}
 
 		a {
