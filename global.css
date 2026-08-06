@@ -1676,11 +1676,6 @@ html:not(.disable) {
 				text-align: left;
 				padding-right: 50px;
 
-				&::before {
-					border: 2px solid var(--blue) !important;
-					border-radius: 10px;
-				}
-
 				.ss-icon {
 					border-color: var(--blue) !important;
 					background-color: var(--blue) !important;
@@ -2561,7 +2556,7 @@ html:not(.disable) {
 		display: none;
 	}
 
-	& .feedback {
+	.feedback {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -2613,11 +2608,24 @@ html:not(.disable) {
 		}
 	}
 
-	.ss-icon-matrix .ss-im-icon-wrapper-inner:has(> i) h3.ss-icon-title {
-		padding-bottom: 10px;
-	}
+	.ss-icon-matrix .ss-im-icon-wrapper-inner {
+		border-color: transparent !important;
 
-	.ss-im-icon-wrapper-inner a {
-		cursor: pointer;
+		&::before {
+			border: 2px solid var(--blue) !important;
+			border-radius: 10px;
+		}
+
+		&:has(> i) h3.ss-icon-title {
+			padding-bottom: 10px;
+		}
+
+		&:has(> i):has(h3.ss-icon-title) .ss-icon-text {
+			padding-bottom: 7px;
+		}
+
+		a {
+			cursor: pointer;
+		}
 	}
 }
