@@ -926,6 +926,36 @@ if (window.location.search.includes('disable')) {
                     };
                 }, 2000);
             };
+            if (window.innerWidth <= 1000) {
+                for (let image of document.querySelectorAll('.customElement.about img')) {
+                    image.style.cursor = 'pointer';
+                    image.addEventListener('click', () => {
+                        window.open(image.src);
+                    });
+                };
+            } else {
+                if (document.querySelector('.customElement.about img')) {
+                    var hoverImageWindow = document.createElement('img');
+                    hoverImageWindow.classList = 'hoverImageWindow';
+                    hoverImageWindow.style = 'position: fixed; bottom: 1vw; left: 1vw; width: 50vw; z-index: 10; opacity: 0; border-radius: 10px; pointer-events: none; transition: 0.25s;';
+                    document.body.appendChild(hoverImageWindow);
+                };
+                for (let image of document.querySelectorAll('.customElement.about img')) {
+                    image.style.cursor = 'pointer';
+                    image.addEventListener('click', () => {
+                        var hoverImageWindow = document.querySelector('.hoverImageWindow');
+                        if (hoverImageWindow.style.opacity == 1) {
+                            window.open(image.src);
+                        } else {
+                            hoverImageWindow.style.opacity = 1;
+                            hoverImageWindow.src = image.src;
+                        };
+                    });
+                    image.addEventListener('mouseleave', () => {
+                        document.querySelector('.hoverImageWindow').style.opacity = 0;
+                    });
+                };
+            };
         });
 
         async function afterReady() {
