@@ -916,14 +916,16 @@ if (window.location.search.includes('disable')) {
                     }, 2500);
                 };
             }, 1750);
-            for (let objectContainer of document.querySelectorAll('.pdf-container.pdf-display-embed')) let objectInterval = setInterval(() => {
-                let object = objectContainer.querySelector('object');
-                if (object) {
-                    object.setAttribute('src', object.getAttribute('data'));
-                    object.outerHTML = object.outerHTML.replace('object', 'iframe');
-                    clearInterval(objectInterval);
-                };
-            }, 2000);
+            for (let objectContainer of document.querySelectorAll('.pdf-container.pdf-display-embed')) {
+                    let objectInterval = setInterval(() => {
+                    let object = objectContainer.querySelector('object');
+                    if (object) {
+                        object.setAttribute('src', object.getAttribute('data'));
+                        object.outerHTML = object.outerHTML.replace('object', 'iframe');
+                        clearInterval(objectInterval);
+                    };
+                }, 2000);
+            };
         });
 
         async function afterReady() {
