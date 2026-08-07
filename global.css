@@ -2436,6 +2436,7 @@ html:not(.disable) {
 			min-width: 100px;
 			background-color: transparent;
 			-moz-appearance: textfield;
+			appearance: textfield;
 
 			&:last-child {
 				background-color: var(--red);
