@@ -1054,6 +1054,7 @@ if (window.location.search.includes('disable')) {
                     document.querySelector('.alert-badge').classList.add('active');
                 }, 100);
             };
+            for (let hiddenSection of document.querySelectorAll('.ss-hidden-component')) hiddenSection.remove();
         };
 
         async function specificPages() {

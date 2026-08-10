@@ -2258,14 +2258,16 @@ html:not(.disable) {
 		padding: 0;
 	}
 
-	.customElement.about .aboutImage:not(:hover) {
+	.customElement.about:not(:has(video)) img:only-of-type:not(:hover),
+	.customElement.about:not(:has(img)) video:only-of-type:not(:hover) {
 		max-width: min(300px, 100%) !important;
-		transition: 0.25s max-width;
+		transition: 0.5s max-width ease-in-out;
 	}
 
-	.customElement.about .aboutImage:hover {
+	.customElement.about:not(:has(video)) img:only-of-type:hover,
+	.customElement.about:not(:has(img)) video:only-of-type:hover {
 		max-width: min(750px, 100%) !important;
-		transition: 0.25s max-width;
+		transition: 0.5s max-width ease-in-out;
 	}
 
 	.translationOffer {
