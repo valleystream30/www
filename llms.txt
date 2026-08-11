@@ -68,7 +68,7 @@ Alternate slugs redirect to the page's main slug.
 | # | Title | Slug | Alternate Slugs |
 |-|-|-|-|
 | 1 | Home | / | /home, * |
-| 2 | Board of Education | /boe | /board, /board-of-education, /our_district, /capital,  |
+| 2 | Board of Education | /boe | /board, /board-of-education, /our_district, /capital |
 | 3 | - District History | /history | /district-history |
 | 4 | - Superintendent | /superintendent | /superintendent-of-schools, /district-superintendent |
 | 5 | - - Global Leaders of Tomorrow | /global-leaders | /global-leaders-of-tomorrow, /glot |
@@ -81,9 +81,9 @@ Alternate slugs redirect to the page's main slug.
 | 12 | Schools | /schools | /our_schools |
 | 13 | - Clear Stream Avenue School | /clear-stream-avenue | /cs, /csa, /csas, /clearstream, /clearstreamavenue, /clearstreamave, /clearstreamavenueschool, /clearstreamaveschool, /clear-stream-ave, /clear-stream-ave-school, /clear-stream, /clear-stream-avenue-school |
 | 14 | - - Clear Stream Avenue Supply Lists | /clear-stream-avenue-supply-lists | /cs-supply-lists, /csa-supply-lists, /csas-supply-lists, /clear-stream-supply-lists, /clear-stream-avenue-school-supply-lists |
-| 15 | - Forest Road School | /forest-road | /fr, /frs, /forest, /forestroad, /forestroadschool, /forest-road-school |
-| 16 | - - Forest Road Supply Lists | /forest-road-supply-lists | /fr-supply-lists, /frs-supply-lists, /forest-supply-lists, /forest-road-school-supply-lists |
-| 17 | - - Forest Road PTA | /forest-road-pta | /fr-pta, /frs-pta, /forest-pta, /forest-road-school-pta |
+| 15 | - Forest Road School | /forest-road | /fr, /frs, /forest, /forestroad, /forestroadschool, /forest-road-school, /forest-rd, /forestrd, /forestrdschool, /forest-rd-school |
+| 16 | - - Forest Road Supply Lists | /forest-road-supply-lists | /fr-supply-lists, /frs-supply-lists, /forest-supply-lists, /forest-road-school-supply-lists, /forest-rd-supply-lists, /forest-rd-school-supply-lists |
+| 17 | - - Forest Road PTA | /forest-road-pta | /forest-road-pta | /fr-pta, /frs-pta, /forest-pta, /forest-road-school-pta, /forest-rd-pta, /forest-rd-school-pta |
 | 18 | - Shaw Avenue School | /shaw-avenue | /sa, /sas, /shaw, /shawavenue, /shawavenueschool, /shaw-avenue-school |
 | 19 | - - Shaw Avenue Supply Lists | /shaw-avenue-supply-lists | /sa-supply-lists, /sas-supply-lists, /shaw-supply-lists, /shaw-avenue-school-supply-lists |
 | 20 | Departments | /departments | /depts |
