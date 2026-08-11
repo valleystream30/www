@@ -73,7 +73,7 @@ Alternate slugs redirect to the page's main slug.
 | 4 | - Superintendent | /superintendent | /superintendent-of-schools, /district-superintendent |
 | 5 | - - Global Leaders of Tomorrow | /global-leaders | /global-leaders-of-tomorrow, /glot |
 | 6 | - District Policies | /district-policies | /policies |
-| 7 | - Voting Information | /voting | /voting-information |
+| 7 | - Voting Information | /voting | /voting-information, /voting-info, /vote |
 | 8 | - Community Resources | /resources | /community-resources, /for_parents, /our_programs |
 | 9 | - Freedom of Information (FOIL) | /foil | /freedom-of-information |
 | 10 | - Student Registration | /registration | /student-registration |
