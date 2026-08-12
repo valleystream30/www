@@ -29,6 +29,8 @@ html:not(.disable) {
 				0.25s margin-left,
 				0.25s margin-right,
 				0.25s width;
+			position: absolute !important;
+			left: calc((100% - (100% / 3)) / 2);
 
 			&:hover,
 			&:has(input:focus) {
@@ -2336,11 +2338,26 @@ html:not(.disable) {
 		}
 	}
 
+	.pageSection:first-of-type .ss-component-header-title,
+	.pageSection:first-of-type:not(:has(.ss-component-header-title))
+		.ss-editor-content
+		*:not(.forceStyle) a {
+		font-weight: 500;
+		cursor: pointer;
+		color: white;
+	}
+
 	.pageSection:not(:first-of-type) .ss-component-header-title,
 	.pageSection:not(:first-of-type):not(:has(.ss-component-header-title))
 		.ss-editor-content
 		*:not(.forceStyle) {
 		font-size: clamp(26px, 6vw, 40px) !important;
+
+		a {
+			font-weight: 500;
+			cursor: pointer;
+			color: white;
+		}
 	}
 
 	.btn-lg,

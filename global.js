@@ -429,6 +429,7 @@ if (window.location.search.includes('disable')) {
                         pageSectionLi.addEventListener('click', () => {
                             if (window.location.hash === pageSectionLink.getAttribute('href')) scrollToHash();
                         });
+                        pageSection.element.querySelectorAll('span')[pageSection.element.querySelectorAll('span').length - 1].outerHTML = `<a href="#${pageSection.slug}">${pageSection.title}</a>`;
                     };
                     pageSectionsLink.appendChild(pageSectionsDiv);
                     nav.prepend(pageSectionsLink);
