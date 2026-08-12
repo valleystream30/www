@@ -1423,14 +1423,38 @@ if (window.location.search.includes('disable')) {
                         map.setAttribute('loading', 'lazy');
                         map.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
                         firstSection.appendChild(map);
+                        var streetViewID = null;
+                        if (pageTitle.includes('clear stream avenue')) streetViewID = '!4v1786576831474!6m8!1m7!1soLFBMvq7_zj11paaPj6HJw!2m2!1d40.66777388399026!2d-73.71761766698346!3f352.8078211522897!4f1.748193650218127!5f0.7820865974627469';
+                        if (pageTitle.includes('forest road')) streetViewID = '!4v1786576719675!6m8!1m7!1sCeW_XH_O1xqj4YSuWymCvg!2m2!1d40.65697563021924!2d-73.71545126017608!3f254.80563004648556!4f-0.6121006860575875!5f0.7820865974627469';
+                        if (pageTitle.includes('shaw avenue')) streetViewID = '!4v1786576586537!6m8!1m7!1sWd9CkS4f3TMQEescM1srww!2m2!1d40.67196214185895!2d-73.71626139810955!3f71.27697467627694!4f-5.525659656377201!5f0.7820865974627469';
+                        if (streetViewID) {
+                            const streetView = document.createElement('iframe');
+                            streetView.classList = 'street-view';
+                            streetView.src = `https://www.google.com/maps/embed?pb=${streetViewID}`;
+                            streetView.style.position = 'absolute';
+                            streetView.style.top = '0';
+                            streetView.style.left = '0';
+                            streetView.style.width = '100%';
+                            streetView.style.height = '100%';
+                            streetView.style.border = '0';
+                            streetView.setAttribute('allowfullscreen', '');
+                            streetView.setAttribute('loading', 'lazy');
+                            streetView.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+                            firstSection.appendChild(streetView);
+                        };
                         if (firstSection.querySelector('h2')) {
-                            firstSection.querySelector('h2').innerHTML = `<i aria-hidden="true" class="ss-icon ss-medium-icon ss-circle-icon fa fa-regular fa-map-location-dot" style="display: inline; font-size: 30px; margin-right: 2.5px;"></i> ${firstSection.querySelector('h2').innerHTML}`;
-                            firstSection.querySelector('h2').style.cursor = 'pointer';
-                            firstSection.querySelector('h2').addEventListener('click', () => {
+                            firstSection.querySelector('h2').innerHTML = `<i map aria-hidden="true" class="ss-icon ss-medium-icon ss-circle-icon fa fa-regular fa-map-location-dot" style="display: inline; font-size: 30px; margin-right: 2.5px;"></i> <i street-view aria-hidden="true" class="ss-icon ss-medium-icon ss-circle-icon fa fa-regular fa-street-view" style="display: inline; font-size: 30px; margin-right: 2.5px;"></i> ${firstSection.querySelector('h2').innerHTML}`;
+                            firstSection.querySelector('h2 [map]').style.cursor = 'pointer';
+                            firstSection.querySelector('h2 [map]').addEventListener('click', () => {
                                 firstSection.querySelector('.map')?.classList.toggle('active');
+                            });
+                            firstSection.querySelector('h2 [street-view]').style.cursor = 'pointer';
+                            firstSection.querySelector('h2 [street-view]').addEventListener('click', () => {
+                                firstSection.querySelector('.street-view')?.classList.toggle('active');
                             });
                             firstSection.addEventListener('mouseleave', () => {
                                 firstSection.querySelector('.map')?.classList.remove('active');
+                                firstSection.querySelector('.street-view')?.classList.remove('active');
                             });
                         };
                     };
