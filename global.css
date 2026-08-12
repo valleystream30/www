@@ -2338,7 +2338,7 @@ html:not(.disable) {
 		}
 	}
 
-	.pageSection:first-of-type .ss-component-header-title,
+	.pageSection:first-of-type .ss-component-header-title a,
 	.pageSection:first-of-type:not(:has(.ss-component-header-title))
 		.ss-editor-content
 		*:not(.forceStyle) a {
