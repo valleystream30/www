@@ -62,6 +62,17 @@ if (window.location.search.includes('disable')) {
     var footer = null;
     var main = null;
     var feedback = null;
+    var pageSections = [];
+    var loggedInUser = {
+        visitor: null,
+        email: null,
+        full_name: null,
+    };
+    var currentSlug = null;
+    var currentSectionTimer = null;
+    var intersecting = new Set();
+    var languages = [];
+    var changeIconInterval = null;
 
     var headerLoadInterval = setInterval(() => {
         header = document.querySelector('header');
@@ -71,17 +82,6 @@ if (window.location.search.includes('disable')) {
             return;
         };
         var nav = Array.from(header.querySelectorAll('nav')).find(nav => (nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1)));
-        var pageSections = [];
-        var loggedInUser = {
-            visitor: null,
-            email: null,
-            full_name: null,
-        };
-        var currentSlug = null;
-        var currentSectionTimer = null;
-        var intersecting = new Set();
-        var languages = [];
-        var changeIconInterval = null;
 
         onReady(async () => {
             try {
@@ -1058,7 +1058,7 @@ if (window.location.search.includes('disable')) {
         };
 
         async function specificPages() {
-            const pageTitle = document.querySelector('title').textContent.toLowerCase();
+            const pageTitle = document.querySelector('title').textContent.toLowerCase().includes(' - ') ? document.querySelector('title').textContent.toLowerCase().split(' - ')[1] : document.querySelector('title').textContent.toLowerCase();
             if (pageTitle.includes('partnership')) {
                 document.querySelector('.ss-editor-content p:last-child')?.classList.add('partnerships');
                 return;
@@ -1453,6 +1453,9 @@ if (window.location.search.includes('disable')) {
                 //     };
                 //     ...unfinished...
                 // };
+            } else if (pageTitle === 'technology') {
+                document.querySelector('title').innerHTML = `${document.querySelector('title').innerHTML.split(' - ')[0]} - ${pageSections[0].title}`;
+                if (document.querySelector('.breadcrumb li:last-of-type')) document.querySelector('.breadcrumb li:last-of-type').innerHTML = pageSections[0].title;
             };
         };
 
