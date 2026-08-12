@@ -909,7 +909,7 @@ html:not(.disable) {
 			.ss-component-content .ss-one-column .ss-component-column h3,
 			.ss-component-content .ss-one-column .ss-component-column span
 		) {
-		padding: min(80px, 7.5vh) 0 !important;
+		padding: min(65px, 6vh) 0 !important;
 
 		.ss-component-content
 			.ss-one-column
@@ -934,7 +934,7 @@ html:not(.disable) {
 		}
 
 		&:not(:first-of-type) {
-			padding: min(70px, 6.5vh) 0 !important;
+			padding: min(50px, 5vh) 0 !important;
 		}
 	}
 
@@ -2270,13 +2270,17 @@ html:not(.disable) {
 	.customElement.about:not(:has(video)) img:only-of-type:not(:hover),
 	.customElement.about:not(:has(img)) video:only-of-type:not(:hover) {
 		max-width: min(300px, 100%) !important;
-		transition: 0.5s max-width ease-in-out;
+		height: auto !important;
+		width: min(300px, 100%) !important;
+		transition: 0.5s ease-in-out;
 	}
 
 	.customElement.about:not(:has(video)) img:only-of-type:hover,
 	.customElement.about:not(:has(img)) video:only-of-type:hover {
 		max-width: min(750px, 100%) !important;
-		transition: 0.5s max-width ease-in-out;
+		width: min(750px, 100%) !important;
+		height: auto !important;
+		transition: 0.5s ease-in-out;
 	}
 
 	.translationOffer {
@@ -2341,7 +2345,8 @@ html:not(.disable) {
 	.pageSection:first-of-type .ss-component-header-title a,
 	.pageSection:first-of-type:not(:has(.ss-component-header-title))
 		.ss-editor-content
-		*:not(.forceStyle) a {
+		*:not(.forceStyle)
+		a {
 		font-weight: 500;
 		cursor: pointer;
 		color: white;
