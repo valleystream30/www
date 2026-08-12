@@ -92,12 +92,12 @@ Alternate slugs redirect to the page's main slug.
 | 23 | - Facilities & Operations | /facilities-and-operations | /facilities |
 | 24 | - Human Resources | /human-resources | /hr |
 | 25 | - Special Services | /special-services | |
-| 26 | - Technology | /technology | /tech |
+| 26 | - Data, Information Systems & Technology | /technology | /tech |
 | 27 | Calendars | /calendars | /cal, /cals, /calendar |
 | 28 | - BoE Meetings | /boe-meetings | /board-meetings, /board-of-education-meetings |
 | 29 | - Student Attendance | /attendance | /student-attendance, /attendance-calendar, /student-attendance-calendar |
 | 30 | - Nassau BOCES Calendar | /boces | /nassau-boces, /boces-calendar, /nassau-boces-calendar |
-| 31 | Chain of Communication | /chain-of-communication | /coc, /c-o-c, /chain, /command, /chain-of-command |
+| 31 | Chain of Communication | /chain-of-communication | /coc, /c-o-c, /chain, /command, /chain-of-command, /chain-of-comm |
 | 32 | Accessibility | /accessibility | |
 | 33 | Site Map | /site_map | /sitemap |
 | 34 | LLMs.txt | /llms.txt | /llms | Backlog |
