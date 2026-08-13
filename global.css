@@ -552,7 +552,7 @@ html:not(.disable) {
 		header > nav {
 			zoom: 0.8;
 
-			& > a:first-of-type {
+			& > a {
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -2159,10 +2159,14 @@ html:not(.disable) {
 		height: 100%;
 	}
 
-	.pageSectionsToggle i,
-	.qrCodeToggle i,
-	.copyPageLinkToggle i {
-		color: #ffffff;
+	.pageSectionsToggle,
+	.qrCodeToggle,
+	.copyPageLinkToggle {
+		text-decoration: underline;
+
+		i {
+			color: #ffffff;
+		}
 	}
 
 	.pageSections,
@@ -2215,11 +2219,11 @@ html:not(.disable) {
 	.qrCode svg {
 		height: 150px;
 		width: 150px;
-		fill: var(--blue);
+		fill: var(--blue) !important;
 		transition: 0.25s;
 
 		&:hover {
-			fill: var(--red);
+			fill: var(--red) !important;
 			transition: 0.25s;
 		}
 	}
