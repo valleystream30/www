@@ -812,6 +812,7 @@ html:not(.disable) {
 
 	body {
 		top: 0px !important;
+		font-size: min(18px, 3.5vw) !important;
 
 		&:has(.alert-badge:not(.active)) .ss-alert-modal-svg-container svg {
 			display: none !important;
@@ -936,7 +937,7 @@ html:not(.disable) {
 
 		&.ss-banner {
 			min-height: unset !important;
-			padding: 80px 0 !important;
+			padding: min(80px, 7vh) 0 !important;
 
 			&::before {
 				opacity: 0.8 !important;
@@ -2458,6 +2459,7 @@ html:not(.disable) {
 	.ss-component.ss-has-bg::before {
 		left: -5px;
 		width: calc(100vw + 5px);
+		height: 101%;
 	}
 
 	iframe,
