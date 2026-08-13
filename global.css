@@ -125,8 +125,12 @@ html:not(.disable) {
 				left: unset !important;
 			}
 
-			&:first-of-type {
+			&:nth-of-type(1) {
 				left: 20px;
+			}
+
+			&:nth-of-type(2) {
+				left: 60px;
 			}
 		}
 
@@ -530,7 +534,8 @@ html:not(.disable) {
 			transform: translateX(50%) !important;
 		}
 
-		.pageSections {
+		.pageSections,
+		.qrCode {
 			top: 80px !important;
 			left: 20px !important;
 		}
@@ -2149,7 +2154,13 @@ html:not(.disable) {
 		height: 100%;
 	}
 
-	.pageSections {
+	.pageSectionsToggle i,
+	.qrCodeToggle i {
+		color: #ffffff;
+	}
+
+	.pageSections,
+	.qrCode {
 		position: absolute;
 		top: 70px;
 		left: 0;
@@ -2159,7 +2170,7 @@ html:not(.disable) {
 		gap: 10px;
 		background: #ffffff;
 		border-radius: 10px;
-		padding: 25px 30px 15px 30px;
+		padding: 20px;
 		overflow-y: scroll;
 		transition: 0.25s;
 		max-height: 60vh;
@@ -2174,6 +2185,10 @@ html:not(.disable) {
 			pointer-events: none;
 			user-select: none;
 		}
+	}
+
+	.pageSections {
+		padding: 25px 30px 15px 30px;
 
 		ul {
 			margin-left: -10px;
@@ -2187,6 +2202,18 @@ html:not(.disable) {
 					text-wrap: auto;
 				}
 			}
+		}
+	}
+
+	.qrCode svg {
+		height: 150px;
+		width: 150px;
+		fill: var(--blue);
+		transition: 0.25s;
+
+		&:hover {
+			fill: var(--red);
+			transition: 0.25s;
 		}
 	}
 
