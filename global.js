@@ -472,6 +472,14 @@ if (window.location.search.includes('disable')) {
                         pad: 0,
                     }));
                     qrCodeLink.appendChild(qrCodeDiv);
+                    var copyPageLinkLink = document.createElement('a');
+                    copyPageLinkLink.className = 'copyPageLinkToggle';
+                    copyPageLinkLink.setAttribute('role', 'button');
+                    copyPageLinkLink.setAttribute('tabindex', '0');
+                    var copyPageLinkIcon = document.createElement('i');
+                    copyPageLinkIcon.classList = 'fa-solid fa-link';
+                    copyPageLinkLink.appendChild(copyPageLinkIcon);
+                    nav.prepend(copyPageLinkLink);
                     nav.prepend(qrCodeLink);
                     nav.prepend(pageSectionsLink);
                     pageSectionsLink.addEventListener('click', (event) => {
@@ -508,6 +516,20 @@ if (window.location.search.includes('disable')) {
                             qrCodeDiv.classList.toggle('active');
                         };
                     });
+                    copyPageLinkLink.addEventListener('click', async (event) => {
+                        if (event.target.closest('.qrCodeList a')) return;
+                        await navigator.clipboard.writeText(document.location);
+                        alert('Copied section link to clipboard.');
+                        for (var languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
+                        pageSectionsDiv.classList.remove('active');
+                    });
+                    copyPageLinkLink.addEventListener('keydown', async (event) => {
+                        if ((event.key === 'Enter') || (event.key === ' ')) {
+                            event.preventDefault();
+                            await navigator.clipboard.writeText(document.location);
+                            alert('Copied section link to clipboard.');
+                        };
+                    });
                     document.addEventListener('click', (event) => {
                         if (!event.target.closest('.pageSections') && !event.target.closest('.pageSectionsToggle')) pageSectionsDiv.classList.remove('active');
                         if (!event.target.closest('.qrCode') && !event.target.closest('.qrCodeToggle')) qrCodeDiv.classList.remove('active');
@@ -523,6 +545,7 @@ if (window.location.search.includes('disable')) {
                             var url  = URL.createObjectURL(blob);
                             await navigator.clipboard.writeText(svg.outerHTML);
                             window.open(url, '_blank');
+                            alert('Copied section QR code to clipboard.');
                         };
                     });
                 };

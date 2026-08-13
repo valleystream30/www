@@ -132,6 +132,10 @@ html:not(.disable) {
 			&:nth-of-type(2) {
 				left: 60px;
 			}
+
+			&:nth-of-type(3) {
+				left: 100px;
+			}
 		}
 
 		header .searchBar {
@@ -535,7 +539,8 @@ html:not(.disable) {
 		}
 
 		.pageSections,
-		.qrCode {
+		.qrCode,
+		.copyPageLink {
 			top: 80px !important;
 			left: 20px !important;
 		}
@@ -2155,12 +2160,14 @@ html:not(.disable) {
 	}
 
 	.pageSectionsToggle i,
-	.qrCodeToggle i {
+	.qrCodeToggle i,
+	.copyPageLinkToggle i {
 		color: #ffffff;
 	}
 
 	.pageSections,
-	.qrCode {
+	.qrCode,
+	.copyPageLink {
 		position: absolute;
 		top: 70px;
 		left: 0;
