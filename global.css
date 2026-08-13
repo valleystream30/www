@@ -2342,21 +2342,24 @@ html:not(.disable) {
 		}
 	}
 
-	.pageSection:first-of-type .ss-component-header-title a,
+	.pageSection:first-of-type .ss-component-header-title,
 	.pageSection:first-of-type:not(:has(.ss-component-header-title))
 		.ss-editor-content
-		*:not(.forceStyle)
+		*:not(.forceStyle) {
+		font-size: clamp(26px, 6vw, 40px) !important;
+
 		a {
-		font-weight: 500;
-		cursor: pointer;
-		color: white;
+			font-weight: 500;
+			cursor: pointer;
+			color: white;
+		}
 	}
 
 	.pageSection:not(:first-of-type) .ss-component-header-title,
 	.pageSection:not(:first-of-type):not(:has(.ss-component-header-title))
 		.ss-editor-content
 		*:not(.forceStyle) {
-		font-size: clamp(26px, 6vw, 40px) !important;
+		font-size: clamp(20px, 5vw, 30px) !important;
 
 		a {
 			font-weight: 500;
