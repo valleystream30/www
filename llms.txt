@@ -14,12 +14,13 @@
 
 ## Important pages
 - Home: https://www.valleystream30.com/
-- Board of Education (Scheduled Meetings, Agendas & Minutes, District Policies, Partnerships, Voting Information): https://www.valleystream30.com/boe
+- Board of Education (Scheduled Meetings, Agendas & Minutes, District Policies, Partnerships): https://www.valleystream30.com/boe
+- Voting Information (Time & Place, Voter Registration, Voter Qualifications, Welcome to the USA): https://www.valleystream30.com/voting
 - Schools: https://www.valleystream30.com/schools
 - Employee Resources: https://www.valleystream30.com/human-resources#employee-resources
 - Points of Contact: https://www.valleystream30.com/human-resources#points-of-contact
 - Use of Facilities: https://www.valleystream30.com/facilities-and-operations#use-of-facilities
-- Community Resources (Welcome to the United States, Code of Conduct, Nutrition, Parent Data Dashboard, Cultural & Religious Observances Accommodations, School Health, Activities & Clubs, Student Attendance, Arrival & Dismissal, Residency, Sex Offenders, School Closings, Library Catalog, MySchoolBucks, NYSED Complaint Procedures): https://www.valleystream30.com/resources
+- Family Connections (Code of Conduct, Nutrition, Parent Data Dashboard, Cultural & Religious Observances Accommodations, School Health, Before/After School Activities & Clubs, Student Attendance, Arrival & Dismissal, Residency, Sex Offenders, School Closings, Library Catalog, MySchoolBucks, NYSED Complaint Procedures): https://www.valleystream30.com/resources
 
 # Schools
 - Clear Stream Avenue School: https://www.valleystream30.com/clear-stream-avenue
@@ -28,11 +29,11 @@
 
 ## Departments
 - Business (Financial Transparency, Budget Information, Bids & RFPs, Transportation, Freedom of Information (FOIL), Tax Information): https://www.valleystream30.com/business
-- Curriculum & Instruction (Core Curriculum, Curriculum Guides, Next Generation Learning Standards, NWEA, Standards-Based Report Card, Universal Pre-Kindergarten, Dignity for All Students Act, Arts in Education, Enrichment, Health Education, Library Media, Family Guides, NYSED Complaint Procedure): https://www.valleystream30.com/curriculum-and-instruction
+- Teaching & Learning (Previously Curriculum & Instruction) (Core Curriculum, Curriculum Guides, Next Generation Learning Standards, NWEA, Standards-Based Report Card, Universal Pre-Kindergarten, Dignity for All Students Act, Arts in Education, Enrichment, Health Education, Library Media, Family Guides, NYSED Complaint Procedure): https://www.valleystream30.com/teaching-and-learning
 - Facilities & Operations (Methodology, Capital Projects, Use of Facilities, Safety & Data Sheets, Workplace Violence Prevention): https://www.valleystream30.com/facilities-and-operations
 - Human Resources (Employee Resources, Employment Opportunities, Points of Contact, Chain of Communication, Rubrics, Community Resources & Employment): https://www.valleystream30.com/human-resources
 - Special Services (Commitment to Students and Families, Understanding Special Education, Application Steps, Committee on Special Education (CSE), Procedural Safeguards, Child Find, Homeless Resources): https://www.valleystream30.com/special-services
-- Technology & Data (Data Security & Privacy (Cybersecurity), ISTE Standards, 2022-2025 Instructional Technology Plan, Smart Schools Investment Plan, Technology Scope and Sequence, Internet Safety Presentation, Digital Citizenship Presentation, Technology District Policies): https://www.valleystream30.com/technology
+- Technology & Data (Data Security & Privacy (Cybersecurity), ISTE Standards, 2022-2025 Instructional Technology Plan, Smart Schools Investment Plan, Technology Scope and Sequence, Internet Safety Presentation, Digital Citizenship Presentation, Technology District Policies, Library Media): https://www.valleystream30.com/technology
 
 ## Miscellaneous
 - District History: https://www.valleystream30.com/history
