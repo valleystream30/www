@@ -1,5 +1,5 @@
 {
-	"name": "vs30",
+	"name": "www",
 	"main": "worker.js",
 	"compatibility_date": "2026-06-11",
 	"routes": [
@@ -9,7 +9,7 @@
 		},
 		{
 			"pattern": "www.valleystream30.com/*",
-			"zone_name": "www.valleystream30.com"
+			"zone_name": "valleystream30.com"
 		}
 	]
 }
