@@ -261,7 +261,7 @@ html:not(.disable) {
 				bottom: -12px;
 				left: -10vw;
 				width: 120vw;
-				height: 10px;
+				height: 12px;
 				background: var(--red);
 			}
 
