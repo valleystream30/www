@@ -258,7 +258,7 @@ html:not(.disable) {
 
 			&::after {
 				position: absolute;
-				bottom: -10px;
+				bottom: -12px;
 				left: -10vw;
 				width: 120vw;
 				height: 10px;
@@ -2548,6 +2548,23 @@ html:not(.disable) {
 						align-items: center;
 					}
 				}
+			}
+		}
+
+		&:not(:has(.spotlight-container)) > .ss-icon-matrix {
+			width: 20vw !important;
+
+			.ss-im-icons-list {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.ss-component-column-wrapper {
+				align-items: flex-start;
+			}
+
+			.ss-component-content {
+				padding: 0 20px !important;
 			}
 		}
 

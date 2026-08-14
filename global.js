@@ -1163,22 +1163,29 @@ if (window.location.search.includes('disable')) {
             const pageTitle = document.querySelector('title').textContent.toLowerCase().includes(' - ') ? document.querySelector('title').textContent.toLowerCase().split(' - ')[1] : document.querySelector('title').textContent.toLowerCase();
             if (pageTitle.includes('partnership')) {
                 document.querySelector('.ss-editor-content p:last-child')?.classList.add('partnerships');
-                return;
             } else if (pageTitle.includes('schools')) {
-                while (true) {
-                    const imgs = document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a img');
-                    const anchors = document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a[style]');
-                    if (imgs.length === 3 || anchors.length === 3) break;
-                    await delay(100);
+                // while (true) {
+                //     const imgs = document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a img');
+                //     const anchors = document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a[style]');
+                //     if (imgs.length === 3 || anchors.length === 3) break;
+                //     await delay(100);
+                // };
+                // const imgElements = Array.from(document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child img'));
+                // const minHeight = imgElements.map(img => img.clientHeight).sort((a, b) => a - b)[0];
+                // for (const a of document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a')) {
+                //     a.style.height = `${minHeight}px`;
+                //     a.style.width = '100%';
+                //     a.style.borderRadius = '10px';
+                // };
+                const firstSection = document.querySelector('.stack_sort_area')?.children[1];
+                const secondSection = document.querySelector('.stack_sort_area')?.children[2];
+                if ((window.innerWidth >= 2000) && firstSection && secondSection && firstSection.classList.contains('ss-icon-matrix') && secondSection.querySelector('.ss-three-column')) {
+                    var schoolSpotlightContainer = document.createElement('div');
+                    schoolSpotlightContainer.className = 'school-spotlight-container';
+                    schoolSpotlightContainer.appendChild(firstSection);
+                    schoolSpotlightContainer.appendChild(secondSection);
+                    document.querySelector('.stack_sort_area').insertBefore(schoolSpotlightContainer, document.querySelector('.stack_sort_area').children[1]);
                 };
-                const imgElements = Array.from(document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child img'));
-                const minHeight = imgElements.map(img => img.clientHeight).sort((a, b) => a - b)[0];
-                for (const a of document.querySelectorAll('main .ss-component-column-wrapper.ss-three-column > :has(img) > :first-child a')) {
-                    a.style.height = `${minHeight}px`;
-                    a.style.width = '100%';
-                    a.style.borderRadius = '10px';
-                };
-                return;
             } else if ((document.location.pathname === '/') || (document.location.pathname === '/home') || (document.location.pathname === '/110901')) {
                 const firstSection = document.querySelector('.stack_sort_area')?.children[0];
                 if (!firstSection) return;
