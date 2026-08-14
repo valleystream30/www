@@ -622,6 +622,10 @@ html:not(.disable) {
 		.ss-lightbox-modal-alert .ss-close-modal {
 			background-color: #fff;
 		}
+
+		.customElement.aboutUs .ss-component-content {
+			padding: 0 40px !important;
+		}
 	}
 
 	@media screen and (max-width: 767px) {
@@ -813,6 +817,8 @@ html:not(.disable) {
 	body {
 		top: 0px !important;
 		font-size: min(18px, 3.5vw) !important;
+		display: flex;
+		flex-direction: column;
 
 		&:has(.alert-badge:not(.active)) .ss-alert-modal-svg-container svg {
 			display: none !important;
