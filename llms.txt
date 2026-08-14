@@ -71,9 +71,9 @@ Alternate slugs redirect to the page's main slug.
 | 1 | Home | / | /home, * |
 | 2 | Board of Education | /boe | /board, /board-of-education, /our_district, /capital |
 | 3 | - District History | /history | /district-history |
-| 4 | - District Policies | /district-policies | /policies |
+| 4 | - District Policies | https://www.boardpolicyonline.com/?b=valley_stream_30 | /policies, /district-policies |
 | 5 | - Voting Information | /voting | /voting-information, /voting-info, /vote |
-| 6 | - Freedom of Information (FOIL) | /foil | /freedom-of-information |
+| 6 | - Freedom of Information (FOIL) | https://www.valleystream30.com/business#freedom-of-information-foil | /foil, /freedom-of-information |
 | 7 | - Student Registration | /registration | /student-registration |
 | 8 | - The Friendly Newsletters | /newsletters | /the-friendly-newsletters, /news, /communication |
 | 9 | - Departments | /departments | /depts |

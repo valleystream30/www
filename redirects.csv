@@ -4,11 +4,13 @@ valleystream30.com/board-of-education,https://valleystream30.com/boe,301,TRUE,TR
 valleystream30.com/our_district,https://valleystream30.com/boe,301,TRUE,TRUE,TRUE,TRUE,/our_district,/boe
 valleystream30.com/capital,https://valleystream30.com/boe,301,TRUE,TRUE,TRUE,TRUE,/capital,/boe
 valleystream30.com/district-history,https://valleystream30.com/history,301,TRUE,TRUE,TRUE,TRUE,/district-history,/history
-valleystream30.com/policies,https://valleystream30.com/district-policies,301,TRUE,TRUE,TRUE,TRUE,/policies,/district-policies
+valleystream30.com/policies,https://www.boardpolicyonline.com/?b=valley_stream_30,301,TRUE,TRUE,TRUE,TRUE,/policies,/https://www.boardpolicyonline.com/?b=valley_stream_30
+valleystream30.com/district-policies,https://www.boardpolicyonline.com/?b=valley_stream_30,301,TRUE,TRUE,TRUE,TRUE,/district-policies,/https://www.boardpolicyonline.com/?b=valley_stream_30
 valleystream30.com/voting-information,https://valleystream30.com/voting,301,TRUE,TRUE,TRUE,TRUE,/voting-information,/voting
 valleystream30.com/voting-info,https://valleystream30.com/voting,301,TRUE,TRUE,TRUE,TRUE,/voting-info,/voting
 valleystream30.com/vote,https://valleystream30.com/voting,301,TRUE,TRUE,TRUE,TRUE,/vote,/voting
-valleystream30.com/freedom-of-information,https://valleystream30.com/foil,301,TRUE,TRUE,TRUE,TRUE,/freedom-of-information,/foil
+valleystream30.com/foil,https://www.valleystream30.com/business#freedom-of-information-foil,301,TRUE,TRUE,TRUE,TRUE,/foil,https://www.valleystream30.com/business#freedom-of-information-foil
+valleystream30.com/freedom-of-information,https://www.valleystream30.com/business#freedom-of-information-foil,301,TRUE,TRUE,TRUE,TRUE,/freedom-of-information,https://www.valleystream30.com/business#freedom-of-information-foil
 valleystream30.com/student-registration,https://valleystream30.com/registration,301,TRUE,TRUE,TRUE,TRUE,/student-registration,/registration
 valleystream30.com/the-friendly-newsletters,https://valleystream30.com/newsletters,301,TRUE,TRUE,TRUE,TRUE,/the-friendly-newsletters,/newsletters
 valleystream30.com/news,https://valleystream30.com/newsletters,301,TRUE,TRUE,TRUE,TRUE,/news,/newsletters
