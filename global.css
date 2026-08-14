@@ -160,8 +160,49 @@ html:not(.disable) {
 			padding: 30px !important;
 			margin: 0 !important;
 
-			.nav-circle-svg {
+			/* .nav-circle-svg {
 				border: 1px solid #ffffff7a;
+			} */
+
+			.nav-circle-svg circle {
+				fill: transparent !important;
+			}
+
+			.carousel-nav-option-prev,
+			.carousel-nav-option-next {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				height: 100%;
+				z-index: -1;
+			}
+
+			.carousel-nav-option-prev {
+				left: -1px;
+				padding: 0px 100px 0px 30px;
+				background: linear-gradient(90deg, var(--blue) -10%, transparent 80%, transparent 100%);
+				background-repeat: no-repeat;
+				background-position: -100px;
+				transition: 0.25s;
+
+				&:hover {
+					background-position: 0px;
+					transition: 0.25s;
+				}
+			}
+
+			.carousel-nav-option-next {
+				right: -1px;
+				padding: 0px 30px 0px 100px;
+				background: linear-gradient(90deg, transparent 0%, transparent 20%, var(--blue) 110%);
+				background-repeat: no-repeat;
+				background-position: 100px;
+				transition: 0.25s;
+
+				&:hover {
+					background-position: 0px;
+					transition: 0.25s;
+				}
 			}
 		}
 
@@ -1999,7 +2040,7 @@ html:not(.disable) {
 
 		.spotlight-nav-container {
 			overflow: hidden;
-			border-radius: 40px;
+			border-radius: 0 0 40px 0;
 		}
 
 		.carousel-nav-option-cycle,
