@@ -106,7 +106,7 @@ if (window.location.search.includes('disable')) {
         } else {
             return;
         };
-        var nav = Array.from(header.querySelectorAll('nav')).find(nav => (nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1)));
+        var nav = Array.from(header.querySelectorAll('nav')).find(nav => nav.clientHeight);
 
         onReady(async () => {
             try {
@@ -132,7 +132,7 @@ if (window.location.search.includes('disable')) {
                 };
                 // document.querySelector('header .ss-site-header-school-tagline').classList.add('customFont');
                 // header.prepend(nav);
-                // header.style.paddingTop = `${(nav.clientHeight * ((window.innerWidth <= 1000) ? 0.8 : 1))}px`;
+                // header.style.paddingTop = `${nav.clientHeight}px`;
                 header.append(nav);
                 if ((window.innerWidth > 1000) && header.querySelector('.ss-site-header-main-links-container .translate a')) {
                     nav.append(header.querySelector('.ss-site-header-main-links-container .translate a'));
@@ -519,7 +519,7 @@ if (window.location.search.includes('disable')) {
                     copyPageLinkLink.addEventListener('click', async (event) => {
                         if (event.target.closest('.qrCodeList a')) return;
                         await navigator.clipboard.writeText(document.location);
-                        alert('Copied section link to clipboard.');
+                        alert(`Copied section link to clipboard: ${document.location}`);
                         for (var languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
                         pageSectionsDiv.classList.remove('active');
                     });
@@ -527,7 +527,7 @@ if (window.location.search.includes('disable')) {
                         if ((event.key === 'Enter') || (event.key === ' ')) {
                             event.preventDefault();
                             await navigator.clipboard.writeText(document.location);
-                            alert('Copied section link to clipboard.');
+                            alert(`Copied section link to clipboard: ${document.location}`);
                         };
                     });
                     document.addEventListener('click', (event) => {
@@ -541,8 +541,8 @@ if (window.location.search.includes('disable')) {
                             var targetW = parseFloat('100') || dim.w;
                             var targetH = Math.round(targetW * dim.h / dim.w);
                             if (targetW < 1 || targetH < 1 || targetW > 12000 || targetH > 12000) return;
-                            var blob = new Blob([svg.outerHTML], {type: 'image/svg+xml;charset=utf-8'});
-                            var url  = URL.createObjectURL(blob);
+                            var blob = new Blob([svg.outerHTML], { type: 'image/svg+xml;charset=utf-8' });
+                            var url = URL.createObjectURL(blob);
                             await navigator.clipboard.writeText(svg.outerHTML);
                             window.open(url, '_blank');
                             alert('Copied section QR code to clipboard.');
@@ -739,6 +739,7 @@ if (window.location.search.includes('disable')) {
                                     // setAboutImageSize();
                                 };
                             });
+                            for (let columnOne of section.querySelectorAll('.ss-column-one > div:not(.force)')) columnOne.style.padding = '';
                             break;
                         case 'links':
                             if (section.querySelector('.ss-editor-content').innerText.toLowerCase().includes('page sections here')) {
@@ -1042,7 +1043,7 @@ if (window.location.search.includes('disable')) {
                     hoverImageWindow.style = 'position: fixed; bottom: 1vw; left: 1vw; width: 50vw; z-index: 10; opacity: 0; border-radius: 10px; pointer-events: none; transition: 0.25s;';
                     document.body.appendChild(hoverImageWindow);
                 };
-                for (let image of document.querySelectorAll('.customElement.about img')) {
+                for (let image of document.querySelectorAll('.customElement.about img:not(.noZoom)')) {
                     image.style.cursor = 'pointer';
                     image.addEventListener('click', () => {
                         var hoverImageWindow = document.querySelector('.hoverImageWindow');
@@ -1058,17 +1059,23 @@ if (window.location.search.includes('disable')) {
                     });
                 };
             };
+            document.querySelectorAll('[style]').forEach(el => {
+                if (!el.style.fontSize || !parseFloat(el.style.fontSize)) return;
+                const currentSize = parseFloat(el.style.fontSize);
+                const newSize = Math.max(14, currentSize - 4);
+                el.style.fontSize = `${newSize}px`;
+            });
         });
 
         async function afterReady() {
             while (nav.clientHeight > 75) await nextFrame();
             console.log(`Proceeding in ${(new Date().getTime() - startTime) / 1000} seconds`);
             try {
-                header.style.paddingBottom = `min(${nav.clientHeight * (window.innerWidth <= 1000 ? 0.8 : 1)}px, 59px)`;
-                document.documentElement.style.scrollPadding = `${nav.clientHeight * (window.innerWidth <= 1000 ? 0.8 : 1)}px`;
-                let navMaxTop = header.clientHeight - nav.clientHeight * (window.innerWidth <= 1000 ? 0.8 : 1);
+                header.style.paddingBottom = `min(${nav.clientHeight}px, 59px)`;
+                document.documentElement.style.scrollPadding = `${nav.clientHeight}px`;
+                let navMaxTop = header.clientHeight - nav.clientHeight;
                 await delay(100);
-                navMaxTop = header.clientHeight - nav.clientHeight * (window.innerWidth <= 1000 ? 0.8 : 1);
+                navMaxTop = header.clientHeight - nav.clientHeight;
                 const onScroll = () => {
                     if (window.scrollY >= navMaxTop) {
                         nav.classList.add('scrolled');
@@ -1132,7 +1139,7 @@ if (window.location.search.includes('disable')) {
             }, 7500);
             main = document.querySelector('main');
             footer = document.querySelector('footer');
-            if (main && footer && footer.clientHeight && (footer.clientHeight > 300)) main.style.marginBottom = `${(window.innerWidth > 1000) ? (footer.clientHeight + 20) : 0}px`;
+            if (main && footer && footer.clientHeight && (footer.clientHeight > 300)) main.style.marginBottom = `${(window.innerWidth > 1000) ? (footer.clientHeight + 6) : 0}px`;
             const lastBreadcrumb = document.querySelector('.breadcrumb li:last-child');
             const secondToLastBreadcrumb = document.querySelector('.breadcrumb li:nth-last-child(2)');
             if ((lastBreadcrumb && secondToLastBreadcrumb) && (lastBreadcrumb.innerText === secondToLastBreadcrumb.innerText)) secondToLastBreadcrumb.remove();
@@ -1179,7 +1186,7 @@ if (window.location.search.includes('disable')) {
                 // };
                 const firstSection = document.querySelector('.stack_sort_area')?.children[1];
                 const secondSection = document.querySelector('.stack_sort_area')?.children[2];
-                if ((window.innerWidth >= 2000) && firstSection && secondSection && firstSection.classList.contains('ss-icon-matrix') && secondSection.querySelector('.ss-three-column')) {
+                if ((window.innerWidth >= 1400) && firstSection && secondSection && firstSection.classList.contains('ss-icon-matrix') && secondSection.querySelector('.ss-three-column')) {
                     var schoolSpotlightContainer = document.createElement('div');
                     schoolSpotlightContainer.className = 'school-spotlight-container';
                     schoolSpotlightContainer.appendChild(firstSection);
@@ -1396,7 +1403,7 @@ if (window.location.search.includes('disable')) {
                 };
             } else if ((document.location.pathname === '/newsletters') || pageTitle.includes('newsletters')) {
                 document.querySelectorAll('main img').forEach(img => {
-                    img.style.height = '400px';
+                    img.style.height = '300px';
                     img.style.aspectRatio = '765/990';
                     img.style.borderRadius = '10px';
                 });
@@ -1454,7 +1461,7 @@ if (window.location.search.includes('disable')) {
                         const results = document.createElement('div');
                         results.style.marginTop = '10px';
                         results.style.fontWeight = 'bold';
-                        results.style.fontSize = '1.2em';
+                        results.style.fontSize = '18px';
                         results.innerText = 'Age Calculator';
                         ageCalculator.append(results);
                         el.appendChild(ageCalculator);
@@ -1504,7 +1511,7 @@ if (window.location.search.includes('disable')) {
             } else if (pageTitle.includes('clear stream avenue') || pageTitle.includes('forest road') || pageTitle.includes('shaw avenue')) {
                 const firstSection = document.querySelector('.stack_sort_area')?.children[1];
                 const secondSection = document.querySelector('.stack_sort_area')?.children[2];
-                if ((window.innerWidth >= 2000) && firstSection && secondSection && firstSection.querySelector('.spotlight-container') && secondSection.classList.contains('ss-icon-matrix')) {
+                if ((window.innerWidth >= 1400) && firstSection && secondSection && firstSection.querySelector('.spotlight-container') && secondSection.classList.contains('ss-icon-matrix')) {
                     var schoolSpotlightContainer = document.createElement('div');
                     schoolSpotlightContainer.className = 'school-spotlight-container';
                     schoolSpotlightContainer.appendChild(firstSection);
@@ -1625,7 +1632,7 @@ if (window.location.search.includes('disable')) {
             }, 500);
             main = document.querySelector('main');
             footer = document.querySelector('footer');
-            main.style.marginBottom = (((window.innerWidth > 1000) && main && footer && footer.clientHeight && (footer.clientHeight > 300)) ? (footer.clientHeight + 20) : 0) + 'px';
+            main.style.marginBottom = (((window.innerWidth > 1000) && main && footer && footer.clientHeight && (footer.clientHeight > 300)) ? (footer.clientHeight + 6) : 0) + 'px';
         });
 
         function scrollToHash() {
