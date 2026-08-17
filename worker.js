@@ -1,6 +1,6 @@
-import headInject from './imports/headInject.html';
-import scriptContent from './imports/global.js';
-import styleContent from './imports/global.css';
+import headInject from './headInject.html';
+import scriptContent from './imports/global.js.txt';
+import styleContent from './imports/global.css.txt';
 
 // function isHTML(request) {
 //     const acceptHeader = request.headers.get("Accept");
