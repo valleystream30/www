@@ -2,7 +2,7 @@
 
 ## Project Tracking
 
-May 18, 2026 - August 7, 2026
+May 18, 2026 - August 18, 2026
 
 ![wakatime](https://wakatime.com/badge/github/valleystream30/www.svg)
 

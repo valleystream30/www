@@ -1,0 +1,29 @@
+{
+	"name": "vs30",
+	"version": "1.0.0",
+	"description": "Drop-in upgrade stylesheets and scripts for the VS30 district website.",
+	"main": "worker.js",
+	"directories": {
+		"doc": "docs"
+	},
+	"scripts": {
+		"build": "mv global.css global.css.txt && mv global.js global.js.txt",
+		"deploy": "npm run build && wrangler deploy",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/valleystream30/www.git"
+	},
+	"keywords": [
+		"valley-stream",
+		"valleystream",
+		"vs30"
+	],
+	"author": "Faisal Nageer",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/valleystream30/www/issues"
+	},
+	"homepage": "https://github.com/valleystream30/www#readme"
+}
