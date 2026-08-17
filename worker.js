@@ -2,14 +2,8 @@ import headInject from './headInject.html';
 import fs from 'fs';
 import path from 'path';
 
-const __filename = new URL(import.meta.url).pathname;
-const __dirname = __filename.substring(0, __filename.lastIndexOf('/'));
-
-const scriptPath = path.join(__dirname, 'global.js');
-const scriptContent = fs.readFileSync(scriptPath, 'utf8');
-
-const stylePath = path.join(__dirname, 'global.css');
-const styleContent = fs.readFileSync(stylePath, 'utf8');
+const scriptContent = fs.readFileSync('./global.js', 'utf8');
+const styleContent = fs.readFileSync('./global.css', 'utf8');
 
 // function isHTML(request) {
 //     const acceptHeader = request.headers.get("Accept");
