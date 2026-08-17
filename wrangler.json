@@ -11,5 +11,11 @@
 			"pattern": "www.valleystream30.com/*",
 			"zone_name": "valleystream30.com"
 		}
+	],
+	"rules": [
+		{
+			"type": "Text",
+			"globs": ["**/*.html", "**/*.css", "**/*.js"]
+		}
 	]
 }

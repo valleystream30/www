@@ -1,9 +1,6 @@
 import headInject from './headInject.html';
-import fs from 'fs';
-import path from 'path';
-
-const scriptContent = fs.readFileSync('./global.js', 'utf8');
-const styleContent = fs.readFileSync('./global.css', 'utf8');
+import scriptContent from './global.js';
+import styleContent from './global.css';
 
 // function isHTML(request) {
 //     const acceptHeader = request.headers.get("Accept");
