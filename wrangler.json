@@ -15,8 +15,7 @@
 	"rules": [
 		{
 			"type": "Text",
-			"globs": ["imports/**/*.css", "imports/**/*.js"],
-			"fallthrough": true
+			"globs": ["imports/**/*.css", "imports/**/*.js"]
 		}
 	]
 }
