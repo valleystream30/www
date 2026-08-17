@@ -11,5 +11,8 @@
 			"pattern": "www.valleystream30.com/*",
 			"zone_name": "valleystream30.com"
 		}
-	]
+	],
+	"build": {
+		"command": "mv global.css global.css.txt && mv global.js global.js.txt"
+	}
 }
