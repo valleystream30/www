@@ -1,11 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 :root {
 	--blue: #042450 !important;
 	--red: #740404 !important;
 	--yellow: #f1c233 !important;
 	--header-school-mascot-height: min(75px, 15vw);
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 html:not(.disable) {
 	background: var(--blue);
