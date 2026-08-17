@@ -942,7 +942,12 @@ if (window.location.search.includes('disable')) {
                     adminBarInner.innerHTML += `<a aria-label="Mods Code" title="Mods Code" href="https://github.com/valleystream30/www" target="_blank" class="admin-btn1 col-sm-3">
                         <em class="fa-light fa-fw fa-code logout_loggedin_icon psq_bar_icon_xl hidden-lg hidden-md hidden-sm visible-xs-12"></em>
                         <em class="fa-light fa-fw fa-code logout_loggedin_icon visible-lg-12 visible-md-12 visible-sm-12 hidden-xs"></em>
-                        <span class="hidden-xs">Reload Page</span>
+                        <span class="hidden-xs">Mods Code</span>
+                    </a>`;
+                    adminBarInner.innerHTML += `<a aria-label="Video Guides" title="Video Guides" href="https://www.youtube.com/playlist?list=PLK39vGlOochw" target="_blank" class="admin-btn1 col-sm-3">
+                        <em class="fa-light fa-fw fa-film logout_loggedin_icon psq_bar_icon_xl hidden-lg hidden-md hidden-sm visible-xs-12"></em>
+                        <em class="fa-light fa-fw fa-film logout_loggedin_icon visible-lg-12 visible-md-12 visible-sm-12 hidden-xs"></em>
+                        <span class="hidden-xs">Video Guides</span>
                     </a>`;
                     adminBarInner.innerHTML += `<a aria-label="Reload Page" title="Reload Page" href="${window.location.pathname}" class="admin-btn1 col-sm-3">
                         <em class="fa-light fa-fw fa-rotate logout_loggedin_icon psq_bar_icon_xl hidden-lg hidden-md hidden-sm visible-xs-12"></em>
