@@ -17,6 +17,7 @@ class ElementHandler {
 
 export default {
     async fetch(request, env, ctx) {
+        if (request.url.includes('index.php?')) return fetch(request);
         const upstream = await fetch(request);
         // const upstreamURL = new URL(upstream.url);
         // if (upstreamURL.pathname.slice(1).includes('/')) return Response.redirect(`${request.url.replace(/https?:\/\/(www\.)?valleystream30\.com(.*)/, 'https://$1valleystream30.com')}/${upstreamURL.pathname.slice(1).replace(/\//g, '-'), 301}`);

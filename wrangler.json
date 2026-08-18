@@ -1,7 +1,7 @@
 {
 	"name": "www",
 	"main": "worker.js",
-	"compatibility_date": "2026-08-17",
+	"compatibility_date": "2026-08-18",
 	"routes": [
 		{
 			"pattern": "valleystream30.com/*",
@@ -14,5 +14,20 @@
 	],
 	"build": {
 		"command": "mv global.css global.css.txt && mv global.js global.js.txt"
+	},
+	"observability": {
+		"enabled": false,
+		"head_sampling_rate": 1,
+		"logs": {
+			"enabled": true,
+			"head_sampling_rate": 1,
+			"persist": true,
+			"invocation_logs": true
+		},
+		"traces": {
+			"enabled": true,
+			"persist": true,
+			"head_sampling_rate": 1
+		}
 	}
 }
