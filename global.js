@@ -612,7 +612,7 @@ if (window.location.search.includes('disable')) {
                                             var eventLink = eventTitleDiv.getAttribute('href');
                                             var eventTitle = eventTitleDiv.innerText.trim();
                                             var eventTime = eventDiv.querySelector('.event-time').innerText.trim();
-                                            if (!eventGroups.find(eventGroup => eventGroup.name === eventDate) || !eventGroups.find(eventGroup => eventGroup.name === eventDate).events.find(event => (event.link === eventLink))) {
+                                            if (!eventGroups.find(eventGroup => eventGroup.name ===  === eventDate) || !eventGroups.find(eventGroup => eventGroup.name === eventDate).events.find(event => (event.link === eventLink))) {
                                                 if (!eventGroups.find(eventGroup => eventGroup.name === eventDate)) eventGroups.push({
                                                     name: eventDate,
                                                     events: [],
@@ -1152,7 +1152,7 @@ if (window.location.search.includes('disable')) {
             if (main && footer && footer.clientHeight && (footer.clientHeight > 300)) main.style.marginBottom = `${(window.innerWidth > 1000) ? (footer.clientHeight + 6) : 0}px`;
             const lastBreadcrumb = document.querySelector('.breadcrumb li:last-child');
             const secondToLastBreadcrumb = document.querySelector('.breadcrumb li:nth-last-child(2)');
-            if ((lastBreadcrumb && secondToLastBreadcrumb) && (lastBreadcrumb.innerText === secondToLastBreadcrumb.innerText)) secondToLastBreadcrumb.remove();
+            if ((lastBreadcrumb && secondToLastBreadcrumb) && (lastBreadcrumb.innerText.replaceAll('List', '').trim() === secondToLastBreadcrumb.innerText.replaceAll('List', '').trim())) secondToLastBreadcrumb.remove();
             if (document.querySelector('.alert-badge i')) document.querySelector('.alert-badge i').className = "fa-solid fa-bell";
             document.querySelector('.alert-badge')?.addEventListener('click', () => {
                 changeIconInterval = setInterval(() => {
