@@ -74,26 +74,26 @@ Alternate slugs redirect to the page's main slug.
 | 4 | - District Policies | https://www.boardpolicyonline.com/?b=valley_stream_30 | /policies, /district-policies |
 | 5 | - Voting Information | /voting | /voting-information, /voting-info, /vote |
 | 6 | - Freedom of Information (FOIL) | https://www.valleystream30.com/business#freedom-of-information-foil | /foil, /freedom-of-information |
-| 7 | - Student Registration | /registration | /student-registration |
-| 8 | - The Friendly Newsletters | /newsletters | /the-friendly-newsletters, /news, /communication |
-| 9 | - Departments | /departments | /depts |
-| 10 | - - Business | /business | |
-| 11 | - - Teaching and Learning | /teaching-and-learning | /curriculum, /curriculum-and-instruction, /curriculum-instruction, /teaching, /learning, /teaching-learning |
-| 12 | - - Facilities & Operations | /facilities-and-operations | /facilities |
-| 13 | - - Human Resources | /human-resources | /hr |
-| 14 | - - Special Services | /special-services | |
-| 15 | - - Data, Information Systems & Technology | /technology | /tech, /data, /it |
-| 16 | - Superintendent | /superintendent | /superintendent-of-schools, /district-superintendent |
-| 17 | - - Global Leaders of Tomorrow | /global-leaders | /global-leaders-of-tomorrow, /glot |
-| 18 | Schools | /schools | /our_schools |
-| 19 | - Family Connections | /family-connections | /family, /connections, /resources, /community-resources, /for_parents, /our_programs |
-| 20 | - Clear Stream Avenue School | /clear-stream-avenue | /cs, /csa, /csas, /clearstream, /clearstreamavenue, /clearstreamave, /clearstreamavenueschool, /clearstreamaveschool, /clear-stream-ave, /clear-stream-ave-school, /clear-stream, /clear-stream-avenue-school |
-| 21 | - - Clear Stream Avenue Supply Lists | /clear-stream-avenue-supply-lists | /cs-supply-lists, /csa-supply-lists, /csas-supply-lists, /clear-stream-supply-lists, /clear-stream-avenue-school-supply-lists |
-| 22 | - Forest Road School | /forest-road | /fr, /frs, /forest, /forestroad, /forestroadschool, /forest-road-school, /forest-rd, /forestrd, /forestrdschool, /forest-rd-school |
-| 23 | - - Forest Road Supply Lists | /forest-road-supply-lists | /fr-supply-lists, /frs-supply-lists, /forest-supply-lists, /forest-road-school-supply-lists, /forest-rd-supply-lists, /forest-rd-school-supply-lists |
-| 24 | - - Forest Road PTA | /forest-road-pta | /fr-pta, /frs-pta, /forest-pta, /forest-road-school-pta, /forest-rd-pta, /forest-rd-school-pta |
-| 25 | - Shaw Avenue School | /shaw-avenue | /sa, /sas, /shaw, /shawavenue, /shawavenueschool, /shaw-avenue-school |
-| 26 | - - Shaw Avenue Supply Lists | /shaw-avenue-supply-lists | /sa-supply-lists, /sas-supply-lists, /shaw-supply-lists, /shaw-avenue-school-supply-lists |
+| 7 | - The Friendly Newsletters | /newsletters | /the-friendly-newsletters, /news, /communication |
+| 8 | - Departments | /departments | /depts |
+| 9 | - - Business | /business | |
+| 10 | - - Teaching and Learning | /teaching-and-learning | /curriculum, /curriculum-and-instruction, /curriculum-instruction, /teaching, /learning, /teaching-learning |
+| 11 | - - Facilities & Operations | /facilities-and-operations | /facilities |
+| 12 | - - Human Resources | /human-resources | /hr |
+| 13 | - - Special Services | /special-services | |
+| 14 | - - Data, Information Systems & Technology | /technology | /tech, /data, /it |
+| 15 | - Superintendent | /superintendent | /superintendent-of-schools, /district-superintendent |
+| 16 | - - Global Leaders of Tomorrow | /global-leaders | /global-leaders-of-tomorrow, /glot |
+| 17 | Schools | /schools | /our_schools |
+| 18 | - Student Registration | /registration | /student-registration |
+| 19 | - Clear Stream Avenue School | /clear-stream-avenue | /cs, /csa, /csas, /clearstream, /clearstreamavenue, /clearstreamave, /clearstreamavenueschool, /clearstreamaveschool, /clear-stream-ave, /clear-stream-ave-school, /clear-stream, /clear-stream-avenue-school |
+| 20 | - - Clear Stream Avenue Supply Lists | /clear-stream-avenue-supply-lists | /cs-supply-lists, /csa-supply-lists, /csas-supply-lists, /clear-stream-supply-lists, /clear-stream-avenue-school-supply-lists |
+| 21 | - Forest Road School | /forest-road | /fr, /frs, /forest, /forestroad, /forestroadschool, /forest-road-school, /forest-rd, /forestrd, /forestrdschool, /forest-rd-school |
+| 22 | - - Forest Road Supply Lists | /forest-road-supply-lists | /fr-supply-lists, /frs-supply-lists, /forest-supply-lists, /forest-road-school-supply-lists, /forest-rd-supply-lists, /forest-rd-school-supply-lists |
+| 23 | - - Forest Road PTA | /forest-road-pta | /fr-pta, /frs-pta, /forest-pta, /forest-road-school-pta, /forest-rd-pta, /forest-rd-school-pta |
+| 24 | - Shaw Avenue School | /shaw-avenue | /sa, /sas, /shaw, /shawavenue, /shawavenueschool, /shaw-avenue-school |
+| 25 | - - Shaw Avenue Supply Lists | /shaw-avenue-supply-lists | /sa-supply-lists, /sas-supply-lists, /shaw-supply-lists, /shaw-avenue-school-supply-lists |
+| 26 | Family Connections | /family-connections | /family, /connections, /resources, /community-resources, /for_parents, /our_programs |
 | 27 | Calendars | /calendars | /cal, /cals, /calendar |
 | 28 | - BoE Meetings | /boe-meetings | /board-meetings, /board-of-education-meetings |
 | 29 | - Student Attendance | /attendance | /student-attendance, /attendance-calendar, /student-attendance-calendar |
