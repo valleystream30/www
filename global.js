@@ -976,7 +976,7 @@ if (window.location.search.includes('disable')) {
                         if (window.location.hash === link.getAttribute('href')) scrollToHash();
                     });
                 };
-                document.querySelector('header img').src = host.includes('https') ? (host + 'images/logo-new.png') : 'https://faisaln.com/share/1780427119.png'; // remove after approval, requires https
+                // document.querySelector('header img').src = host.includes('https') ? (host + 'images/logo-new.png') : 'https://faisaln.com/share/1780427119.png'; // remove after approval, requires https
                 async function sequentialRun(taskFactories) {
                     const runWithTimeout = (taskFn, t) => Promise.race([
                         (async () => {
