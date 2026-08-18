@@ -612,7 +612,7 @@ if (window.location.search.includes('disable')) {
                                             var eventLink = eventTitleDiv.getAttribute('href');
                                             var eventTitle = eventTitleDiv.innerText.trim();
                                             var eventTime = eventDiv.querySelector('.event-time').innerText.trim();
-                                            if (!eventGroups.find(eventGroup => eventGroup.name ===  === eventDate) || !eventGroups.find(eventGroup => eventGroup.name === eventDate).events.find(event => (event.link === eventLink))) {
+                                            if (!eventGroups.find(eventGroup => eventGroup.name === eventDate) || !eventGroups.find(eventGroup => eventGroup.name === eventDate).events.find(event => (event.link === eventLink))) {
                                                 if (!eventGroups.find(eventGroup => eventGroup.name === eventDate)) eventGroups.push({
                                                     name: eventDate,
                                                     events: [],
