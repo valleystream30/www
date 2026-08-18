@@ -6,10 +6,6 @@
 		{
 			"pattern": "valleystream30.com/*",
 			"zone_name": "valleystream30.com"
-		},
-		{
-			"pattern": "www.valleystream30.com/*",
-			"zone_name": "valleystream30.com"
 		}
 	],
 	"build": {
