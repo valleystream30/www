@@ -1,4 +1,5 @@
 import headInject from './headInject.html';
+import headInjectDev from './headInjectDev.html';
 import scriptContent from './global.js.txt';
 import styleContent from './global.css.txt';
 
