@@ -1,7 +1,12 @@
 // if (window.location.pathname.includes('-')) history.replaceState(null, '', window.location.pathname.replace(/-/g, '/'));
 
-if (window.location.search.includes('disable')) {
+const params = new URLSearchParams(window.location.search);
+if (params.has('disable')) {
     document.documentElement.classList.add('ready', 'disable');
+} else if (!params.has('dev') && Object.fromEntries(document.cookie.split('; ').map(cookie => cookie.split('=')))['dev']) {
+    params.set('dev', 'true');
+    window.location.search = params.toString();
+    window.location.reload();
 } else {
     var startTime = new Date().getTime();
 
@@ -939,14 +944,14 @@ if (window.location.search.includes('disable')) {
                         <em class="fa-light fa-fw fa-ban logout_loggedin_icon visible-lg-12 visible-md-12 visible-sm-12 hidden-xs"></em>
                         <span class="hidden-xs">Disable Mods</span>
                     </a>`;
-                    adminBarInner.innerHTML += `<a aria-label="Mods Code" title="Mods Code" href="https://github.com/valleystream30/www" target="_blank" class="admin-btn1 col-sm-3">
+                    if (params.has('dev')) adminBarInner.innerHTML += `<a aria-label="Mods Code" title="Mods Code" href="https://github.com/valleystream30/www" target="_blank" class="admin-btn1 col-sm-3">
                         <em class="fa-light fa-fw fa-code logout_loggedin_icon psq_bar_icon_xl hidden-lg hidden-md hidden-sm visible-xs-12"></em>
                         <em class="fa-light fa-fw fa-code logout_loggedin_icon visible-lg-12 visible-md-12 visible-sm-12 hidden-xs"></em>
                         <span class="hidden-xs">Mods Code</span>
                     </a>`;
                     adminBarInner.innerHTML += `<a aria-label="Video Guides" title="Video Guides" href="https://www.youtube.com/playlist?list=PLK39vGlOochw" target="_blank" class="admin-btn1 col-sm-3">
-                        <em class="fa-light fa-fw fa-film logout_loggedin_icon psq_bar_icon_xl hidden-lg hidden-md hidden-sm visible-xs-12"></em>
-                        <em class="fa-light fa-fw fa-film logout_loggedin_icon visible-lg-12 visible-md-12 visible-sm-12 hidden-xs"></em>
+                        <em class="fa-light fa-fw fa-youtube logout_loggedin_icon psq_bar_icon_xl hidden-lg hidden-md hidden-sm visible-xs-12"></em>
+                        <em class="fa-light fa-fw fa-youtube logout_loggedin_icon visible-lg-12 visible-md-12 visible-sm-12 hidden-xs"></em>
                         <span class="hidden-xs">Video Guides</span>
                     </a>`;
                     adminBarInner.innerHTML += `<a aria-label="Reload Page" title="Reload Page" href="${window.location.pathname}" class="admin-btn1 col-sm-3">
@@ -1387,7 +1392,6 @@ if (window.location.search.includes('disable')) {
                 pageBody.append(masonry, mobileMasonry, tabletMasonry);
                 const oldList = pageBody.querySelector('.pageBody > ul');
                 if (oldList) oldList.remove();
-                const params = new URLSearchParams(window.location.search);
                 if (params.has('s')) {
                     siteMapSearch.value = params.get('s');
                     siteMapSearch.dispatchEvent(new Event('input'));
@@ -1404,7 +1408,6 @@ if (window.location.search.includes('disable')) {
                 pageBody.appendChild(searchSiteButton);
                 return;
             } else if (pageTitle.includes('search results')) {
-                const params = new URLSearchParams(window.location.search);
                 if (params.has('s')) {
                     const field = document.getElementById('search_field');
                     if (field) field.value = params.get('s');

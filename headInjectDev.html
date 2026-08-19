@@ -1,0 +1,11 @@
+<script>
+    const host = 'http://localhost:5500/';
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = host + 'global.css';
+    document.head.appendChild(link);
+    const script = document.createElement('script');
+    script.src = host + 'global.js';
+    script.async = false;
+    document.head.appendChild(script);
+</script>
