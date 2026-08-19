@@ -2317,7 +2317,7 @@ html:not(.disable) {
 		padding: 15px;
 		overflow-y: scroll;
 		transition: 0.25s;
-		max-height: 20svh;
+		max-height: 70svh;
 		box-shadow: 0 5px 20px var(--blue);
 		color: var(--blue);
 		width: max-content;
@@ -3073,7 +3073,6 @@ html:not(.disable) {
 	}
 
 	.ss-component.break-out:not(:has(.stack_off)) {
-		width: calc(100vw + 2px);
 		left: calc(50% - 1px);
 		transform: translateX(calc(-50% + 1px));
 	}
