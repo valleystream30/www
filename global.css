@@ -1467,15 +1467,15 @@ html:not(.disable) {
 				}
 
 				&.shaw::before {
-					background-image: url("https://github.com/valleystream30/www/blob/main/images/shaw-new.png?raw=true");
+					background-image: url("https://cdn.valleystream30.com/images/shaw-new.png");
 				}
 
 				&.clearStream::before {
-					background-image: url("https://github.com/valleystream30/www/blob/main/images/clearstream-new-alt.png?raw=true");
+					background-image: url("https://cdn.valleystream30.com/images/clearstream-new-alt.png");
 				}
 
 				&.forest::before {
-					background-image: url("https://github.com/valleystream30/www/blob/main/images/forest-new.png?raw=true");
+					background-image: url("https://cdn.valleystream30.com/images/forest-new.png");
 				}
 			}
 
@@ -2131,7 +2131,7 @@ html:not(.disable) {
 		width: min(600px, 50vw);
 
 		&:has(.events-container) {
-			background-image: url(https://faisaln.com/share/1780427119.png);
+			background-image: url(https://cdn.valleystream30.com/images/logo-new.png);
 			background-position: center 40%;
 			background-repeat: no-repeat;
 			background-size: 50%;
