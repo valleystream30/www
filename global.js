@@ -110,7 +110,7 @@ if (params.has('disable')) {
         } else {
             return;
         };
-        var nav = Array.from(header.querySelectorAll('nav')).find(nav => nav.clientHeight);
+        var nav = Array.from(header.querySelectorAll('nav')).filter(nav => nav.clientHeight).reverse()[0];
 
         onReady(async () => {
             try {
@@ -1225,17 +1225,17 @@ if (params.has('disable')) {
                 while (true) {
                     for (const slide of firstSection.querySelectorAll('.spotlight-slide')) {
                         if (window.innerWidth <= 1000) {
-                            slide.style.height = `calc(100vh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
+                            slide.style.height = `calc(100svh - ${header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight}px)`;
                         } else if (window.innerWidth > 1300) {
                             const hasMatrix = document.querySelector('.stack_sort_area > * + section')?.classList.contains('ss-icon-matrix');
                             const base = hasMatrix ? header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight : header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight;
-                            slide.style.height = `calc(100vh - ${base}px)`;
-                            document.querySelector('.spotlight-wrapper').style.height = `calc(100vh - ${base}px)`;
+                            slide.style.height = `calc(100svh - ${base}px)`;
+                            document.querySelector('.spotlight-wrapper').style.height = `calc(100svh - ${base}px)`;
                         } else {
                             const hasMatrix = document.querySelector('.stack_sort_area > * + section')?.classList.contains('ss-icon-matrix');
                             const base = hasMatrix ? header.clientHeight + document.querySelector('.stack_sort_area').children[1].clientHeight : header.clientHeight + document.querySelector('.spotlight-nav-container').clientHeight;
-                            slide.style.minHeight = `calc(100vh - ${base}px)`;
-                            document.querySelector('.spotlight-wrapper').style.minHeight = `calc(100vh - ${base}px)`;
+                            slide.style.minHeight = `calc(100svh - ${base}px)`;
+                            document.querySelector('.spotlight-wrapper').style.minHeight = `calc(100svh - ${base}px)`;
                         };
                     };
                     if (firstSection.querySelector('.spotlight-slide')?.style.height || firstSection.querySelector('.spotlight-slide')?.style.minHeight) break;
@@ -1246,7 +1246,7 @@ if (params.has('disable')) {
                     const sizedImgs = document.querySelectorAll('.ss-image-link img[height]');
                     if (styledLinks.length === 3 || sizedImgs.length === 3) {
                         const section = document.querySelector('section:has(.ss-image-link[style]), section:has(.ss-image-link img[height])');
-                        if (section) section.style.padding = 'min(70px, 7vh) min(20px, 2vw)';
+                        if (section) section.style.padding = 'min(70px, 7svh) min(20px, 2vw)';
                         for (const el of document.querySelectorAll('.ss-image-link, .ss-image-link img')) {
                             el.style.width = '100%';
                             el.removeAttribute('height');
@@ -1541,7 +1541,7 @@ if (params.has('disable')) {
                         img.onload = img.onerror = resolve;
                     })));
                     while (!header.hasAttribute('style')) await nextFrame();
-                    schoolSpotlightContainer.style.minHeight = `calc(100vh - ${header.getBoundingClientRect().height + (document.querySelector('.breadcrumb')?.getBoundingClientRect()?.height || 0) + document.querySelector('.stack_sort_area')?.children[0]?.getBoundingClientRect()?.height || 0}px)`;
+                    schoolSpotlightContainer.style.minHeight = `calc(100svh - ${header.getBoundingClientRect().height + (document.querySelector('.breadcrumb')?.getBoundingClientRect()?.height || 0) + document.querySelector('.stack_sort_area')?.children[0]?.getBoundingClientRect()?.height || 0}px)`;
                     const zerothSection = document.querySelector('.stack_sort_area')?.children[0];
                     if (zerothSection) {
                         const map = document.createElement('iframe');
