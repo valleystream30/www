@@ -16,7 +16,7 @@ class ElementHandler {
         switch (element.tagName) {
             case 'head':
                 element.append(headInject, { html: true });
-                if (isDev === true) {
+                if (this.isDev === true) {
                     element.append(headInjectDev, { html: true });
                 } else {
                     element.append(`<script>${scriptContent}</script>`, { html: true });
