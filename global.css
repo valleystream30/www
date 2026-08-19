@@ -2130,7 +2130,7 @@ html:not(.disable) {
 		transition: 1.25s;
 		width: min(600px, 50vw);
 
-		&:has(.events-container) {
+		&:not(:has(.events-container)) {
 			background-image: url(https://cdn.valleystream30.com/images/logo-new.png);
 			background-position: center 40%;
 			background-repeat: no-repeat;

@@ -949,8 +949,8 @@ if (params.has('disable')) {
                         <span class="hidden-xs">Mods Code</span>
                     </a>`;
                     adminBarInner.innerHTML += `<a aria-label="Video Guides" title="Video Guides" href="https://www.youtube.com/playlist?list=PLK39vGlOochw" target="_blank" class="admin-btn1 col-sm-3">
-                        <em class="fa-light fa-fw fa-youtube logout_loggedin_icon psq_bar_icon_xl hidden-lg hidden-md hidden-sm visible-xs-12"></em>
-                        <em class="fa-light fa-fw fa-youtube logout_loggedin_icon visible-lg-12 visible-md-12 visible-sm-12 hidden-xs"></em>
+                        <em class="fa-brands fa-fw fa-youtube logout_loggedin_icon psq_bar_icon_xl hidden-lg hidden-md hidden-sm visible-xs-12"></em>
+                        <em class="fa-brands fa-fw fa-youtube logout_loggedin_icon visible-lg-12 visible-md-12 visible-sm-12 hidden-xs"></em>
                         <span class="hidden-xs">Video Guides</span>
                     </a>`;
                     adminBarInner.innerHTML += `<a aria-label="Reload Page" title="Reload Page" href="${window.location.pathname}" class="admin-btn1 col-sm-3">
