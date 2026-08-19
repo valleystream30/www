@@ -6,7 +6,6 @@ if (params.has('disable')) {
 } else if (!params.has('dev') && Object.fromEntries(document.cookie.split('; ').map(cookie => cookie.split('=')))['dev']) {
     params.set('dev', 'true');
     window.location.search = params.toString();
-    window.location.reload();
 } else {
     var startTime = new Date().getTime();
 
