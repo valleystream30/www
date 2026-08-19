@@ -1136,9 +1136,16 @@ if (params.has('disable')) {
                     if (topmost && (topmost.slug !== currentSlug)) {
                         currentSlug = topmost.slug;
                         window.history.replaceState({}, '', `#${(topmost !== pageSections[0]) ? currentSlug : ''}`);
+                        if (document.querySelector('.qrCode')) {
+                            document.querySelector('.qrCode').innerHTML = '';
+                            document.querySelector('.qrCode').appendChild(QRCode({
+                                msg: document.location,
+                                pad: 0,
+                            }));
+                        };
                     };
                     currentSectionTimer = null;
-                }, 2500);
+                }, 2000);
             }, {
                 root: null,
                 rootMargin: `0px 0px ${window.innerHeight / 5}px`,
