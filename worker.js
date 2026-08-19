@@ -8,26 +8,23 @@ import styleContent from './global.css.txt';
 // };
 
 class ElementHandler {
+    constructor(isDev = false) {
+        this.isDev = isDev;
+    }
+
     element(element) {
         switch (element.tagName) {
             case 'head':
                 element.append(headInject, { html: true });
-                element.append(`<script>${scriptContent}</script>`, { html: true });
-                element.append(`<style>${styleContent}</style>`, { html: true });
+                if (isDev === true) {
+                    element.append(headInjectDev, { html: true });
+                } else {
+                    element.append(`<script>${scriptContent}</script>`, { html: true });
+                    element.append(`<style>${styleContent}</style>`, { html: true });
+                };
                 break;
             case 'meta':
                 if (element.getAttribute('name') === 'author') element.append(', Faisal Nageer');
-                break;
-        };
-    };
-};
-
-class ElementHandlerDev {
-    element(element) {
-        switch (element.tagName) {
-            case 'head':
-                element.append(headInject, { html: true });
-                element.append(headInjectDev, { html: true });
                 break;
         };
     };
@@ -40,10 +37,7 @@ export default {
         const url = new URL(request.url);
         // const upstreamURL = new URL(upstream.url);
         // if (upstreamURL.pathname.slice(1).includes('/')) return Response.redirect(`${request.url.replace(/https?:\/\/(www\.)?valleystream30\.com(.*)/, 'https://$1valleystream30.com')}/${upstreamURL.pathname.slice(1).replace(/\//g, '-'), 301}`);
-        if (upstream.status !== 404) {
-            if (url.searchParams.get('dev')) return new HTMLRewriter().on('head', new ElementHandlerDev()).on('head > meta', new ElementHandler()).transform(upstream);
-            return new HTMLRewriter().on('head', new ElementHandler()).on('head > meta', new ElementHandler()).transform(upstream);
-        };
+        if (upstream.status !== 404) return new HTMLRewriter().on('head', new ElementHandler(url.searchParams.has('dev'))).on('head > meta', new ElementHandler()).transform(upstream);
         // const redirects = [
         //     {
         //         from: /https?:\/\/(?:www\.)?valleystream30\.com\/admin/,
