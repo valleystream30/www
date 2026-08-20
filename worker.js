@@ -26,6 +26,7 @@ class ElementHandler {
                 break;
             case 'meta':
                 if (element.getAttribute('name') === 'author') element.append(', Faisal Nageer');
+                if (element.getAttribute('property') === 'og:image') element.setInnerContent('https://cdn.valleystream30.com/favicon.png');
                 break;
         };
     };
