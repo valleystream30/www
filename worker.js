@@ -25,7 +25,7 @@ class ElementHandler {
                 };
                 break;
             case 'meta':
-                if (element.getAttribute('name') === 'author') element.setAttribute(`${element.getAttribute('name')}, Faisal Nageer`);
+                if (element.getAttribute('name') === 'author') element.setAttribute('content', `${element.getAttribute('name')}, Faisal Nageer`);
                 if (element.getAttribute('property') === 'og:image') element.setAttribute('content', 'https://cdn.valleystream30.com/favicon.png');
                 if (element.getAttribute('name') === 'description') element.setAttribute('content', 'Valley Stream 30 UFSD is a public elementary‑grade district (K-6) serving the Village of Valley Stream in Nassau County, New York.');
                 if (element.getAttribute('property') === 'og:description') element.setAttribute('content', 'Valley Stream 30 UFSD is a public elementary‑grade district (K-6) serving the Village of Valley Stream in Nassau County, New York.');
