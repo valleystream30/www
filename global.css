@@ -3013,6 +3013,10 @@ html:not(.disable) {
 		li.top-nav
 		> ul.dropdown-menu {
 		border-radius: 0 0 10px 10px !important;
+
+		ul.dropdown-menu {
+			border-radius: 10px !important;
+		}
 	}
 
 	.ss-component[data-comp="document"] + .ss-component[data-comp="document"] {
