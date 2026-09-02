@@ -290,7 +290,7 @@ html:not(.disable) {
 			z-index: 0;
 
 			&::after {
-				display: block !important;
+				display: none !important;
 				position: absolute !important;
 				top: -200px !important;
 				left: 50% !important;
