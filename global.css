@@ -2929,8 +2929,8 @@ html:not(.disable) {
 	}
 
 	.ss-site-header {
-		--ss-nav-font-size-desktop: 16px !important;
-		--ss-menu-font-size: 16px !important;
+		--ss-nav-font-size-desktop: 14px !important;
+		--ss-menu-font-size: 14px !important;
 		--ss-site-name-font-size-desktop: 24px !important;
 		--ss-site-name-font-size-mobile: 15px !important;
 		--ss-tagline-font-size-desktop: 12px !important;
