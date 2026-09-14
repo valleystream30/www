@@ -555,12 +555,12 @@ html:not(.disable) {
 		& > i {
 			height: 15px !important;
 			width: 15px !important;
-			font-size: 11px !important;
+			font-size: 0.6875em !important;
 			left: 15px !important;
 		}
 
 		input {
-			font-size: 11px !important;
+			font-size: 0.6875em !important;
 			padding: 10px 40px !important;
 		}
 
@@ -569,7 +569,7 @@ html:not(.disable) {
 			height: calc(100% - 10px) !important;
 
 			i {
-				font-size: 11px;
+				font-size: 0.6875em;
 			}
 		} */
 		}
@@ -642,7 +642,7 @@ html:not(.disable) {
 		}
 
 		.ss-site-header-main-nav a {
-			font-size: 14px !important;
+			font-size: 0.875em !important;
 			text-decoration: none;
 		}
 
@@ -774,7 +774,7 @@ html:not(.disable) {
 		position: absolute;
 		width: 100vw;
 		text-align: center;
-		font-size: 16px;
+		font-size: 1em;
 		color: #fff;
 		transition: 0.25s opacity;
 		font-family: "Montserrat";
@@ -919,7 +919,7 @@ html:not(.disable) {
 
 	body {
 		top: 0px !important;
-		font-size: min(14px, 3.5vw) !important;
+		font-size: min(0.875em, 3.5vw) !important;
 		display: flex;
 		flex-direction: column;
 
@@ -1134,7 +1134,7 @@ html:not(.disable) {
 
 		& > li {
 			margin-right: 14px;
-			font-size: 10px !important;
+			font-size: 0.625em !important;
 
 			span {
 				position: absolute;
@@ -1203,7 +1203,7 @@ html:not(.disable) {
 			}
 
 			.fa-rotate {
-				font-size: 13.5px;
+				font-size: 0.84375em;
 			}
 
 			em {
@@ -1306,6 +1306,7 @@ html:not(.disable) {
 		padding: 5px 10px;
 		border-radius: 5px;
 		word-spacing: -2px !important;
+		font-size: 0.875em;
 	}
 
 	.skiptranslate {
@@ -1398,7 +1399,7 @@ html:not(.disable) {
 
 		.ss-site-header-school-tagline {
 			font-family: Charm !important;
-			font-size: 16px !important;
+			font-size: 1em !important;
 		} */
 
 		.ss-site-header-main-nav > .ss-site-header-page-links {
@@ -1555,7 +1556,7 @@ html:not(.disable) {
 			& > i {
 				height: 16px;
 				width: 16px;
-				font-size: 16px;
+				font-size: 1em;
 				color: #ffffff;
 				position: absolute;
 				left: 70px;
@@ -1565,7 +1566,7 @@ html:not(.disable) {
 				background: transparent;
 				color: #ffffff;
 				border: none;
-				font-size: 14px;
+				font-size: 0.875em;
 				width: -webkit-fill-available;
 				padding: 12px 46px;
 				border: 2px solid #ffffff;
@@ -1713,7 +1714,7 @@ html:not(.disable) {
 	.page_title:not(.forceStyle) {
 		color: var(--blue) !important;
 		text-align: center;
-		font-size: 26px !important;
+		font-size: 1.625em !important;
 		margin-top: 40px;
 		margin-left: 0;
 	}
@@ -1858,7 +1859,7 @@ html:not(.disable) {
 	}
 
 	.customElement.staff .email {
-		font-size: 20.4px;
+		font-size: 1.275em;
 		margin-top: -4px;
 	}
 
@@ -1966,7 +1967,7 @@ html:not(.disable) {
 	}
 
 	.customElement.links .stack-links-container i {
-		font-size: 44px;
+		font-size: 1.375em;
 	}
 
 	.customElement.sideBySide .ss-component-header-title {
@@ -2498,7 +2499,7 @@ html:not(.disable) {
 
 			button {
 				padding: 10px 30px;
-				font-size: 13.5px;
+				font-size: 0.84375em;
 				transition: 0.25s;
 			}
 		}
@@ -2529,7 +2530,7 @@ html:not(.disable) {
 	.pageSection:first-of-type:not(:has(.ss-component-header-title))
 		.ss-editor-content
 		*:not(.forceStyle) {
-		font-size: clamp(17px, 5vw, 30px) !important;
+		font-size: clamp(1.0625em, 5vw, 1.875em) !important;
 
 		a {
 			font-weight: 500;
@@ -2542,7 +2543,7 @@ html:not(.disable) {
 	.pageSection:not(:first-of-type):not(:has(.ss-component-header-title))
 		.ss-editor-content
 		*:not(.forceStyle) {
-		font-size: clamp(16px, 4.5vw, 26px) !important;
+		font-size: clamp(1em, 4.5vw, 1.625em) !important;
 
 		a {
 			font-weight: 500;
@@ -2869,12 +2870,12 @@ html:not(.disable) {
 	}
 
 	.ss-icon-title {
-		font-size: 16px !important;
+		font-size: 1em !important;
 		font-weight: 500 !important;
 	}
 
 	.ss-icon-text {
-		font-size: 14px !important;
+		font-size: 0.875em !important;
 	}
 
 	div:has(> nav .breadcrumb) {
@@ -2882,7 +2883,7 @@ html:not(.disable) {
 	}
 
 	footer .school-footer-seven-name {
-		font-size: 16px !important;
+		font-size: 1em !important;
 	}
 
 	footer .school-footer-seven-address-info,
@@ -2891,31 +2892,31 @@ html:not(.disable) {
 	footer .school-footer-seven-general-info a.school-footer-seven-contact-link,
 	footer .school-footer-seven-custom-links a,
 	footer .school-footer-seven-site-links a.site-link {
-		font-size: 14px !important;
+		font-size: 0.875em !important;
 	}
 
 	footer .school-footer-copyright-name,
 	footer .school-footer-disclaimer-text {
-		font-size: 11px !important;
+		font-size: 0.6875em !important;
 	}
 
 	footer .school-footer-seven-social-info i {
-		font-size: 16px !important;
+		font-size: 1em !important;
 	}
 
 	.admin-btn1 em {
-		font-size: 15px !important;
+		font-size: 0.9375em !important;
 	}
 
 	.ss-tab {
-		font-size: 16px !important;
+		font-size: 1em !important;
 		padding: 10px 16px 10px !important;
 		min-height: 50px !important;
 		max-height: 50px !important;
 	}
 
 	.ss-accordion-btn {
-		font-size: 16px !important;
+		font-size: 1em !important;
 	}
 
 	.ss-tabs-list::before {
@@ -2929,48 +2930,48 @@ html:not(.disable) {
 	}
 
 	.ss-site-header {
-		--ss-nav-font-size-desktop: 12px !important;
-		--ss-menu-font-size: 12px !important;
-		--ss-site-name-font-size-desktop: 24px !important;
-		--ss-site-name-font-size-mobile: 15px !important;
-		--ss-tagline-font-size-desktop: 12px !important;
-		--ss-tagline-font-size-mobile: 10px !important;
-		--ss-utility-font-size: 10px !important;
-		--ss-default-font-size: 14px !important;
+		--ss-nav-font-size-desktop: 1em !important;
+		--ss-menu-font-size: 1em !important;
+		--ss-site-name-font-size-desktop: 1.5em !important;
+		--ss-site-name-font-size-mobile: 0.9375em !important;
+		--ss-tagline-font-size-desktop: 0.75em !important;
+		--ss-tagline-font-size-mobile: 0.625em !important;
+		--ss-utility-font-size: 0.625em !important;
+		--ss-default-font-size: 0.875em !important;
 	}
 
 	.h1,
 	h1 {
-		font-size: 28px;
+		font-size: 1.75em;
 	}
 
 	.h2,
 	h2 {
-		font-size: 22px;
+		font-size: 1.375em;
 	}
 
 	.h3,
 	h3 {
-		font-size: 20px;
+		font-size: 1.25em;
 	}
 
 	.h4,
 	h4 {
-		font-size: 18px;
+		font-size: 1.125em;
 	}
 
 	.h5,
 	h5 {
-		font-size: 16px;
+		font-size: 1em;
 	}
 
 	.h6,
 	h6 {
-		font-size: 14px;
+		font-size: 0.875em;
 	}
 
 	.ss-component-header .ss-component-header-title {
-		font-size: 38px !important;
+		font-size: 2.375em !important;
 	}
 
 	.container
@@ -2983,7 +2984,7 @@ html:not(.disable) {
 	.news-feed-psq h2,
 	.news-feed-psq h3,
 	.news-feed-psq h4 {
-		font-size: 22px !important;
+		font-size: 1.375em !important;
 	}
 
 	.ss-component.stack_news
@@ -2996,7 +2997,7 @@ html:not(.disable) {
 		.news-feed-feature-rows-container
 		.ss-articles-container
 		.stack-three-two-title {
-		font-size: 20px !important;
+		font-size: 1.25em !important;
 	}
 
 	.ss-site-header-page-links .dropdown-menu {
@@ -3024,7 +3025,7 @@ html:not(.disable) {
 	}
 
 	.stack-link-text-container a {
-		font-size: 18px !important;
+		font-size: 1.125em !important;
 	}
 
 	.ss-im-solid-overlap-boxes .ss-icon.ss-small-icon,
@@ -3035,7 +3036,7 @@ html:not(.disable) {
 
 	.ss-im-solid-overlap-boxes .ss-icon.ss-circle-icon,
 	.ss-im-outline-overlap-boxes .ss-icon.ss-circle-icon {
-		font-size: 30px !important;
+		font-size: 1.875em !important;
 	}
 
 	.stack-link-text-container {
