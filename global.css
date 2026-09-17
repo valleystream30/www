@@ -2450,7 +2450,7 @@ html:not(.disable) {
 		img:not(.noZoom):only-of-type:not(:hover),
 	.customElement.about:not(:has(img:not(.noZoom)))
 		video:not(.noZoom):only-of-type:not(:hover) {
-		max-width: min(300px, 100%) !important;
+		max-width: min(300px, 100%, 10vw) !important;
 		height: auto !important;
 		width: min(300px, 100%) !important;
 		transition: 0.5s ease-in-out;
@@ -2460,7 +2460,7 @@ html:not(.disable) {
 		img:not(.noZoom):only-of-type:hover,
 	.customElement.about:not(:has(img:not(.noZoom)))
 		video:not(.noZoom):only-of-type:hover {
-		max-width: min(500px, 100%) !important;
+		max-width: min(500px, 100%, 10vw) !important;
 		width: min(500px, 100%) !important;
 		height: auto !important;
 		transition: 0.5s ease-in-out;

@@ -1054,7 +1054,7 @@ if (params.has('disable')) {
                 if (document.querySelector('.customElement.about img')) {
                     var hoverImageWindow = document.createElement('img');
                     hoverImageWindow.classList = 'hoverImageWindow';
-                    hoverImageWindow.style = 'position: fixed; bottom: 1vw; left: 1vw; width: 50vw; z-index: 10; opacity: 0; border-radius: 10px; pointer-events: none; transition: 0.25s;';
+                    hoverImageWindow.style = 'position: fixed; bottom: 1vw; left: 1vw; width: auto; z-index: 10; opacity: 0; border-radius: 10px; pointer-events: none; transition: 0.25s; max-height: 60vh; max-width: 50vw; height: min(100%, 350px);';
                     document.body.appendChild(hoverImageWindow);
                 };
                 for (let image of document.querySelectorAll('.customElement.about img:not(.noZoom)')) {
