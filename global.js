@@ -1322,6 +1322,12 @@ if (params.has('disable')) {
                         carouselInner.querySelectorAll('.item')[i].classList.add('active');
                     });
                 };
+                for (let i = 0; i < document.querySelectorAll('.ss-im-icon-bar .ss-icon.ss-custom-icon.ss-circle-icon').length; i++) {
+                    const icon = document.querySelectorAll('.ss-im-icon-bar .ss-icon.ss-custom-icon.ss-circle-icon')[i];
+                    const iconBackgroundColor = window.getComputedStyle(icon)['background-color'];
+                    icon.outerHTML = `<div class="icon-bar-icon-wrapper">${icon.outerHTML}</div>`;
+                    document.querySelectorAll('.ss-im-icon-bar .ss-icon.ss-custom-icon.ss-circle-icon')[i].parentElement.style.backgroundColor = iconBackgroundColor;
+                };
             } else if (pageTitle.includes('site map')) {
                 const pageBody = document.querySelector('.pageBody');
                 if (!pageBody) return;
