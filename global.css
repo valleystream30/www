@@ -736,6 +736,15 @@ html:not(.disable) {
 			flex-direction: column;
 			gap: 15px;
 		}
+
+		.age-calculator:not(.forceStyle) {
+			flex-direction: column;
+			width: inherit !important;
+
+			& > *:last-child {
+				border-radius: 10px;
+			}
+		}
 	}
 
 	@media screen and (max-width: 767px) {
