@@ -3,6 +3,9 @@ import headInjectDev from './headInjectDev.html';
 import scriptContent from './global.js.txt';
 import styleContent from './global.css.txt';
 
+const scriptInject = `<script>${scriptContent}</script>`;
+const styleInject = `<style>${styleContent}</style>`;
+
 // function isHTML(request) {
 //     const acceptHeader = request.headers.get("Accept");
 //     return ((typeof acceptHeader === "string") && (acceptHeader.indexOf("text/html") >= 0));
@@ -20,28 +23,33 @@ class ElementHandler {
                 if (this.isDev === true) {
                     element.append(headInjectDev, { html: true });
                 } else {
-                    element.append(`<script>${scriptContent}</script>`, { html: true });
-                    element.append(`<style>${styleContent}</style>`, { html: true });
+                    element.append(scriptInject, { html: true });
+                    element.append(styleInject, { html: true });
                 };
                 break;
             case 'meta':
-                if (element.getAttribute('name') === 'author') element.setAttribute('content', `${element.getAttribute('name')}, Faisal Nageer`);
-                if (element.getAttribute('property') === 'og:image') element.setAttribute('content', 'https://cdn.valleystream30.com/favicon.png');
-                if (element.getAttribute('name') === 'description') element.setAttribute('content', 'Valley Stream 30 UFSD is a public elementary‑grade district (K-6) serving the Village of Valley Stream in Nassau County, New York.');
-                if (element.getAttribute('property') === 'og:description') element.setAttribute('content', 'Valley Stream 30 UFSD is a public elementary‑grade district (K-6) serving the Village of Valley Stream in Nassau County, New York.');
+                const name = element.getAttribute('name');
+                const property = element.getAttribute('property');
+                if (name === 'author') element.setAttribute('content', 'author, Faisal Nageer');
+                if (property === 'og:image') element.setAttribute('content', 'https://cdn.valleystream30.com/favicon.png');
+                if (name === 'description') element.setAttribute('content', 'Valley Stream 30 UFSD is a public elementary‑grade district (K-6) serving the Village of Valley Stream in Nassau County, New York.');
+                if (property === 'og:description') element.setAttribute('content', 'Valley Stream 30 UFSD is a public elementary‑grade district (K-6) serving the Village of Valley Stream in Nassau County, New York.');
                 break;
         };
     };
 };
 
+const productionHandler = new ElementHandler();
+const developmentHandler = new ElementHandler(true);
+
 export default {
     async fetch(request, env, ctx) {
         if (request.url.includes('index.php?')) return fetch(request);
         const upstream = await fetch(request);
-        const url = new URL(request.url);
+        const url = ((upstream.status === 404) || request.url.includes('?')) ? new URL(request.url) : null;
         // const upstreamURL = new URL(upstream.url);
         // if (upstreamURL.pathname.slice(1).includes('/')) return Response.redirect(`${request.url.replace(/https?:\/\/(www\.)?valleystream30\.com(.*)/, 'https://$1valleystream30.com')}/${upstreamURL.pathname.slice(1).replace(/\//g, '-'), 301}`);
-        if (upstream.status !== 404) return new HTMLRewriter().on('head', new ElementHandler(url.searchParams.has('dev'))).on('head > meta', new ElementHandler()).transform(upstream);
+        if (upstream.status !== 404) return new HTMLRewriter().on('head', url?.searchParams.has('dev') ? developmentHandler : productionHandler).on('head > meta', productionHandler).transform(upstream);
         // const redirects = [
         //     {
         //         from: /https?:\/\/(?:www\.)?valleystream30\.com\/admin/,
