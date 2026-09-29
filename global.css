@@ -3079,7 +3079,7 @@ html:not(.disable) {
 		padding: 10px;
 	}
 
-	.ss-component:not(.ss-no-pad):not(.ss-im-icon-bar) {
+	.ss-component:not(.ss-no-pad):not(.ss-remove-pad):not(.ss-im-icon-bar) {
 		padding: 40px 0;
 	}
 
