@@ -2574,6 +2574,7 @@ html:not(.disable) {
 		}
 	}
 
+	.btn,
 	.btn-lg,
 	.btn-default {
 		padding: 15px 30px !important;
