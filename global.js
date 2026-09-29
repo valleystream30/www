@@ -1185,6 +1185,17 @@ if (params.has('disable')) {
                 }, 100);
             };
             for (let hiddenSection of document.querySelectorAll('.ss-hidden-component')) hiddenSection.remove();
+            document.querySelectorAll('section[id]').forEach(section => {
+                const copySectionLinkButton = document.createElement('div');
+                copySectionLinkButton.classList = 'copySectionLink';
+                copySectionLinkButton.innerHTML = '<i class="fa-solid fa-link"></i>';
+                section.appendChild(copySectionLinkButton);
+                copySectionLinkButton.addEventListener('click', () => {
+                    const sectionLink = `${window.location.origin}${window.location.pathname}#${pageSections.find(pageSection => pageSection.id === section.id)?.slug || section.id}`;
+                    navigator.clipboard.writeText(sectionLink);
+                    alert(`Copied section link to clipboard: ${sectionLink}`);
+                });
+            });
         };
 
         async function specificPages() {
@@ -1318,8 +1329,11 @@ if (params.has('disable')) {
                         </div>
                     </div>`;
                     for (let i = 0; i < carouselInner.querySelectorAll('.locationSwitch p').length; i++) carouselInner.querySelectorAll('.locationSwitch p')[i].addEventListener('click', () => {
-                        carouselInner.querySelectorAll('.item').forEach(item => item.classList.remove('active'));
-                        carouselInner.querySelectorAll('.item')[i].classList.add('active');
+                        const carouselInnerItems = carouselInner.querySelectorAll('.item');
+                        for (let j = 0; j < carouselInnerItems.length; j++) {
+                            carouselInnerItems[j].classList.remove('active');
+                            if (j === i) carouselInnerItems[j].classList.add('active');
+                        };
                     });
                 };
                 for (let i = 0; i < document.querySelectorAll('.ss-im-icon-bar .ss-icon.ss-custom-icon.ss-circle-icon').length; i++) {
