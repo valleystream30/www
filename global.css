@@ -1041,7 +1041,7 @@ html:not(.disable) {
 		):has(
 			.ss-component-content .ss-one-column .ss-component-column h3,
 			.ss-component-content .ss-one-column .ss-component-column span
-		) {
+		):not(.ss-remove-pad) {
 		padding: min(60px, 5.5svh) 0 !important;
 
 		.ss-component-content
@@ -3103,5 +3103,9 @@ html:not(.disable) {
 	.ss-component.break-out:not(:has(.stack_off)) {
 		left: calc(50% - 1px);
 		transform: translateX(calc(-50% + 1px));
+	}
+
+	.ss-remove-pad {
+		padding: 0 !important;
 	}
 }
