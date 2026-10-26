@@ -611,13 +611,13 @@ if (params.has('disable')) {
                                         let eventGroups = [];
                                         for (let event of document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event')) {
                                             const eventDiv = event.shadowRoot.querySelector('.calendar-event-container');
-                                            const eventDate = eventDiv.querySelector('.event-date-container').innerText.replaceAll('\n', ' ').trim();
+                                            const eventDate = eventDiv.querySelector('.event-date-container').textContent.replaceAll('\n', ' ').trim();
                                             const eventTitleDiv = eventDiv.querySelector('.event-title a');
                                             const eventLink = eventTitleDiv.getAttribute('href');
-                                            const eventTitle = eventTitleDiv.innerText.trim();
-                                            const eventTime = eventDiv.querySelector('.event-time').innerText.trim();
+                                            const eventTitle = eventTitleDiv.textContent.trim();
+                                            const eventTime = eventDiv.querySelector('.event-time').textContent.trim();
                                             if (!eventGroups.find(eventGroup => eventGroup.name === eventDate) || !eventGroups.find(eventGroup => eventGroup.name === eventDate).events.find(event => (event.link === eventLink))) {
-                                                console.log(eventDiv.outerHTML, eventDiv.querySelector('.event-date-container'), eventDiv.querySelector('.event-date-container').innerText, eventDiv.querySelector('.event-date-container').innerText.replaceAll('\n', ' '), eventDiv.querySelector('.event-date-container').innerText.replaceAll('\n', ' ').trim())
+                                                console.log(eventDiv.outerHTML, eventDiv.querySelector('.event-date-container'), eventDiv.querySelector('.event-date-container').textContent, eventDiv.querySelector('.event-date-container').textContent.replaceAll('\n', ' '), eventDiv.querySelector('.event-date-container').textContent.replaceAll('\n', ' ').trim())
                                                 if (!eventGroups.find(eventGroup => eventGroup.name === eventDate)) eventGroups.push({
                                                     name: eventDate,
                                                     events: [],
