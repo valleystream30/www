@@ -118,7 +118,7 @@ if (params.has('disable')) {
                     loggedInUser = JSON.parse(String('{' + (document.querySelector('.adminBar script') ? '\'' + document.querySelector('.adminBar script').innerText.trim().split(`visitor: {`)[1].split('}')[0].trim().replaceAll('  ', '').replaceAll('\n', ' ').slice(0, -1).replaceAll(', ', ', \'').replaceAll(':', '\':') : '') + '}').replaceAll('\'', '"'));
                 } catch { };
                 if (loggedInUser.full_name) {
-                    document.documentElement.setAttribute('user', loggedInUser.full_name.split(' ')[0]);
+                    document.documentElement.setAttribute('user', loggedInUser.full_name.split(' ').filter(a => a)[0]);
                     var greeting = 'Good evening';
                     var currentHour = new Date().getHours();
                     if (new Date().getDay() === 5) {
@@ -660,8 +660,7 @@ if (params.has('disable')) {
                                                     eventsTitle.innerText = 'Tomorrow';
                                                     eventsContainer.append(eventsTitle);
                                                 } else {
-                                                    var [day, mon, date] = eventGroup.name.split(' ');
-                                                    console.log(eventGroup, day, mon, date);
+                                                    var [day, mon, date] = eventGroup.name.split(' ').filter(a => a);
                                                     eventsTitle.innerText = `${day.charAt(0).toUpperCase() + day.slice(1).toLowerCase()}, ${months[mon]} ${parseInt(date, 10) + (["th", "st", "nd", "rd"][((["th", "st", "nd", "rd"] % 100) - 20) % 10] || ["th", "st", "nd", "rd"][(parseInt(date, 10) % 100)] || ["th", "st", "nd", "rd"][0])}`;
                                                     eventsContainer.append(eventsTitle);
                                                 };
