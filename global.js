@@ -617,7 +617,6 @@ if (params.has('disable')) {
                                             const eventTitle = eventTitleDiv.textContent.trim();
                                             const eventTime = eventDiv.querySelector('.event-time').textContent.trim();
                                             if (!eventGroups.find(eventGroup => eventGroup.name === eventDate) || !eventGroups.find(eventGroup => eventGroup.name === eventDate).events.find(event => (event.link === eventLink))) {
-                                                console.log(eventDiv.outerHTML, eventDiv.querySelector('.event-date-container'), eventDiv.querySelector('.event-date-container').textContent, eventDiv.querySelector('.event-date-container').textContent.replaceAll('\n', ' '), eventDiv.querySelector('.event-date-container').textContent.replaceAll('\n', ' ').trim())
                                                 if (!eventGroups.find(eventGroup => eventGroup.name === eventDate)) eventGroups.push({
                                                     name: eventDate,
                                                     events: [],
