@@ -661,6 +661,7 @@ if (params.has('disable')) {
                                                     eventsContainer.append(eventsTitle);
                                                 } else {
                                                     var [day, mon, date] = eventGroup.name.split(' ');
+                                                    console.log(eventGroup, day, mon, date);
                                                     eventsTitle.innerText = `${day.charAt(0).toUpperCase() + day.slice(1).toLowerCase()}, ${months[mon]} ${parseInt(date, 10) + (["th", "st", "nd", "rd"][((["th", "st", "nd", "rd"] % 100) - 20) % 10] || ["th", "st", "nd", "rd"][(parseInt(date, 10) % 100)] || ["th", "st", "nd", "rd"][0])}`;
                                                     eventsContainer.append(eventsTitle);
                                                 };

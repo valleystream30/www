@@ -467,14 +467,14 @@ html:not(.disable) {
 			margin-left: 50%;
 			transform: translateX(-50%);
 
-			.ss-im-icon-wrapper {
+			.ss-im-icon-wrapper:not(.forceStyle) {
 				width: unset !important;
 
 				.ss-im-icon-wrapper-inner {
 					padding: 15px;
 					zoom: 0.9;
 					justify-content: center;
-					aspect-ratio: 1;
+					aspect-ratio: 1.25;
 				}
 
 				&:nth-child(2n-1) {
