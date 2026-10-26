@@ -7,14 +7,14 @@ if (params.has('disable')) {
     params.set('dev', 'true');
     window.location.search = params.toString();
 } else {
-    var startTime = new Date().getTime();
+    let startTime = new Date().getTime();
 
     function resetTranslate() {
-        var iframe = document.getElementsByClassName('goog-te-banner-frame')[0] || document.getElementById(':1.container');
+        let iframe = document.getElementsByClassName('goog-te-banner-frame')[0] || document.getElementById(':1.container');
         if (!iframe) return;
-        var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-        var restore_el = innerDoc.getElementsByTagName("button");
-        for (var i = 0; i < restore_el.length; i++) {
+        let innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+        let restore_el = innerDoc.getElementsByTagName("button");
+        for (let i = 0; i < restore_el.length; i++) {
             if (restore_el[i].id.indexOf("restore") >= 0) {
                 restore_el[i].click();
                 return;
@@ -63,15 +63,15 @@ if (params.has('disable')) {
     function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); };
 
     function QRCode(r) {
-        var n, t, o, e, a = [], f = [], i = Math.max, u = Math.min, h = Math.abs, v = Math.ceil, c = /^[0-9]*$/, s = /^[A-Z0-9 $%*+.\/:-]*$/, l = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:", g = [[-1, 7, 10, 15, 20, 26, 18, 20, 24, 30, 18, 20, 24, 26, 30, 22, 24, 28, 30, 28, 28, 28, 28, 30, 30, 26, 28, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], [-1, 10, 16, 26, 18, 24, 16, 18, 22, 22, 26, 30, 22, 22, 24, 24, 28, 28, 26, 26, 26, 26, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28], [-1, 13, 22, 18, 26, 18, 24, 18, 22, 20, 24, 28, 26, 24, 20, 30, 24, 28, 28, 26, 30, 28, 30, 30, 30, 30, 28, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], [-1, 17, 28, 22, 16, 22, 28, 26, 26, 24, 28, 24, 28, 22, 24, 24, 30, 28, 28, 26, 28, 30, 24, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30]], d = [[-1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 7, 8, 8, 9, 9, 10, 12, 12, 12, 13, 14, 15, 16, 17, 18, 19, 19, 20, 21, 22, 24, 25], [-1, 1, 1, 1, 2, 2, 4, 4, 4, 5, 5, 5, 8, 9, 9, 10, 10, 11, 13, 14, 16, 17, 17, 18, 20, 21, 23, 25, 26, 28, 29, 31, 33, 35, 37, 38, 40, 43, 45, 47, 49], [-1, 1, 1, 2, 2, 4, 4, 6, 6, 8, 8, 8, 10, 12, 16, 12, 17, 16, 18, 21, 20, 23, 23, 25, 27, 29, 34, 34, 35, 38, 40, 43, 45, 48, 51, 53, 56, 59, 62, 65, 68], [-1, 1, 1, 2, 4, 4, 4, 5, 6, 8, 8, 11, 11, 16, 16, 18, 16, 19, 21, 25, 25, 25, 34, 30, 32, 35, 37, 40, 42, 45, 48, 51, 54, 57, 60, 63, 66, 70, 74, 77, 81]], m = { L: [0, 1], M: [1, 0], Q: [2, 3], H: [3, 2] }, p = function (r, n) { for (var t = 0, o = 8; o--;)t = t << 1 ^ 285 * (t >>> 7) ^ (n >>> o & 1) * r; return t }, C = function (r, n) { for (var t = [], o = r.length, e = o; e;)for (var a = r[o - e--] ^ t.shift(), f = n.length; f--;)t[f] ^= p(n[f], a); return t }, w = function (r) { for (var n = [function () { return 0 == (t + o) % 2 }, function () { return 0 == t % 2 }, function () { return 0 == o % 3 }, function () { return 0 == (t + o) % 3 }, function () { return 0 == ((t / 2 | 0) + (o / 3 | 0)) % 2 }, function () { return 0 == t * o % 2 + t * o % 3 }, function () { return 0 == (t * o % 2 + t * o % 3) % 2 }, function () { return 0 == ((t + o) % 2 + t * o % 3) % 2 }][r], t = e; t--;)for (var o = e; o--;)f[t][o] || (a[t][o] ^= n()) }, b = function () { for (var r = function (r, n) { n[6] || (r += e), n.shift(), n.push(r) }, n = function (n, o, a) { return n && (r(o, a), o = 0), r(o += e, a), t(a) }, t = function (r) { var n = r[5], t = n > 0 && r[4] == n && r[3] == 3 * n && r[2] == n && r[1] == n; return (t && r[6] >= 4 * n && r[0] >= n ? 1 : 0) + (t && r[0] >= 4 * n && r[6] >= n ? 1 : 0) }, o = 0, f = e * e, i = 0, u = e; u--;) { for (var c = [0, 0, 0, 0, 0, 0, 0], s = [0, 0, 0, 0, 0, 0, 0], l = !1, g = !1, d = 0, m = 0, p = e; p--;) { a[u][p] == l ? 5 == ++d ? o += 3 : d > 5 && o++ : (r(d, c), o += 40 * t(c), d = 1, l = a[u][p]), a[p][u] == g ? 5 == ++m ? o += 3 : m > 5 && o++ : (r(m, s), o += 40 * t(s), m = 1, g = a[p][u]); var C = a[u][p]; C && i++, p && u && C == a[u][p - 1] && C == a[u - 1][p] && C == a[u - 1][p - 1] && (o += 3) } o += 40 * n(l, d, c) + 40 * n(g, m, s) } return o += 10 * (v(h(20 * i - 10 * f) / f) - 1) }, A = function (r, n, t) { for (; n--;)t.push(r >>> n & 1) }, M = function (r, n) { return r.numBitsCharCount[(n + 7) / 17 | 0] }, B = function (r, n) { return 0 != (r >>> n & 1) }, x = function (r, n) { for (var t = 0, o = r.length; o--;) { var e = r[o], a = M(e, n); if (1 << a <= e.numChars) return 1 / 0; t += 4 + a + e.bitData.length } return t }, D = function (r) { if (r < 1 || r > 40) throw "Version number out of range"; var n = (16 * r + 128) * r + 64; if (r >= 2) { var t = r / 7 | 2; n -= (25 * t - 10) * t - 55, r >= 7 && (n -= 36) } return n }, I = function (r, n) { for (var t = 2; -2 <= t; t--)for (var o = 2; -2 <= o; o--)E(r + o, n + t, 1 != i(h(o), h(t))) }, H = function (r, n) { for (var t = 4; -4 <= t; t--)for (var o = 4; -4 <= o; o--) { var a = i(h(o), h(t)), f = r + o, u = n + t; 0 <= f && f < e && 0 <= u && u < e && E(f, u, 2 != a && 4 != a) } }, $ = function (r) { for (var n = t[1] << 3 | r, o = n, a = 10; a--;)o = o << 1 ^ 1335 * (o >>> 9); var f = 21522 ^ (n << 10 | o); if (f >>> 15 != 0) throw "Assertion error"; for (a = 0; a <= 5; a++)E(8, a, B(f, a)); E(8, 7, B(f, 6)), E(8, 8, B(f, 7)), E(7, 8, B(f, 8)); for (a = 9; a < 15; a++)E(14 - a, 8, B(f, a)); for (a = 0; a < 8; a++)E(e - 1 - a, 8, B(f, a)); for (a = 8; a < 15; a++)E(8, e - 15 + a, B(f, a)); E(8, e - 8, 1) }, O = function () { for (var r = e; r--;)E(6, r, 0 == r % 2), E(r, 6, 0 == r % 2); for (var t = function () { var r = []; if (n > 1) for (var t = 2 + (n / 7 | 0), o = 32 == n ? 26 : 2 * v((e - 13) / (2 * t - 2)); t--;)r[t] = t * o + 6; return r }(), o = r = t.length; o--;)for (var a = r; a--;)0 == a && 0 == o || 0 == a && o == r - 1 || a == r - 1 && 0 == o || I(t[a], t[o]); H(3, 3), H(e - 4, 3), H(3, e - 4), $(0), function () { if (!(7 > n)) { for (var r = n, t = 12; t--;)r = r << 1 ^ 7973 * (r >>> 11); var o = n << 12 | r; if (t = 18, o >>> 18 != 0) throw "Assertion error"; for (; t--;) { var a = e - 11 + t % 3, f = t / 3 | 0, i = B(o, t); E(a, f, i), E(f, a, i) } } }() }, Q = function (r) { if (r.length != V(n, t)) throw "Invalid argument"; for (var o = d[t[0]][n], e = g[t[0]][n], a = D(n) / 8 | 0, f = o - a % o, i = a / o | 0, u = [], h = function (r) { var n = 1, t = []; t[r - 1] = 1; for (var o = 0; o < r; o++) { for (var e = 0; e < r; e++)t[e] = p(t[e], n) ^ t[e + 1]; n = p(n, 2) } return t }(e), v = 0, c = 0; v < o; v++) { var s = r.slice(c, c + i - e + (v < f ? 0 : 1)); c += s.length; var l = C(s, h); v < f && s.push(0), u.push(s.concat(l)) } var m = []; for (v = 0; v < u[0].length; v++)for (var w = 0; w < u.length; w++)(v != i - e || w >= f) && m.push(u[w][v]); return m }, S = function (r) { for (var n = [], t = (r = encodeURI(r), 0); t < r.length; t++)"%" != r.charAt(t) ? n.push(r.charCodeAt(t)) : (n.push(parseInt(r.substr(t + 1, 2), 16)), t += 2); return n }, V = function (r, n) { return (D(r) / 8 | 0) - g[n[0]][r] * d[n[0]][r] }, E = function (r, n, t) { a[n][r] = t ? 1 : 0, f[n][r] = 1 }, R = function (r) { for (var n = [], t = 0, o = r; t < o.length; t++) { var e = o[t]; A(e, 8, n) } return { modeBits: 4, numBitsCharCount: [8, 16, 16], numChars: r.length, bitData: n } }, Z = function (r) { if (!c.test(r)) throw "String contains non-numeric characters"; for (var n = [], t = 0; t < r.length;) { var o = u(r.length - t, 3); A(parseInt(r.substr(t, o), 10), 3 * o + 1, n), t += o } return { modeBits: 1, numBitsCharCount: [10, 12, 14], numChars: r.length, bitData: n } }, z = function (r) { if (!s.test(r)) throw "String contains unencodable characters in alphanumeric mode"; var n, t = []; for (n = 0; n + 2 <= r.length; n += 2) { var o = 45 * l.indexOf(r.charAt(n)); o += l.indexOf(r.charAt(n + 1)), A(o, 11, t) } return n < r.length && A(l.indexOf(r.charAt(n)), 6, t), { modeBits: 2, numBitsCharCount: [9, 11, 13], numChars: r.length, bitData: t } }, L = function (r, n, t, o) { var e = function (r) { return "" == r ? [] : c.test(r) ? [Z(r)] : s.test(r) ? [z(r)] : [R(S(r))] }(r); return U(e, n, t, o) }, N = function (r, i, u, h) { t = i, o = h; for (var v = e = 4 * (n = r) + 17; v--;)a[v] = [], f[v] = []; if (O(), function (r) { for (var n = 0, t = 1, o = e - 1, i = o; i > 0; i -= 2) { 6 == i && --i; for (var u = 0 > (t = -t) ? o : 0, h = 0; h < e; ++h) { for (var v = i; v > i - 2; --v)f[u][v] || (a[u][v] = B(r[n >>> 3], 7 - (7 & n)), ++n); u += t } } }(Q(u)), 0 > o) { var c = 1e9; for (v = 8; v--;) { w(v), $(v); var s = b(); c > s && (c = s, o = v), w(v) } } w(o), $(o), f = [] }, U = function (r, n, t, o, e, a) { if (void 0 === e && (e = 1), void 0 === a && (a = 40), void 0 === o && (o = -1), void 0 === t && (t = !0), !(1 <= e && e <= a && a <= 40) || o < -1 || o > 7) throw "Invalid value"; for (var f = [], i = 236, h = [], v = e; ;) { var c = x(r, v); if (c <= 8 * V(v, n)) break; if (v >= a) throw "Data too long"; v++ } if (t) for (var s = (l = [m.H, m.Q, m.M]).length; s--;)c <= 8 * V(v, l[s]) && (n = l[s]); for (var l = 0; l < r.length; l++) { var g = r[l]; A(g.modeBits, 4, f), A(g.numChars, M(g, v), f); for (var d = 0, p = g.bitData; d < p.length; d++)f.push(p[d]) } if (f.length != c) throw "Assertion error"; var C = 8 * V(v, n); if (f.length > C) throw "Assertion error"; if (A(0, u(4, C - f.length), f), A(0, (8 - f.length % 8) % 8, f), f.length % 8 != 0) throw "Assertion error"; for (; f.length < C;)A(i, 8, f), i ^= 253; for (s = f.length; s--;)h[s >>> 3] |= f[s] << 7 - (7 & s); return N(v, n, h, o) }; return function () { function n(r) { return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(r) } function t(r, n) { for (var t in r = document.createElementNS(s, r), n || {}) r.setAttribute(t, n[t]); return r } var o, f, i, u, v, c, s = "http://www.w3.org/2000/svg", l = "", g = "string" == typeof r ? { msg: r } : r || {}, d = g.pal || ["#000"], p = h(g.dim) || 256, C = [1, 0, 0, 1, c = (c = h(g.pad)) > -1 ? c : 4, c], w = n(w = d[0]) ? w : "#000", b = n(b = d[1]) ? b : 0, A = g.vrb ? 0 : 1; for (L(g.msg || "", m[g.ecl] || m.M, 0 == g.ecb ? 0 : 1, g.mtx), v = e + 2 * c, i = e; i--;)for (u = 0, f = e; f--;)a[i][f] && (A ? (u++, a[i][f - 1] || (l += "M" + f + "," + i + "h" + u + "v1h-" + u + "v-1z", u = 0)) : l += "M" + f + "," + i + "h1v1h-1v-1z"); return o = t("svg", { viewBox: [0, 0, v, v].join(" "), width: p, height: p, fill: w, "shape-rendering": "crispEdges", xmlns: s, version: "1.1" }), b && o.appendChild(t("path", { fill: b, d: "M0,0V" + v + "H" + v + "V0H0Z" })), o.appendChild(t("path", { transform: "matrix(" + C + ")", d: l })), o }()
+        let n, t, o, e, a = [], f = [], i = Math.max, u = Math.min, h = Math.abs, v = Math.ceil, c = /^[0-9]*$/, s = /^[A-Z0-9 $%*+.\/:-]*$/, l = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:", g = [[-1, 7, 10, 15, 20, 26, 18, 20, 24, 30, 18, 20, 24, 26, 30, 22, 24, 28, 30, 28, 28, 28, 28, 30, 30, 26, 28, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], [-1, 10, 16, 26, 18, 24, 16, 18, 22, 22, 26, 30, 22, 22, 24, 24, 28, 28, 26, 26, 26, 26, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28], [-1, 13, 22, 18, 26, 18, 24, 18, 22, 20, 24, 28, 26, 24, 20, 30, 24, 28, 28, 26, 30, 28, 30, 30, 30, 30, 28, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], [-1, 17, 28, 22, 16, 22, 28, 26, 26, 24, 28, 24, 28, 22, 24, 24, 30, 28, 28, 26, 28, 30, 24, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30]], d = [[-1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 7, 8, 8, 9, 9, 10, 12, 12, 12, 13, 14, 15, 16, 17, 18, 19, 19, 20, 21, 22, 24, 25], [-1, 1, 1, 1, 2, 2, 4, 4, 4, 5, 5, 5, 8, 9, 9, 10, 10, 11, 13, 14, 16, 17, 17, 18, 20, 21, 23, 25, 26, 28, 29, 31, 33, 35, 37, 38, 40, 43, 45, 47, 49], [-1, 1, 1, 2, 2, 4, 4, 6, 6, 8, 8, 8, 10, 12, 16, 12, 17, 16, 18, 21, 20, 23, 23, 25, 27, 29, 34, 34, 35, 38, 40, 43, 45, 48, 51, 53, 56, 59, 62, 65, 68], [-1, 1, 1, 2, 4, 4, 4, 5, 6, 8, 8, 11, 11, 16, 16, 18, 16, 19, 21, 25, 25, 25, 34, 30, 32, 35, 37, 40, 42, 45, 48, 51, 54, 57, 60, 63, 66, 70, 74, 77, 81]], m = { L: [0, 1], M: [1, 0], Q: [2, 3], H: [3, 2] }, p = function (r, n) { for (let t = 0, o = 8; o--;)t = t << 1 ^ 285 * (t >>> 7) ^ (n >>> o & 1) * r; return t }, C = function (r, n) { for (let t = [], o = r.length, e = o; e;)for (let a = r[o - e--] ^ t.shift(), f = n.length; f--;)t[f] ^= p(n[f], a); return t }, w = function (r) { for (let n = [function () { return 0 == (t + o) % 2 }, function () { return 0 == t % 2 }, function () { return 0 == o % 3 }, function () { return 0 == (t + o) % 3 }, function () { return 0 == ((t / 2 | 0) + (o / 3 | 0)) % 2 }, function () { return 0 == t * o % 2 + t * o % 3 }, function () { return 0 == (t * o % 2 + t * o % 3) % 2 }, function () { return 0 == ((t + o) % 2 + t * o % 3) % 2 }][r], t = e; t--;)for (let o = e; o--;)f[t][o] || (a[t][o] ^= n()) }, b = function () { for (let r = function (r, n) { n[6] || (r += e), n.shift(), n.push(r) }, n = function (n, o, a) { return n && (r(o, a), o = 0), r(o += e, a), t(a) }, t = function (r) { let n = r[5], t = n > 0 && r[4] == n && r[3] == 3 * n && r[2] == n && r[1] == n; return (t && r[6] >= 4 * n && r[0] >= n ? 1 : 0) + (t && r[0] >= 4 * n && r[6] >= n ? 1 : 0) }, o = 0, f = e * e, i = 0, u = e; u--;) { for (let c = [0, 0, 0, 0, 0, 0, 0], s = [0, 0, 0, 0, 0, 0, 0], l = !1, g = !1, d = 0, m = 0, p = e; p--;) { a[u][p] == l ? 5 == ++d ? o += 3 : d > 5 && o++ : (r(d, c), o += 40 * t(c), d = 1, l = a[u][p]), a[p][u] == g ? 5 == ++m ? o += 3 : m > 5 && o++ : (r(m, s), o += 40 * t(s), m = 1, g = a[p][u]); let C = a[u][p]; C && i++, p && u && C == a[u][p - 1] && C == a[u - 1][p] && C == a[u - 1][p - 1] && (o += 3) } o += 40 * n(l, d, c) + 40 * n(g, m, s) } return o += 10 * (v(h(20 * i - 10 * f) / f) - 1) }, A = function (r, n, t) { for (; n--;)t.push(r >>> n & 1) }, M = function (r, n) { return r.numBitsCharCount[(n + 7) / 17 | 0] }, B = function (r, n) { return 0 != (r >>> n & 1) }, x = function (r, n) { for (let t = 0, o = r.length; o--;) { let e = r[o], a = M(e, n); if (1 << a <= e.numChars) return 1 / 0; t += 4 + a + e.bitData.length } return t }, D = function (r) { if (r < 1 || r > 40) throw "Version number out of range"; let n = (16 * r + 128) * r + 64; if (r >= 2) { let t = r / 7 | 2; n -= (25 * t - 10) * t - 55, r >= 7 && (n -= 36) } return n }, I = function (r, n) { for (let t = 2; -2 <= t; t--)for (let o = 2; -2 <= o; o--)E(r + o, n + t, 1 != i(h(o), h(t))) }, H = function (r, n) { for (let t = 4; -4 <= t; t--)for (let o = 4; -4 <= o; o--) { let a = i(h(o), h(t)), f = r + o, u = n + t; 0 <= f && f < e && 0 <= u && u < e && E(f, u, 2 != a && 4 != a) } }, $ = function (r) { for (let n = t[1] << 3 | r, o = n, a = 10; a--;)o = o << 1 ^ 1335 * (o >>> 9); let f = 21522 ^ (n << 10 | o); if (f >>> 15 != 0) throw "Assertion error"; for (a = 0; a <= 5; a++)E(8, a, B(f, a)); E(8, 7, B(f, 6)), E(8, 8, B(f, 7)), E(7, 8, B(f, 8)); for (a = 9; a < 15; a++)E(14 - a, 8, B(f, a)); for (a = 0; a < 8; a++)E(e - 1 - a, 8, B(f, a)); for (a = 8; a < 15; a++)E(8, e - 15 + a, B(f, a)); E(8, e - 8, 1) }, O = function () { for (let r = e; r--;)E(6, r, 0 == r % 2), E(r, 6, 0 == r % 2); for (let t = function () { let r = []; if (n > 1) for (let t = 2 + (n / 7 | 0), o = 32 == n ? 26 : 2 * v((e - 13) / (2 * t - 2)); t--;)r[t] = t * o + 6; return r }(), o = r = t.length; o--;)for (let a = r; a--;)0 == a && 0 == o || 0 == a && o == r - 1 || a == r - 1 && 0 == o || I(t[a], t[o]); H(3, 3), H(e - 4, 3), H(3, e - 4), $(0), function () { if (!(7 > n)) { for (let r = n, t = 12; t--;)r = r << 1 ^ 7973 * (r >>> 11); let o = n << 12 | r; if (t = 18, o >>> 18 != 0) throw "Assertion error"; for (; t--;) { let a = e - 11 + t % 3, f = t / 3 | 0, i = B(o, t); E(a, f, i), E(f, a, i) } } }() }, Q = function (r) { if (r.length != V(n, t)) throw "Invalid argument"; for (let o = d[t[0]][n], e = g[t[0]][n], a = D(n) / 8 | 0, f = o - a % o, i = a / o | 0, u = [], h = function (r) { let n = 1, t = []; t[r - 1] = 1; for (let o = 0; o < r; o++) { for (let e = 0; e < r; e++)t[e] = p(t[e], n) ^ t[e + 1]; n = p(n, 2) } return t }(e), v = 0, c = 0; v < o; v++) { let s = r.slice(c, c + i - e + (v < f ? 0 : 1)); c += s.length; let l = C(s, h); v < f && s.push(0), u.push(s.concat(l)) } let m = []; for (v = 0; v < u[0].length; v++)for (let w = 0; w < u.length; w++)(v != i - e || w >= f) && m.push(u[w][v]); return m }, S = function (r) { for (let n = [], t = (r = encodeURI(r), 0); t < r.length; t++)"%" != r.charAt(t) ? n.push(r.charCodeAt(t)) : (n.push(parseInt(r.substr(t + 1, 2), 16)), t += 2); return n }, V = function (r, n) { return (D(r) / 8 | 0) - g[n[0]][r] * d[n[0]][r] }, E = function (r, n, t) { a[n][r] = t ? 1 : 0, f[n][r] = 1 }, R = function (r) { for (let n = [], t = 0, o = r; t < o.length; t++) { let e = o[t]; A(e, 8, n) } return { modeBits: 4, numBitsCharCount: [8, 16, 16], numChars: r.length, bitData: n } }, Z = function (r) { if (!c.test(r)) throw "String contains non-numeric characters"; for (let n = [], t = 0; t < r.length;) { let o = u(r.length - t, 3); A(parseInt(r.substr(t, o), 10), 3 * o + 1, n), t += o } return { modeBits: 1, numBitsCharCount: [10, 12, 14], numChars: r.length, bitData: n } }, z = function (r) { if (!s.test(r)) throw "String contains unencodable characters in alphanumeric mode"; let n, t = []; for (n = 0; n + 2 <= r.length; n += 2) { let o = 45 * l.indexOf(r.charAt(n)); o += l.indexOf(r.charAt(n + 1)), A(o, 11, t) } return n < r.length && A(l.indexOf(r.charAt(n)), 6, t), { modeBits: 2, numBitsCharCount: [9, 11, 13], numChars: r.length, bitData: t } }, L = function (r, n, t, o) { let e = function (r) { return "" == r ? [] : c.test(r) ? [Z(r)] : s.test(r) ? [z(r)] : [R(S(r))] }(r); return U(e, n, t, o) }, N = function (r, i, u, h) { t = i, o = h; for (let v = e = 4 * (n = r) + 17; v--;)a[v] = [], f[v] = []; if (O(), function (r) { for (let n = 0, t = 1, o = e - 1, i = o; i > 0; i -= 2) { 6 == i && --i; for (let u = 0 > (t = -t) ? o : 0, h = 0; h < e; ++h) { for (let v = i; v > i - 2; --v)f[u][v] || (a[u][v] = B(r[n >>> 3], 7 - (7 & n)), ++n); u += t } } }(Q(u)), 0 > o) { let c = 1e9; for (v = 8; v--;) { w(v), $(v); let s = b(); c > s && (c = s, o = v), w(v) } } w(o), $(o), f = [] }, U = function (r, n, t, o, e, a) { if (void 0 === e && (e = 1), void 0 === a && (a = 40), void 0 === o && (o = -1), void 0 === t && (t = !0), !(1 <= e && e <= a && a <= 40) || o < -1 || o > 7) throw "Invalid value"; for (let f = [], i = 236, h = [], v = e; ;) { let c = x(r, v); if (c <= 8 * V(v, n)) break; if (v >= a) throw "Data too long"; v++ } if (t) for (let s = (l = [m.H, m.Q, m.M]).length; s--;)c <= 8 * V(v, l[s]) && (n = l[s]); for (let l = 0; l < r.length; l++) { let g = r[l]; A(g.modeBits, 4, f), A(g.numChars, M(g, v), f); for (let d = 0, p = g.bitData; d < p.length; d++)f.push(p[d]) } if (f.length != c) throw "Assertion error"; let C = 8 * V(v, n); if (f.length > C) throw "Assertion error"; if (A(0, u(4, C - f.length), f), A(0, (8 - f.length % 8) % 8, f), f.length % 8 != 0) throw "Assertion error"; for (; f.length < C;)A(i, 8, f), i ^= 253; for (s = f.length; s--;)h[s >>> 3] |= f[s] << 7 - (7 & s); return N(v, n, h, o) }; return function () { function n(r) { return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(r) } function t(r, n) { for (let t in r = document.createElementNS(s, r), n || {}) r.setAttribute(t, n[t]); return r } let o, f, i, u, v, c, s = "http://www.w3.org/2000/svg", l = "", g = "string" == typeof r ? { msg: r } : r || {}, d = g.pal || ["#000"], p = h(g.dim) || 256, C = [1, 0, 0, 1, c = (c = h(g.pad)) > -1 ? c : 4, c], w = n(w = d[0]) ? w : "#000", b = n(b = d[1]) ? b : 0, A = g.vrb ? 0 : 1; for (L(g.msg || "", m[g.ecl] || m.M, 0 == g.ecb ? 0 : 1, g.mtx), v = e + 2 * c, i = e; i--;)for (u = 0, f = e; f--;)a[i][f] && (A ? (u++, a[i][f - 1] || (l += "M" + f + "," + i + "h" + u + "v1h-" + u + "v-1z", u = 0)) : l += "M" + f + "," + i + "h1v1h-1v-1z"); return o = t("svg", { viewBox: [0, 0, v, v].join(" "), width: p, height: p, fill: w, "shape-rendering": "crispEdges", xmlns: s, version: "1.1" }), b && o.appendChild(t("path", { fill: b, d: "M0,0V" + v + "H" + v + "V0H0Z" })), o.appendChild(t("path", { transform: "matrix(" + C + ")", d: l })), o }()
     };
 
     function svgDimensions(svg) {
-        var w = parseFloat(svg.getAttribute('width'));
-        var h = parseFloat(svg.getAttribute('height'));
-        var vb = svg.getAttribute('viewBox');
+        let w = parseFloat(svg.getAttribute('width'));
+        let h = parseFloat(svg.getAttribute('height'));
+        let vb = svg.getAttribute('viewBox');
         if ((!w || !h) && vb) {
-            var p = vb.trim().split(/[\s,]+/).map(parseFloat);
+            let p = vb.trim().split(/[\s,]+/).map(parseFloat);
             if (p.length === 4) {
                 if (!w) w = p[2];
                 if (!h) h = p[3];
@@ -79,7 +79,7 @@ if (params.has('disable')) {
         }
         if (!w || !h) {
             try {
-                var bb = svg.getBBox();
+                let bb = svg.getBBox();
                 if (!w) w = bb.width;
                 if (!h) h = bb.height;
             } catch (e) { }
@@ -87,30 +87,30 @@ if (params.has('disable')) {
         return { w: w || 300, h: h || 150 };
     };
 
-    var header = null;
-    var footer = null;
-    var main = null;
-    var feedback = null;
-    var pageSections = [];
-    var loggedInUser = {
+    let header = null;
+    let footer = null;
+    let main = null;
+    let feedback = null;
+    let pageSections = [];
+    let loggedInUser = {
         visitor: null,
         email: null,
         full_name: null,
     };
-    var currentSlug = null;
-    var currentSectionTimer = null;
-    var intersecting = new Set();
-    var languages = [];
-    var changeIconInterval = null;
+    let currentSlug = null;
+    let currentSectionTimer = null;
+    let intersecting = new Set();
+    let languages = [];
+    let changeIconInterval = null;
 
-    var headerLoadInterval = setInterval(() => {
+    let headerLoadInterval = setInterval(() => {
         header = document.querySelector('header');
         if (header) {
             clearInterval(headerLoadInterval);
         } else {
             return;
         };
-        var nav = Array.from(header.querySelectorAll('nav')).filter(nav => nav.clientHeight).reverse()[0];
+        let nav = Array.from(header.querySelectorAll('nav')).filter(nav => nav.clientHeight).reverse()[0];
 
         onReady(async () => {
             try {
@@ -119,8 +119,8 @@ if (params.has('disable')) {
                 } catch { };
                 if (loggedInUser.full_name) {
                     document.documentElement.setAttribute('user', loggedInUser.full_name.split(' ')[0]);
-                    var greeting = 'Good evening';
-                    var currentHour = new Date().getHours();
+                    let greeting = 'Good evening';
+                    let currentHour = new Date().getHours();
                     if (new Date().getDay() === 5) {
                         greeting = 'Happy Friday';
                     } else if ((currentHour >= 5) && (currentHour < 12)) {
@@ -140,15 +140,15 @@ if (params.has('disable')) {
                 header.append(nav);
                 if ((window.innerWidth > 1000) && header.querySelector('.ss-site-header-main-links-container .translate a')) {
                     nav.append(header.querySelector('.ss-site-header-main-links-container .translate a'));
-                    for (var translate of header.querySelectorAll('.ss-site-header-main-links-container .translate')) translate.style.display = 'none';
+                    for (let translate of header.querySelectorAll('.ss-site-header-main-links-container .translate')) translate.style.display = 'none';
                 };
                 if (window.innerWidth >= 1200) {
-                    var searchBar = document.createElement('div');
+                    let searchBar = document.createElement('div');
                     searchBar.className = 'searchBar';
                     searchBar.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Search..." id="siteSearchInput" /><button id="siteSearchButton"><i class="fa-solid fa-arrow-right"></i></button>`;
                     header.querySelector('.ss-site-header-main-container').insertBefore(searchBar, header.querySelector('.ss-site-header-main-container').lastElementChild);
                     document.getElementById('siteSearchButton').addEventListener('click', () => {
-                        var query = document.getElementById('siteSearchInput').value;
+                        let query = document.getElementById('siteSearchInput').value;
                         if (query) window.location.href = `/search?s=${encodeURIComponent(query)}`;
                     });
                     document.getElementById('siteSearchInput').addEventListener('keydown', (event) => {
@@ -156,12 +156,12 @@ if (params.has('disable')) {
                     });
                 };
                 if (window.innerWidth <= 1000) {
-                    var nav2 = document.createElement('nav');
+                    let nav2 = document.createElement('nav');
                     nav2.className = 'ss-site-header-main-links-container';
                     nav2.style.display = 'flex';
                     nav2.style.justifyContent = 'center';
-                    for (var schoolLink of Array.from(document.querySelectorAll('#ss-schools-modal a')).sort((a, b) => a.innerText.localeCompare(b.innerText))) {
-                        var newLink = schoolLink.cloneNode(true);
+                    for (let schoolLink of Array.from(document.querySelectorAll('#ss-schools-modal a')).sort((a, b) => a.innerText.localeCompare(b.innerText))) {
+                        let newLink = schoolLink.cloneNode(true);
                         newLink.innerText = newLink.innerText.replace(' School', '').replace(' Avenue', ' Ave');
                         if (newLink.innerText.toLowerCase().includes('shaw')) newLink.classList.add('shaw');
                         if (newLink.innerText.toLowerCase().includes('clear')) newLink.classList.add('clearStream');
@@ -170,9 +170,9 @@ if (params.has('disable')) {
                     };
                     header.querySelector('.ss-site-header-main-container').appendChild(nav2);
                 } else {
-                    for (var nav2 of document.querySelectorAll('.ss-site-header-main-links-container')) {
-                        for (var schoolLink of Array.from(document.querySelectorAll('#ss-schools-modal a')).sort((a, b) => b.innerText.localeCompare(a.innerText))) {
-                            var newLink = schoolLink.cloneNode(true);
+                    for (let nav2 of document.querySelectorAll('.ss-site-header-main-links-container')) {
+                        for (let schoolLink of Array.from(document.querySelectorAll('#ss-schools-modal a')).sort((a, b) => b.innerText.localeCompare(a.innerText))) {
+                            let newLink = schoolLink.cloneNode(true);
                             newLink.innerHTML = `<p>${newLink.innerText.replace(' School', '')}</p>`;
                             if (newLink.innerText.toLowerCase().includes('shaw')) newLink.classList.add('shaw');
                             if (newLink.innerText.toLowerCase().includes('clear')) newLink.classList.add('clearStream');
@@ -181,21 +181,21 @@ if (params.has('disable')) {
                         };
                     };
                 };
-                // var newLink = document.createElement('a');
+                // let newLink = document.createElement('a');
                 // newLink.className = 'ss-site-header-title-container';
                 // newLink.href = '/';
                 // newLink.append(...header.querySelectorAll('.ss-site-header-title-container *'));
                 // header.querySelector('.ss-site-header-title-container').replaceWith(newLink);
-                var breadcrumbs = document.querySelector('main > .row:has(.breadcrumb)');
+                let breadcrumbs = document.querySelector('main > .row:has(.breadcrumb)');
                 if (breadcrumbs) {
-                    var breadcrumbsMargin = (document.body.clientWidth - breadcrumbs.clientWidth) / 2;
+                    let breadcrumbsMargin = (document.body.clientWidth - breadcrumbs.clientWidth) / 2;
                     if (breadcrumbsMargin > 0) {
                         breadcrumbs.style.marginLeft = `-${breadcrumbsMargin}px`;
                         breadcrumbs.style.width = '100vw';
                     };
                 };
-                var fontN = 0;
-                var headerN = 0;
+                let fontN = 0;
+                let headerN = 0;
                 // const fontValues = ['', '1', '2', '3', '4'];
                 const fontValues = ['', '1', '2'];
                 const headerValues = ['', '1', '2', '3', '4', '5'];
@@ -227,7 +227,7 @@ if (params.has('disable')) {
                     };
                 };
                 if (document.querySelector('footer a')) document.querySelector('footer a').href = 'https://maps.app.goo.gl/TPDs2TqNehEzxuMY8';
-                for (var btn of document.querySelectorAll('a.btn')) {
+                for (let btn of document.querySelectorAll('a.btn')) {
                     if (btn.querySelector('.ss-button-icon')) continue;
                     const icon = document.createElement('span');
                     icon.setAttribute('aria-hidden', 'true');
@@ -235,15 +235,15 @@ if (params.has('disable')) {
                     btn.appendChild(icon);
                 };
                 const bodyObserver = new MutationObserver(mutations => {
-                    for (var mutation of mutations) {
-                        for (var node of mutation.addedNodes) {
+                    for (let mutation of mutations) {
+                        for (let node of mutation.addedNodes) {
                             if (node.classList && node.classList.contains('modal-backdrop') && (document.querySelectorAll('.modal-backdrop').length > 1)) node.remove();
                         };
                     };
                 });
                 bodyObserver.observe(document.body, { childList: true });
                 addTask(() => new Promise(resolve => {
-                    var languagesInterval = setInterval(() => {
+                    let languagesInterval = setInterval(() => {
                         if (document.getElementById('GoogleTranslate')?.options.length) {
                             clearInterval(languagesInterval);
                             languages = Array.from(document.getElementById('GoogleTranslate').options).slice(1).map(option => {
@@ -257,7 +257,7 @@ if (params.has('disable')) {
                                 'code': '',
                             });
                             if (languages.find(lang => lang.code === 'nhe')) languages.find(lang => lang.code === 'nhe').language = 'Nahuatl';
-                            for (var lang of languages) {
+                            for (let lang of languages) {
                                 if (lang.language.includes('(') && lang.language.includes(')')) {
                                     const mainLanguage = lang.language.split('(')[0].trim();
                                     const subLanguage = lang.language.split('(')[1].split(')')[0].trim();
@@ -288,13 +288,13 @@ if (params.has('disable')) {
                                 return 0;
                             });
                             document.querySelectorAll('header .translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type').forEach(translateButton => {
-                                var languageSelector = document.createElement('div');
+                                let languageSelector = document.createElement('div');
                                 languageSelector.className = 'languageSelector notranslate';
                                 languageSelector.innerHTML = `<b>Site Language</b><input type="text" id="languageSearch" placeholder="Search languages..." /><div class="languageOptions">${languages.map(lang => `<span data-code="${lang.code}">${lang.language}</span>`).join('')}</div>`;
                                 translateButton.parentElement.appendChild(languageSelector);
                                 translateButton.addEventListener('click', (event) => {
                                     event.preventDefault();
-                                    var languageSelector = translateButton.parentElement.querySelector('.languageSelector');
+                                    let languageSelector = translateButton.parentElement.querySelector('.languageSelector');
                                     languageSelector.classList.toggle('active');
                                     if (languageSelector.classList.contains('active')) setTimeout(() => {
                                         languageSelector.querySelector('#languageSearch').focus();
@@ -304,7 +304,7 @@ if (params.has('disable')) {
                                 });
                                 translateButton.parentElement.querySelector('.languageSelector #languageSearch').addEventListener('input', (event) => {
                                     const searchTerm = event.target.value.toLowerCase();
-                                    for (var option of translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span')) option.style.display = option.innerText.toLowerCase().includes(searchTerm) ? 'block' : 'none';
+                                    for (let option of translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span')) option.style.display = option.innerText.toLowerCase().includes(searchTerm) ? 'block' : 'none';
                                 });
                                 translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span').forEach(option => {
                                     if (option.getAttribute('data-code') === '') option.classList.add('active');
@@ -321,29 +321,29 @@ if (params.has('disable')) {
                                 });
                             });
                             document.addEventListener('click', (event) => {
-                                if (!event.target.closest('.languageSelector') && !event.target.closest('header .translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type')) for (var languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
+                                if (!event.target.closest('.languageSelector') && !event.target.closest('header .translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type')) for (let languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
                             });
                             document.addEventListener('keydown', (event) => {
-                                if (event.key === 'Escape') for (var languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
+                                if (event.key === 'Escape') for (let languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
                             });
                             const htmlObserver = new MutationObserver(mutations => {
-                                for (var mutation of mutations) {
+                                for (let mutation of mutations) {
                                     if (mutation.attributeName !== 'lang') continue;
-                                    var langCode = document.documentElement.getAttribute('lang');
-                                    var langName = languages.find(lang => lang.code === langCode)?.language || langCode;
+                                    let langCode = document.documentElement.getAttribute('lang');
+                                    let langName = languages.find(lang => lang.code === langCode)?.language || langCode;
                                     console.log(`Language changing to ${langName} (${langCode})`);
-                                    for (var el of document.querySelectorAll('[lang]:not(html), a:not([tabindex]), img[alt]')) el.style.display = '';
+                                    for (let el of document.querySelectorAll('[lang]:not(html), a:not([tabindex]), img[alt]')) el.style.display = '';
                                     if ((langCode !== 'auto') && (langCode !== 'en') && (langCode !== '')) {
-                                        for (var section of document.querySelectorAll('section')) {
-                                            var totalFound = [];
-                                            for (var el of section.querySelectorAll('[lang]:not(html)')) {
+                                        for (let section of document.querySelectorAll('section')) {
+                                            let totalFound = [];
+                                            for (let el of section.querySelectorAll('[lang]:not(html)')) {
                                                 if (el.getAttribute('lang') === langCode) {
                                                     el.style.display = 'none';
                                                 } else {
                                                     totalFound.push(el);
                                                 };
                                             };
-                                            for (var el of section.querySelectorAll('a:not([tabindex])')) {
+                                            for (let el of section.querySelectorAll('a:not([tabindex])')) {
                                                 if (!languages.map(lang => lang.language).some(lang => el.innerText.toLowerCase().includes(lang.toLowerCase()))) continue;
                                                 if (!el.innerText.toLowerCase().includes(langName.toLowerCase())) {
                                                     el.style.display = 'none';
@@ -351,7 +351,7 @@ if (params.has('disable')) {
                                                     totalFound.push(el);
                                                 };
                                             };
-                                            for (var el of section.querySelectorAll('img[alt]')) {
+                                            for (let el of section.querySelectorAll('img[alt]')) {
                                                 if (!languages.map(lang => lang.language).some(lang => el.alt.toLowerCase().includes(lang.toLowerCase()))) continue;
                                                 if (!el.alt.toLowerCase().includes(langName.toLowerCase())) {
                                                     el.style.display = 'none';
@@ -359,29 +359,29 @@ if (params.has('disable')) {
                                                     totalFound.push(el);
                                                 };
                                             };
-                                            if (totalFound.length === 0) for (var el of section.querySelectorAll('[lang]:not(html), a:not([tabindex]), img[alt]')) el.style.display = '';
+                                            if (totalFound.length === 0) for (let el of section.querySelectorAll('[lang]:not(html), a:not([tabindex]), img[alt]')) el.style.display = '';
                                         };
                                     };
-                                    for (var translateButton of header.querySelectorAll('.translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type')) {
-                                        for (var option of translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span')) option.classList.toggle('active', (option.getAttribute('data-code') === langCode) || ((option.getAttribute('data-code') === '') && (langCode === 'en')));
+                                    for (let translateButton of header.querySelectorAll('.translate > a, header > nav:not(.ss-site-header-main-nav-mobile) > a:last-of-type')) {
+                                        for (let option of translateButton.parentElement.querySelectorAll('.languageSelector .languageOptions span')) option.classList.toggle('active', (option.getAttribute('data-code') === langCode) || ((option.getAttribute('data-code') === '') && (langCode === 'en')));
                                     };
                                     console.log(`Language changed to ${langName} (${langCode})`);
                                 };
                             });
                             htmlObserver.observe(document.documentElement, { attributes: true });
                             if ((!document.documentElement.hasAttribute('lang') || (document.documentElement.getAttribute('lang') === 'en')) && !localStorage.getItem('firstPageLoad')) {
-                                var translationOffer = document.createElement('div');
+                                let translationOffer = document.createElement('div');
                                 translationOffer.className = 'translationOffer';
-                                var translationOfferTitle = document.createElement('h2');
+                                let translationOfferTitle = document.createElement('h2');
                                 translationOfferTitle.innerText = 'Translate Our Website';
                                 translationOffer.appendChild(translationOfferTitle);
-                                var translationOfferText = document.createElement('p');
+                                let translationOfferText = document.createElement('p');
                                 translationOfferText.innerText = 'Valley Stream District 30 is committed to providing a website that is accessible to all. Our website is available to be translated into your preferred language.';
                                 translationOffer.appendChild(translationOfferText);
-                                var translationOfferLanguages = document.createElement('div');
+                                let translationOfferLanguages = document.createElement('div');
                                 translationOfferLanguages.className = 'languages';
                                 for (let language of languages.slice(0, 9)) {
-                                    var languageButton = document.createElement('button');
+                                    let languageButton = document.createElement('button');
                                     languageButton.className = 'btn btn-default';
                                     languageButton.innerHTML = `${language.language}<span aria-hidden="true" class="ss-button-icon"></span>`;
                                     languageButton.addEventListener('click', () => {
@@ -392,7 +392,7 @@ if (params.has('disable')) {
                                     });
                                     translationOfferLanguages.appendChild(languageButton);
                                 };
-                                var languageButton = document.createElement('button');
+                                let languageButton = document.createElement('button');
                                 languageButton.className = 'btn btn-default';
                                 languageButton.innerHTML = 'More Languages<span aria-hidden="true" class="ss-button-icon"></span>';
                                 languageButton.addEventListener('click', () => {
@@ -407,7 +407,7 @@ if (params.has('disable')) {
                                 });
                                 translationOfferLanguages.appendChild(languageButton);
                                 translationOffer.appendChild(translationOfferLanguages);
-                                var translationOfferClose = document.createElement('i');
+                                let translationOfferClose = document.createElement('i');
                                 translationOfferClose.className = 'translationOfferClose fa-regular fa-close';
                                 translationOfferClose.addEventListener('click', () => {
                                     translationOffer.remove();
@@ -428,7 +428,7 @@ if (params.has('disable')) {
                     }, 500);
                 }));
                 pageSections = Array.from(document.querySelectorAll('.pageSection[id], section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column h3):not(:has(.stack_off)), section:not(.ss-hidden-component).ss-has-bg:has(.ss-component-content .ss-one-column .ss-component-column span):not(:has(.stack_off)), section:not(.ss-hidden-component):has(.ss-component-header-title)')).filter(section => section.classList.contains('pageSection') || (section.querySelector('.ss-component-header-title') ? true : (section.querySelector('.ss-component-content .ss-one-column .ss-component-column').children.length === 1))).map(section => {
-                    var title = section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span, .ss-component-header-title')?.innerText || section.innerText;
+                    let title = section.querySelector('.ss-component-content .ss-one-column .ss-component-column h3, .ss-component-content .ss-one-column .ss-component-column span, .ss-component-header-title')?.innerText || section.innerText;
                     return {
                         'element': section,
                         'id': section.id,
@@ -436,20 +436,20 @@ if (params.has('disable')) {
                         'slug': title.toLowerCase().replaceAll('&', 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
                     };
                 }).filter(section => (section.title.trim() !== '') && !section.title.toLowerCase().includes('customelement'));
-                for (var pageSection of pageSections) pageSection.element.classList.add('pageSection');
+                for (let pageSection of pageSections) pageSection.element.classList.add('pageSection');
                 if (pageSections.length > 1) {
-                    var pageSectionsLink = document.createElement('a');
+                    let pageSectionsLink = document.createElement('a');
                     pageSectionsLink.className = 'pageSectionsToggle';
                     pageSectionsLink.setAttribute('role', 'button');
                     pageSectionsLink.setAttribute('tabindex', '0');
-                    var pageSectionsIcon = document.createElement('i');
+                    let pageSectionsIcon = document.createElement('i');
                     pageSectionsIcon.classList = 'fa-solid fa-list';
                     pageSectionsLink.appendChild(pageSectionsIcon);
-                    var pageSectionsDiv = document.createElement('div');
+                    let pageSectionsDiv = document.createElement('div');
                     pageSectionsDiv.className = 'pageSections';
                     pageSectionsDiv.innerHTML = `<b>On This Page</b><ul class="pageSectionsList"></ul>`;
-                    for (var pageSection of pageSections) {
-                        var pageSectionLi = document.createElement('li');
+                    for (let pageSection of pageSections) {
+                        let pageSectionLi = document.createElement('li');
                         let pageSectionLink = document.createElement('a');
                         pageSectionLink.href = `#${pageSection.slug}`;
                         pageSectionLink.innerText = pageSection.title;
@@ -461,14 +461,14 @@ if (params.has('disable')) {
                         if (pageSection.element.classList.contains('ss-has-bg') && !pageSection.element.querySelector('.ss-component-header-title')) pageSection.element.querySelectorAll('.ss-editor-content *:not(.forceStyle) span')[pageSection.element.querySelectorAll('.ss-editor-content *:not(.forceStyle) span').length - 1].outerHTML = `<a href="#${pageSection.slug}">${pageSection.title}</a>`;
                     };
                     pageSectionsLink.appendChild(pageSectionsDiv);
-                    var qrCodeLink = document.createElement('a');
+                    let qrCodeLink = document.createElement('a');
                     qrCodeLink.className = 'qrCodeToggle';
                     qrCodeLink.setAttribute('role', 'button');
                     qrCodeLink.setAttribute('tabindex', '0');
-                    var qrCodeIcon = document.createElement('i');
+                    let qrCodeIcon = document.createElement('i');
                     qrCodeIcon.classList = 'fa-solid fa-qrcode';
                     qrCodeLink.appendChild(qrCodeIcon);
-                    var qrCodeDiv = document.createElement('div');
+                    let qrCodeDiv = document.createElement('div');
                     qrCodeDiv.className = 'qrCode';
                     qrCodeDiv.innerHTML = '';
                     qrCodeDiv.appendChild(QRCode({
@@ -476,11 +476,11 @@ if (params.has('disable')) {
                         pad: 0,
                     }));
                     qrCodeLink.appendChild(qrCodeDiv);
-                    var copyPageLinkLink = document.createElement('a');
+                    let copyPageLinkLink = document.createElement('a');
                     copyPageLinkLink.className = 'copyPageLinkToggle';
                     copyPageLinkLink.setAttribute('role', 'button');
                     copyPageLinkLink.setAttribute('tabindex', '0');
-                    var copyPageLinkIcon = document.createElement('i');
+                    let copyPageLinkIcon = document.createElement('i');
                     copyPageLinkIcon.classList = 'fa-solid fa-link';
                     copyPageLinkLink.appendChild(copyPageLinkIcon);
                     nav.prepend(copyPageLinkLink);
@@ -489,7 +489,7 @@ if (params.has('disable')) {
                     pageSectionsLink.addEventListener('click', (event) => {
                         if (event.target.closest('.pageSectionsList a')) return;
                         pageSectionsDiv.classList.toggle('active');
-                        for (var languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
+                        for (let languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
                         qrCodeDiv.classList.remove('active');
                     });
                     pageSectionsLink.addEventListener('keydown', (event) => {
@@ -506,7 +506,7 @@ if (params.has('disable')) {
                             pad: 0,
                         }));
                         qrCodeDiv.classList.toggle('active');
-                        for (var languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
+                        for (let languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
                         pageSectionsDiv.classList.remove('active');
                     });
                     qrCodeLink.addEventListener('keydown', (event) => {
@@ -524,7 +524,7 @@ if (params.has('disable')) {
                         if (event.target.closest('.qrCodeList a')) return;
                         await navigator.clipboard.writeText(document.location);
                         alert(`Copied section link to clipboard: ${document.location}`);
-                        for (var languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
+                        for (let languageSelector of document.querySelectorAll('.languageSelector')) languageSelector.classList.remove('active');
                         pageSectionsDiv.classList.remove('active');
                     });
                     copyPageLinkLink.addEventListener('keydown', async (event) => {
@@ -539,27 +539,27 @@ if (params.has('disable')) {
                         if (!event.target.closest('.qrCode') && !event.target.closest('.qrCodeToggle')) qrCodeDiv.classList.remove('active');
                     });
                     qrCodeDiv.addEventListener('click', async () => {
-                        var svg = qrCodeDiv.querySelector('svg');
+                        let svg = qrCodeDiv.querySelector('svg');
                         if (svg) {
-                            var dim = svgDimensions(svg);
-                            var targetW = parseFloat('100') || dim.w;
-                            var targetH = Math.round(targetW * dim.h / dim.w);
+                            let dim = svgDimensions(svg);
+                            let targetW = parseFloat('100') || dim.w;
+                            let targetH = Math.round(targetW * dim.h / dim.w);
                             if (targetW < 1 || targetH < 1 || targetW > 12000 || targetH > 12000) return;
-                            var blob = new Blob([svg.outerHTML], { type: 'image/svg+xml;charset=utf-8' });
-                            var url = URL.createObjectURL(blob);
+                            let blob = new Blob([svg.outerHTML], { type: 'image/svg+xml;charset=utf-8' });
+                            let url = URL.createObjectURL(blob);
                             await navigator.clipboard.writeText(svg.outerHTML);
                             window.open(url, '_blank');
                             alert('Copied section QR code to clipboard.');
                         };
                     });
                 };
-                for (var section of document.querySelectorAll('section:has(.ss-component-header-title)')) {
-                    var pageRedBar = section.querySelector('.ss-component-header-title');
+                for (let section of document.querySelectorAll('section:has(.ss-component-header-title)')) {
+                    let pageRedBar = section.querySelector('.ss-component-header-title');
                     // console.log(section, pageRedBar, pageRedBar.innerText, pageRedBar.innerText.includes('customElement.'))
                     if (pageRedBar.innerText.includes('customElement.')) {
                         section.classList.add('customElement');
-                        for (var part of pageRedBar.innerText.split('customElement.')[1].split('.')) section.classList.add(part);
-                        var customElement = pageRedBar.innerText.split('customElement.')[1].split('.')[0];
+                        for (let part of pageRedBar.innerText.split('customElement.')[1].split('.')) section.classList.add(part);
+                        let customElement = pageRedBar.innerText.split('customElement.')[1].split('.')[0];
                         section.setAttribute('customElement', customElement);
                         section.querySelector('.ss-component-header').remove();
                     };
@@ -567,7 +567,7 @@ if (params.has('disable')) {
                 document.querySelectorAll('section.customElement[customelement]').forEach(section => {
                     switch (section.getAttribute('customelement')) {
                         case 'staff':
-                            for (var wrapper of section.querySelectorAll('.ss-im-icon-wrapper-inner')) {
+                            for (let wrapper of section.querySelectorAll('.ss-im-icon-wrapper-inner')) {
                                 const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
                                 const emailMatch = wrapper.innerText.match(emailPattern);
                                 const email = emailMatch ? emailMatch[0] : null;
@@ -592,7 +592,7 @@ if (params.has('disable')) {
                             };
                             break;
                         case 'spotlight':
-                            var spotlightWrapper = document.createElement('div');
+                            let spotlightWrapper = document.createElement('div');
                             spotlightWrapper.className = 'spotlight-wrapper';
                             if (window.innerWidth > 1000) {
                                 section.parentElement.insertBefore(spotlightWrapper, section);
@@ -600,22 +600,22 @@ if (params.has('disable')) {
                             } else {
                                 document.querySelector('.stack_sort_area').insertBefore(spotlightWrapper, document.querySelector('.stack_sort_area').children[2]);
                             };
-                            var spotlightSidebar = document.createElement('div');
+                            let spotlightSidebar = document.createElement('div');
                             spotlightSidebar.className = 'spotlight-sidebar';
                             spotlightWrapper.appendChild(spotlightSidebar);
                             if (window.innerWidth > 1000) spotlightSidebar.innerHTML = `<div class="spotlight-info"><i class="fa-solid fa-chevron-left"></i><h3>${section.querySelector('.carousel-inner > .item.active .spotlight-slide-title').innerText}</h3><p>${section.querySelector('.carousel-inner > .item.active .spotlight-text-cta-container').innerText}</p></div>`;
                             addTask(() => new Promise(resolve => {
-                                var homepageEventsInterval = setInterval(() => {
+                                let homepageEventsInterval = setInterval(() => {
                                     if (document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event').length) {
                                         clearInterval(homepageEventsInterval);
-                                        var eventGroups = [];
-                                        for (var event of document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event')) {
-                                            var eventDiv = event.shadowRoot.querySelector('.calendar-event-container');
-                                            var eventDate = eventDiv.querySelector('.event-date-container').innerText.replaceAll('\n', ' ').trim();
-                                            var eventTitleDiv = eventDiv.querySelector('.event-title a');
-                                            var eventLink = eventTitleDiv.getAttribute('href');
-                                            var eventTitle = eventTitleDiv.innerText.trim();
-                                            var eventTime = eventDiv.querySelector('.event-time').innerText.trim();
+                                        let eventGroups = [];
+                                        for (let event of document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event')) {
+                                            let eventDiv = event.shadowRoot.querySelector('.calendar-event-container');
+                                            let eventDate = eventDiv.querySelector('.event-date-container').innerText.replaceAll('\n', ' ').trim();
+                                            let eventTitleDiv = eventDiv.querySelector('.event-title a');
+                                            let eventLink = eventTitleDiv.getAttribute('href');
+                                            let eventTitle = eventTitleDiv.innerText.trim();
+                                            let eventTime = eventDiv.querySelector('.event-time').innerText.trim();
                                             if (!eventGroups.find(eventGroup => eventGroup.name === eventDate) || !eventGroups.find(eventGroup => eventGroup.name === eventDate).events.find(event => (event.link === eventLink))) {
                                                 console.log(eventDiv.outerHTML, eventDate, eventTitleDiv.outerHTML, eventLink, eventTitle, eventTime)
                                                 if (!eventGroups.find(eventGroup => eventGroup.name === eventDate)) eventGroups.push({
@@ -631,11 +631,11 @@ if (params.has('disable')) {
                                             };
                                         };
                                         if (eventGroups.length) {
-                                            var eventsContainer = document.createElement('div');
+                                            let eventsContainer = document.createElement('div');
                                             eventsContainer.className = 'events-container';
-                                            var now = new Date();
-                                            var today = now.toLocaleDateString(undefined, { month: 'short', day: '2-digit' });
-                                            var tomorrow = (new Date(now.getTime() + 24 * 60 * 60 * 1000)).toLocaleDateString(undefined, { month: 'short', day: '2-digit' });
+                                            let now = new Date();
+                                            let today = now.toLocaleDateString(undefined, { month: 'short', day: '2-digit' });
+                                            let tomorrow = (new Date(now.getTime() + 24 * 60 * 60 * 1000)).toLocaleDateString(undefined, { month: 'short', day: '2-digit' });
                                             const months = {
                                                 Jan: 'January',
                                                 Feb: 'February',
@@ -651,9 +651,9 @@ if (params.has('disable')) {
                                                 Dec: 'December',
                                             };
                                             if (window.innerWidth <= 1000) eventGroups = eventGroups.slice(0, 1);
-                                            for (var eventGroupN in eventGroups) {
-                                                var eventGroup = eventGroups[eventGroupN];
-                                                var eventsTitle = Number(eventGroupN) ? document.createElement('p') : document.createElement('h2');
+                                            for (let eventGroupN in eventGroups) {
+                                                let eventGroup = eventGroups[eventGroupN];
+                                                let eventsTitle = Number(eventGroupN) ? document.createElement('p') : document.createElement('h2');
                                                 if (eventGroup.name.endsWith(today)) {
                                                     eventsTitle.innerText = `Today's Events`;
                                                     eventsContainer.append(eventsTitle);
@@ -661,13 +661,13 @@ if (params.has('disable')) {
                                                     eventsTitle.innerText = 'Tomorrow';
                                                     eventsContainer.append(eventsTitle);
                                                 } else {
-                                                    var [day, mon, date] = eventGroup.name.split(' ');
+                                                    let [day, mon, date] = eventGroup.name.split(' ');
                                                     console.log(eventGroup, day, mon, date);
                                                     eventsTitle.innerText = `${day.charAt(0).toUpperCase() + day.slice(1).toLowerCase()}, ${months[mon]} ${parseInt(date, 10) + (["th", "st", "nd", "rd"][((["th", "st", "nd", "rd"] % 100) - 20) % 10] || ["th", "st", "nd", "rd"][(parseInt(date, 10) % 100)] || ["th", "st", "nd", "rd"][0])}`;
                                                     eventsContainer.append(eventsTitle);
                                                 };
-                                                for (var event of eventGroup.events) {
-                                                    var eventLink = document.createElement('a');
+                                                for (let event of eventGroup.events) {
+                                                    let eventLink = document.createElement('a');
                                                     eventLink.href = event.link;
                                                     eventLink.classList.add('event');
                                                     eventLink.innerHTML = `<div class="event-date">${event.date.replace(' ', '<br>')}</div><div class="event-info"><b>${event.title}</b><p>${event.time}</p></div>`;
@@ -683,7 +683,7 @@ if (params.has('disable')) {
                             }));
                             if (window.innerWidth <= 1000) break;
                             const carouselObserver = new MutationObserver(mutations => {
-                                for (var mutation of mutations) {
+                                for (let mutation of mutations) {
                                     if (mutation.attributeName !== 'class') continue;
                                     if (mutation.target.classList.contains('item') && mutation.target.classList.contains('active') && !mutation.target.classList.contains('left')) {
                                         document.querySelector('.spotlight-sidebar .spotlight-info h3').innerText = mutation.target.querySelector('.spotlight-slide-title').innerText.replaceAll('\n', '');
@@ -691,7 +691,7 @@ if (params.has('disable')) {
                                     };
                                 };
                             });
-                            for (var item of section.querySelectorAll('.carousel-inner > .item')) carouselObserver.observe(item, { attributeFilter: ['class'] });
+                            for (let item of section.querySelectorAll('.carousel-inner > .item')) carouselObserver.observe(item, { attributeFilter: ['class'] });
                             document.addEventListener('keydown', e => {
                                 if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
                                 switch (e.key) {
@@ -706,16 +706,16 @@ if (params.has('disable')) {
                             break;
                         case 'about':
                             // section.querySelector('.ss-column-one').innerHTML += '<p>&nbsp;</p>';
-                            // var sectionsOnPageDiv = document.createElement('div');
+                            // let sectionsOnPageDiv = document.createElement('div');
                             // sectionsOnPageDiv.className = 'sectionsOnPage';
                             // sectionsOnPageDiv.innerHTML = `<b>On This Page</b><ul class="sectionsOnPageList"></ul>`;
                             // section.querySelector('.ss-column-one').append(sectionsOnPageDiv);
-                            // for (var sectionInfo of pageSections.slice(1)) sectionsOnPageDiv.querySelector('ul').innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
-                            for (var ul of section.querySelectorAll('.ss-column-one div > ul')) {
-                                var lis = ul.querySelectorAll('li');
-                                var removeLi = Array.from(lis).find(li => li.innerText.toLowerCase().includes('page sections here'));
+                            // for (let sectionInfo of pageSections.slice(1)) sectionsOnPageDiv.querySelector('ul').innerHTML += `<li><a href="#${sectionInfo.id}">${sectionInfo.title}</a></li>`;
+                            for (let ul of section.querySelectorAll('.ss-column-one div > ul')) {
+                                let lis = ul.querySelectorAll('li');
+                                let removeLi = Array.from(lis).find(li => li.innerText.toLowerCase().includes('page sections here'));
                                 if (!removeLi) continue;
-                                for (var sectionInfo of pageSections.slice(1).reverse()) {
+                                for (let sectionInfo of pageSections.slice(1).reverse()) {
                                     let newLi = document.createElement('li');
                                     newLi.innerHTML = `<a href="#${sectionInfo.slug}">${sectionInfo.title}</a>`;
                                     removeLi.parentNode.insertBefore(newLi, removeLi.nextSibling);
@@ -729,7 +729,7 @@ if (params.has('disable')) {
                                 if (aboutImage && (window.innerWidth > 1000) && (aboutImage.style.maxWidth === 'min(750px, 100%)') && (aboutImage.style.borderRadius === '10px')) {
                                     aboutImage.classList.add('aboutImage');
                                     // aboutImage.style.transition = 'width .25s';
-                                    // var settingAboutImageSize = false;
+                                    // let settingAboutImageSize = false;
                                     // function setAboutImageSize() {
                                     //     if (settingAboutImageSize) return;
                                     //     settingAboutImageSize = true;
@@ -751,7 +751,7 @@ if (params.has('disable')) {
                             if (section.querySelector('.ss-editor-content').innerText.toLowerCase().includes('page sections here')) {
                                 section.querySelector('.ss-editor-content').innerHTML = section.querySelector('.ss-editor-content').innerHTML.replace(/page sections here/i, '');
                                 if (section.querySelector('.ss-editor-content').innerText.trim() === '') section.querySelector('.ss-editor-content').remove();
-                                for (var container of section.querySelectorAll('.stack-link-container:has(a)')) {
+                                for (let container of section.querySelectorAll('.stack-link-container:has(a)')) {
                                     let link = container.querySelector('a');
                                     if (pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase())) link.href = `#${pageSections.find(pageSection => pageSection.title.toLowerCase() === link.innerText.toLowerCase()).slug}`;
                                     link.addEventListener('click', () => {
@@ -763,8 +763,8 @@ if (params.has('disable')) {
                                     });
                                 };
                             } else {
-                                var linksWithSubLinks = {};
-                                for (var container of Array.from(section.querySelectorAll('.stack-link-container:has(a)')).filter(link => link.innerText.includes('->'))) {
+                                let linksWithSubLinks = {};
+                                for (let container of Array.from(section.querySelectorAll('.stack-link-container:has(a)')).filter(link => link.innerText.includes('->'))) {
                                     const originTitle = container.innerText.split('->')[0].trim();
                                     if (linksWithSubLinks[originTitle]) {
                                         container.querySelector('a').innerText = container.innerText.split('->')[1].trim();
@@ -790,26 +790,26 @@ if (params.has('disable')) {
                                         };
                                         const subLinksPopup = document.createElement('div');
                                         subLinksPopup.classList = 'subLinksPopup';
-                                        var newMainNode = linksWithSubLinkItem.element.cloneNode(true);
+                                        let newMainNode = linksWithSubLinkItem.element.cloneNode(true);
                                         newMainNode.querySelector('a').innerText = linksWithSubLinkItem.title;
                                         subLinksPopup.appendChild(newMainNode);
-                                        for (var subLink of linksWithSubLinkItem.subLinks) subLinksPopup.appendChild(subLink);
+                                        for (let subLink of linksWithSubLinkItem.subLinks) subLinksPopup.appendChild(subLink);
                                         linksWithSubLinkItem.element.appendChild(subLinksPopup);
                                     });
-                                    for (var subLink of linksWithSubLinkItem.subLinks) subLink.remove();
+                                    for (let subLink of linksWithSubLinkItem.subLinks) subLink.remove();
                                 };
                                 document.addEventListener('click', (event) => {
                                     if (!event.target.closest('.subLinksPopup') && !event.target.closest('.hasSubLinks')) {
-                                        for (var subLinksPopup of document.querySelectorAll('.subLinksPopup')) subLinksPopup.remove();
+                                        for (let subLinksPopup of document.querySelectorAll('.subLinksPopup')) subLinksPopup.remove();
                                     };
                                 });
                             };
                             break;
                         case 'tabbedElements':
-                            var tabs = section.querySelectorAll('.ss-tab');
-                            var allTabsTargetElements = [];
-                            for (var tab of tabs) {
-                                var targetElements = [];
+                            let tabs = section.querySelectorAll('.ss-tab');
+                            let allTabsTargetElements = [];
+                            for (let tab of tabs) {
+                                let targetElements = [];
                                 try {
                                     targetElements = document.querySelectorAll(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
                                 } catch (e) {
@@ -818,7 +818,7 @@ if (params.has('disable')) {
                                 // console.log(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'), targetElements)
                                 allTabsTargetElements = allTabsTargetElements.concat(Array.from(targetElements));
                                 if (targetElements.length) document.getElementById(tab.getAttribute('aria-controls')).style.display = 'none';
-                                for (var targetElement of targetElements) {
+                                for (let targetElement of targetElements) {
                                     if (targetElement.classList.contains('customElement')) {
                                         if (!targetElement.classList.contains('ss-has-bg')) targetElement.classList.remove('break-out');
                                     } else {
@@ -826,21 +826,21 @@ if (params.has('disable')) {
                                     };
                                 };
                                 tab.addEventListener('click', (event) => {
-                                    for (var el of allTabsTargetElements) {
+                                    for (let el of allTabsTargetElements) {
                                         if (el.classList.contains('customElement')) {
                                             el.classList.remove('active');
                                         } else {
                                             el.style.display = 'none';
                                         };
                                     };
-                                    var targetElements = [];
+                                    let targetElements = [];
                                     try {
                                         targetElements = document.querySelectorAll(('.' + document.getElementById(event.target.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
                                     } catch (e) {
                                         console.error(e);
                                     };
                                     // console.log('to', targetElements)
-                                    for (var targetElement of targetElements) {
+                                    for (let targetElement of targetElements) {
                                         if (targetElement.classList.contains('customElement')) {
                                             targetElement.classList.add('active');
                                         } else {
@@ -863,10 +863,10 @@ if (params.has('disable')) {
                     document.querySelector('header .ss-site-header-main-links-container > a.forest').style.marginLeft = `-${Math.min(window.scrollY, 50)}px`;
                     document.querySelector('header .ss-site-header-main-links-container > a.shaw').style.marginTop = `-${Math.min(window.scrollY, 45)}px`;
                 });
-                var feedbackLink = document.querySelector('footer .school-footer-col:last-of-type nav:last-of-type ul:last-of-type li:last-of-type');
+                let feedbackLink = document.querySelector('footer .school-footer-col:last-of-type nav:last-of-type ul:last-of-type li:last-of-type');
                 if (feedbackLink) {
                     feedbackLink.parentElement.appendChild(feedbackLink.cloneNode(true));
-                    var signInLink = document.querySelector('footer .school-footer-col:last-of-type nav:last-of-type ul:last-of-type li:last-of-type');
+                    let signInLink = document.querySelector('footer .school-footer-col:last-of-type nav:last-of-type ul:last-of-type li:last-of-type');
                     try {
                         if (document.querySelector('.adminBar')) {
                             signInLink.querySelector('a').innerText = 'Log Out';
@@ -937,7 +937,7 @@ if (params.has('disable')) {
                         if (feedback && feedback.querySelector('form') && !feedback.querySelector('form').contains(e.target)) feedback.classList.remove('active');
                     });
                 };
-                var adminBarInner = document.querySelector('.adminBar') && document.querySelector('.adminBar').lastElementChild;
+                let adminBarInner = document.querySelector('.adminBar') && document.querySelector('.adminBar').lastElementChild;
                 if (loggedInUser.full_name) adminBarInner?.setAttribute('logged-in-as', loggedInUser.full_name);
                 if (adminBarInner) {
                     adminBarInner.innerHTML += `<a aria-label="Disable Mods" title="Disable Mods" href="${window.location.pathname}?disable=true" class="admin-btn1 col-sm-3">
@@ -963,11 +963,11 @@ if (params.has('disable')) {
                 };
                 for (let link of document.querySelectorAll('a[href]')) {
                     try {
-                        var url = new URL(link.getAttribute('href'));
+                        let url = new URL(link.getAttribute('href'));
                         if ((url.hostname.split('.')[url.hostname.split('.').length - 1] === window.location.hostname.split('.')[window.location.hostname.split('.').length - 1]) && (url.hostname.split('.')[url.hostname.split('.').length - 2] === window.location.hostname.split('.')[window.location.hostname.split('.').length - 2])) link.setAttribute('href', url.origin + '/' + url.pathname.slice(1).replaceAll('/', '-') + url.search + url.hash);
                     } catch (e) { };
                     if (link.getAttribute('href') === '') {
-                        var newLink = document.createElement('div');
+                        let newLink = document.createElement('div');
                         newLink.className = link.className;
                         newLink.innerHTML = link.innerHTML;
                         link.replaceWith(newLink);
@@ -1007,7 +1007,7 @@ if (params.has('disable')) {
                 document.querySelectorAll('i:not(:empty)').forEach(icon => {
                     if (icon.innerHTML === '&nbsp;') icon.innerHTML = '';
                 });
-                var accessibilityIconInterval = setInterval(() => {
+                let accessibilityIconInterval = setInterval(() => {
                     if (!document.querySelector('#userwayAccessibilityIcon')) return;
                     clearInterval(accessibilityIconInterval);
                     document.querySelector('#userwayAccessibilityIcon').style.background = 'var(--blue)';
@@ -1054,7 +1054,7 @@ if (params.has('disable')) {
                 };
             } else {
                 if (document.querySelector('.customElement.about img')) {
-                    var hoverImageWindow = document.createElement('img');
+                    let hoverImageWindow = document.createElement('img');
                     hoverImageWindow.classList = 'hoverImageWindow';
                     hoverImageWindow.style = 'position: fixed; bottom: 1vw; left: 1vw; width: auto; z-index: 10; opacity: 0; border-radius: 10px; pointer-events: none; transition: 0.25s; max-height: 60vh; max-width: 50vw; height: min(100%, 350px);';
                     document.body.appendChild(hoverImageWindow);
@@ -1062,7 +1062,7 @@ if (params.has('disable')) {
                 for (let image of document.querySelectorAll('.customElement.about img:not(.noZoom)')) {
                     image.style.cursor = 'pointer';
                     image.addEventListener('click', () => {
-                        var hoverImageWindow = document.querySelector('.hoverImageWindow');
+                        let hoverImageWindow = document.querySelector('.hoverImageWindow');
                         if (hoverImageWindow.style.opacity == 1) {
                             window.open(image.src);
                         } else {
@@ -1130,7 +1130,7 @@ if (params.has('disable')) {
                 };
                 clearTimeout(currentSectionTimer);
                 currentSectionTimer = setTimeout(() => {
-                    var topmost = [...intersecting].reduce((best, { element }) => {
+                    let topmost = [...intersecting].reduce((best, { element }) => {
                         const rect = element.getBoundingClientRect();
                         return !best || (rect.top < best.top) ? { element, top: rect.top } : best;
                     }, null).element;
@@ -1221,7 +1221,7 @@ if (params.has('disable')) {
                 const firstSection = document.querySelector('.stack_sort_area')?.children[1];
                 const secondSection = document.querySelector('.stack_sort_area')?.children[2];
                 if ((window.innerWidth >= 1400) && firstSection && secondSection && firstSection.classList.contains('ss-icon-matrix') && secondSection.querySelector('.ss-three-column')) {
-                    var schoolSpotlightContainer = document.createElement('div');
+                    let schoolSpotlightContainer = document.createElement('div');
                     schoolSpotlightContainer.className = 'school-spotlight-container';
                     schoolSpotlightContainer.appendChild(firstSection);
                     schoolSpotlightContainer.appendChild(secondSection);
@@ -1553,7 +1553,7 @@ if (params.has('disable')) {
                 const firstSection = document.querySelector('.stack_sort_area')?.children[1];
                 const secondSection = document.querySelector('.stack_sort_area')?.children[2];
                 if ((window.innerWidth >= 1400) && firstSection && secondSection && firstSection.querySelector('.spotlight-container') && secondSection.classList.contains('ss-icon-matrix')) {
-                    var schoolSpotlightContainer = document.createElement('div');
+                    let schoolSpotlightContainer = document.createElement('div');
                     schoolSpotlightContainer.className = 'school-spotlight-container';
                     schoolSpotlightContainer.appendChild(firstSection);
                     schoolSpotlightContainer.appendChild(secondSection);
@@ -1579,7 +1579,7 @@ if (params.has('disable')) {
                         map.setAttribute('loading', 'lazy');
                         map.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
                         firstSection.appendChild(map);
-                        var streetViewID = null;
+                        let streetViewID = null;
                         if (pageTitle.includes('clear stream avenue')) streetViewID = '!4v1786576831474!6m8!1m7!1soLFBMvq7_zj11paaPj6HJw!2m2!1d40.66777388399026!2d-73.71761766698346!3f352.8078211522897!4f1.748193650218127!5f0.7820865974627469';
                         if (pageTitle.includes('forest road')) streetViewID = '!4v1786576719675!6m8!1m7!1sCeW_XH_O1xqj4YSuWymCvg!2m2!1d40.65697563021924!2d-73.71545126017608!3f254.80563004648556!4f-0.6121006860575875!5f0.7820865974627469';
                         if (pageTitle.includes('shaw avenue')) streetViewID = '!4v1786576586537!6m8!1m7!1sWd9CkS4f3TMQEescM1srww!2m2!1d40.67196214185895!2d-73.71626139810955!3f71.27697467627694!4f-5.525659656377201!5f0.7820865974627469';
@@ -1627,7 +1627,7 @@ if (params.has('disable')) {
                 //     }).forEach(slide => slide.remove());
                 //     // re-index slides
                 //     const slidesLeft = Array.from(document.querySelectorAll('section.ss-calendar-events .slick-slide'));
-                //     var slideIndex = -4;
+                //     let slideIndex = -4;
                 //     for (let slide of slidesLeft) {
                 //         slide
                 //         slideIndex++;
@@ -1640,11 +1640,11 @@ if (params.has('disable')) {
             };
         };
 
-        var resizeTimeout;
-        var previousWidth = window.innerWidth;
+        let resizeTimeout;
+        let previousWidth = window.innerWidth;
         window.addEventListener('resize', () => {
             const newWidth = window.innerWidth;
-            var needsReloading = false;
+            let needsReloading = false;
             if (((previousWidth > 1900) && (newWidth <= 1900)) || ((previousWidth <= 1900) && (newWidth > 1900)) ||
                 ((previousWidth > 1300) && (newWidth <= 1300)) || ((previousWidth <= 1300) && (newWidth > 1300)) ||
                 ((previousWidth > 1100) && (newWidth <= 1100)) || ((previousWidth <= 1100) && (newWidth > 1100)) ||
@@ -1685,14 +1685,14 @@ if (params.has('disable')) {
                 }));
             };
             if (!window.location.hash || !window.location.hash.split('#')[1]) return;
-            var pageSection = pageSections.find(pageSection => pageSection.slug.toLowerCase() === window.location.hash.split('#')[1]);
+            let pageSection = pageSections.find(pageSection => pageSection.slug.toLowerCase() === window.location.hash.split('#')[1]);
             if (pageSection) setTimeout(() => {
                 if (pageSection.element.clientHeight > 100) {
                     pageSection.element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 } else {
-                    var box = pageSection.element.getBoundingClientRect();
-                    var body = document.body;
-                    var docEl = document.documentElement;
+                    let box = pageSection.element.getBoundingClientRect();
+                    let body = document.body;
+                    let docEl = document.documentElement;
                     window.scrollTo({
                         top: Math.round(box.top + (window.pageYOffset || docEl.scrollTop || body.scrollTop) - (docEl.clientTop || body.clientTop || 0)) - nav.clientHeight - 50,
                         behavior: 'smooth'
