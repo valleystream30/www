@@ -617,6 +617,7 @@ if (params.has('disable')) {
                                             var eventTitle = eventTitleDiv.innerText.trim();
                                             var eventTime = eventDiv.querySelector('.event-time').innerText.trim();
                                             if (!eventGroups.find(eventGroup => eventGroup.name === eventDate) || !eventGroups.find(eventGroup => eventGroup.name === eventDate).events.find(event => (event.link === eventLink))) {
+                                                console.log(eventDiv.outerHTML, eventDate, eventTitleDiv.outerHTML, eventLink, eventTitle, eventTime)
                                                 if (!eventGroups.find(eventGroup => eventGroup.name === eventDate)) eventGroups.push({
                                                     name: eventDate,
                                                     events: [],
