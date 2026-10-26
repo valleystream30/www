@@ -1155,9 +1155,12 @@ if (params.has('disable')) {
             setTimeout(() => {
                 document.querySelectorAll('section:has(.ss-component-header-title)').forEach(section => {
                     const title = section.querySelector('.ss-component-header-title');
-                    if (title && title.innerText.includes('customElement.')) window.location.reload();
+                    if (title && title.innerText.includes('customElement.')) {
+                        console.log('A customElement is remaining and the page needs reloading.', title.innerText);
+                        window.location.reload();
+                    }
                 });
-            }, 7500);
+            }, 10000);
             main = document.querySelector('main');
             footer = document.querySelector('footer');
             if (main && footer && footer.clientHeight && (footer.clientHeight > 300)) main.style.marginBottom = `${(window.innerWidth > 1000) ? (footer.clientHeight + 6) : 0}px`;
@@ -1652,6 +1655,7 @@ if (params.has('disable')) {
                 ((previousWidth > 767) && (newWidth <= 767)) || ((previousWidth <= 767) && (newWidth > 767)) ||
                 ((previousWidth > 576) && (newWidth <= 576)) || ((previousWidth <= 576) && (newWidth > 576))) needsReloading = true;
             if (needsReloading) {
+                console.log('The page size changed, and needs reloading.');
                 clearTimeout(resizeTimeout);
                 resizeTimeout = setTimeout(() => {
                     window.location.reload();
