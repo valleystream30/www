@@ -1085,7 +1085,7 @@ if (params.has('disable')) {
             while (nav.clientHeight > 75) await nextFrame();
             console.log(`Proceeding in ${(new Date().getTime() - startTime) / 1000} seconds`);
             try {
-                header.style.paddingBottom = `min(${nav.clientHeight}px, 59px)`;
+                header.style.paddingBottom = `min(${nav.clientHeight - 1}px, 59px)`;
                 document.documentElement.style.scrollPadding = `${nav.clientHeight}px`;
                 let navMaxTop = header.clientHeight - nav.clientHeight;
                 await delay(100);
