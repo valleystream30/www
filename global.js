@@ -1015,6 +1015,11 @@ if (params.has('disable')) {
                 } catch (err) {
                     console.error(err);
                 };
+                if (window.innerWidth <= 560) for (const iframe of [...document.querySelectorAll('iframe')].filter(iframe => iframe.src.endsWith('.pdf'))) {
+                    const iframeURL = iframe.src;
+                    if (iframe.parentElement.childElementCount === 1) iframe.parentElement.style.textAlign = 'center';
+                    iframe.outerHTML = `<a class="btn btn-default" href="${iframeURL}" target="_blank">Open PDF in a new tab<span aria-hidden="true" class="ss-button-icon"></span></a>`;
+                };
             } catch (err) {
                 console.error(err);
             };
