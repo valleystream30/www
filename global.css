@@ -3058,7 +3058,7 @@ html:not(.disable) {
 		.ss-site-header-page-links
 		li.top-nav
 		> ul.dropdown-menu {
-		border-radius: 0 0 10px 10px !important;
+		border-radius: 10px !important;
 
 		ul.dropdown-menu {
 			border-radius: 10px !important;
