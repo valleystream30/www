@@ -690,6 +690,10 @@ html:not(.disable) {
 		#waterFountain {
 			display: none;
 		}
+
+		.ss-component-content:not(.background-break-out) {
+			max-width: min(100%, 90vw) !important;
+		}
 	}
 
 	@media screen and (min-width: 800px) {
@@ -2635,7 +2639,7 @@ html:not(.disable) {
 	}
 
 	.ss-component-content:not(.background-break-out) {
-		max-width: min(100%, 90vw) !important;
+		max-width: min(100%, 95vw) !important;
 	}
 
 	.customElement.aboutUs .ss-component-content {
@@ -3145,6 +3149,30 @@ html:not(.disable) {
 			opacity: 0 !important;
 			user-select: none;
 			pointer-events: none;
+		}
+	}
+
+	[data-comp="announcements"] {
+		height: unset !important;
+		padding-bottom: 5px;
+		border-radius: 10px;
+
+		.liquid-slider {
+			height: unset !important;
+			padding-bottom: 4px;
+			border-radius: 10px !important;
+		}
+
+		&:has(.ls-panel:not(.clone):nth-child(2 of .ls-panel:not(.clone))) .liquid-slider {
+			border-radius: 0 10px 10px 10px !important;
+		}
+
+		.panel-wrapper {
+			padding: 15px 20px;
+		}
+
+		&.ss-no-slide .carouselButtonsAnnouncements {
+			display: none;
 		}
 	}
 }

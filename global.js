@@ -1084,6 +1084,9 @@ if (params.has('disable')) {
                     });
                 };
             };
+            const announcementTabsStyle = document.createElement('style');
+            announcementTabsStyle.innerHTML = `#page-content-wrapper #${[...document.querySelectorAll('[data-comp="announcements"] .ls-nav a')].map(tab => tab.id).filter(id => id).join(', #page-content-wrapper #')} { border-radius: 10px 10px 0 0 !important; }`;
+            document.head.appendChild(announcementTabsStyle);
             document.querySelectorAll('[style]').forEach(el => {
                 if (!el.style.fontSize || !parseFloat(el.style.fontSize)) return;
                 const currentSize = parseFloat(el.style.fontSize);
@@ -1469,7 +1472,7 @@ if (params.has('disable')) {
                 });
             } else if ((document.location.pathname === '/registration') || pageTitle.includes('registration')) {
                 for (let el of document.querySelectorAll('p')) {
-                    if (el.innerText.includes('age calculator here')) {
+                    if (el.innerText.toLowerCase().trim() === 'age calculator here') {
                         el.innerHTML = '';
                         function ageString(startMonth, startDay, startYear, endMonth, endDay, endYear) {
                             const startDate = new Date(Number(startYear), Number(startMonth) - 1, Number(startDay));
