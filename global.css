@@ -510,6 +510,23 @@ html:not(.disable) {
 			}
 		}
 
+		table tbody:not(:has(> tr:nth-child(2))):has(> tr > td:nth-child(3)) {
+			display: flex;
+			flex-direction: row;
+			width: 100vw;
+			overflow-x: scroll;
+			padding: 0 30px;
+			margin-left: -30px;
+
+			& > tr:has(> td:nth-child(3)) {
+				flex-direction: row;
+
+				& > td {
+					width: 35vw !important;
+				}
+			}
+		}
+
 		.customElement.links .stack-links-container {
 			grid-template-columns: 1fr;
 
@@ -3116,7 +3133,7 @@ html:not(.disable) {
 
 	section[id]:has(.copySectionLink) {
 		position: relative;
-	
+
 		.copySectionLink {
 			position: absolute;
 			top: 10px;
