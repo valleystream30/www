@@ -565,7 +565,7 @@ if (params.has('disable')) {
                     };
                 };
                 document.querySelectorAll('section.customElement[customelement]').forEach(section => {
-                    switch (section.getAttribute('customelement')) {
+                    switch (section.classList.contains('tabbedElements') ? 'tabbedElements' : section.getAttribute('customelement')) {
                         case 'staff':
                             for (var wrapper of section.querySelectorAll('.ss-im-icon-wrapper-inner')) {
                                 const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
@@ -803,16 +803,34 @@ if (params.has('disable')) {
                                 });
                             };
                             break;
-                        case 'tabbedElements':
-                            var tabs = section.querySelectorAll('.ss-tab');
+                        case 'tabbedElements': {
+                            var tabs = Array.from(section.querySelectorAll('.ss-tab')).filter(tab => tab.closest('section.customElement.tabbedElements') === section);
                             var allTabsTargetElements = [];
-                            for (var tab of tabs) {
-                                var targetElements = [];
+                            const getTabTargetElements = tab => {
                                 try {
-                                    targetElements = document.querySelectorAll(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
+                                    return document.querySelectorAll(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
                                 } catch (e) {
                                     console.error(e);
+                                    return [];
                                 };
+                            };
+                            const deactivateElement = (element, visited = new Set()) => {
+                                if (visited.has(element)) return;
+                                visited.add(element);
+                                if (element.classList.contains('customElement')) {
+                                    element.classList.remove('active');
+                                    for (var descendant of element.querySelectorAll('.customElement.active')) descendant.classList.remove('active');
+                                } else {
+                                    element.style.display = 'none';
+                                };
+                                if (element.classList.contains('tabbedElements')) {
+                                    const nestedTabs = Array.from(element.querySelectorAll('.ss-tab')).filter(tab => tab.closest('section.customElement.tabbedElements') === element);
+                                    for (var nestedTab of nestedTabs) for (var nestedTarget of getTabTargetElements(nestedTab)) deactivateElement(nestedTarget, visited);
+                                };
+                            };
+                            for (var tab of tabs) {
+                                var targetElements = [];
+                                targetElements = getTabTargetElements(tab);
                                 // console.log(('.' + document.getElementById(tab.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'), targetElements)
                                 allTabsTargetElements = allTabsTargetElements.concat(Array.from(targetElements));
                                 if (targetElements.length) document.getElementById(tab.getAttribute('aria-controls')).style.display = 'none';
@@ -824,19 +842,8 @@ if (params.has('disable')) {
                                     };
                                 };
                                 tab.addEventListener('click', (event) => {
-                                    for (var el of allTabsTargetElements) {
-                                        if (el.classList.contains('customElement')) {
-                                            el.classList.remove('active');
-                                        } else {
-                                            el.style.display = 'none';
-                                        };
-                                    };
-                                    var targetElements = [];
-                                    try {
-                                        targetElements = document.querySelectorAll(('.' + document.getElementById(event.target.getAttribute('aria-controls')).innerText.trim()).replaceAll('..', '.'));
-                                    } catch (e) {
-                                        console.error(e);
-                                    };
+                                    for (var el of allTabsTargetElements) deactivateElement(el);
+                                    var targetElements = getTabTargetElements(event.target);
                                     // console.log('to', targetElements)
                                     for (var targetElement of targetElements) {
                                         if (targetElement.classList.contains('customElement')) {
@@ -853,8 +860,26 @@ if (params.has('disable')) {
                                     };
                                 });
                             };
-                            if (tabs.length) tabs[0].click();
+                            if (tabs.length) {
+                                const tabbedParents = [];
+                                for (let parent = section.parentElement; parent; parent = parent.parentElement) {
+                                    if (parent.matches('section.customElement.tabbedElement')) tabbedParents.push(parent);
+                                };
+                                const hasInactiveParent = () => (section.classList.contains('tabbedElement') && !section.classList.contains('active')) || tabbedParents.some(parent => !parent.classList.contains('active'));
+                                const tabbedElementsObserver = new MutationObserver(() => {
+                                    if (hasInactiveParent() || !section.classList.contains('active') || allTabsTargetElements.some(element => element.classList.contains('active'))) return;
+                                    tabs[0].click();
+                                });
+                                if (!hasInactiveParent()) tabs[0].click();
+                                if (section.classList.contains('tabbedElement') || tabbedParents.length) {
+                                    tabbedElementsObserver.observe(section, { attributes: true, attributeFilter: ['class'] });
+                                    for (var parent of tabbedParents) tabbedElementsObserver.observe(parent, { attributes: true, attributeFilter: ['class'] });
+                                } else {
+                                    tabbedElementsObserver.disconnect();
+                                };
+                            };
                             break;
+                        }
                     };
                 });
                 if (window.innerWidth <= 560) document.addEventListener('scroll', () => {
