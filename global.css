@@ -2476,7 +2476,99 @@ html:not(.disable) {
 			visibility: unset !important;
 		}
 
-		&.active:has(+ .customElement.tabbedElement.active) {
+		&.active:has(
+				+ .customElement.tabbedElement.active,
+				+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement.active,
+				+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement.active,
+				+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement.active,
+				+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement.active,
+				+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement.active,
+				+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement.active,
+				+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement.active,
+				+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement.active,
+				+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement.active,
+				+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement.active,
+				+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement.active,
+				+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement:not(.active)
+					+ .customElement.tabbedElement.active
+			) {
 			padding-bottom: 25px !important;
 		}
 
@@ -3163,7 +3255,8 @@ html:not(.disable) {
 			border-radius: 10px !important;
 		}
 
-		&:has(.ls-panel:not(.clone):nth-child(2 of .ls-panel:not(.clone))) .liquid-slider {
+		&:has(.ls-panel:not(.clone):nth-child(2 of .ls-panel:not(.clone)))
+			.liquid-slider {
 			border-radius: 0 10px 10px 10px !important;
 		}
 
