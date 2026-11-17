@@ -2730,7 +2730,8 @@ html:not(.disable) {
 		}
 	}
 
-	.ss-component-content:not(.background-break-out) {
+	section:not([customElement]) .ss-component-content:not(.background-break-out),
+	section[customElement]:not([customElement="sideBySide"]) .ss-component-content:not(.background-break-out) {
 		max-width: min(100%, 95vw) !important;
 	}
 
