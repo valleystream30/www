@@ -556,7 +556,7 @@ html:not(.disable) {
 				display: none !important;
 			}
 
-			h2 {
+			h2:not(.forceStyle) {
 				margin-top: 10px !important;
 			}
 
@@ -2094,11 +2094,10 @@ html:not(.disable) {
 	}
 
 	.ss-im-icon-bar .ss-icon.ss-custom-icon.ss-circle-icon {
-		overflow: visible;
-		border-radius: 0;
-		height: 100%;
+		border-radius: 100%;
 		width: auto;
-		margin-bottom: 0;
+		margin-bottom: 10px;
+		padding: 20px;
 	}
 
 	.ss-component[data-comp="feature-video"] .ss-component-content,

@@ -45,8 +45,15 @@ const originHostname = 'www.valleystream30.com';
 
 export default {
     async fetch(request, env, ctx) {
+        const publicUrl = new URL(request.url);
         const upstreamUrl = new URL(request.url);
-        upstreamUrl.hostname = originHostname;
+        if (publicUrl.pathname === '/') {
+            upstreamUrl.hostname = originHostname;
+            upstreamUrl.pathname = '/index.php';
+            upstreamUrl.search = 'pageID=home';
+        } else {
+            upstreamUrl.hostname = originHostname;
+        }
         let upstream;
         try {
             const upstreamHeaders = new Headers(request.headers);
@@ -79,7 +86,34 @@ export default {
                 'Retry-After': '30'
             }
         });
-        if ((upstream.status >= 300) && (upstream.status < 400)) return upstream;
+        if ((upstream.status >= 300) && (upstream.status < 400)) {
+            const location = upstream.headers.get('Location');
+            if (!location) return upstream;
+
+            try {
+                const redirectUrl = new URL(location, publicUrl);
+                if ((redirectUrl.hostname === 'www.valleystream30.com') || (redirectUrl.hostname === 'valleystream30.com')) {
+                    redirectUrl.hostname = 'valleystream30.com';
+                    if (redirectUrl.toString() === publicUrl.toString()) {
+                        return new Response('Not found', {
+                            status: 404,
+                            headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+                        });
+                    }
+
+                    const redirectHeaders = new Headers(upstream.headers);
+                    redirectHeaders.set('Location', redirectUrl.toString());
+                    return new Response(null, {
+                        status: upstream.status,
+                        headers: redirectHeaders
+                    });
+                }
+            } catch (error) {
+                return upstream;
+            }
+
+            return upstream;
+        }
         // const upstreamURL = new URL(upstream.url);
         // if (upstreamURL.pathname.slice(1).includes('/')) return Response.redirect(`${request.url.replace(/https?:\/\/(www\.)?valleystream30\.com(.*)/, 'https://$1valleystream30.com')}/${upstreamURL.pathname.slice(1).replace(/\//g, '-'), 301}`);
         if (upstream.status !== 404) {
