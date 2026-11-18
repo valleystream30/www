@@ -65,7 +65,11 @@ export default {
                 }
             });
         }
-        const url = ((upstream.status === 404) || request.url.includes('?')) ? new URL(request.url) : null;
+        const url = new URL(request.url);
+        if (upstream.status === 404) {
+            url.hostname = 'cdn.valleystream30.com';
+            return Response.redirect(url.toString(), 302);
+        }
         if ((upstream.status === 520) || (upstream.status === 521) || (upstream.status === 522) || (upstream.status === 523) || (upstream.status === 524) || (upstream.status === 525) || (upstream.status === 526)) return new Response('The district website is temporarily unavailable. Please try again shortly.', {
             status: 503,
             headers: {
