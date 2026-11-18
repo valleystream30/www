@@ -2096,8 +2096,8 @@ html:not(.disable) {
 	.ss-im-icon-bar .ss-icon.ss-custom-icon.ss-circle-icon {
 		border-radius: 100%;
 		width: auto;
-		margin-bottom: 10px;
 		padding: 20px;
+		overflow: visible !important;
 	}
 
 	.ss-component[data-comp="feature-video"] .ss-component-content,
