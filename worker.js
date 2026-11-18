@@ -41,15 +41,52 @@ class ElementHandler {
 
 const productionHandler = new ElementHandler();
 const developmentHandler = new ElementHandler(true);
+const originHostname = 'www.valleystream30.com';
 
 export default {
     async fetch(request, env, ctx) {
-        if (request.url.includes('index.php?')) return fetch(request);
-        const upstream = await fetch(request);
+        const upstreamUrl = new URL(request.url);
+        upstreamUrl.hostname = originHostname;
+        let upstream;
+        try {
+            const upstreamHeaders = new Headers(request.headers);
+            upstreamHeaders.delete('host');
+            upstreamHeaders.set('x-forwarded-host', new URL(request.url).host);
+            upstream = await fetch(upstreamUrl.toString(), {
+                method: request.method,
+                headers: upstreamHeaders,
+                body: ((request.method === 'GET') || (request.method === 'HEAD')) ? undefined : request.body,
+                redirect: 'manual',
+                cf: {
+                    cacheTtl: 300,
+                    cacheEverything: request.method === 'GET'
+                }
+            });
+        } catch (error) {
+            return new Response('The district website is temporarily unavailable. Please try again shortly.', {
+                status: 503,
+                headers: {
+                    'Content-Type': 'text/plain; charset=utf-8',
+                    'Retry-After': '30'
+                }
+            });
+        }
         const url = ((upstream.status === 404) || request.url.includes('?')) ? new URL(request.url) : null;
+        if ((upstream.status === 520) || (upstream.status === 521) || (upstream.status === 522) || (upstream.status === 523) || (upstream.status === 524) || (upstream.status === 525) || (upstream.status === 526)) return new Response('The district website is temporarily unavailable. Please try again shortly.', {
+            status: 503,
+            headers: {
+                'Content-Type': 'text/plain; charset=utf-8',
+                'Retry-After': '30'
+            }
+        });
+        if ((upstream.status >= 300) && (upstream.status < 400)) return upstream;
         // const upstreamURL = new URL(upstream.url);
         // if (upstreamURL.pathname.slice(1).includes('/')) return Response.redirect(`${request.url.replace(/https?:\/\/(www\.)?valleystream30\.com(.*)/, 'https://$1valleystream30.com')}/${upstreamURL.pathname.slice(1).replace(/\//g, '-'), 301}`);
-        if (upstream.status !== 404) return new HTMLRewriter().on('head', url?.searchParams.has('dev') ? developmentHandler : productionHandler).on('head > meta', productionHandler).transform(upstream);
+        if (upstream.status !== 404) {
+            const contentType = upstream.headers.get('Content-Type') || '';
+            if (!contentType.toLowerCase().includes('text/html')) return upstream;
+            return new HTMLRewriter().on('head', url?.searchParams.has('dev') ? developmentHandler : productionHandler).on('head > meta', productionHandler).transform(upstream);
+        }
         // const redirects = [
         //     {
         //         from: /https?:\/\/(?:www\.)?valleystream30\.com\/admin/,
