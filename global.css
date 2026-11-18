@@ -310,7 +310,7 @@ html:not(.disable) {
 			position: relative;
 
 			&::before {
-				background: #ffffff;
+				background: #fff;
 				position: absolute;
 				top: 0;
 				left: -10vw;
@@ -694,6 +694,29 @@ html:not(.disable) {
 		/* .ss-component-content:not(.background-break-out) {
 			max-width: min(100%, 90vw) !important;
 		} */
+
+		.launchBannerImagesContainer {
+			flex-direction: column;
+			gap: 15px;
+			zoom: 0.8;
+		}
+
+		.launchBannerImagesContainerDivider {
+			height: 2px;
+			width: 220px;
+		}
+
+		.launchBanner h2 {
+			font-size: 20px;
+		}
+
+		.launchBanner p {
+			font-size: 16px;
+		}
+
+		.launchBannerFeatures {
+			zoom: 0.8;
+		}
 	}
 
 	@media screen and (min-width: 800px) {
@@ -798,7 +821,7 @@ html:not(.disable) {
 		height: 50px;
 		margin: -25px 0 0 -25px;
 		border: 2px solid rgba(255, 255, 255, 0.2);
-		border-top-color: #ffffff;
+		border-top-color: #fff;
 		border-radius: 50%;
 		animation: spin 0.9s linear infinite;
 		user-select: none;
@@ -841,13 +864,13 @@ html:not(.disable) {
 		--ss-header-mobile-menu-highlight-background: transparent !important;
 		--header-background-color: var(--blue);
 		--header-nav-background-color: var(--red);
-		--header-color: #ffffff;
-		--header-nav-color: #ffffff;
+		--header-color: #fff;
+		--header-nav-color: #fff;
 		--ss-utility-font-color: var(--header-color) !important;
 		--ss-utility-icon-color: var(--header-color) !important;
 		--ss-nav-font-color: var(--header-nav-color) !important;
 		--ss-menu-background-color: var(--red) !important;
-		--ss-menu-font-color: #ffffff !important;
+		--ss-menu-font-color: #fff !important;
 		--ss-nav-font-family: Montserrat, sans-serif !important;
 		--ss-menu-font-family: Montserrat, sans-serif !important;
 		--ss-site-name-font-family: Montserrat, sans-serif !important;
@@ -965,7 +988,8 @@ html:not(.disable) {
 			display: none !important;
 		}
 
-		&:has(.translationOffer)::before {
+		&:has(.translationOffer)::before,
+		&:has(.launchBanner)::before {
 			position: fixed;
 			top: 0;
 			left: 0;
@@ -976,7 +1000,8 @@ html:not(.disable) {
 			z-index: 1050;
 		}
 
-		&:has(.translationOffer) > :not(.translationOffer) {
+		&:has(.translationOffer) > :not(.translationOffer),
+		&:has(.launchBanner) > :not(.launchBanner) {
 			pointer-events: none;
 			user-select: none;
 		}
@@ -1033,7 +1058,7 @@ html:not(.disable) {
 
 		svg {
 			width: 75%;
-			fill: #ffffff;
+			fill: #fff;
 			max-width: 20vw;
 		}
 	}
@@ -1133,13 +1158,13 @@ html:not(.disable) {
 		width: fit-content !important;
 
 		a {
-			color: #ffffff !important;
+			color: #fff !important;
 			border-radius: 8px;
 			padding-right: 1.2rem;
 			width: fit-content !important;
 
 			span {
-				color: #ffffff;
+				color: #fff;
 				width: max-content;
 			}
 		}
@@ -1245,7 +1270,7 @@ html:not(.disable) {
 			}
 
 			em {
-				color: #ffffff !important;
+				color: #fff !important;
 				transition: 0.25s;
 			}
 
@@ -1292,7 +1317,7 @@ html:not(.disable) {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
-		background: #ffffff;
+		background: #fff;
 		border-radius: 10px;
 		padding: 16px;
 		overflow-y: scroll;
@@ -1318,7 +1343,7 @@ html:not(.disable) {
 
 		span {
 			background: var(--red);
-			color: #ffffff !important;
+			color: #fff !important;
 			padding: 5px 8px;
 			border-radius: 5px;
 			cursor: pointer;
@@ -1388,7 +1413,7 @@ html:not(.disable) {
 		zoom: 0.7;
 
 		* {
-			color: #ffffff !important;
+			color: #fff !important;
 		}
 
 		p {
@@ -1562,7 +1587,7 @@ html:not(.disable) {
 		}
 
 		& > nav > a:last-of-type path {
-			fill: #ffffff;
+			fill: #fff;
 		}
 
 		& > nav > a:last-of-type:hover .translate-svg,
@@ -1571,7 +1596,7 @@ html:not(.disable) {
 		}
 
 		& > nav > a:first-of-type i {
-			color: #ffffff;
+			color: #fff;
 		}
 
 		.ss-site-header-main-container {
@@ -1594,19 +1619,19 @@ html:not(.disable) {
 				height: 16px;
 				width: 16px;
 				font-size: 16px;
-				color: #ffffff;
+				color: #fff;
 				position: absolute;
 				left: 70px;
 			}
 
 			input {
 				background: transparent;
-				color: #ffffff;
+				color: #fff;
 				border: none;
 				font-size: 14px;
 				width: -webkit-fill-available;
 				padding: 12px 46px;
-				border: 2px solid #ffffff;
+				border: 2px solid #fff;
 				border-radius: 100px !important;
 				max-width: 100%;
 
@@ -1631,7 +1656,7 @@ html:not(.disable) {
 
 				&:not(:hover) {
 					background-color: transparent;
-					color: #ffffff;
+					color: #fff;
 					transition: 0.25s;
 				}
 			}
@@ -1725,7 +1750,7 @@ html:not(.disable) {
 		border-radius: 10px;
 
 		a {
-			color: #ffffff !important;
+			color: #fff !important;
 		}
 
 		hr {
@@ -2047,7 +2072,7 @@ html:not(.disable) {
 			justify-content: center;
 
 			> * {
-				color: #ffffff;
+				color: #fff;
 				margin: 0;
 				padding: 4px 9px;
 				border-radius: 5px;
@@ -2081,7 +2106,7 @@ html:not(.disable) {
 	.ss-color .ss-accordion-btn:focus,
 	.ss-color .ss-accordion-btn.open {
 		background-color: var(--red) !important;
-		color: #ffffff !important;
+		color: #fff !important;
 	}
 
 	.ss-im-icon-bar .icon-bar-icon-wrapper {
@@ -2135,7 +2160,7 @@ html:not(.disable) {
 		.slick-arrow
 		.nav-arrow-svg
 		path {
-		stroke: #ffffff;
+		stroke: #fff;
 	}
 
 	.scrollover-cover .image-rollover-container::before,
@@ -2229,7 +2254,7 @@ html:not(.disable) {
 		}
 
 		* {
-			color: #ffffff !important;
+			color: #fff !important;
 		}
 
 		h2 {
@@ -2345,7 +2370,7 @@ html:not(.disable) {
 		text-decoration: underline;
 
 		i {
-			color: #ffffff;
+			color: #fff;
 		}
 	}
 
@@ -2359,7 +2384,7 @@ html:not(.disable) {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
-		background: #ffffff;
+		background: #fff;
 		border-radius: 10px;
 		padding: 15px;
 		overflow-y: scroll;
@@ -2658,7 +2683,7 @@ html:not(.disable) {
 
 			&:hover {
 				background: var(--blue);
-				color: #ffffff;
+				color: #fff;
 				transition: 0.25s;
 			}
 		}
@@ -2673,7 +2698,7 @@ html:not(.disable) {
 		a {
 			font-weight: 600;
 			cursor: pointer;
-			color: white;
+			color: #fff;
 		}
 	}
 
@@ -2686,7 +2711,7 @@ html:not(.disable) {
 		a {
 			font-weight: 500;
 			cursor: pointer;
-			color: white;
+			color: #fff;
 		}
 	}
 
@@ -2793,7 +2818,7 @@ html:not(.disable) {
 			padding: 10px 20px;
 			margin: 0 !important;
 			border: none;
-			color: #ffffff;
+			color: #fff;
 			min-width: 90px;
 			background-color: transparent;
 			-moz-appearance: textfield;
@@ -2887,7 +2912,7 @@ html:not(.disable) {
 		&::after {
 			content: "Latest";
 			background: var(--blue);
-			color: #ffffff;
+			color: #fff;
 			position: absolute;
 			bottom: 0;
 			left: 0;
@@ -2955,7 +2980,7 @@ html:not(.disable) {
 		}
 
 		form {
-			background: #ffffff;
+			background: #fff;
 			color: var(--blue);
 			transform: translateX(-50%) translateY(-50%);
 			padding: 30px;
@@ -3267,6 +3292,175 @@ html:not(.disable) {
 
 		&.ss-no-slide .carouselButtonsAnnouncements {
 			display: none;
+		}
+	}
+
+	.launchBanner {
+		position: fixed;
+		top: 50%;
+		left: calc(50% - (min(1000px, 90%) / 2));
+		width: min(1000px, 90%);
+		background: #fff;
+		padding: 30px;
+		border-radius: 20px;
+		translate: 0 -50%;
+		z-index: 1050;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 15px;
+
+		.launchBannerImagesContainer {
+			display: flex;
+			padding-top: 10px;
+			justify-content: center;
+			align-items: center;
+			gap: 20px;
+			align-self: stretch;
+
+			.launchBannerSiteLogo {
+				height: 70px;
+				width: auto;
+			}
+
+			.launchBannerImagesContainerDivider {
+				width: 2px;
+				height: 80px;
+				border-radius: 10px;
+				background: var(--red);
+			}
+
+			.launchBannerSchoolLogos {
+				display: flex;
+				align-items: center;
+
+				> * {
+					width: 70px;
+					height: 70px;
+					aspect-ratio: 1/1;
+				}
+
+				> *:not(:first-child) {
+					margin-left: -15px;
+				}
+			}
+		}
+
+		.launchBannerText {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			gap: 5px;
+			align-self: stretch;
+		}
+
+		h2,
+		p {
+			margin: 0;
+			font-weight: 700;
+			color: var(--blue);
+		}
+
+		h2 {
+			font-size: 25px;
+		}
+
+		p {
+			font-size: 20px;
+		}
+
+		.launchBannerFeatures {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 10px 20px;
+			align-self: stretch;
+			flex-wrap: wrap;
+
+			.launchBannerFeature {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				align-self: stretch;
+
+				.launchBannerFeaturePill {
+					display: flex;
+					height: 35px;
+					min-width: 40px;
+					padding: 1px 12.5px 0 12.5px;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					gap: 10px;
+					text-align: center;
+					font-size: 18px;
+					font-weight: 600;
+					border-radius: 40px;
+					background: var(--red);
+					color: #fff;
+				}
+
+				p {
+					color: var(--blue);
+					font-size: 18px;
+					font-weight: 600;
+				}
+			}
+		}
+
+		.launchBannerButtons {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 10px 20px;
+			align-self: stretch;
+			flex-wrap: wrap;
+
+			.launchBannerButton {
+				display: flex;
+				padding: 7.5px 15px;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				gap: 10px;
+				border-radius: 10px;
+				background: var(--red);
+				color: #fff;
+				font-size: 15px;
+				font-weight: 600;
+			}
+		}
+
+		.launchBannerClose {
+			position: absolute;
+			top: 15px;
+			right: 15px;
+			cursor: pointer;
+			padding: 20px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 40px;
+			width: 40px;
+			border-radius: 100%;
+			transition: 0.25s;
+
+			&:hover {
+				background: var(--blue);
+				color: #fff;
+				transition: 0.25s;
+			}
+		}
+
+		#launchBannerConfettiCanvas {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+			opacity: 0.5;
 		}
 	}
 }

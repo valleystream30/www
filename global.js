@@ -111,6 +111,7 @@ if (params.has('disable')) {
             return;
         };
         var nav = Array.from(header.querySelectorAll('nav')).filter(nav => nav.clientHeight).reverse()[0];
+        var replaceCustomElements = null;
 
         onReady(async () => {
             try {
@@ -369,7 +370,8 @@ if (params.has('disable')) {
                                 };
                             });
                             htmlObserver.observe(document.documentElement, { attributes: true });
-                            if ((!document.documentElement.hasAttribute('lang') || (document.documentElement.getAttribute('lang') === 'en')) && !localStorage.getItem('firstPageLoad')) {
+                            function showTranslationOffer() {
+                                if ((document.documentElement.hasAttribute('lang') && (document.documentElement.getAttribute('lang') !== 'en')) || localStorage.getItem('firstPageLoad')) return;
                                 var translationOffer = document.createElement('div');
                                 translationOffer.className = 'translationOffer';
                                 var translationOfferTitle = document.createElement('h2');
@@ -422,6 +424,150 @@ if (params.has('disable')) {
                                 };
                                 document.addEventListener('click', translationOfferCloseEvent);
                                 localStorage.setItem('firstPageLoad', 'true');
+                            };
+                            const launchBannerDismissedAt = localStorage.getItem('launchBannerDismissedAt');
+                            if (!launchBannerDismissedAt || (new Date().getTime() - parseInt(launchBannerDismissedAt)) > (24 * 60 * 60 * 1000)) {
+                                var launchBanner = document.createElement('div');
+                                launchBanner.className = 'launchBanner';
+
+                                var launchBannerImagesContainer = document.createElement('div');
+                                launchBannerImagesContainer.className = 'launchBannerImagesContainer';
+                                var launchBannerSiteLogo = document.createElement('img');
+                                launchBannerSiteLogo.className = 'launchBannerSiteLogo';
+                                launchBannerSiteLogo.src = 'https://cdn.valleystream30.com/images/logo-new-dark.png';
+                                launchBannerImagesContainer.appendChild(launchBannerSiteLogo);
+                                var launchBannerImagesContainerDivider = document.createElement('div');
+                                launchBannerImagesContainerDivider.className = 'launchBannerImagesContainerDivider';
+                                launchBannerImagesContainer.appendChild(launchBannerImagesContainerDivider);
+                                var launchBannerSchoolLogos = document.createElement('div');
+                                launchBannerSchoolLogos.className = 'launchBannerSchoolLogos';
+                                var clearStreamLogo = document.createElement('img');
+                                clearStreamLogo.className = 'clearStream';
+                                clearStreamLogo.src = 'https://cdn.valleystream30.com/images/clearstream-new-alt.png';
+                                clearStreamLogo.alt = 'Clear Stream Avenue School';
+                                launchBannerSchoolLogos.appendChild(clearStreamLogo);
+                                var forestLogo = document.createElement('img');
+                                forestLogo.className = 'forest';
+                                forestLogo.src = 'https://cdn.valleystream30.com/images/forest-new.png';
+                                forestLogo.alt = 'Forest Avenue School';
+                                launchBannerSchoolLogos.appendChild(forestLogo);
+                                var shawLogo = document.createElement('img');
+                                shawLogo.className = 'shaw';
+                                shawLogo.src = 'https://cdn.valleystream30.com/images/shaw-new.png';
+                                shawLogo.alt = 'Shaw Avenue School';
+                                launchBannerSchoolLogos.appendChild(shawLogo);
+                                launchBannerImagesContainer.appendChild(launchBannerSchoolLogos);
+                                launchBanner.appendChild(launchBannerImagesContainer);
+
+                                var launchBannerText = document.createElement('div');
+                                launchBannerText.className = 'launchBannerText';
+                                var launchBannerTitle = document.createElement('h2');
+                                launchBannerTitle.innerText = 'Introducing the new VS30 District Website!';
+                                launchBannerText.appendChild(launchBannerTitle);
+                                var launchBannerSubtitle = document.createElement('p');
+                                launchBannerSubtitle.innerText = 'A simpler, accessible, organized, transparent experience.';
+                                launchBannerText.appendChild(launchBannerSubtitle);
+                                launchBanner.appendChild(launchBannerText);
+
+                                var launchBannerFeatures = document.createElement('div');
+                                launchBannerFeatures.className = 'launchBannerFeatures';
+                                var launchBannerFeature1 = document.createElement('div');
+                                launchBannerFeature1.className = 'launchBannerFeature';
+                                var launchBannerFeaturePill1 = document.createElement('div');
+                                launchBannerFeaturePill1.className = 'launchBannerFeaturePill';
+                                launchBannerFeaturePill1.innerText = '200+';
+                                var launchBannerFeatureText1 = document.createElement('p');
+                                launchBannerFeatureText1.innerText = 'Languages supported';
+                                launchBannerFeature1.appendChild(launchBannerFeaturePill1);
+                                launchBannerFeature1.appendChild(launchBannerFeatureText1);
+                                launchBannerFeatures.appendChild(launchBannerFeature1);
+                                var launchBannerFeature2 = document.createElement('div');
+                                launchBannerFeature2.className = 'launchBannerFeature';
+                                var launchBannerFeaturePill2 = document.createElement('div');
+                                launchBannerFeaturePill2.className = 'launchBannerFeaturePill';
+                                launchBannerFeaturePill2.innerText = '<40';
+                                var launchBannerFeatureText2 = document.createElement('p');
+                                launchBannerFeatureText2.innerText = 'Total pages';
+                                launchBannerFeature2.appendChild(launchBannerFeaturePill2);
+                                launchBannerFeature2.appendChild(launchBannerFeatureText2);
+                                launchBannerFeatures.appendChild(launchBannerFeature2);
+                                launchBanner.appendChild(launchBannerFeatures);
+
+                                var launchBannerButtons = document.createElement('div');
+                                launchBannerButtons.className = 'launchBannerButtons';
+                                var launchBannerButton1 = document.createElement('a');
+                                launchBannerButton1.className = 'launchBannerButton';
+                                launchBannerButton1.innerText = 'Family Connections';
+                                launchBannerButton1.href = 'https://valleystream30.com/family-connections';
+                                var launchBannerButton2 = document.createElement('a');
+                                launchBannerButton2.className = 'launchBannerButton';
+                                launchBannerButton2.innerText = 'Community Budget Survey';
+                                launchBannerButton2.href = 'https://docs.google.com/forms/d/e/1FAIpQLSeLBVVWnRTEG21jDycxffOuIafuk7rSMQPrOvx_FA-bIpNwQQ/viewform?pli=1';
+                                launchBannerButtons.appendChild(launchBannerButton1);
+                                launchBannerButtons.appendChild(launchBannerButton2);
+                                launchBanner.appendChild(launchBannerButtons);
+
+                                var launchBannerConfettiCanvas = document.createElement('canvas');
+                                launchBannerConfettiCanvas.id = 'launchBannerConfettiCanvas';
+                                launchBanner.appendChild(launchBannerConfettiCanvas);
+                                var confettiActive = true;
+
+                                var launchBannerClose = document.createElement('i');
+                                launchBannerClose.className = 'launchBannerClose fa-regular fa-close';
+                                launchBannerClose.addEventListener('click', () => {
+                                    launchBanner.remove();
+                                    confettiActive = false;
+                                    document.removeEventListener('click', launchBannerCloseEvent);
+                                });
+                                launchBanner.appendChild(launchBannerClose);
+                                document.body.prepend(launchBanner);
+                                function launchBannerCloseEvent(event) {
+                                    if (event.target.closest('.launchBanner')) return;
+                                    launchBanner.remove();
+                                    confettiActive = false;
+                                    document.removeEventListener('click', launchBannerCloseEvent);
+                                    showTranslationOffer();
+                                };
+                                document.addEventListener('click', launchBannerCloseEvent);
+
+                                const confettiScript = document.createElement('script');
+                                confettiScript.src = 'https://cdn.jsdelivr.net/npm/@tsparticles/confetti@4.5.3/tsparticles.confetti.bundle.min.js';
+                                document.head.appendChild(confettiScript);
+
+                                var confettiReadyInterval = setInterval(async function () {
+                                    if (typeof confetti === 'undefined') return;
+                                    clearInterval(confettiReadyInterval);
+                                    const launchBannerConfettiCanvas = document.getElementById("launchBannerConfettiCanvas");
+                                    launchBannerConfettiCanvas.confetti = launchBannerConfettiCanvas.confetti || await confetti.create(launchBannerConfettiCanvas, {});
+                                    const confettiInterval = setInterval(function () {
+                                        if (!confettiActive) return clearInterval(confettiInterval);
+                                        launchBannerConfettiCanvas.confetti({
+                                            particleCount: 8,
+                                            angle: 90,
+                                            spread: 70,
+                                            origin: {
+                                                x: Math.random(),
+                                                y: 0
+                                            },
+                                            gravity: 1.2,
+                                            ticks: 600,
+                                            colors: [
+                                                "#760012",
+                                                "#66CCFF",
+                                                "#142952",
+                                                "#F1C233",
+                                                "#0A4D7F",
+                                                "#3a1978"
+                                            ],
+                                            shapes: ["circle", "square", "triangle", "star"],
+                                            startVelocity: 3,
+                                        });
+                                    }, 50);
+                                }, 500);
+
+                                localStorage.setItem('launchBannerDismissedAt', new Date().getTime().toString());
+                            } else {
+                                showTranslationOffer();
                             };
                             resolve();
                         }
@@ -555,7 +701,7 @@ if (params.has('disable')) {
                 };
                 var replaceCustomElementsRunning = false;
                 var replaceCustomElementsQueued = false;
-                const replaceCustomElements = async () => {
+                replaceCustomElements = async () => {
                     if (replaceCustomElementsRunning) {
                         replaceCustomElementsQueued = true;
                         return;
@@ -679,7 +825,7 @@ if (params.has('disable')) {
                                                             var eventLink = document.createElement('a');
                                                             eventLink.href = event.link;
                                                             eventLink.classList.add('event');
-                                                            eventLink.innerHTML = `<div class="event-date">${event.date.replace(' ', '<br>')}</div><div class="event-info"><b>${event.title}</b><p>${event.time}</p></div>`;
+                                                            eventLink.innerHTML = `<div class="event-date">${event.date.trim().replaceAll('\n', ' ').trim().replace(' ', '<br>')}</div><div class="event-info"><b>${event.title}</b><p>${event.time}</p></div>`;
                                                             eventsContainer.appendChild(eventLink);
                                                         };
                                                     };
@@ -1456,10 +1602,10 @@ if (params.has('disable')) {
             changeIconInterval = setInterval(() => {
                 if (document.querySelector('.ss-alert-modal-svg-container:not(:has(svg.new))')) {
                     document.querySelector('.ss-alert-modal-svg-container:not(:has(svg.new))').innerHTML = `<svg class="new" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M320 64C302.3 64 288 78.3 288 96L288 99.2C215 114 160 178.6 160 256L160 277.7C160 325.8 143.6 372.5 113.6 410.1L103.8 422.3C98.7 428.6 96 436.4 96 444.5C96 464.1 111.9 480 131.5 480L508.4 480C528 480 543.9 464.1 543.9 444.5C543.9 436.4 541.2 428.6 536.1 422.3L526.3 410.1C496.4 372.5 480 325.8 480 277.7L480 256C480 178.6 425 114 352 99.2L352 96C352 78.3 337.7 64 320 64zM258 528C265.1 555.6 290.2 576 320 576C349.8 576 374.9 555.6 382 528L258 528z"/></svg>`;
-                if (document.querySelector('.ss-alert-modal-cta-button') && (document.querySelector('.ss-alert-modal-cta-button').href === window.location.href)) document.querySelector('.ss-alert-modal-cta-button').remove();
-                setTimeout(() => {
-                    document.querySelector('.alert-badge').classList.add('active');
-                }, 100);
+                    if (document.querySelector('.ss-alert-modal-cta-button') && (document.querySelector('.ss-alert-modal-cta-button').href === window.location.href)) document.querySelector('.ss-alert-modal-cta-button').remove();
+                    setTimeout(() => {
+                        document.querySelector('.alert-badge').classList.add('active');
+                    }, 100);
                 };
                 if (!document.querySelector('.ss-alert-modal-svg-container')) clearInterval(changeIconInterval);
             }, 500);
