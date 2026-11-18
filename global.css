@@ -691,9 +691,9 @@ html:not(.disable) {
 			display: none;
 		}
 
-		.ss-component-content:not(.background-break-out) {
+		/* .ss-component-content:not(.background-break-out) {
 			max-width: min(100%, 90vw) !important;
-		}
+		} */
 	}
 
 	@media screen and (min-width: 800px) {
@@ -1067,7 +1067,7 @@ html:not(.disable) {
 			.ss-component-content .ss-one-column .ss-component-column h3,
 			.ss-component-content .ss-one-column .ss-component-column span
 		):not(.ss-remove-pad) {
-		padding: min(60px, 5.5svh) 0 !important;
+		padding: min(20px, 5.5svh) 0 !important;
 
 		.ss-component-content
 			.ss-one-column
@@ -1092,7 +1092,7 @@ html:not(.disable) {
 		}
 
 		&:not(:first-of-type) {
-			padding: min(50px, 5svh) 0 !important;
+			padding: min(20px, 5svh) 0 !important;
 		}
 	}
 
@@ -2672,7 +2672,7 @@ html:not(.disable) {
 		font-size: clamp(17px, 5vw, 30px) !important;
 
 		a {
-			font-weight: 500;
+			font-weight: 600;
 			cursor: pointer;
 			color: white;
 		}
@@ -2730,10 +2730,10 @@ html:not(.disable) {
 		}
 	}
 
-	section:not([customElement]) .ss-component-content:not(.background-break-out),
+	/* section:not([customElement]) .ss-component-content:not(.background-break-out),
 	section[customElement]:not([customElement="sideBySide"]) .ss-component-content:not(.background-break-out) {
 		max-width: min(100%, 95vw) !important;
-	}
+	} */
 
 	.customElement.aboutUs .ss-component-content {
 		padding: 20px 80px 0 80px;
@@ -2747,6 +2747,7 @@ html:not(.disable) {
 		left: -5px;
 		width: calc(100vw + 5px);
 		height: 101%;
+		background-color: #2480e5 !important;
 	}
 
 	iframe,
