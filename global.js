@@ -760,7 +760,7 @@ if (params.has('disable')) {
                                     var spotlightSidebar = document.createElement('div');
                                     spotlightSidebar.className = 'spotlight-sidebar';
                                     spotlightWrapper.appendChild(spotlightSidebar);
-                                    if (window.innerWidth > 1000) spotlightSidebar.innerHTML = `<div class="spotlight-info"><i class="fa-solid fa-chevron-left"></i><h3>${section.querySelector('.carousel-inner > .item.active .spotlight-slide-title').innerText}</h3><p>${section.querySelector('.carousel-inner > .item.active .spotlight-text-cta-container').innerText}</p></div>`;
+                                    if (window.innerWidth > 1000) spotlightSidebar.innerHTML = `<div class="spotlight-info"><i class="fa-solid fa-chevron-left"></i><h3>${section.querySelector('.carousel-inner > .item.active .spotlight-slide-title')?.innerText || ''}</h3><p>${section.querySelector('.carousel-inner > .item.active .spotlight-text-cta-container')?.innerText || ''}</p></div>`;
                                     addTask(() => new Promise(resolve => {
                                         var homepageEventsInterval = setInterval(() => {
                                             if (document.querySelectorAll('.customElement.spotlightCalendar .slick-slide:not(.slick-cloned) calendar-event').length) {
@@ -841,8 +841,8 @@ if (params.has('disable')) {
                                         for (var mutation of mutations) {
                                             if (mutation.attributeName !== 'class') continue;
                                             if (mutation.target.classList.contains('item') && mutation.target.classList.contains('active') && !mutation.target.classList.contains('left')) {
-                                                document.querySelector('.spotlight-sidebar .spotlight-info h3').innerText = mutation.target.querySelector('.spotlight-slide-title').innerText.replaceAll('\n', '');
-                                                document.querySelector('.spotlight-sidebar .spotlight-info p').innerText = mutation.target.querySelector('.spotlight-text-cta-container').innerText.replaceAll('\n', '');
+                                                document.querySelector('.spotlight-sidebar .spotlight-info h3').innerText = (mutation.target.querySelector('.spotlight-slide-title')?.innerText || '').replaceAll('\n', '');
+                                                document.querySelector('.spotlight-sidebar .spotlight-info p').innerText = (mutation.target.querySelector('.spotlight-text-cta-container')?.innerText || '').replaceAll('\n', '');
                                             };
                                         };
                                     });
